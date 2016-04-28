@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<VOTABLE version="1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns="http://www.ivoa.net/xml/VOTable/v1.3" >
+  <COOSYS ID="J2000" equinox="J2000" system="eq_FK5"/>
+  <RESOURCE name="Duchamp Output">
+    <TABLE name="">
+      <DESCRIPTION></DESCRIPTION>
+      <PARAM name="imageFile" ucd="meta.file;meta.fits" datatype="char" arraysize="255" value="src/test/resources/image/good/validFile.fits"/>
+      <PARAM name="flagSubsection" ucd="meta.code" datatype="boolean" value="1"/>
+      <PARAM name="subsection" ucd="" datatype="char" arraysize="27" value="[250:2000,250:2000,1:1,1:1]"/>
+      <PARAM name="flagStatSec" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="StatSec" ucd="" datatype="char" arraysize="7" value="[*,*,*]"/>
+      <PARAM name="searchType" ucd="meta.note" datatype="char" arraysize="7" value="spatial"/>
+      <PARAM name="flagNegative" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="flagBaseline" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="flagRobustStats" ucd="meta.code" datatype="boolean" value="1"/>
+      <PARAM name="flagFDR" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="threshold" ucd="phot.flux;stat.min" datatype="float" value="6"/>
+      <PARAM name="flagGrowth" ucd="meta.code" datatype="boolean" value="1"/>
+      <PARAM name="growthThreshold" ucd="phot.flux;stat.min" datatype="float" value="4"/>
+      <PARAM name="minPix" ucd="" datatype="int" value="3"/>
+      <PARAM name="minChannels" ucd="" datatype="int" value="0"/>
+      <PARAM name="minVoxels" ucd="" datatype="int" value="3"/>
+      <PARAM name="flagAdjacent" ucd="meta.code" datatype="boolean" value="1"/>
+      <PARAM name="threshVelocity" ucd="" datatype="float" value="7"/>
+      <PARAM name="flagRejectBeforeMerge" ucd="" datatype="boolean" value="0"/>
+      <PARAM name="flagTwoStageMerging" ucd="" datatype="boolean" value="1"/>
+      <PARAM name="pixelCentre" ucd="" datatype="char" arraysize="8" value="centroid"/>
+      <PARAM name="flagSmooth" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="flagATrous" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="Reference frequency" ucd="em.freq;meta.main" datatype="float" unit="Hz" value="9e+08"/>
+      <PARAM name="thresholdActual" ucd="" datatype="float" unit="Jy/beam" value="6"/>
+      <FIELD name="island_id" ID="col_island_id" ucd="meta.id.parent" datatype="char" unit="--" arraysize="70"/>
+      <FIELD name="component_id" ID="col_component_id" ucd="meta.id;meta.main" datatype="char" unit="--" arraysize="71"/>
+      <FIELD name="component_name" ID="col_component_name" ucd="meta.id" datatype="char" unit="" arraysize="15"/>
+      <FIELD name="ra_hms_cont" ID="col_ra" ucd="pos.eq.ra" ref="J2000" datatype="char" unit="" arraysize="12"/>
+      <FIELD name="dec_dms_cont" ID="col_dec" ucd="pos.eq.dec" ref="J2000" datatype="char" unit="" arraysize="13"/>
+      <FIELD name="ra_deg_cont" ID="col_rajd" ucd="pos.eq.ra;meta.main" ref="J2000" datatype="float" unit="deg" width="12" precision="6"/>
+      <FIELD name="dec_deg_cont" ID="col_decjd" ucd="pos.eq.dec;meta.main" ref="J2000" datatype="float" unit="deg" width="13" precision="6"/>
+      <FIELD name="ra_err" ID="col_raerr" ucd="stat.error;pos.eq.ra" ref="J2000" datatype="float" unit="arcsec" width="11" precision="2"/>
+      <FIELD name="dec_err" ID="col_decerr" ucd="stat.error;pos.eq.dec" ref="J2000" datatype="float" unit="arcsec" width="11" precision="2"/>
+      <FIELD name="freq" ID="col_freq" ucd="em.freq" datatype="float" unit="MHz" width="11" precision="1"/>
+      <FIELD name="flux_peak" ID="col_fpeak" ucd="phot.flux.density;stat.max;em.radio;stat.fit" datatype="float" unit="mJy/beam" width="11" precision="3"/>
+      <FIELD name="flux_peak_err" ID="col_fpeak_err" ucd="stat.error;phot.flux.density;stat.max;em.radio;stat.fit" datatype="float" unit="mJy/beam" width="14" precision="3"/>
+      <FIELD name="flux_int" ID="col_fint" ucd="phot.flux.density;em.radio;stat.fit" datatype="float" unit="mJy" width="9" precision="3"/>
+      <FIELD name="flux_int_err" ID="col_fint_err" ucd="stat.error;phot.flux.density;em.radio;stat.fit" datatype="float" unit="mJy" width="13" precision="3"/>
+      <FIELD name="maj_axis" ID="col_maj" ucd="phys.angSize.smajAxis;em.radio;stat.fit" datatype="float" unit="arcsec" width="9" precision="2"/>
+      <FIELD name="min_axis" ID="col_min" ucd="phys.angSize.sminAxis;em.radio;stat.fit" datatype="float" unit="arcsec" width="9" precision="2"/>
+      <FIELD name="pos_ang" ID="col_pa" ucd="phys.angSize;pos.posAng;em.radio;stat.fit" datatype="float" unit="deg" width="8" precision="2"/>
+      <FIELD name="maj_axis_err" ID="col_maj_err" ucd="stat.error;phys.angSize.smajAxis;em.radio" datatype="float" unit="arcsec" width="13" precision="2"/>
+      <FIELD name="min_axis_err" ID="col_min_err" ucd="stat.error;phys.angSize.sminAxis;em.radio" datatype="float" unit="arcsec" width="13" precision="2"/>
+      <FIELD name="pos_ang_err" ID="col_pa_err" ucd="stat.error;phys.angSize;pos.posAng;em.radio" datatype="float" unit="deg" width="12" precision="2"/>
+      <FIELD name="maj_axis_deconv" ID="col_maj_deconv" ucd="phys.angSize.smajAxis;em.radio;askap:meta.deconvolved" datatype="float" unit="arcsec" width="16" precision="2"/>
+      <FIELD name="min_axis_deconv" ID="col_min_deconv" ucd="phys.angSize.sminAxis;em.radio;askap:meta.deconvolved" datatype="float" unit="arcsec" width="16" precision="2"/>
+      <FIELD name="pos_ang_deconv" ID="col_pa_deconv" ucd="phys.angSize;pos.posAng;em.radio;askap:meta.deconvolved" datatype="float" unit="deg" width="15" precision="2"/>
+      <FIELD name="chi_squared_fit" ID="col_chisqfit" ucd="stat.fit.chi2" datatype="float" unit="--" width="17" precision="4"/>
+      <FIELD name="rms_fit_gauss" ID="col_rmsfit" ucd="stat.stdev;stat.fit" datatype="float" unit="mJy/beam" width="14" precision="3"/>
+      <FIELD name="spectral_index" ID="col_alpha" ucd="spect.index;em.radio" datatype="float" unit="--" width="15" precision="2"/>
+      <FIELD name="spectral_curvature" ID="col_beta" ucd="askap:spect.curvature;em.radio" datatype="float" unit="--" width="19" precision="2"/>
+      <FIELD name="rms_image" ID="col_rmsimage" ucd="stat.stdev;phot.flux.density" datatype="float" unit="mJy/beam" width="11" precision="3"/>
+      <FIELD name="has_siblings" ID="col_flag1" ucd="meta.code" datatype="int" unit="" width="8"/>
+      <FIELD name="fit_is_estimate" ID="col_flag2" ucd="meta.code" datatype="int" unit="" width="8"/>
+      <FIELD name="flag_c3" ID="col_flag3" ucd="meta.code" datatype="int" unit="" width="8"/>
+      <FIELD name="flag_c4" ID="col_flag4" ucd="meta.code" datatype="int" unit="" width="8"/>
+      <FIELD name="comment" ID="col_comment" ucd="meta.note" datatype="char" unit="" arraysize="100"/>
+      
+      <DATA>
+        <TABLEDATA>
+        <TR>
+          <TD>    _Images/SB_609_617_639_643_659_no617b6_withBeam_Freq_Stokes.fits_1</TD><TD>    _Images/SB_609_617_639_643_659_no617b6_withBeam_Freq_Stokes.fits_1a</TD><TD> J222645-623529</TD><TD>  22:26:45.4</TD><TD>    -62:35:29</TD><TD>  336.689324</TD><TD>   -62.591524</TD><TD>       0.00</TD><TD>       0.00</TD><TD>      864.0</TD><TD>   1312.663</TD><TD>         0.000</TD><TD> 1440.637</TD><TD>        0.000</TD><TD>    80.09</TD><TD>    48.60</TD><TD>  156.33</TD><TD>         0.00</TD><TD>         0.00</TD><TD>        0.00</TD><TD>           21.08</TD><TD>           15.45</TD><TD>         -43.78</TD><TD>        1194.4159</TD><TD>      2590.406</TD><TD>           0.00</TD><TD>               0.00</TD><TD>      1.477</TD><TD>       0</TD><TD>       0</TD><TD>       0</TD><TD>       0</TD><TD>                                                                                                    </TD>
+        </TR>
+        </TABLEDATA>
+      </DATA>
+    </TABLE>
+  </RESOURCE>
+</VOTABLE>

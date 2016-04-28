@@ -1,0 +1,3 @@
+Error in PARAM 'imageFile' : value 'null' does not match any image in the observation
+Error in FIELD 'dec_deg_w_err' : Attribute 'unit' ('deg') must be 'arcsec'
+Error in 11th TD (FIELD 'dec_deg_uw') of 1st TR : Value 'STEVE' is not a 'double'

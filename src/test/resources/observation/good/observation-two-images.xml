@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataset xmlns="http://au.csiro/askap/observation">
+	<identity>
+		<telescope>ASKAP</telescope>
+		<sbid>12345</sbid>
+		<obsprogram>test</obsprogram>
+	</identity>
+
+	<observation>
+		<obsstart>2013-11-19T02:30:00.000</obsstart>
+		<obsend>2013-11-19T03:30:00.000</obsend>
+	</observation>
+
+	<images>
+		<image>
+			<format>fits</format>
+			<filename>validFile.fits</filename>
+            <project>AS007</project>
+		</image>
+        <image>
+            <format>fits</format>
+            <filename>validFile-sfov-bug.fits</filename>
+            <project>AS004</project>
+        </image>
+	</images>
+</dataset>

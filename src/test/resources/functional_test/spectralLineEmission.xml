@@ -1,0 +1,305 @@
+<?xml version="1.0"?>
+<VOTABLE version="1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns="http://www.ivoa.net/xml/VOTable/v1.3"
+ xmlns:stc="http://www.ivoa.net/xml/STC/v1.30" >
+  <COOSYS ID="J2000" equinox="J2000" system="eq_FK5"/>
+  <RESOURCE name="HI Emission-line object catalogue from Selavy source-finding">
+    <TABLE name="HI Emission-line object catalogue">
+      <DESCRIPTION></DESCRIPTION>
+      <PARAM ID="catalogueName" arraysize="63" datatype="char" name="Catalogue Name" ucd="" value="spectral_line_emission"/>
+	  <PARAM ID="indexedFields" arraysize="255" datatype="char" name="Indexed Fields" ucd="" value="ra_hms_w, dec_dms_w"/>
+	  <PARAM ID="principalFields" arraysize="255" datatype="char" name="Principal Fields" ucd="" value="ra_hms_w, dec_dms_w"/>
+      <PARAM name="table_version" ucd="meta.version" datatype="char" arraysize="39" value="casda.sl_hi_emission_object_v0.8"/>
+      <PARAM name="imageFile" ucd="meta.file;meta.fits" datatype="char" arraysize="101" value="validFile.fits"/>
+      <PARAM name="flagSubsection" ucd="meta.code" datatype="boolean" value="1"/>
+      <PARAM name="subsection" ucd="" datatype="char" arraysize="19" value="[1:100,1:100,1:128]"/>
+      <PARAM name="flagStatSec" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="StatSec" ucd="" datatype="char" arraysize="7" value="[*,*,*]"/>
+      <PARAM name="searchType" ucd="meta.note" datatype="char" arraysize="7" value="spatial"/>
+      <PARAM name="flagNegative" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="flagBaseline" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="flagRobustStats" ucd="meta.code" datatype="boolean" value="1"/>
+      <PARAM name="flagFDR" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="threshold" ucd="phot.flux;stat.min" datatype="float" value="5.02064"/>
+      <PARAM name="flagGrowth" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="minPix" ucd="" datatype="int" value="2"/>
+      <PARAM name="minChannels" ucd="" datatype="int" value="1"/>
+      <PARAM name="minVoxels" ucd="" datatype="int" value="4"/>
+      <PARAM name="flagAdjacent" ucd="meta.code" datatype="boolean" value="1"/>
+      <PARAM name="threshVelocity" ucd="" datatype="float" value="7"/>
+      <PARAM name="flagRejectBeforeMerge" ucd="" datatype="boolean" value="0"/>
+      <PARAM name="flagTwoStageMerging" ucd="" datatype="boolean" value="1"/>
+      <PARAM name="pixelCentre" ucd="" datatype="char" arraysize="8" value="centroid"/>
+      <PARAM name="flagSmooth" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="flagATrous" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="Reference frequency" ucd="em.freq;meta.main" datatype="float" unit="m/s" value="13191.3"/>
+      <PARAM name="thresholdActual" ucd="" datatype="float" unit="Jy/beam" value="5.02064"/>
+	  <FIELD name="object_id" ID="col_object_id" ucd="meta.id;meta.main" datatype="char" unit="" arraysize="27"/>
+      <FIELD name="object_name" ID="col_object_name" ucd="meta.id" datatype="char" unit="" arraysize="15"/>
+      <FIELD name="ra_hms_w" ID="col_ra_hms_w" ucd="pos.eq.ra" ref="J2000" datatype="char" unit="h:m:s" arraysize="11"/>
+      <FIELD name="dec_dms_w" ID="col_dec_hms_w" ucd="pos.eq.dec" ref="J2000" datatype="char" unit="deg:arcmin:arcsec" arraysize="20"/>
+      <FIELD name="ra_deg_w" ID="col_ra_deg_w" ucd="pos.eq.ra;meta.main" ref="J2000" datatype="double" unit="deg" width="11" precision="6"/>
+      <FIELD name="ra_deg_w_err" ID="col_ra_deg_w_err" ucd="stat.error;pos.eq.ra;meta.main" ref="J2000" datatype="float" unit="arcsec" width="11" precision="2"/>
+      <FIELD name="dec_deg_w" ID="col_dec_deg_w" ucd="pos.eq.dec;meta.main" ref="J2000" datatype="double" unit="deg" width="11" precision="6"/>
+      <FIELD name="dec_deg_w_err" ID="col_dec_deg_w_err" ucd="stat.error;pos.eq.dec;meta.main" ref="J2000" datatype="float" unit="arcsec" width="11" precision="2"/>
+      <FIELD name="ra_deg_uw" ID="col_ra_deg_uw" ucd="pos.eq.ra" ref="J2000" datatype="double" unit="deg" width="11" precision="6"/>
+      <FIELD name="ra_deg_uw_err" ID="col_ra_deg_uw_err" ucd="stat.error;pos.eq.ra" ref="J2000" datatype="float" unit="arcsec" width="11" precision="2"/>
+      <FIELD name="dec_deg_uw" ID="col_dec_deg_uw" ucd="pos.eq.dec" ref="J2000" datatype="double" unit="deg" width="11" precision="6"/>
+      <FIELD name="dec_deg_uw_err" ID="col_dec_deg_uw_err" ucd="stat.error;pos.eq.dec" ref="J2000" datatype="float" unit="arcsec" width="11" precision="2"/>
+      <FIELD name="glong_w" ID="col_glong_w" ucd="pos.galactic.lon;meta.main" ref="J2000" datatype="double" unit="deg" width="11" precision="6"/>
+      <FIELD name="glong_w_err" ID="col_glong_w_err" ucd="stat.error;pos.galactic.lon;meta.main" ref="J2000" datatype="float" unit="arcsec" width="11" precision="2"/>
+      <FIELD name="glat_w" ID="col_glat_w" ucd="pos.galactic.lat;meta.main" ref="J2000" datatype="double" unit="deg" width="11" precision="6"/>
+      <FIELD name="glat_w_err" ID="col_glat_w_err" ucd="stat.error;pos.galactic.lat;meta.main" ref="J2000" datatype="float" unit="arcsec" width="11" precision="2"/>
+      <FIELD name="glong_uw" ID="col_glong_uw" ucd="pos.galactic.lon;meta.main" ref="J2000" datatype="double" unit="deg" width="11" precision="6"/>
+      <FIELD name="glong_uw_err" ID="col_glong_uw_err" ucd="stat.error;pos.galactic.lon;meta.main" ref="J2000" datatype="float" unit="arcsec" width="11" precision="2"/>
+      <FIELD name="glat_uw" ID="col_glat_uw" ucd="pos.galactic.lat;meta.main" ref="J2000" datatype="double" unit="deg" width="11" precision="6"/>
+      <FIELD name="glat_uw_err" ID="col_glat_uw_err" ucd="stat.error;pos.galactic.lat;meta.main" ref="J2000" datatype="float" unit="arcsec" width="11" precision="2"/>
+      <FIELD name="maj_axis" ID="col_maj_axis" ucd="askap:src.smajAxis;em.radio" datatype="float" unit="arcsec" width="6" precision="2"/>
+      <FIELD name="min_axis" ID="col_min_axis" ucd="askap:src.sminAxis;em.radio" datatype="float" unit="arcsec" width="6" precision="2"/>
+      <FIELD name="pos_ang" ID="col_posang" ucd="askap:src.posAng;em.radio" datatype="float" unit="deg" width="7" precision="2"/>
+      <FIELD name="maj_axis_fit" ID="col_maj_axis_fit" ucd="askap:src.smajAxis;em.radio;stat.fit" datatype="float" unit="arcsec" width="6" precision="2"/>
+      <FIELD name="maj_axis_fit_err" ID="col_maj_axis_fit_err" ucd="stat.error;askap:src.smajAxis;em.radio;stat.fit" datatype="float" unit="arcsec" width="6" precision="2"/>
+      <FIELD name="min_axis_fit" ID="col_min_axis_fit" ucd="askap:src.sminAxis;em.radio;stat.fit" datatype="float" unit="arcsec" width="6" precision="2"/>
+      <FIELD name="min_axis_fit_err" ID="col_min_axis_fit_err" ucd="stat.error;askap:src.sminAxis;em.radio;stat.fit" datatype="float" unit="arcsec" width="6" precision="2"/>
+      <FIELD name="pos_ang_fit" ID="col_pos_ang_fit" ucd="askap:src.posAng;em.radio;stat.fit" datatype="float" unit="deg" width="7" precision="2"/>
+      <FIELD name="pos_ang_fit_err" ID="col_pos_ang_fit_err" ucd="stat.error;askap:src.posAng;em.radio;stat.fit" datatype="float" unit="deg" width="7" precision="2"/>
+      <FIELD name="size_x" ID="col_size_x" ucd="askap:src.size;instr.pixel" datatype="int" unit="" width="4"/>
+      <FIELD name="size_y" ID="col_size_y" ucd="askap:src.size;instr.pixel" datatype="int" unit="" width="4"/>
+      <FIELD name="size_z" ID="col_size_z" ucd="askap:src.size;spect.binSize" datatype="int" unit="" width="4"/>
+      <FIELD name="n_vox" ID="col_nvox" ucd="askap:src.size;askap:instr.voxel" datatype="int" unit="" width="9"/>
+      <FIELD name="asymmetry_2d" ID="col_asymmetry_2d" ucd="askap:src.asymmetry.2d" datatype="float" unit="" width="5" precision="3"/>
+      <FIELD name="asymmetry_2d_err" ID="col_asymmetry_2d_err" ucd="stat.error;askap:src.asymmetry.2d" datatype="float" unit="" width="5" precision="3"/>
+      <FIELD name="asymmetry_3d" ID="col_asymmetry_3d" ucd="askap:src.asymmetry.3d" datatype="float" unit="" width="5" precision="3"/>
+      <FIELD name="asymmetry_3d_err" ID="col_asymmetry_3d_err" ucd="stat.error;askap:src.asymmetry.3d" datatype="float" unit="" width="5" precision="3"/>
+      <FIELD name="freq_uw" ID="col_freq_uw" ucd="em.freq" datatype="double" unit="MHz" width="11" precision="6"/>
+      <FIELD name="freq_uw_err" ID="col_freq_uw_err" ucd="stat.error;em.freq" datatype="double" unit="MHz" width="11" precision="6"/>
+      <FIELD name="freq_w" ID="col_freq_w" ucd="em.freq;meta.main" datatype="double" unit="MHz" width="11" precision="6"/>
+      <FIELD name="freq_w_err" ID="col_freq_w_err" ucd="stat.error;em.freq;meta.main" datatype="double" unit="MHz" width="11" precision="6"/>
+      <FIELD name="freq_peak" ID="col_freq_peak" ucd="em.freq;phot.flux.density;stat.max" datatype="double" unit="MHz" width="11" precision="6"/>
+      <FIELD name="vel_uw" ID="col_vel_uw" ucd="spect.dopplerVeloc.opt;em.line.HI" datatype="float" unit="km/s" width="11" precision="3"/>
+      <FIELD name="vel_uw_err" ID="col_vel_uw_err" ucd="stat.error;spect.dopplerVeloc.opt;em.line.HI" datatype="float" unit="km/s" width="11" precision="3"/>
+      <FIELD name="vel_w" ID="col_vel_w" ucd="spect.dopplerVeloc.opt;em.line.HI;meta.main" datatype="float" unit="km/s" width="11" precision="3"/>
+      <FIELD name="vel_w_err" ID="col_vel_w_err" ucd="stat.error;spect.dopplerVeloc.opt;em.line.HI;meta.main" datatype="float" unit="km/s" width="11" precision="3"/>
+      <FIELD name="vel_peak" ID="col_vel_peak" ucd="spect.dopplerVeloc.opt;em.line.HI;phot.flux.density;stat.max" datatype="float" unit="km/s" width="11" precision="3"/>
+      <FIELD name="integ_flux" ID="col_integ_flux" ucd="phot.flux.density;askap:arith.integrated;em.radio" datatype="float" unit="Jy.km/s" width="10" precision="3"/>
+      <FIELD name="integ_flux_err" ID="col_integ_flux_err" ucd="stat.error;phot.flux.density;askap:arith.integrated;em.radio" datatype="float" unit="Jy.km/s" width="10" precision="3"/>
+      <FIELD name="flux_voxel_max" ID="col_flux_voxel_max" ucd="askap:phot.flux.density.voxel;stat.max;em.radio" datatype="float" unit="mJy/beam" width="10" precision="3"/>
+      <FIELD name="flux_voxel_min" ID="col_flux_voxel_min" ucd="askap:phot.flux.density.voxel;stat.min;em.radio" datatype="float" unit="mJy/beam" width="10" precision="3"/>
+      <FIELD name="flux_voxel_mean" ID="col_flux_voxel_mean" ucd="askap:phot.flux.density.voxel;stat.mean;em.radio" datatype="float" unit="mJy/beam" width="10" precision="3"/>
+      <FIELD name="flux_voxel_stdev" ID="col_flux_voxel_stdev" ucd="askap:phot.flux.density.voxel;stat.stdev;em.radio" datatype="float" unit="mJy/beam" width="10" precision="3"/>
+      <FIELD name="flux_voxel_rms" ID="col_flux_voxel_rms" ucd="askap:phot.flux.density.voxel;askap:stat.rms;em.radio" datatype="float" unit="mJy/beam" width="10" precision="3"/>
+      <FIELD name="rms_imagecube" ID="col_rms_imagecube" ucd="stat.stdev;phot.flux.density" datatype="float" unit="mJy/beam" width="10" precision="3"/>
+      <FIELD name="w50_freq" ID="col_w50_freq" ucd="askap:em.freq.width" datatype="float" unit="kHz" width="11" precision="4"/>
+      <FIELD name="w50_freq_err" ID="col_w50_freq_err" ucd="stat.error;askap:em.freq.width" datatype="float" unit="kHz" width="11" precision="4"/>
+      <FIELD name="cw50_freq" ID="col_cw50_freq" ucd="askap:em.freq.width" datatype="float" unit="kHz" width="11" precision="4"/>
+      <FIELD name="cw50_freq_err" ID="col_cw50_freq_err" ucd="stat.error;askap:em.freq.width" datatype="float" unit="kHz" width="11" precision="4"/>
+      <FIELD name="w20_freq" ID="col_w20_freq" ucd="askap:em.freq.width" datatype="float" unit="kHz" width="11" precision="4"/>
+      <FIELD name="w20_freq_err" ID="col_w20_freq_err" ucd="stat.error;askap:em.freq.width" datatype="float" unit="kHz" width="11" precision="4"/>
+      <FIELD name="cw20_freq" ID="col_cw20_freq" ucd="askap:em.freq.width" datatype="float" unit="kHz" width="11" precision="4"/>
+      <FIELD name="cw20_freq_err" ID="col_cw20_freq_err" ucd="stat.error;askap:em.freq.width" datatype="float" unit="kHz" width="11" precision="4"/>
+      <FIELD name="w50_vel" ID="col_w50_vel" ucd="askap:spect.dopplerVeloc.width" datatype="float" unit="km/s" width="11" precision="4"/>
+      <FIELD name="w50_vel_err" ID="col_w50_vel_err" ucd="stat.error;askap:spect.dopplerVeloc.width" datatype="float" unit="km/s" width="11" precision="4"/>
+      <FIELD name="cw50_vel" ID="col_cw50_vel" ucd="askap:spect.dopplerVeloc.width" datatype="float" unit="km/s" width="11" precision="4"/>
+      <FIELD name="cw50_vel_err" ID="col_cw50_vel_err" ucd="stat.error;askap:spect.dopplerVeloc.width" datatype="float" unit="km/s" width="11" precision="4"/>
+      <FIELD name="w20_vel" ID="col_w20_vel" ucd="askap:askap:spect.dopplerVeloc.width" datatype="float" unit="km/s" width="11" precision="4"/>
+      <FIELD name="w20_vel_err" ID="col_w20_vel_err" ucd="stat.error;askap:spect.dopplerVeloc.width" datatype="float" unit="km/s" width="11" precision="4"/>
+      <FIELD name="cw20_vel" ID="col_cw20_vel" ucd="askap:askap:spect.dopplerVeloc.width" datatype="float" unit="km/s" width="11" precision="4"/>
+      <FIELD name="cw20_vel_err" ID="col_cw20_vel_err" ucd="stat.error;askap:spect.dopplerVeloc.width" datatype="float" unit="km/s" width="11" precision="4"/>
+      <FIELD name="freq_w50_clip_uw" ID="col_freq_w50_clip_uw" ucd="em.freq" datatype="double" unit="MHz" width="11" precision="6"/>
+      <FIELD name="freq_w50_clip_uw_err" ID="col_freq_w50_clip_uw_err" ucd="stat.error;em.freq" datatype="double" unit="MHz" width="11" precision="6"/>
+      <FIELD name="freq_cw50_clip_uw" ID="col_freq_cw50_clip_uw" ucd="em.freq" datatype="double" unit="MHz" width="11" precision="6"/>
+      <FIELD name="freq_cw50_clip_uw_err" ID="col_freq_cw50_clip_uw_err" ucd="stat.error;em.freq" datatype="double" unit="MHz" width="11" precision="6"/>
+      <FIELD name="freq_w20_clip_uw" ID="col_freq_w20_clip_uw" ucd="em.freq" datatype="double" unit="MHz" width="11" precision="6"/>
+      <FIELD name="freq_w20_clip_uw_err" ID="col_freq_w20_clip_uw_err" ucd="stat.error;em.freq" datatype="double" unit="MHz" width="11" precision="6"/>
+      <FIELD name="freq_cw20_clip_uw" ID="col_freq_cw20_clip_uw" ucd="em.freq" datatype="double" unit="MHz" width="11" precision="6"/>
+      <FIELD name="freq_cw20_clip_uw_err" ID="col_freq_cw20_clip_uw_err" ucd="stat.error;em.freq" datatype="double" unit="MHz" width="11" precision="6"/>
+      <FIELD name="vel_w50_clip_uw" ID="col_vel_w50_clip_uw" ucd="spect.dopplerVeloc.opt;em.line.HI" datatype="float" unit="km/s" width="11" precision="3"/>
+      <FIELD name="vel_w50_clip_uw_err" ID="col_vel_w50_clip_uw_err" ucd="stat.error;spect.dopplerVeloc.opt;em.line.HI" datatype="float" unit="km/s" width="11" precision="3"/>
+      <FIELD name="vel_cw50_clip_uw" ID="col_vel_cw50_clip_uw" ucd="spect.dopplerVeloc.opt;em.line.HI" datatype="float" unit="km/s" width="11" precision="3"/>
+      <FIELD name="vel_cw50_clip_uw_err" ID="col_vel_cw50_clip_uw_err" ucd="stat.error;spect.dopplerVeloc.opt;em.line.HI" datatype="float" unit="km/s" width="11" precision="3"/>
+      <FIELD name="vel_w20_clip_uw" ID="col_vel_w20_clip_uw" ucd="spect.dopplerVeloc.opt;em.line.HI" datatype="float" unit="km/s" width="11" precision="3"/>
+      <FIELD name="vel_w20_clip_uw_err" ID="col_vel_w20_clip_uw_err" ucd="stat.error;spect.dopplerVeloc.opt;em.line.HI" datatype="float" unit="km/s" width="11" precision="3"/>
+      <FIELD name="vel_cw20_clip_uw" ID="col_vel_cw20_clip_uw" ucd="spect.dopplerVeloc.opt;em.line.HI" datatype="float" unit="km/s" width="11" precision="3"/>
+      <FIELD name="vel_cw20_clip_uw_err" ID="col_vel_cw20_clip_uw_err" ucd="stat.error;spect.dopplerVeloc.opt;em.line.HI" datatype="float" unit="km/s" width="11" precision="3"/>
+      <FIELD name="freq_w50_clip_w" ID="col_freq_w50_clip_w" ucd="em.freq" datatype="double" unit="MHz" width="11" precision="6"/>
+      <FIELD name="freq_w50_clip_w_err" ID="col_freq_w50_clip_w_err" ucd="stat.error;em.freq" datatype="double" unit="MHz" width="11" precision="6"/>
+      <FIELD name="freq_cw50_clip_w" ID="col_freq_cw50_clip_w" ucd="em.freq" datatype="double" unit="MHz" width="11" precision="6"/>
+      <FIELD name="freq_cw50_clip_w_err" ID="col_freq_cw50_clip_w_err" ucd="stat.error;em.freq" datatype="double" unit="MHz" width="11" precision="6"/>
+      <FIELD name="freq_w20_clip_w" ID="col_freq_w20_clip_w" ucd="em.freq" datatype="double" unit="MHz" width="11" precision="6"/>
+      <FIELD name="freq_w20_clip_w_err" ID="col_freq_w20_clip_w_err" ucd="stat.error;em.freq" datatype="double" unit="MHz" width="11" precision="6"/>
+      <FIELD name="freq_cw20_clip_w" ID="col_freq_cw20_clip_w" ucd="em.freq" datatype="double" unit="MHz" width="11" precision="6"/>
+      <FIELD name="freq_cw20_clip_w_err" ID="col_freq_cw20_clip_w_err" ucd="stat.error;em.freq" datatype="double" unit="MHz" width="11" precision="6"/>
+      <FIELD name="vel_w50_clip_w" ID="col_vel_w50_clip_w" ucd="spect.dopplerVeloc.opt;em.line.HI" datatype="float" unit="km/s" width="11" precision="3"/>
+      <FIELD name="vel_w50_clip_w_err" ID="col_vel_w50_clip_w_err" ucd="stat.error;spect.dopplerVeloc.opt;em.line.HI" datatype="float" unit="km/s" width="11" precision="3"/>
+      <FIELD name="vel_cw50_clip_w" ID="col_vel_cw50_clip_w" ucd="spect.dopplerVeloc.opt;em.line.HI" datatype="float" unit="km/s" width="11" precision="3"/>
+      <FIELD name="vel_cw50_clip_w_err" ID="col_vel_cw50_clip_w_err" ucd="stat.error;spect.dopplerVeloc.opt;em.line.HI" datatype="float" unit="km/s" width="11" precision="3"/>
+      <FIELD name="vel_w20_clip_w" ID="col_vel_w20_clip_w" ucd="spect.dopplerVeloc.opt;em.line.HI" datatype="float" unit="km/s" width="11" precision="3"/>
+      <FIELD name="vel_w20_clip_w_err" ID="col_vel_w20_clip_w_err" ucd="stat.error;spect.dopplerVeloc.opt;em.line.HI" datatype="float" unit="km/s" width="11" precision="3"/>
+      <FIELD name="vel_cw20_clip_w" ID="col_vel_cw20_clip_w" ucd="spect.dopplerVeloc.opt;em.line.HI" datatype="float" unit="km/s" width="11" precision="3"/>
+      <FIELD name="vel_cw20_clip_w_err" ID="col_vel_cw20_clip_w_err" ucd="stat.error;spect.dopplerVeloc.opt;em.line.HI" datatype="float" unit="km/s" width="11" precision="3"/>
+      <FIELD name="integ_flux_w50_clip" ID="col_integ_flux_w50_clip" ucd="phot.flux.density;askap:arith.integrated;em.radio" datatype="float" unit="Jy.km/s" width="10" precision="3"/>
+      <FIELD name="integ_flux_w50_clip_err" ID="col_integ_flux_w50_clip_err" ucd="stat.error;phot.flux.density;askap:arith.integrated;em.radio" datatype="float" unit="Jy.km/s" width="10" precision="3"/>
+      <FIELD name="integ_flux_cw50_clip" ID="col_integ_flux_cw50_clip" ucd="phot.flux.density;askap:arith.integrated;em.radio" datatype="float" unit="Jy.km/s" width="10" precision="3"/>
+      <FIELD name="integ_flux_cw50_clip_err" ID="col_integ_flux_cw50_clip_err" ucd="stat.error;phot.flux.density;askap:arith.integrated;em.radio" datatype="float" unit="Jy.km/s" width="10" precision="3"/>
+      <FIELD name="integ_flux_w20_clip" ID="col_integ_flux_w20_clip" ucd="phot.flux.density;askap:arith.integrated;em.radio" datatype="float" unit="Jy.km/s" width="10" precision="3"/>
+      <FIELD name="integ_flux_w20_clip_err" ID="col_integ_flux_w20_clip_err" ucd="stat.error;phot.flux.density;askap:arith.integrated;em.radio" datatype="float" unit="Jy.km/s" width="10" precision="3"/>
+      <FIELD name="integ_flux_cw20_clip" ID="col_integ_flux_cw20_clip" ucd="phot.flux.density;askap:arith.integrated;em.radio" datatype="float" unit="Jy.km/s" width="10" precision="3"/>
+      <FIELD name="integ_flux_cw20_clip_err" ID="col_integ_flux_cw20_clip_err" ucd="stat.error;phot.flux.density;askap:arith.integrated;em.radio" datatype="float" unit="Jy.km/s" width="10" precision="3"/>
+      <FIELD name="bf_a" ID="col_bf_a" ucd="stat.fit.param" datatype="float" unit="Jy.km/s" width="10" precision="3"/>
+      <FIELD name="bf_a_err" ID="col_bf_a_err" ucd="stat.error;stat.fit.param" datatype="float" unit="Jy.km/s" width="10" precision="3"/>
+      <FIELD name="bf_w" ID="col_bf_w" ucd="stat.fit.param" datatype="double" unit="MHz" width="10" precision="6"/>
+      <FIELD name="bf_w_err" ID="col_bf_w_err" ucd="stat.error;stat.fit.param" datatype="double" unit="MHz" width="10" precision="6"/>
+      <FIELD name="bf_b1" ID="col_bf_b1" ucd="stat.fit.param" datatype="float" unit="" width="10" precision="3"/>
+      <FIELD name="bf_b1_err" ID="col_bf_b1_err" ucd="stat.error;stat.fit.param" datatype="float" unit="" width="10" precision="3"/>
+      <FIELD name="bf_b2" ID="col_bf_b2" ucd="stat.fit.param" datatype="float" unit="" width="10" precision="3"/>
+      <FIELD name="bf_b2_err" ID="col_bf_b2_err" ucd="stat.error;stat.fit.param" datatype="float" unit="" width="10" precision="3"/>
+      <FIELD name="bf_xe" ID="col_bf_xe" ucd="stat.fit.param" datatype="double" unit="MHz" width="10" precision="6"/>
+      <FIELD name="bf_xe_err" ID="col_bf_xe_err" ucd="stat.error;stat.fit.param" datatype="double" unit="MHz" width="10" precision="6"/>
+      <FIELD name="bf_xp" ID="col_bf_xp" ucd="stat.fit.param" datatype="double" unit="MHz" width="10" precision="6"/>
+      <FIELD name="bf_xp_err" ID="col_bf_xp_err" ucd="stat.error;stat.fit.param" datatype="double" unit="MHz" width="10" precision="6"/>
+      <FIELD name="bf_c" ID="col_bf_c" ucd="stat.fit.param" datatype="float" unit="" width="10" precision="3"/>
+      <FIELD name="bf_c_err" ID="col_bf_c_err" ucd="stat.error;stat.fit.param" datatype="float" unit="" width="10" precision="3"/>
+      <FIELD name="bf_n" ID="col_bf_n" ucd="stat.fit.param" datatype="float" unit="" width="10" precision="3"/>
+      <FIELD name="bf_n_err" ID="col_bf_n_err" ucd="stat.error;stat.fit.param" datatype="float" unit="" width="10" precision="3"/>
+      <FIELD name="flag_s1" ID="col_flag_s1" ucd="meta.code" datatype="int" unit="" width="5"/>
+      <FIELD name="flag_s2" ID="col_flag_s2" ucd="meta.code" datatype="int" unit="" width="5"/>
+      <FIELD name="flag_s3" ID="col_flag_s3" ucd="meta.code" datatype="int" unit="" width="5"/>
+      <DATA>
+        <TABLEDATA>
+        <TR>
+          <TD> SB10001_verificationCube_1</TD>
+          <TD> J060910-273517</TD>
+          <TD> 06:09:10.0</TD>
+          <TD>  -27:35:17</TD>
+          <TD>  92.291535</TD>
+          <TD>       0.10</TD>
+          <TD> -27.588162</TD>
+          <TD>       0.40</TD>
+          <TD>   15.123456</TD>
+          <TD>       0.07</TD>
+          <TD>   6.098765</TD>
+          <TD>       0.19</TD>
+          <TD>   8.546932</TD>
+          <TD>       0.97</TD>
+          <TD>   55.223377</TD>
+          <TD>       9.99</TD>
+          <TD>   44.379125</TD>
+          <TD>       1.21</TD>
+          <TD>   13.824679</TD>
+          <TD>       1.55</TD>
+          <TD>781.21</TD>
+          <TD>751.70</TD>
+          <TD> 148.18</TD>
+          <TD>  23.56</TD>
+          <TD>  66.45</TD>
+          <TD> 3.46</TD>
+          <TD>  7.39</TD>
+          <TD>   8.66</TD>
+          <TD>  2.44</TD>
+          <TD>   5</TD>
+          <TD>   6</TD>
+          <TD>   5</TD>
+          <TD>       68</TD>
+          <TD>1.536</TD>
+          <TD>2.631</TD>
+          <TD>1.001</TD>
+          <TD>8.661</TD>
+          <TD>   45.928123</TD
+          ><TD>   6.938446</TD>
+          <TD>   115.649557</TD>
+          <TD>   999.999999</TD>
+          <TD>   1.000001</TD>
+          <TD> 277.447</TD>
+          <TD>   46.987</TD>
+          <TD>   65.997</TD>
+          <TD>   34.664</TD>
+          <TD>   46.551</TD>
+          <TD>   423.501</TD>
+          <TD>     8.161</TD>
+          <TD> 10574.080</TD>
+          <TD>     19.678</TD>
+          <TD>     21.943</TD>
+          <TD>     55.236</TD>
+          <TD>     22.667</TD>
+          <TD>   993.945</TD>
+          <TD>     8.459</TD>
+          <TD>     89.6798</TD>
+          <TD>     53.4761</TD>
+          <TD>     82.1394</TD>
+          <TD>     23.6572</TD>
+          <TD>     26.3359</TD>
+          <TD>     97.4651</TD>
+          <TD>     100.2357</TD>
+          <TD>    66.9577</TD>
+          <TD>     158.9813</TD>
+          <TD>     456.2346</TD>
+          <TD>     761.4697</TD>
+          <TD>   100.4332</TD>
+          <TD>     89.4798</TD>
+          <TD>     156.3476</TD>
+          <TD>     99.4567</TD>
+          <TD>   102.497497</TD>
+          <TD>   615.987005</TD>
+          <TD>   17.171989</TD>
+          <TD>   53.353131</TD>
+          <TD>   12.457775</TD>
+          <TD>   45.659067</TD>
+          <TD>   77.829538</TD>
+          <TD>   55.172829</TD>
+          <TD>   34.794</TD>
+          <TD>   95.316</TD>
+          <TD>   1.917</TD>
+          <TD>   64.756</TD>
+          <TD>   0.557</TD>
+          <TD>   36.467</TD>
+          <TD>   1.111</TD>
+          <TD>   2.222</TD>
+          <TD>   3.333</TD>
+          <TD>   4.444444</TD>
+          <TD>   5.555555</TD>
+          <TD>   6.666666</TD>
+          <TD>   7.777777</TD>
+          <TD>   8.888888</TD>
+          <TD>   9.999999</TD>
+          <TD>   6.548443</TD>
+          <TD>   346.657</TD>
+          <TD>   67.915</TD>
+          <TD>   9.648</TD>
+          <TD>   95.123</TD>
+          <TD>   66.987</TD>
+          <TD>   18.763</TD>
+          <TD>   999.111</TD>
+          <TD>   664.557</TD>
+          <TD>     8.652</TD>
+          <TD>     7.854</TD>
+          <TD>     1.258</TD>
+          <TD>     3.698</TD>
+          <TD>     7.532</TD>
+          <TD>     9.512</TD>
+          <TD>     66.159</TD>
+          <TD>     84.357</TD>
+          <TD>     16.951</TD>
+          <TD>     12.753</TD>
+          <TD>  36.363636</TD>
+          <TD>  25.252525</TD>
+          <TD>     1.369</TD>
+          <TD>     3.258</TD>
+          <TD>     8.741</TD>
+          <TD>     7.852</TD>
+          <TD>  222.664664</TD>
+          <TD>  111.555555</TD>
+          <TD>  717.436436</TD>
+          <TD>  604.553553</TD>
+          <TD>     4.963</TD>
+          <TD>     9.789</TD>
+          <TD>     8.123</TD>
+          <TD>     7.456</TD>
+          <TD>    1</TD>
+          <TD>    0</TD>
+          <TD>    2</TD>
+        </TR>
+        </TABLEDATA>
+      </DATA>
+    </TABLE>
+  </RESOURCE>
+</VOTABLE>

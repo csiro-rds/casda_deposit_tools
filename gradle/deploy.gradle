@@ -1,0 +1,93 @@
+/*
+ * Scripts for deploying CASDA data deposit to a server.
+ *
+ * NB: This script is conditionally applied. Any new tasks will need to be 
+ * included in the conditions in build.gradle. 
+ *
+ * Usage: gradle deployToServer
+ */
+ 
+
+// Make sure the required params are supplied. This is generally done by the CI job's 
+// "Properties Content" field with a prefix of ORG_GRADLE_PROJECT_  
+// e.g.  ORG_GRADLE_PROJECT_deployuser=auser
+// or they can be added locally to your gradle.properties
+assert project.hasProperty('deployuser'), 'Properties for deployment must be provided'
+assert project.hasProperty('deploypassword'), 'Properties for deployment must be provided'
+assert System.env.SOURCE_BUILD_NUMBER, 'Deploying must be done by the appropriate Jenkins job'
+assert project.hasProperty('remoteHost'), 'The remote host for the deployment must be specified.'
+assert project.hasProperty('appUser'), 'The application user for the deployment environment'
+
+// Ssh settings
+ssh {
+  knownHosts = allowAnyHosts    // Disable host key verification
+}
+
+
+// Define the remote server we are interacting with.
+remotes {
+    targetServer {
+        host = remoteHost
+        user = deployuser
+        password = deploypassword
+    }
+}
+
+def applicationRemoteDir = '/CASDA/application/casda_deposit_tools'
+def downloadFolder = "${buildDir}/download"
+def downloadedArtifact = file("${downloadFolder}/${jar.baseName}.zip")
+def repoUrl = 'http://jenkins-cdc.it.csiro.au:8085/nexus/service/local/artifact/maven/redirect?r=cd'
+
+task makeDownloadFolder() {
+	mkdir file(downloadFolder)
+}
+
+task downloadBinaryArchive(dependsOn: makeDownloadFolder) {
+	description 'Download our target war file from the nexus repository'
+	group 'Continuous Delivery'
+
+	doLast {
+	    ext {
+	        binaryUrl = "${repoUrl}&g=${project.group}&a=${jar.baseName}&e=zip&v=${project.version}"
+            println binaryUrl
+	    }
+	
+		ant.get(src: binaryUrl, dest: downloadedArtifact)
+	}
+}
+
+task deployToServer(type: SshTask, dependsOn: downloadBinaryArchive) {
+    description 'Deploy CASDA Data Deposit tools to the required server. Intended for use by the CI job only.'
+    group 'Continuous Delivery'
+    
+    doFirst {
+        println "Deploying data_deposit build ${project.version} to server ${remotes.targetServer.host}"
+    }
+    
+    // Note: Each sudo command here must be specifically allowed in the remote host suduers config.
+    session(remotes.targetServer) {
+        def asUser = "sudo -u ${appUser}"
+        def remoteAppRootDir = "${applicationRemoteDir}"
+        def remoteAppDistDir = "${remoteAppRootDir}/deploy"
+        def remoteAppDist = "${remoteAppDistDir}/${jar.baseName}.zip"
+        def remoteAppDir = "${remoteAppRootDir}/${jar.baseName}"
+        def remoteAppLibDir = "${remoteAppDir}/lib"
+        def remoteAppConfigDir = "${remoteAppDir}/config"
+        def remoteAppLogFile = "${remoteAppRootDir}/logs/${jar.baseName}.log"
+        
+        println "Uploading ${downloadedArtifact} to ${remoteAppDist}"
+        put downloadedArtifact, "${remoteAppDist}"
+
+        println "Removing old libs directory (if it exists)"
+        println("if [ -d \"${remoteAppLibDir}\" ]; then ${asUser} rm -rf \"${remoteAppLibDir}\"; fi")
+        execute("if [ -d \"${remoteAppLibDir}\" ]; then ${asUser} rm -rf \"${remoteAppLibDir}\"; fi")
+        
+        println "Extracting ${remoteAppDist} to ${remoteAppRootDir} (overwriting existing if it exists)"
+        println("${asUser} unzip -o \"${remoteAppDist}\" -d \"${remoteAppRootDir}\"")
+        execute("${asUser} unzip -o \"${remoteAppDist}\" -d \"${remoteAppRootDir}\"")
+        
+        println "Copying template configuration files (as required)"
+        println("for each in \$(ls ${remoteAppConfigDir}/*.template); do if [ ! -f \${each%*.*} ]; then echo \"Copying \$each\"; ${asUser} cp \"\$each\" \${each%*.*}; else echo \"Leaving \${each%*.*} alone\"; fi; done")
+        execute("for each in \$(ls ${remoteAppConfigDir}/*.template); do if [ ! -f \${each%*.*} ]; then echo \"Copying \$each\"; ${asUser} cp \"\$each\" \${each%*.*}; else echo \"Leaving \${each%*.*} alone\"; fi; done")
+    }
+}

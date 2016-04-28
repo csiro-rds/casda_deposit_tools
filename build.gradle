@@ -1,0 +1,445 @@
+/*
+
+ * Gradle build script for CSIRO CASDA Data Deposit applications (data_deposit).
+ * Built for Gradle v2.6
+ *
+ * Primary tasks are:
+ *  clean - Remove the contents of the build folder ready for a full rebuild.
+ *  build - Compiles the code, builds the jar, and runs the tests (this is the most commonly used command)
+ *  eclipse - Usually after cleanEclipse - rebuild the eclipse (or STS) classpath and so on.
+ *  jaxb - to generate the POJO classes from the schema
+ *  
+ * NOTE: Due to the generated classes that the source relies upon, this needs to be built with:
+ *  gradle clean jaxb build
+ * Since otherwise the tests will fail.  "gradle clean jaxb" and "gradle build" separately don't seem to work in eclipse or CL.
+ */
+buildscript {
+    repositories { 
+        mavenCentral() 
+    }
+    dependencies { 
+        classpath("org.hidetake:gradle-ssh-plugin:0.3.10") 
+    }
+}
+
+task wrapper(type: Wrapper) { gradleVersion = '2.6' }
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+apply plugin: 'ssh'
+
+group = 'au.csiro'
+description = 'CASDA Data Deposit'
+
+ext {
+    majorVersion = 1
+    minorVersion = 2
+    springBootVersion = '1.2.5.RELEASE'
+    installDir = 'build/install/'+project.name
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenLocal() // Required when we use locally-built versions of CSIRO projects
+    mavenCentral()
+    maven { url "http://jenkins-cdc.it.csiro.au:8085/nexus/content/repositories/cd/" }
+    maven { url "http://jenkins-cdc.it.csiro.au:8085/nexus/content/repositories/releases/" }
+    maven { url "http://jenkins-cdc.it.csiro.au:8085/nexus/content/repositories/thirdparty/" }
+    maven { url "http://download.osgeo.org/webdav/geotools" }
+    maven { url "http://www.hibernatespatial.org/repository" }
+}
+
+configurations { 
+    providedRuntime
+    all*.exclude group: "org.springframework.boot", module: "spring-boot-starter-logging"
+    all*.exclude group: "xerces", module: "xercesImpl"
+    all*.exclude group: "org.hamcrest", module: "hamcrest-library"
+    all*.exclude group: "org.hamcrest", module: "hamcrest-core"
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-integration:${springBootVersion}") {
+        exclude group: "org.springframework.integration", module: "spring-integration-http"
+    }
+    compile("com.beust:jcommander:1.48")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
+    compile("org.postgresql:postgresql:9.3-1103-jdbc41")
+    
+    compile("org.springframework.boot:spring-boot-starter-log4j2:${springBootVersion}")
+    
+    // CASDA DEPENDENCIES
+    compile 'au.csiro:casda_commons:1.0.165'
+    compile 'au.csiro:job_manager:1.0.14'
+    
+    
+    // for processing FITS files
+    compile ('au.csiro:atnf-ivoa-tools:1.0.5') { 
+        exclude(module:'slf4j-nop') 
+    }
+    
+    compile("org.hibernate:hibernate-spatial:4.3") {
+        exclude(module: 'postgresql')
+        exclude(module:'slf4j-nop')
+    }
+    
+    // String-templating library
+    compile("org.antlr:stringtemplate:4.0.2")
+    
+    // Templating library for generating sql files 
+    compile("org.freemarker:freemarker:2.3.23")
+    
+    compile("com.google.code.findbugs:jsr305:3.0.0")
+    
+    compile("org.apache.httpcomponents:httpclient:4.5")
+    compile("org.jdom:jdom:2.0.2")
+    
+    compile("com.fasterxml.jackson.core:jackson-databind:2.5.4")
+
+    runtime("org.hibernate:hibernate-validator:5.2.1.Final")
+    runtime("org.glassfish.web:el-impl:2.2")
+    
+    // H2 extension for geometry
+    testCompile( 'org.opengeo:geodb:0.7') {
+        exclude group: 'net.sourceforge.hatbox', module: 'hatbox'
+    }     
+    
+    testCompile("com.h2database:h2:1.4.188")
+
+    testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+    testCompile("junit:junit:4.12")
+    testCompile("org.hamcrest:java-hamcrest:2.0.0.0")
+    testCompile("org.hamcrest:hamcrest-junit:2.0.0.0")
+    testCompile('org.mockito:mockito-core:1.10.19')
+    // For nested test cases (JUnit's Enclosed is good for some things but not others)
+    testCompile("de.bechte.junit:junit-hierarchicalcontextrunner:4.12.1")
+    
+    // Allows us to set expectations or control things like System.out, System.getProperty, System.exit, etc.
+    testCompile("com.github.stefanbirkner:system-rules:1.12.1")
+}
+
+apply from: 'gradle/versioning.gradle'
+
+//=====================================================================================================================
+//
+// Main artifact build configuration
+//
+//=====================================================================================================================
+
+sourceSets {
+    test {
+        resources   {
+            // So that test_config goes into gradle's build/resources/test and Eclipse's binTest
+            srcDir "src/test/local"
+        }
+    }
+    test {
+        resources { 
+            // So that (local) config goes into gradle's build/resources/test and Eclipse's binSrc
+            // (due to the rewired classpath in the Eclipse config).
+            srcDir "src/main/local"
+        }
+    }
+}
+
+jar { 
+    baseName='data_deposit'
+}
+jar.dependsOn makeVersionProps
+
+
+//=====================================================================================================================
+//
+// Test configuration.
+//
+//=====================================================================================================================
+
+tasks.withType(Test) { 
+    if (System.getProperty('env')) {
+        systemProperty 'env', System.getProperty('env')
+    } 
+}
+
+test {
+    testLogging {
+        events 'started'
+    }
+}
+
+//=====================================================================================================================
+//
+// JAXB is used to generate XML-parsing Java classes for RTC observation input files.
+//
+//=====================================================================================================================
+
+configurations { jaxb }
+
+dependencies {
+    jaxb 'com.sun.xml.bind:jaxb-core:2.2.11'
+    jaxb 'com.sun.xml.bind:jaxb-xjc:2.2.11'
+    jaxb 'com.sun.xml.bind:jaxb-impl:2.2.11'
+    jaxb 'javax.xml.bind:jaxb-api:2.2.11'
+}
+
+class JaxbTask extends DefaultTask {
+
+    @Input
+    File outputDir
+    
+    @Input
+    String basePackage
+
+    @InputFile
+    File schemaFile
+    
+    @InputFile
+    File bindingFile
+    
+    @Input
+    String jaxbToolingClasspath
+  
+    def Task configure(Closure configureClosure) {
+        super.configure(configureClosure)
+        outputs.dir outputDir
+        project.tasks.clean.delete(outputDir)
+        project.tasks.compileJava.source = project.tasks.compileJava.source.plus(outputs.files)
+        this
+    }
+
+    @TaskAction
+    def processXsd() {
+        System.setProperty("javax.xml.accessExternalSchema", "file,http")
+        System.setProperty("disableXMLSecurity", "true")
+        System.setProperty("ANT_OPTS", "-Dcom.sun.tools.xjc.Options.findServices=true")
+        outputDir.mkdirs()
+
+        ant.taskdef(
+            name: 'xjc', 
+            classname: 'com.sun.tools.xjc.XJCTask', 
+            classpath: jaxbToolingClasspath)
+        ant.jaxbTargetDir = outputDir
+        ant.xjc(
+            destdir: "${outputDir}", 
+            package: basePackage, 
+            extension: true, 
+            classpath: jaxbToolingClasspath) {
+            schema(file: schemaFile)
+            binding(file: bindingFile)
+        }
+    }
+}
+
+task jaxbObservation(type: JaxbTask) {
+    jaxbToolingClasspath = configurations.jaxb.asPath
+    outputDir = file('src/main/generated')
+    schemaFile = file('src/main/resources/schemas/observation_metadata.xsd')
+    basePackage = 'au.csiro.casda.datadeposit.observation.jaxb'
+    bindingFile = file('src/main/resources/schemas/observation_metadata_bindings.xjb')
+}
+
+task jaxbVoTable(type: JaxbTask) {
+    jaxbToolingClasspath = configurations.jaxb.asPath
+    outputDir = file('src/main/generated')
+    schemaFile = file('src/main/resources/schemas/VOTable-1.3.xsd')
+    basePackage = 'net.ivoa.vo'
+    bindingFile = file('src/main/resources/schemas/VOTable-1.3_bindings.xjb')
+}
+
+task jaxb(dependsOn: [
+        tasks.jaxbObservation,
+        tasks.jaxbVoTable
+])
+
+//=====================================================================================================================
+//
+// The 'application plugin is used to configure the project for distribution.
+//
+//=====================================================================================================================
+
+apply plugin: 'application'
+
+// List of scripts that will be generated.  These are generated by the CreateStartScripts tasks
+// that are generated dynamically.
+//
+// WARNING: The format of the following lines is crucial as it is used in a unit test to ensure that the
+// script usage information is correct.
+//
+project.ext.scripts = [
+    [
+        mainClassName: 'au.csiro.casda.dataaccess.NgasDownloader', 
+        applicationName: 'ngas_download'
+    ],
+    [
+        mainClassName: 'au.csiro.casda.datadeposit.observation.ObservationCommandLineImporter', 
+        applicationName: 'observation_import'
+    ],
+    [
+        mainClassName: 'au.csiro.casda.datadeposit.catalogue.CatalogueCommandLineImporter',
+        applicationName: 'catalogue_import'
+    ],
+    [
+        mainClassName: 'au.csiro.casda.datadeposit.rtcnotifier.Notifier',
+        applicationName: 'rtc_notify'
+    ],
+    [
+        mainClassName: 'au.csiro.casda.datadeposit.fits.FitsCommandLineImporter',
+        applicationName: 'fits_import'
+    ],
+    [
+        mainClassName: 'au.csiro.casda.datadeposit.copy.StageArtefactCommandLineTool',
+        applicationName: 'stage_artefact'
+    ],
+    [
+        mainClassName: 'au.csiro.casda.datadeposit.copy.RegisterArtefactCommandLineTool',
+        applicationName: 'register_artefact'
+    ]
+]
+
+// empty this task out, and add all the startscripts below
+startScripts.deleteAllActions()
+
+scripts.each() { scriptConfig ->
+    def t = tasks.create(name: scriptConfig.applicationName + 'StartScript', type: CreateStartScripts) {
+        mainClassName = scriptConfig.mainClassName
+        applicationName = scriptConfig.applicationName
+        outputDir = file(project.buildDir.toString() + '/scripts')
+        classpath = jar.outputs.files + project.configurations.runtime
+		// this appends APP_HOME/lib/config
+		classpath += files('src/main/local/config')
+		defaultJvmOpts = ["-Dorg.jboss.logging.provider=slf4j", "-Xmx2g"]
+
+        doLast {
+            def windowsScriptFile = file getWindowsScript()
+            def unixScriptFile = file getUnixScript()
+
+            // replace %APP_HOME%/lib with lib and add 'cd %APP_HOME%' to shorten Windows command length.
+            windowsScriptFile.text = windowsScriptFile.text.replace('%APP_HOME%\\lib', 'lib')
+            windowsScriptFile.text = windowsScriptFile.text.replace('"%JAVA_EXE%" %DEFAULT_JVM_OPTS%', 'cd "%APP_HOME%"\r\n"%JAVA_EXE%" %DEFAULT_JVM_OPTS%')
+            
+            // replace APP_HOME/lib/config with APP_HOME/config to point to our config directory
+			windowsScriptFile.text = windowsScriptFile.text.replace('lib\\config', 'config')
+            unixScriptFile.text    = unixScriptFile.text.replace('$APP_HOME/lib/config', '$APP_HOME/config')
+
+            // replace APP_HOME setting so that APP_HOME can be passed-in if desired (Slurm issue)
+            unixScriptFile.text    = unixScriptFile.text.replaceAll(
+                /(?m)^APP_HOME=.*$/, 
+                'if [ -z "\\$APP_HOME" ] || [ -z "\\$SLURM_JOB_NAME" ]; then APP_HOME="`pwd -P`"; fi')
+        }
+    }
+    startScripts.dependsOn(t)
+}
+
+
+distZip {
+    // Rename each file as it is copied (I can't find any other way to do this)
+    def rootDirName = "${baseName}-${project.version}".replaceAll(/\./, '\\.')
+    def requiredRootDirName = "${jar.baseName}"
+    eachFile { fileCopyDetails ->
+        fileCopyDetails.setPath(fileCopyDetails.getPath().replaceAll(/${rootDirName}\//, "${requiredRootDirName}/"))
+    }
+}
+distZip.dependsOn makeVersionProps
+
+applicationDistribution.with {
+    from(".") {
+        include "README.md"
+    }
+	
+    into("bin") {
+        from(file("build/scripts"))
+        include "*"
+    }
+}
+
+
+task installConfigurationFiles(type: Copy) {
+    into(new File(tasks.installApp.destinationDir, "config"))
+    from(new File(tasks.installApp.destinationDir, "config"))
+    include "**/*.template"
+    rename { file ->
+        file.replaceAll(/\.template$/, '')
+    }
+}
+installConfigurationFiles.mustRunAfter installApp
+
+run {
+    systemProperties System.getProperties() // Otherwise -D options don't get passed on.
+}
+
+//=====================================================================================================================
+//
+// Eclipse Configuration
+//
+//=====================================================================================================================
+
+eclipse {
+    project { natures 'org.springsource.ide.eclipse.gradle.core.nature' }
+    classpath {
+        containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+        containers 'org.eclipse.jdt.launching.JRE_CONTAINER'
+        file {
+            withXml { xmlProvider ->
+                xmlProvider.asElement().getElementsByTagName("classpathentry").each { classpathentry ->
+                    // Split up the src and test output folders.
+                    //
+                    // (This was done to solve a problem in Eclipse where test
+                    // resources were being picked up from a joint output directory.)
+                    if (classpathentry.getAttribute('kind') == 'src') {
+                        def outputPath
+                        if (classpathentry.getAttribute('path') =~ /\/main\//) {
+                            outputPath = "binSrc"
+                        } else if (classpathentry.getAttribute('path') =~ /\/test\//) {
+                            outputPath = "binTest"
+                        } else {
+                            outputPath = "binUnknown"
+                        }
+                        if (!classpathentry.hasAttribute('output')) {
+                            classpathentry.setAttribute('output', outputPath)
+                        }
+                    }
+                }               
+            }
+            withXml { xmlProvider ->
+                def node = xmlProvider.asNode()
+                node.appendNode('classpathentry', [kind: 'src', output: 'binSrc', path: 'src/main/generated'])
+            }
+        }
+    }
+}
+tasks.eclipseClasspath.dependsOn tasks.clean, tasks.cleanEclipseClasspath, tasks.jaxb
+
+//=====================================================================================================================
+//
+// Include other build files
+//
+//=====================================================================================================================
+
+// Produces pmd, findbugs and checkstyle reports.
+apply from: 'gradle/report.gradle'
+
+// Produces jacoco code coverage report.
+apply from: 'gradle/coverage-report.gradle'
+
+// We conditionally apply the publish script so that we don't need the properties for all builds.
+if (gradle.startParameter.taskNames.any{it =~ /publish/}) {
+    apply from: 'gradle/publish.gradle'
+}
+
+// We conditionally apply the deploy script so that we don't need the properties for all builds.
+if (gradle.startParameter.taskNames.contains('deployToServer')) {
+    apply from: 'gradle/deploy.gradle'
+}
+
+// The status task does a health check on the deployed system and throws an exception if its not healthy
+if (gradle.startParameter.taskNames.contains('status')) {
+    apply from: 'gradle/status.gradle'
+}
+
+task deployToLocal(
+    dependsOn: [
+        tasks.check, 
+        tasks.installApp, 
+        tasks.installConfigurationFiles
+    ])

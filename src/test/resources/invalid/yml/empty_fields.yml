@@ -1,0 +1,7 @@
+params:
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.ParamConstraint
+        name: imageFile
+        datatype: char
+        maxarraysize: 255
+fields:

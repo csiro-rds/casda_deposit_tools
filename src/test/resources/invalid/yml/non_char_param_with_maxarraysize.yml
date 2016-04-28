@@ -1,0 +1,24 @@
+params:
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.ParamConstraint
+        name: Reference frequency
+        datatype: float
+        unit: Hz
+        maxarraysize: 15
+fields:
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: island_id
+        id: col_island_id
+        datatype: char
+        unit: --
+        maxarraysize: 15
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: ra_deg_cont
+        id: col_rajd
+        ref: J2000 
+        datatype: float
+        unit: deg
+        width: 12
+        precision: 6

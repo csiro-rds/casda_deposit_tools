@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<VOTABLE version="1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ivoa.net/xml/VOTable/v1.3" xmlns:stc="http://www.ivoa.net/xml/STC/v1.30" >
+<RESOURCE name="CASDA TAP Result" type='results'>
+<INFO name="QUERY_STATUS" value="OK">Successful query</INFO>
+<TABLE name="results">
+<DESCRIPTION>Catalogue containing unusual data types</DESCRIPTION>
+<PARAM ID="catalogueName" arraysize="63" datatype="char" name="Catalogue Name" ucd="" value="Level7_unusual"/>
+<PARAM ID="projectCode" arraysize="255" datatype="char" name="Project Code" ucd="" value="AS031"/>
+<PARAM ID="indexedFields" arraysize="255" datatype="char" name="Indexed Fields" ucd="" value="source_name,ra_deg_cont,dec_deg_cont"/>
+<PARAM ID="principalFields" arraysize="255" datatype="char" name="Principal Fields" ucd="" value="source_name,ra_deg_cont, dec_deg_cont"/>
+<FIELD name="source_ident" ID="source_ident" datatype="char" arraysize="4" ucd="meta.id;meta.main" >
+ <DESCRIPTION>Component number</DESCRIPTION>
+</FIELD>
+<FIELD name="source_name" ID="source_name" datatype="char" arraysize="26" ucd="meta.id" >
+ <DESCRIPTION>Designation for the radio component</DESCRIPTION>
+</FIELD>
+<FIELD name="boolean_field" ID="bool_field" datatype="boolean" ucd="" >
+ <DESCRIPTION>A boolean data field</DESCRIPTION>
+</FIELD>
+<FIELD name="bit_field" ID="bit_fld" datatype="bit" width="8" >
+ <DESCRIPTION>A field for bit values</DESCRIPTION>
+</FIELD>
+<FIELD name="unsigned_byte_field" ID="unsigned_byte_fld" datatype="unsignedByte" >
+ <DESCRIPTION>An unsigned byte field</DESCRIPTION>
+</FIELD>
+<FIELD name="ra_deg_cont" ID="ra_deg_cont" datatype="double" unit="deg" ucd="pos.eq.ra;meta.main" >
+ <DESCRIPTION>J2000 right ascension in decimal degrees</DESCRIPTION>
+</FIELD>
+<FIELD name="dec_deg_cont" ID="dec_deg_cont" datatype="double" unit="deg" ucd="pos.eq.dec;meta.main" >
+ <DESCRIPTION>J2000 declination in decimal degrees</DESCRIPTION>
+</FIELD>
+<FIELD name="Name_with_Caps" ID="Name_with_Caps" datatype="char"  arraysize="22" >
+ <DESCRIPTION>Test field with capitals in the name</DESCRIPTION>
+</FIELD>
+<DATA>
+<TABLEDATA>
+           <TR><TD>S001</TD><TD>ATCDFS_J032602.78-284709.0</TD><TD>0</TD><TD>101010</TD><TD>4</TD><TD>51.5116039999999984</TD><TD>-28.7858499999999999</TD><TD>A1</TD></TR>
+           <TR><TD>S002</TD><TD>ATCDFS_J032604.15-275659.3</TD><TD>1</TD><TD>1</TD><TD>0</TD><TD>51.5172999999999988</TD><TD>-27.9498309999999996</TD><TD>A2</TD></TR>
+           <TR><TD>S003</TD><TD>ATCDFS_J032605.68-274734.4</TD><TD>t</TD><TD>0</TD><TD>255</TD><TD>51.5236879999999999</TD><TD>-27.7929110000000001</TD><TD>A3</TD></TR>
+           <TR><TD>S004</TD><TD>ATCDFS_J032606.95-275332.2</TD><TD>f</TD><TD>001</TD><TD>254</TD><TD>51.5289789999999996</TD><TD>-27.8922939999999997</TD><TD>A4</TD></TR>
+           <TR><TD>S005</TD><TD>ATCDFS_J032611.47-273243.8</TD><TD>T</TD><TD>111</TD><TD>0xff</TD><TD>51.5478129999999979</TD><TD>-27.5455030000000001</TD><TD>A5</TD></TR>
+           <TR><TD>S006</TD><TD>ATCDFS_J032613.70-281717.7</TD><TD>F</TD><TD>000</TD><TD>0x20</TD><TD>51.5570870000000028</TD><TD>-28.288253000000001</TD><TD>A6</TD></TR>
+           <TR><TD>S007</TD><TD>ATCDFS_J032615.48-284629.2</TD><TD>tRUE</TD><TD>1</TD><TD>1</TD><TD>51.5645379999999989</TD><TD>-28.7747889999999984</TD><TD>A7</TD></TR>
+           <TR><TD>S008</TD><TD>ATCDFS_J032615.55-280601.0</TD><TD>FALSE</TD><TD>0</TD><TD>0x0</TD><TD>51.564821000000002</TD><TD>-28.1002919999999996</TD><TD>A8</TD></TR>
+           <TR><TD>S009</TD><TD>ATCDFS_J032616.35-280014.6</TD><TD> </TD><TD>1</TD><TD>0x1</TD><TD>51.5681379999999976</TD><TD>-28.0040580000000006</TD><TD>A9</TD></TR>
+           <TR><TD>S010</TD><TD>ATCDFS_J032616.41-271621.1</TD><TD>?</TD><TD>0</TD><TD>0x0a</TD><TD>51.5684129999999996</TD><TD>-28.0040580000000006</TD><TD>A10</TD></TR>
+</TABLEDATA>
+</DATA>
+</TABLE>
+</RESOURCE>
+</VOTABLE>

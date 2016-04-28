@@ -1,0 +1,3 @@
+Error in PARAM 'imageFile' : value 'null' does not match any image in the observation
+Error in FIELD 'dec_deg_cont' : Attribute 'unit' ('arcsec') must be 'deg'
+Error in 11th TD (FIELD 'ra_deg_cont_err') of 1st TR : Value 'OOPS' is not a 'float'

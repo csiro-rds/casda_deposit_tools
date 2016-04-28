@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataset xmlns="http://au.csiro/askap/observation">
+	<identity>
+		<telescope>ASKAP</telescope>
+		<sbid>22224</sbid>
+		<obsprogram>test</obsprogram>
+	</identity>
+
+	<observation>
+		<obsstart>2013-11-19T02:30:00.000</obsstart>
+		<obsend>2013-11-19T03:30:00.000</obsend>
+	</observation>
+
+	<images>
+		<image>
+			<format>fits</format>
+			<filename>image.i.clean.restored.fits</filename>
+            <project>AS007</project>
+		</image>
+
+	</images>
+
+	<catalogues>
+		<catalogue>
+			<format>votable</format>
+            <type>continuum-component</type>
+			<filename>componentCatalogue.xml</filename>
+			<project>AS007</project>
+		</catalogue>
+	</catalogues>
+
+	<measurement_sets>
+		<measurement_set>
+			<format>tar</format>
+			<filename>ms.tar</filename>
+			<project>AS007</project>
+			<scanstart>1.2345</scanstart>
+			<scanend>2.2345</scanend>
+			<fieldcentre units="rad">[-3.02, -0.785]</fieldcentre>
+			<coordsystem>J2000</coordsystem>
+			<fieldname>Fornax</fieldname>
+			<polarisations>[XX, XY, YX, YY]</polarisations>
+			<numchan>16416</numchan>
+			<centrefreq units="Hz">1400000000.0</centrefreq>
+			<centrewidth>18518.0</centrewidth>
+		</measurement_set>
+	</measurement_sets>
+
+	<evaluations>
+		<evaluation>
+			<format>pdf</format>
+			<filename>evaluations.pdf</filename>
+		</evaluation>
+	</evaluations>
+</dataset>

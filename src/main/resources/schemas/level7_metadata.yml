@@ -1,0 +1,31 @@
+# Definition of the expected structure of all Level7 Catalogue VOTable files.
+# 
+params:
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.ParamConstraint
+        name: Catalogue Name
+        datatype: char
+        maxarraysize: 63
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.ParamConstraint
+        name: Indexed Fields
+        datatype: char
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.ParamConstraint
+        name: Principal Fields
+        datatype: char
+fields:
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        ucd: meta.id;meta.main
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        ucd: pos.eq.ra;meta.main
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        ucd: pos.eq.dec;meta.main
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        datatype: char
+        maxarraysize: 1024
+        

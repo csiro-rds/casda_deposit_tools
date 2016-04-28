@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataset xmlns="http://au.csiro/askap/observation">
+	<identity>
+		<telescope>ASKAP</telescope>
+		<!-- Scheduling Block ID Type: int Range: 0 to (2^31 - 1)) -->
+		<sbid>8</sbid>
+
+		<!-- Observation program - A collection of scheduling blocks Type: int 
+			Range: 0 to (2^31 - 1)) -->
+		<obsprogram>test</obsprogram>
+
+		<!-- Project Reference - May be an OPAL ID Type: String -->
+		<projects>
+			<project>AS007</project>
+			<project>AS004</project>
+		</projects>
+
+	</identity>
+
+	<observation>
+		<!-- Observation Start Time/Date - Format is YYYY-MM-DD-Thh:mm:ss[.sss] 
+			An alternative may be seconds since MJD=0 if that would be easier to parse. -->
+		<obsstart>2013-11-19T02:30:00.000</obsstart>
+
+		<!-- Observation Stop Time/Date -->
+		<obsend>2013-11-19T03:30:00.000</obsend>
+	</observation>
+
+	<!-- May contain one or more image elements -->
+	<images>
+		<image>
+			<format>fits</format>
+			<filename>data/image/ref_image8.fits</filename>
+		</image>
+
+	</images>
+
+	<catalogues>
+		<catalogue>
+			<format>votable</format>
+			<!-- This VOTable contains 5881 objects and has a wide RA / DEC - lots of sky -->
+			<!-- It also has an error with that name and a DEC float value 'not a float' -->
+			<!-- See https://jira.csiro.au/browse/CASDA-2509 -->
+			<filename>src/test/resources/continuum_test_data/ref_08_votable_err.xml</filename>
+			<project>AS007</project>
+			<!-- The VOTable catalog is self describing, in XML, so it is not further 
+				described here -->
+		</catalogue>
+	</catalogues>
+
+	<measurement_sets>
+		<measurement_set>
+			<format>tar</format>
+			<filename>src/test/resources/measurement/good/no_file.ms.tar</filename>
+			<project>AS007</project>
+			<scanstart>1.2345</scanstart>
+			<scanend>2.2345</scanend>
+			<fieldcentre units="rad">[-3.02, -0.785]</fieldcentre>
+			<coordsystem>J2000</coordsystem>
+			<fieldname>Fornax</fieldname>
+			<polarisations>[XX, XY, YX, YY]</polarisations>
+			<numchan>16416</numchan>
+			<centrefreq units="Hz">1400000000.0</centrefreq>
+			<centrewidth>18518.0</centrewidth>
+		</measurement_set>
+	</measurement_sets>
+
+	<evaluations>
+		<evaluation>
+			<format>pdf</format>
+			<filename>src/test/resources/evaluation/good/no_file.pdf</filename>
+		</evaluation>
+	</evaluations>
+</dataset>

@@ -1,0 +1,14 @@
+.classpath
+.project
+.gradle
+.settings
+bin/
+binSrc/
+binTest/
+build/
+logs/
+src/main/generated/
+sql/
+config/application.properties
+src/test/resources/atlas/
+dep.txt

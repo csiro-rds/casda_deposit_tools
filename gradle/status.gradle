@@ -1,0 +1,48 @@
+/*
+ * Scripts for checking the status of the application deployed to a server.
+ *
+ * NB: This script is conditionally applied. Any new tasks will need to be
+ * included in the conditions in build.gradle.
+ *
+ * Usage: gradle status
+ */
+assert project.hasProperty('remoteHost'), 'The remote host for the deployment must be specified.'
+assert project.hasProperty('appUser'), 'The application user for the deployment environment'
+
+// Ssh settings
+ssh {
+  knownHosts = allowAnyHosts    // Disable host key verification
+  pty = true    // Fixes "sudo: no tty present and no askpass program specified"
+}
+
+// Define the remote server we are interacting with.
+remotes {
+    targetServer {
+        host = remoteHost
+        user = deployuser
+        password = deploypassword
+    }
+}
+
+def applicationRemoteDir = '/CASDA/application/casda_deposit_tools'
+
+task status(type: SshTask) {
+    description 'Check the deployment of the application to the server. Intended for use by the CI job only.'
+    group 'Continuous Delivery'
+    
+    // Note: Each sudo command here must be specifically allowed in the remote host suduers config.
+    session(remotes.targetServer) {
+        def asUser = "sudo -u ${appUser}"
+        def remoteAppRootDir = "${applicationRemoteDir}"
+        def remoteAppDir = "${remoteAppRootDir}/${jar.baseName}"
+
+        scripts.each() { scriptConfig ->
+            if (!scriptConfig.applicationName.equals('deposit_manager')) {
+                def remoteAppScript = "${remoteAppDir}/bin/${scriptConfig.applicationName}"
+                println "Checking usage on ${remoteAppScript}"
+                println "${asUser} ${remoteAppScript} -help"
+                execute "${asUser} ${remoteAppScript} -help"
+            }
+        }
+    }
+}

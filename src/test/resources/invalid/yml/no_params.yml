@@ -1,0 +1,8 @@
+fields:
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: island_id
+        id: col_island_id
+        datatype: char
+        unit: --
+        maxarraysize: 15

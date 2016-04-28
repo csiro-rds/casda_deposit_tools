@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<VOTABLE version="1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ivoa.net/xml/VOTable/v1.3" xmlns:stc="http://www.ivoa.net/xml/STC/v1.30" >
+<RESOURCE name="CASDA TAP Result" type='results'>
+<INFO name="QUERY_STATUS" value="OK">Successful query</INFO>
+<TABLE name="results">
+<DESCRIPTION>Atlas Sources for Project Foo</DESCRIPTION>
+<PARAM ID="catalogueName" arraysize="63" datatype="char" name="Catalogue Name" ucd="" value="my_level7_catalogue"/>
+<PARAM ID="projectCode" arraysize="255" datatype="char" name="Project Code" ucd="" value="FOOBARBAM"/>
+<PARAM ID="indexedFields" arraysize="255" datatype="char" name="Indexed Fields" ucd="" value="ra_deg_cont,dec_deg_cont"/>
+<PARAM ID="principalFields" arraysize="255" datatype="char" name="Principal Fields" ucd="" value="ra_deg_cont, dec_deg_cont"/>
+<FIELD name="source_ident" ID="source_ident" datatype="char" arraysize="4" ucd="meta.id;meta.main" >
+ <DESCRIPTION>Component number</DESCRIPTION>
+</FIELD>
+<FIELD name="ra_deg_cont" ID="ra_deg_cont" datatype="double" unit="deg" ucd="pos.eq.ra;meta.main" >
+ <DESCRIPTION>J2000 right ascension in decimal degrees</DESCRIPTION>
+</FIELD>
+<FIELD name="dec_deg_cont" ID="dec_deg_cont" datatype="double" unit="deg" ucd="pos.eq.dec;meta.main" >
+ <DESCRIPTION>J2000 declination in decimal degrees</DESCRIPTION>
+</FIELD>
+<FIELD name="type" ID="type" datatype="int" ucd="meta.code" >
+ <DESCRIPTION>Identification type given in Table 5</DESCRIPTION>
+</FIELD>
+<FIELD name="comment" ID="comment" datatype="char" arraysize="1025" unit="none" ucd="meta.note" >
+ <DESCRIPTION>Additional comments</DESCRIPTION>
+</FIELD>
+<DATA>
+<TABLEDATA>
+           <TR><TD>S001</TD><TD>51.5116039999999984</TD><TD>-28.7858499999999999</TD><TD>4</TD><TD>looks like a group in irac 1</TD></TR>
+           <TR><TD>S002</TD><TD>51.5172999999999988</TD><TD>-27.9498309999999996</TD><TD>8</TD><TD>out of SWIRE field</TD></TR>
+           <TR><TD>S003</TD><TD>51.5236879999999999</TD><TD>-27.7929110000000001</TD><TD>8</TD><TD>out of SWIRE field</TD></TR>
+           <TR><TD>S004</TD><TD>51.5289789999999996</TD><TD>-27.8922939999999997</TD><TD>8</TD><TD>out of SWIRE field</TD></TR>
+           <TR><TD>S005</TD><TD>51.5478129999999979</TD><TD>-27.5455030000000001</TD><TD>8</TD><TD>out of SWIRE field</TD></TR>
+           <TR><TD>S006</TD><TD>51.5570870000000028</TD><TD>-28.288253000000001</TD><TD>3</TD><TD>in a group of IR sources</TD></TR>
+           <TR><TD>S007</TD><TD>51.5645379999999989</TD><TD>-28.7747889999999984</TD><TD>2</TD><TD>single unresolved</TD></TR>
+           <TR><TD>S008</TD><TD>51.564821000000002</TD><TD>-28.1002919999999996</TD><TD>2</TD><TD>extended in IR</TD></TR>
+           <TR><TD>S009</TD><TD>51.5681379999999976</TD><TD>-28.0040580000000006</TD><TD>1</TD><TD></TD></TR>
+           <TR><TD>S010</TD><TD>51.5684129999999996</TD><TD>-27.2725280000000012</TD><TD>8</TD><TD>out of SWIRE field</TD></TR>
+</TABLEDATA>
+</DATA>
+</TABLE>
+</RESOURCE>
+</VOTABLE>

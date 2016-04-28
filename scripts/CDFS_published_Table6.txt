@@ -1,0 +1,817 @@
+Title: Deep ATLAS radio observations of the CDFS-SWIRE field
+Authors: Norris R.P., Afonso J., Appleton P.N. Boyle B.J., Ciliegi P., 
+         Croom S.M., Huynh M.T., Jackson C.A., Koekemoer A.M., Lonsdale C.J.,
+         Middelberg E., Mobasher B., Oliver S.J., Polletta M., Siana B.D.,
+         Smail I., Voronkov M.A.
+Table: Catalog of Radio Sources with their identifications and classifications
+================================================================================
+Byte-by-byte Description of file: datafile6.txt
+--------------------------------------------------------------------------------
+   Bytes Format Units    Label  Explanations
+--------------------------------------------------------------------------------
+   1-  4 A4     ---      ID     Component number 
+   6- 31 A26    ---      Name   Designation for the radio component (1)
+  33- 51 A19    ---      CID    Component number corresponding to Table 4
+  53- 78 A26    ---      SName  SWIRE designated name (2)
+      80 I1     h        RAh    Hour of Right Ascension (J2000) (3)
+  82- 83 I2     min      RAm    Minute of Right Ascension (J2000) (3)
+  85- 90 F6.3   s        RAs    Second of Right Ascension (J2000) (3)
+      92 A1     ---      DE-    Sign of the Declination (J2000) (3)
+  93- 94 I2     deg      DEd    Degree of Declination (J2000) (3)
+  96- 97 I2     arcmin   DEm    Arcminute of Declination (J2000) (3)
+  99-103 F5.2   arcsec   DEs    Arcsecond of Declination (J2000) (3)
+ 105-110 F6.1   mJy      F20    Total 20 cm flux density (4)
+ 112-118 F7.1   uJy      F3.6   ? The 3.6 micron flux density (5)
+ 120-126 F7.1   uJy      F4.5   ? The 4.5 micron flux density (5)
+ 128-134 F7.1   uJy      F5.8   ? The 5.8 micron flux density (5)
+ 136-142 F7.1   uJy      F8.0   ? The 8.0 micron flux density (5)
+ 144-151 F8.1   uJy      F24    ? The 24 micron flux density (5)
+ 153-156 F4.1   mag      umag   ? SDSS u' band (Vega) magnitude (6)
+ 158-161 F4.1   mag      gmag   ? SDSS g' band (Vega) magnitude (6)
+ 163-166 F4.1   mag      rmag   ? SDSS r' band (Vega) magnitude (6)
+ 168-171 F4.1   mag      Imag   ? SDSS I' band (Vega) magnitude (6)
+ 173-176 F4.1   mag      zmag   ? SDSS z' band (Vega) magnitude (6)
+ 178-183 F6.4   ---      z      ? Spectroscopic redshift (7)
+ 185-186 I2     ---      Type   Identification type given in Table 5
+ 188-190 A3     ---      Class  Classification based on Section 3.4 criteria
+ 192-194 A3     ---    f_Class  Basis for class (8)
+ 196-427 A232   ---      Comm   Additional comments (9)
+--------------------------------------------------------------------------------
+Note (1): In the case of single-component sources, this is identical to the 
+          component name used in Table 4. This is the formal IAU designation 
+          and should be used in literature when referring to this source.
+Note (2): name of the SWIRE identification used in SWIRE Public Data Release
+3.
+          In cases where the source does not appear in the Public Data 
+          Release 3, but did appear in the pre-release catalogue, the source 
+          identification from the pre-release catalogue is shown in brackets. 
+          A blank indicates there is no catalogued SWIRE source, but a source
+          may still be present in the SWIRE image, in which case it will be 
+          noted in Comm.
+Note (3): In the case of a single component, this is the position of the radio 
+          source. In the case of a complex source, such as a radio double,
+this
+          is the position of the host galaxy. In the latter case, this is the 
+          optical position if one is available, or else an infrared position.
+Note (4): This is the total integrated 20 cm flux of all components included 
+          in the source.
+Note (5): These fluxes are optimized so that they are aperture extractions for 
+          point sources and extended (Kron) extractions for extended sources. 
+          -1 indicates that the source was undetected, and a blank indicates 
+          that the source was not observed, or that its flux is not listed in 
+          the SWIRE catalog.
+Note (6): Aperture magnitudes for stellar sources, and integrated magnitudes 
+          for extended sources.  Filter characteristics are shown in Table 3.
+A
+          99 indicates that the source was undetected, and a blank indicates 
+          that the source was not observed.
+Note (7): In most cases these have been measured by us as part of this
+program,
+          as described in Section 2.5. In some cases they are taken from other
+          authors, in which case this is noted in Comm. To avoid ambiguity, 
+          photometric redshifts are not included here.
+Note (8): The criterion used for the classification is given by the lower-case 
+          letter: a=morphology (i.e. double, triple, or core-jet radio
+source),
+          b=value of q_24micron_ = log (S_24micron_/S_20cm_), 
+          c=classification taken from the literature, s=based on spectroscopy 
+          presented in this paper, x=based on X-ray hardness ratio given 
+          by Giacconi et al. (2002).
+Note (9): "M-test" refers  the criterion for selecting double radio sources 
+          described by Magliocchetti et al. (1998). "XIDnnn(mm)" indicates that
+          the source was detected by Chandra (Giacconi et al 2002), and is 
+          labeled XIDnnn, with hardness ratio mm, in their catalogue. z(x) 
+          gives the reference for the redshift as follows: a=this paper 
+          (ADROIT observations), b= this paper (AAOmega observations), 
+          c=Afonso et al. (2006), d=Croom et al. (2001), 
+          e=da Costa et al. (1998), f=Vanzella et al. (2006), 
+          g=Colless et al. (2001),h=Le Fevre et al. (2004), 
+          i=Loveday et al. (1996), j=Cimatti et al. (2004), 
+          k=Way et al. (2005), l= Lauberts & Valentijn (1989).
+--------------------------------------------------------------------------------
+S001 ATCDFS_J032602.78-284709.0 C001                SWIRE3_J032603.15-284708.5 3 26 02.785 -28 47 09.06    1.4    33.8    21.1    -1.0    -1.0     -1.0                                  4         looks like a group in irac 1
+S002 ATCDFS_J032604.15-275659.3 C002                                           3 26 04.152 -27 56 59.39    2.0                                                                           8         out of SWIRE field
+S003 ATCDFS_J032605.68-274734.4 C003                                           3 26 05.685 -27 47 34.48   74.7                                                                           8         out of SWIRE field
+S004 ATCDFS_J032606.95-275332.2 C004                                           3 26 06.955 -27 53 32.26    0.4                                                                           8         out of SWIRE field
+S005 ATCDFS_J032611.47-273243.8 C005                                           3 26 11.475 -27 32 43.81  110.9                                                                           8         out of SWIRE field
+S006 ATCDFS_J032613.70-281717.7 C006                (441298)                   3 26 13.701 -28 17 17.71    0.5     6.4    -1.0    -1.0    -1.0     -1.0                                  3         in a group of IR sources
+S007 ATCDFS_J032615.48-284629.2 C007                SWIRE3_J032615.41-284630.7 3 26 15.489 -28 46 29.24    0.7   265.0   136.9   132.7    67.1     -1.0                                  2         single unresolved
+S008 ATCDFS_J032615.55-280601.0 C008                SWIRE3_J032615.52-280559.8 3 26 15.557 -28 06 01.05    1.1    40.3    51.4    -1.0    -1.0     -1.0                                  2         extended in IR
+S009 ATCDFS_J032616.35-280014.6 C009                SWIRE3_J032616.31-280014.7 3 26 16.353 -28 00 14.61    1.7   143.6    73.9    -1.0    56.7     -1.0                                  1         
+S010 ATCDFS_J032616.41-271621.1 C010                                           3 26 16.419 -27 16 21.10    7.8                                                                           8         out of SWIRE field
+S011 ATCDFS_J032617.89-280707.2 C011,C012           SWIRE3_J032617.89-280707.2 3 26 17.89  -28 07 07.25   24.1    30.8    29.4    25.9    -1.0     -1.0                                 -1 AGN a   Radio double
+S012 ATCDFS_J032622.07-274324.4 C013                SWIRE3_J032622.06-274324.5 3 26 22.079 -27 43 24.48   27.8   218.8   312.6   430.6   576.4     -1.0                                  1         
+S013 ATCDFS_J032625.10-280908.8 C014                SWIRE3_J032625.19-280910.1 3 26 25.109 -28 09 08.85    1.0     7.6    12.0    -1.0    40.6    640.7                                  2 AGN b   complex system in irac
+S014 ATCDFS_J032626.90-275610.9 C015                SWIRE3_J032626.89-275611.6 3 26 26.904 -27 56 10.91    4.1  1365.1  1771.6  2184.7  2872.2   5689.8                                  1         isolated src
+S015 ATCDFS_J032629.08-280648.9 C016                SWIRE3_J032629.13-280650.7 3 26 29.089 -28 06 48.95    0.3  1285.4   842.7  1012.4  4951.5   4548.2                                  2         single unresolved, extended IR galaxy. Disk?
+S016 ATCDFS_J032629.13-285648.7 C017                SWIRE3_J032629.10-285648.8 3 26 29.134 -28 56 48.75    3.9    22.9    23.5    38.4    -1.0     -1.0                                  1         isolated galaxy
+S017 ATCDFS_J032629.17-272538.2 C018                SWIRE3_J032629.18-272538.2 3 26 29.173 -27 25 38.26    2.8   102.4   126.9   182.1   278.3     -1.0                                  1         2 ir sources
+S018 ATCDFS_J032629.54-284055.5 C019                SWIRE3_J032629.54-284055.8 3 26 29.541 -28 40 55.52    0.9   240.9   119.0   114.6    -1.0     -1.0                                  1         in group of gals
+S019 ATCDFS_J032629.97-284753.3 C020                SWIRE3_J032629.81-284754.4 3 26 29.973 -28 47 53.38    4.9   102.0    48.6    51.2    -1.0     -1.0                                  3         in line of galaxies. Some extension in radio along the line
+S020 ATCDFS_J032630.38-283628.7 C022                SWIRE3_J032630.25-283626.3 3 26 30.387 -28 36 28.72    1.5    24.7    22.1    -1.0    -1.0     -1.0                                  4         C022 & C023 are probably two interacting galaxies, with good SWIRE Ids, and with radio emission connecting them. C022 is very extended, hence offset to IR position. Identified as double by M test, but morphology makes this unlikely.
+S021 ATCDFS_J032630.68-283657.4 C023                SWIRE3_J032630.64-283658.0 3 26 30.682 -28 36 57.46    1.9   367.9   270.8   167.0   140.5     -1.0                                  1         See comment on C022
+S022 ATCDFS_J032630.83-273441.3 C021,C025           SWIRE3_J032630.83-273441.3 3 26 30.83  -27 34 41.30   29.1   141.9    80.9    54.4    -1.0     -1.0                                 -1 AGN a   Radio double
+S023 ATCDFS_J032631.65-274744.9 C024                SWIRE3_J032631.62-274745.1 3 26 31.659 -27 47 44.91    2.7    23.3    25.1    -1.0    -1.0     -1.0                                  1         member of a pair of galaxies
+S024 ATCDFS_J032632.21-274646.6 C026                SWIRE3_J032632.20-274646.8 3 26 32.218 -27 46 46.63   24.3   113.6   160.1   300.1   601.9   2051.3                                  1 AGN b   member of a pair of galaxies
+S025 ATCDFS_J032634.64-282022.4 C027                SWIRE3_J032634.58-282022.8 3 26 34.646 -28 20 22.40    0.6    37.1    25.1    -1.0    -1.0     -1.0                                  1         
+S026 ATCDFS_J032635.12-281229.0 C028                SWIRE3_J032635.10-281229.2 3 26 35.123 -28 12 29.07    0.4    11.0    15.3    -1.0    -1.0     -1.0                                  1         
+S027 ATCDFS_J032636.18-283935.9 C029                SWIRE3_J032636.14-283936.1 3 26 36.184 -28 39 35.96    1.0   216.1   149.4    91.4    -1.0     -1.0                                  1         in group of gals
+S028 ATCDFS_J032636.95-284606.9 C031                (422709)                   3 26 36.959 -28 46 06.95    0.8    -1.0    -1.0    -1.0    53.4     -1.0                                  4         
+S029 ATCDFS_J032637.29-285738.2 C032                (414575)                   3 26 37.299 -28 57 38.25    3.8    10.4     9.1    -1.0    -1.0    332.0                                  1 AGN b   in group of gals
+S030 ATCDFS_J032638.09-280335.2 C033                SWIRE3_J032638.08-280336.2 3 26 38.094 -28 03 35.26    1.5   165.0   151.7   114.7   102.6    569.7                                  2 AGN b   in a group
+S031 ATCDFS_J032639.15-280800.6 C030,C034,C038      SWIRE3_J032639.11-280801.5 3 26 39.158 -28 08 00.67   42.3  1981.0  1235.9   525.6   163.3     -1.0                          0.2172  6 AGN a   Radio triple. z(g)
+S032 ATCDFS_J032639.16-283249.1 C035                                           3 26 39.160 -28 32 49.11    2.5                                                                           7         Visible in all four irac bands, but uncatalogued because of imaging artefact. 
+S033 ATCDFS_J032639.34-284132.5 C036                SWIRE3_J032639.36-284132.1 3 26 39.342 -28 41 32.58    0.4    12.5    11.9    -1.0    -1.0    339.1                                  1 AGN b   
+S034 ATCDFS_J032639.97-281814.1 C037                SWIRE3_J032639.96-281814.1 3 26 39.974 -28 18 14.18    1.0    15.5    21.0    -1.0    -1.0    549.5                                  1 AGN b   
+S035 ATCDFS_J032642.55-285715.6 C039                SWIRE3_J032642.48-285716.4 3 26 42.555 -28 57 15.66    0.9    58.8    69.1    -1.0    -1.0    274.4                                  2 AGN b   
+S036 ATCDFS_J032643.06-274728.3 C040                SWIRE3_J032643.10-274727.6 3 26 43.066 -27 47 28.33    5.8    40.0    38.7    -1.0    -1.0     -1.0                                  1         
+S037 ATCDFS_J032643.37-281329.1 C041                SWIRE3_J032643.37-281328.0 3 26 43.370 -28 13 29.17    0.5   159.4   126.3   100.5   290.7    744.8                                  2         
+S038 ATCDFS_J032643.61-282209.7 C042                SWIRE3_J032643.33-282211.4 3 26 43.611 -28 22 09.79    8.3   192.9   265.2   321.9   471.5   2875.0                                  4 AGN b   complex extended src in radio & IR, but spitzer id is certainly involved. 
+S039 ATCDFS_J032647.22-273306.2 C043                SWIRE3_J032647.17-273306.9 3 26 47.229 -27 33 06.20    0.3    56.9    57.3    -1.0    -1.0     -1.0                                  2         
+S040 ATCDFS_J032647.97-283141.4 C044                SWIRE3_J032647.90-283141.6 3 26 47.971 -28 31 41.48    0.4   102.0    59.8    37.3    56.6     -1.0                                  2         
+S041 ATCDFS_J032648.23-275747.5 C045                SWIRE3_J032648.21-275746.9 3 26 48.239 -27 57 47.55    1.0    14.2    19.6    -1.0    -1.0    241.4                                  1 AGN b   
+S042 ATCDFS_J032648.57-274938.4 C046                SWIRE3_J032648.47-274938.0 3 26 48.571 -27 49 38.47    5.0    15.6    10.9    -1.0    -1.0     -1.0                                  2         
+S043 ATCDFS_J032648.67-284735.8 C047                SWIRE3_J032648.69-284735.7 3 26 48.675 -28 47 35.87   13.8    95.3    70.4    36.1    33.3     -1.0                                  1         
+S044 ATCDFS_J032649.00-272454.1 C048                SWIRE3_J032648.92-272458.1 3 26 49.001 -27 24 54.18    0.5    84.9   120.5   206.9   396.0   1740.2                                  4         
+S045 ATCDFS_J032649.40-274833.0 C049                SWIRE3_J032649.37-274832.8 3 26 49.401 -27 48 33.03    0.8    17.0    27.0    51.5    -1.0     -1.0                                  1         
+S046 ATCDFS_J032652.45-275239.1 C050                SWIRE3_J032652.40-275238.6 3 26 52.457 -27 52 39.16    0.5    85.7    69.6    58.5    40.9     -1.0                                  1         
+S047 ATCDFS_J032652.58-281627.6 C051                SWIRE3_J032652.51-281629.2 3 26 52.588 -28 16 27.61    0.7   481.7   369.6   308.5  2365.6   2466.3                                  2         
+S048 ATCDFS_J032653.05-282443.1 C052                SWIRE3_J032653.03-282443.4 3 26 53.058 -28 24 43.17    1.2   274.0   181.1   105.7    59.9     -1.0                                  1         
+S049 ATCDFS_J032653.44-281814.8 C053                SWIRE3_J032653.39-281815.3 3 26 53.442 -28 18 14.87    0.9    30.3    35.0    -1.0    -1.0     -1.0                                  1         
+S050 ATCDFS_J032654.49-273751.6 C054                SWIRE3_J032654.55-273751.2 3 26 54.490 -27 37 51.61    0.3    37.4    50.8    -1.0    99.1    672.5                                  2         
+S051 ATCDFS_J032657.00-272658.8 C055                SWIRE3_J032657.10-272701.0 3 26 57.005 -27 26 58.88    0.8   504.2   397.7   286.2    -1.0   5272.0                                  3         C055 and C057 ID'd as double by M test, but both have good SWIRE IDs and no SWIRE source between them. Thus a pair of galaxies. C055 is itself a pair of interacting galaxies.
+S052 ATCDFS_J032657.92-282756.4 C056                (434580)                   3 26 57.922 -28 27 56.47    1.5     5.8    -1.0    -1.0    -1.0     -1.0                                  1         
+S053 ATCDFS_J032658.45-272700.1 C057                SWIRE3_J032658.39-272658.0 3 26 58.455 -27 27 00.15    0.4   357.9   514.1   930.8  1677.1   4614.2                                  3         See comment for C055.
+S054 ATCDFS_J032700.16-272128.7 C058                SWIRE3_J032700.05-272126.3 3 27 00.167 -27 21 28.71    0.4    44.4    55.0    63.9    85.0    454.4                                  3         
+S055 ATCDFS_J032701.01-272804.8 C059                SWIRE3_J032700.98-272804.0 3 27 01.012 -27 28 04.80    0.5    68.6    77.5    86.7   227.0    416.8                                  1 AGN b   
+S056 ATCDFS_J032702.07-275729.9 C060                SWIRE3_J032702.07-275729.8 3 27 02.073 -27 57 29.90    3.8    16.4    21.8    -1.0    41.9    292.9                                  1 AGN b   
+S057 ATCDFS_J032702.63-284754.3 C061                SWIRE3_J032702.71-284753.6 3 27 02.630 -28 47 54.38    0.4   678.1   549.0   280.4  2520.2   2889.1                                  2         
+S058 ATCDFS_J032704.09-284813.4 C062,C064           SWIRE3_J032704.09-284813.4 3 27 04.09  -28 48 13.43    6.8    72.9    61.7    -1.0    -1.0     -1.0                                 -1 AGN a   Radio double with strong SWIRE id at centre
+S059 ATCDFS_J032704.09-273145.9 C063                (467698)                   3 27 04.090 -27 31 45.91    0.3     6.6     9.0    -1.0    -1.0     -1.0                                  2         
+S060 ATCDFS_J032704.97-283900.5 C065                SWIRE3_J032704.94-283859.7 3 27 04.975 -28 39 00.53    1.1    28.2    31.7    38.0    -1.0    533.1                                  1 AGN b   
+S061 ATCDFS_J032706.97-275814.8 C066                SWIRE3_J032706.97-275814.6 3 27 06.977 -27 58 14.88    1.4   321.8   193.2   203.5   202.8    432.4                                  1 AGN b   
+S062 ATCDFS_J032707.48-282255.8 C067                (437592)                   3 27 07.485 -28 22 55.80    0.5     8.1    10.4    -1.0    -1.0     -1.0                                  2         
+S063 ATCDFS_J032708.41-271505.2 C068                SWIRE3_J032708.43-271504.6 3 27 08.411 -27 15 05.27    1.3    32.9    58.2   134.5   389.2   1930.4                                  1         
+S064 ATCDFS_J032709.39-284245.9 C069                SWIRE3_J032709.34-284246.2 3 27 09.394 -28 42 45.92    0.7   258.9   323.7   214.3  1623.7   4239.7                          0.2621  1         z(g)
+S065 ATCDFS_J032710.52-272906.7 C070                SWIRE3_J032710.49-272906.5 3 27 10.522 -27 29 06.77    5.8    62.7    48.9    -1.0    -1.0     -1.0                                  1         
+S066 ATCDFS_J032715.64-271843.7 C071                (474947)                   3 27 15.641 -27 18 43.74    2.3     9.1    14.0    -1.0    44.3     -1.0                                  1         
+S067 ATCDFS_J032715.92-275427.9 C073                (455290)                   3 27 15.925 -27 54 27.97    2.2    -1.0    -1.0   135.6   153.1     -1.0                                  1         M test classifies C072 and C073 as a double, but they both have sub-arcsec Spitzer IDs, so we classify them as a pair of galaxies.
+S068 ATCDFS_J032715.92-275332.8 C072                SWIRE3_J032715.90-275332.7 3 27 15.926 -27 53 32.82    1.7    37.8    39.3    -1.0    -1.0     -1.0                                  1         See comment on C073
+S069 ATCDFS_J032716.88-284102.5 C074                SWIRE3_J032716.98-284103.7 3 27 16.883 -28 41 02.59    0.5    65.3    53.7    43.9    -1.0     -1.0                99.0              2         
+S070 ATCDFS_J032717.53-275945.3 C075                SWIRE3_J032717.52-275946.5 3 27 17.533 -27 59 45.31    0.5    11.7    13.7    -1.0    -1.0    406.3                                  2 AGN b   
+S071 ATCDFS_J032718.79-273132.7 C076                (467819)                   3 27 18.797 -27 31 32.79    0.4     6.4     6.4    -1.0    -1.0     -1.0                                  4         
+S072 ATCDFS_J032718.98-284640.5 C077                SWIRE3_J032718.94-284641.1 3 27 18.982 -28 46 40.56    3.1   445.6   305.4   124.8    78.6     -1.0                                  1         
+S073 ATCDFS_J032719.57-284144.5 C078                SWIRE3_J032719.53-284144.3 3 27 19.572 -28 41 44.58    1.2    32.4    22.7    -1.0    -1.0     -1.0                99.0              1         
+S074 ATCDFS_J032719.78-280237.0 C079                SWIRE3_J032719.77-280237.1 3 27 19.782 -28 02 37.00    9.2    27.0    30.5    53.9    -1.0    275.0                                  1 AGN b   
+S075 ATCDFS_J032719.98-271446.5 C080                SWIRE3_J032720.02-271442.1 3 27 19.982 -27 14 46.59    0.7   378.0   264.7   168.6   987.2   1050.6                                  4         
+S076 ATCDFS_J032722.27-271614.9 C081                SWIRE3_J032722.24-271615.7 3 27 22.277 -27 16 14.92    1.9   159.3    82.0    47.8    37.2     -1.0                                  1         
+S077 ATCDFS_J032723.49-284750.7 C082                SWIRE3_J032723.48-284751.1 3 27 23.493 -28 47 50.72    0.7    22.2    26.5    -1.0    60.4   1114.1                99.0              1         M test classifies C082 and C083 as a double, but they both have sub-arcsec Spitzer IDs, so we classify them as a pair of galaxies.
+S078 ATCDFS_J032724.46-284723.9 C083                SWIRE3_J032724.44-284723.1 3 27 24.462 -28 47 23.98    0.9    20.2    22.3    -1.0    -1.0     -1.0                99.0              1         See comment on C082
+S079 ATCDFS_J032726.61-272329.2 C084                SWIRE3_J032726.61-272327.9 3 27 26.610 -27 23 29.29    2.3    35.2    41.0    35.7    -1.0     -1.0                                  2         
+S080 ATCDFS_J032728.84-282108.7 C086                SWIRE3_J032728.78-282110.2 3 27 28.846 -28 21 08.72    0.6    99.7    58.1    40.0    -1.0     -1.0 99.0 99.0 22.1 20.5              2         
+S081 ATCDFS_J032729.24-274352.6 C085,C087,C088      SWIRE3_J032729.24-274352.6 3 27 29.246 -27 43 52.63    8.0    20.2    20.8    -1.0    -1.0     -1.0                                  6 AGN a   Radio triple
+S082 ATCDFS_J032731.27-281258.8 C090                SWIRE3_J032731.31-281258.1 3 27 31.277 -28 12 58.81    0.4   393.0   317.4   342.0  1501.4   1882.4                                  1         
+S083 ATCDFS_J032731.55-275248.8 C089,C091           SWIRE3_J032731.61-275245.5 3 27 31.552 -27 52 48.84    4.5    28.6    23.9    -1.0    -1.0     -1.0 99.0 99.0 99.0 22.9              4         complex region, but probably core-jet with C091 core, C089 jet
+S084 ATCDFS_J032731.59-273355.2 C092                SWIRE3_J032731.60-273355.1 3 27 31.599 -27 33 55.27    0.3   260.1   191.0   124.9    81.8     -1.0 99.0 99.0 22.8 21.4              1         
+S085 ATCDFS_J032732.13-275457.8 C093                SWIRE3_J032732.16-275456.7 3 27 32.138 -27 54 57.82    0.6    64.6    57.6    39.2   130.5   1153.7 99.0 99.0 23.5 99.0              2         
+S086 ATCDFS_J032732.17-282624.9 C094                SWIRE3_J032732.16-282624.8 3 27 32.175 -28 26 24.99    8.6    70.6    59.6    -1.0    -1.0     -1.0 99.0 99.0 99.0 23.1              1         
+S087 ATCDFS_J032732.71-281010.4 C095,C096           SWIRE3_J032732.71-281010.4 3 27 32.71  -28 10 10.49   22.1    84.7    54.0    51.3    -1.0     -1.0 99.0 99.0 99.0 21.2             -1 AGN a   Radio double
+S088 ATCDFS_J032733.46-273913.9 C097                (463694)                   3 27 33.461 -27 39 13.94    0.5     5.5     7.8    -1.0    -1.0    149.0 99.0 24.1 23.6 23.2              1 AGN b   
+S089 ATCDFS_J032734.01-284621.3 C098                SWIRE3_J032733.99-284621.2 3 27 34.010 -28 46 21.36  133.2   104.4    79.6    56.3    -1.0     -1.0                99.0              1         
+S090 ATCDFS_J032736.78-280802.1 C099                SWIRE3_J032736.83-280804.1 3 27 36.786 -28 08 02.17    0.7   372.0   320.9   275.1   645.2   2692.9 20.8 20.0 18.9 18.2              3         
+S091 ATCDFS_J032737.74-280130.0 C100                SWIRE3_J032737.72-280130.2 3 27 37.741 -28 01 30.04   96.4   202.1   272.2   362.1   516.1   1771.9 21.3 21.2 20.2 19.7      1.1774  1 AGN bs  QSO?
+S092 ATCDFS_J032738.17-275705.3 C101                SWIRE3_J032738.22-275704.0 3 27 38.173 -27 57 05.31    0.3    37.8    37.7    -1.0   118.2   1354.4 23.0 23.3 22.6 21.8              2         
+S093 ATCDFS_J032739.36-285352.4 C102                SWIRE3_J032739.36-285351.0 3 27 39.362 -28 53 52.49    0.9   143.1    91.2    -1.0    -1.0     -1.0 99.0 24.6 23.3 22.0              2         
+S094 ATCDFS_J032740.72-285413.4 C103                (417209)                   3 27 40.727 -28 54 13.48    8.9    11.1     7.9    -1.0    -1.0     -1.0 99.0 24.2 23.5 22.7              3         
+S095 ATCDFS_J032741.06-282320.1 C104                SWIRE3_J032741.08-282320.3 3 27 41.069 -28 23 20.15    3.7  5277.1  3640.8  5146.8 28212.0  43980.7 19.4 18.4 17.5 16.6      0.0600  1         z(g)
+S096 ATCDFS_J032741.43-271933.1 C105                SWIRE3_J032741.44-271933.4 3 27 41.436 -27 19 33.19    2.2    63.3    43.8    48.8    -1.0     -1.0                                  1         
+S097 ATCDFS_J032741.70-274236.6 C106                (462006)                   3 27 41.700 -27 42 36.61    4.3     7.0    12.3    -1.0    -1.0     -1.0      99.0 99.0 99.0              1         
+S098 ATCDFS_J032745.08-274051.5 C107                SWIRE3_J032745.14-274052.4 3 27 45.080 -27 40 51.51    0.3   400.7   400.4   333.5   854.4   2316.0 21.4 21.1 19.8 19.1              2         
+S099 ATCDFS_J032746.86-271743.0 C108                SWIRE3_J032746.84-271743.1 3 27 46.867 -27 17 43.07   11.6   391.1   223.1   117.7    87.6     -1.0                                  1         
+S100 ATCDFS_J032747.22-282608.3 C109                SWIRE3_J032747.28-282608.0 3 27 47.224 -28 26 08.34    2.7    30.3    32.4    -1.0    -1.0    689.2 99.0 99.0 99.0 99.0              2 AGN b   
+S101 ATCDFS_J032747.57-273430.2 C110                                           3 27 47.577 -27 34 30.20    0.7                                                                           7         faint uncatalogued source in IRAC band 2 coincident with radio src
+S102 ATCDFS_J032748.58-274729.3 C111                SWIRE3_J032748.58-274729.3 3 27 48.581 -27 47 29.34    0.5    51.2    45.1    36.3    -1.0     -1.0                                  1         
+S103 ATCDFS_J032749.42-274445.6 C112                SWIRE3_J032749.55-274445.2 3 27 49.425 -27 44 45.60    0.5   129.2    86.2    67.5    -1.0     -1.0                                  3         member of a pair of galaxies
+S104 ATCDFS_J032749.58-274520.1 C113                SWIRE3_J032749.55-274519.8 3 27 49.586 -27 45 20.19    0.4    20.0    27.8    -1.0    -1.0     -1.0                                  1         member of a pair of galaxies
+S105 ATCDFS_J032750.83-285131.7 C114,C115           SWIRE3_J032750.49-285136.0 3 27 50.83  -28 51 31.72    6.4    97.9    58.2    52.1    -1.0     -1.0 99.0      99.0                  -1 AGN a   Radio double
+S106 ATCDFS_J032751.95-275256.2 C116                SWIRE3_J032751.96-275255.8 3 27 51.952 -27 52 56.25    8.6    34.7    31.3    -1.0    -1.0     -1.0 99.0 99.0 24.0 22.8              1         
+S107 ATCDFS_J032753.19-280630.5 C117                SWIRE3_J032753.19-280631.7 3 27 53.192 -28 06 30.51    0.3    13.9    16.4    -1.0    -1.0    139.3 99.0 99.0 99.0 99.0              2 AGN b   
+S108 ATCDFS_J032753.22-281825.5 C118                SWIRE3_J032753.17-281825.7 3 27 53.227 -28 18 25.50    0.7    42.1    32.9    -1.0    -1.0     -1.0                                  1         
+S109 ATCDFS_J032754.44-281130.4 C119                SWIRE3_J032754.47-281129.7 3 27 54.442 -28 11 30.40    0.5   728.1   690.9   276.2  1737.4   2901.9                          0.2464  1         z(g)
+S110 ATCDFS_J032756.39-283855.9 C120                SWIRE3_J032756.36-283858.1 3 27 56.393 -28 38 55.90    1.0  3174.0  2109.4  1301.0  1563.6    495.7 19.9 18.7 17.5 16.7              3 AGN b   
+S111 ATCDFS_J032758.10-280358.3 C121                SWIRE3_J032758.05-280359.6 3 27 58.101 -28 03 58.35    0.3    24.1    23.0    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              2         
+S112 ATCDFS_J032758.65-285339.9 C122                SWIRE3_J032758.57-285339.8 3 27 58.650 -28 53 39.95    1.6    27.4    34.5    -1.0    38.6     -1.0 99.0 24.2 23.6 22.8              2         
+S113 ATCDFS_J032759.19-272827.3 C123                SWIRE3_J032759.16-272827.0 3 27 59.191 -27 28 27.38    0.6    37.0    40.9    -1.0    -1.0     -1.0                                  1         
+S114 ATCDFS_J032759.89-275554.7 C124                                           3 27 59.894 -27 55 54.73    7.2                                                                           9         IFRS
+S115 ATCDFS_J032801.68-273214.3 C125                SWIRE3_J032801.61-273214.2 3 28 01.688 -27 32 14.33    0.3    35.1    42.1    53.8    46.4     -1.0 99.0                             1         
+S116 ATCDFS_J032801.89-272044.2 C126                SWIRE3_J032801.90-272044.9 3 28 01.897 -27 20 44.28    2.3    19.1    24.0    -1.0    -1.0     -1.0                                  1         
+S117 ATCDFS_J032804.44-274049.4 C127                SWIRE3_J032804.56-274047.3 3 28 04.447 -27 40 49.41    1.2   608.4   439.6   622.1  5060.2  14666.1 19.4 19.2 18.6 18.0      0.0906  3         z(g)
+S118 ATCDFS_J032805.84-272334.2 C128                SWIRE3_J032805.81-272335.0 3 28 05.845 -27 23 34.20    1.9    25.3    25.0    -1.0    -1.0     -1.0                                  1         
+S119 ATCDFS_J032806.04-272635.3 C129                SWIRE3_J032806.18-272637.2 3 28 06.049 -27 26 35.32    1.7    24.5    23.1    -1.0    -1.0     -1.0                                  3         
+S120 ATCDFS_J032811.20-272552.9 C130                SWIRE3_J032811.20-272553.3 3 28 11.208 -27 25 52.92    1.3    85.1    73.5    43.9    65.5    627.8                                  1 AGN b   
+S121 ATCDFS_J032812.16-274009.7 C131                SWIRE3_J032812.10-274010.4 3 28 12.169 -27 40 09.71    0.4    21.0    28.8    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              2         
+S122 ATCDFS_J032812.99-271942.6 C132                                           3 28 12.995 -27 19 42.69    0.5                                                                           9         IFRS?
+S123 ATCDFS_J032815.06-273648.6 C133                SWIRE3_J032814.92-273650.9 3 28 15.060 -27 36 48.65    0.8    58.3    37.0    -1.0    -1.0     -1.0 99.0 99.0 23.1 21.6              4         
+S124 ATCDFS_J032816.78-272658.2 C134                SWIRE3_J032816.68-272702.1 3 28 16.786 -27 26 58.26    0.4    29.6    23.0    -1.0    -1.0     -1.0                                  4         ID 4 arcsec from bright galaxy
+S125 ATCDFS_J032818.07-274308.6 C135                SWIRE3_J032818.03-274308.0 3 28 18.076 -27 43 08.63    1.5   596.0   591.7   347.2  2335.0   6450.5                          0.2482  1         z(g)
+S126 ATCDFS_J032820.34-273011.5 C136                SWIRE3_J032820.30-273011.3 3 28 20.345 -27 30 11.51    0.6   713.3   550.7   235.8   196.3    245.4                                  1 AGN b   
+S127 ATCDFS_J032821.52-280811.8 C137                SWIRE3_J032821.51-280811.8 3 28 21.525 -28 08 11.83    1.1   823.5   760.3   420.8  3752.7   5847.1 19.6 19.4 18.6 18.0              1         
+S128 ATCDFS_J032821.94-280002.4 C138                SWIRE3_J032821.93-280001.9 3 28 21.940 -28 00 02.49    3.1    80.2    45.0    -1.0    -1.0     -1.0 99.0 24.4 22.6 21.1              1         
+S129 ATCDFS_J032822.52-272846.9 C139                (469289)                   3 28 22.522 -27 28 46.93    3.5    -1.0    -1.0    -1.0    -1.0    459.2                                  1 AGN b   
+S130 ATCDFS_J032822.70-283157.7 C140                SWIRE3_J032822.69-283157.9 3 28 22.701 -28 31 57.77    1.3  3948.5  2722.9  3570.3 21307.8  15713.7 18.7 17.9 17.1 16.4              1         
+S131 ATCDFS_J032823.93-281519.8 C142                SWIRE3_J032823.95-281520.0 3 28 23.931 -28 15 19.84    0.6   822.8   888.4  1225.0  4898.1  11087.7                          0.1214  1         z(g)
+S132 ATCDFS_J032824.45-281837.5 C143                SWIRE3_J032824.52-281839.8 3 28 24.454 -28 18 37.59    0.2   165.9   232.6   340.5   489.2   2290.4                                  3         
+S133 ATCDFS_J032824.56-284021.7 C144                SWIRE3_J032824.56-284021.6 3 28 24.567 -28 40 21.79   11.1    14.7    13.2    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              1         
+S134 ATCDFS_J032824.71-274149.8 C145,C147           SWIRE3_J032824.71-274149.3 3 28 24.712 -27 41 49.85    1.4    46.4    55.0    71.4    -1.0    505.2 99.0 99.0 99.0 99.0              1 AGN b   Core-jet
+S135 ATCDFS_J032825.37-274445.5 C146                SWIRE3_J032825.35-274445.0 3 28 25.373 -27 44 45.50    1.0    30.4    32.7    43.8    -1.0     -1.0                                  1         
+S136 ATCDFS_J032825.92-271701.3 C141,C148,C151      SWIRE3_J032825.92-271701.3 3 28 25.92  -27 17 01.32   34.2    38.1    25.9    -1.0    -1.0     -1.0                                 -1 AGN a   Radio double with connecting jet 
+S137 ATCDFS_J032826.50-281920.5 C149                SWIRE3_J032826.51-281920.7 3 28 26.504 -28 19 20.57    1.2   589.1   483.3   146.7   133.9    580.0 99.0 21.9 20.2 99.0      0.4265  1 AGN b   z(b)
+S138 ATCDFS_J032826.55-273304.2 C150                SWIRE3_J032826.52-273304.1 3 28 26.556 -27 33 04.25    4.1   105.0    83.2    51.6    41.2     -1.0 99.0 99.0 99.0 22.7              1         
+S139 ATCDFS_J032829.30-280151.0 C152                SWIRE3_J032829.30-280150.5 3 28 29.309 -28 01 51.01    1.6   294.4   166.4   106.5    72.1     -1.0 99.0 24.5 22.3 20.8      0.9021  1         z(b)
+S140 ATCDFS_J032832.77-273538.7 C153                SWIRE3_J032832.78-273540.2 3 28 32.773 -27 35 38.76    0.6   238.1   174.7   176.2  2183.9   3603.7 20.2 19.9 19.3 18.7              2         
+S141 ATCDFS_J032832.79-285536.3 C154                SWIRE3_J032832.78-285536.1 3 28 32.797 -28 55 36.34   17.3    42.9    49.5    49.5    -1.0     -1.0 99.0 24.3 23.6 22.5              1         
+S142 ATCDFS_J032833.79-280152.5 C155                SWIRE3_J032833.78-280153.5 3 28 33.798 -28 01 52.55    0.3    19.8    18.4    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              1         
+S143 ATCDFS_J032835.63-273515.1 C156                SWIRE3_J032835.53-273514.2 3 28 35.631 -27 35 15.14    3.2    36.1    36.0    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              2         
+S144 ATCDFS_J032836.22-271650.3 C157                SWIRE3_J032836.19-271650.3 3 28 36.220 -27 16 50.38    0.8    52.2    54.6    -1.0    37.4     -1.0                                  1         
+S145 ATCDFS_J032836.53-284156.0 C158,C159           SWIRE3_J032836.52-284156.0 3 28 36.53  -28 41 56.00 1357.8  4030.0  5687.8  9769.3 24294.5 202434.7 18.6 18.3 17.6 16.7      0.1084 -1 AGN ab  Radio double. Strongest radio source in field. Failed M-test because of flux ratio. z(g)
+S146 ATCDFS_J032837.04-275434.9 C160                SWIRE3_J032837.04-275435.0 3 28 37.049 -27 54 34.93    0.6   776.0   513.2   731.6  4758.2   6575.6 18.6 18.5 18.0 17.5              1         
+S147 ATCDFS_J032840.34-280539.9 C161                SWIRE3_J032840.34-280539.2 3 28 40.342 -28 05 39.98    0.6    17.1    20.7    -1.0    -1.0    199.2 99.0 99.0 99.0 23.6              1 AGN b   
+S148 ATCDFS_J032841.10-283644.3 C162                SWIRE3_J032841.23-283646.6 3 28 41.102 -28 36 44.36    2.2   113.2    56.2    52.9    34.3     -1.0 99.0 24.5 22.9 21.5              4         
+S149 ATCDFS_J032842.40-274447.7 C163                SWIRE3_J032842.41-274446.5 3 28 42.401 -27 44 47.79    0.3    42.9    36.8    37.1    -1.0     -1.0                                  2         
+S150 ATCDFS_J032843.38-282157.7 C164                SWIRE3_J032843.33-282157.2 3 28 43.386 -28 21 57.75    1.3   203.0   154.4    98.9    48.2     -1.0 99.0 22.0 20.3 19.2      0.4276  1         z(b)
+S151 ATCDFS_J032844.28-282323.0 C165                SWIRE3_J032844.22-282323.5 3 28 44.288 -28 23 23.04    1.0    38.2    52.6    66.1    86.0    409.2 99.0 99.0 99.0 99.0              1 AGN b   
+S152 ATCDFS_J032846.65-282616.6 C166                SWIRE3_J032846.56-282618.1 3 28 46.651 -28 26 16.64   58.0    96.4    84.5   102.2    83.9     -1.0 99.0 99.0 99.0 99.0              2         
+S153 ATCDFS_J032847.23-271512.9 C167                SWIRE3_J032847.21-271513.1 3 28 47.231 -27 15 12.93    6.0    12.3    19.1    -1.0    -1.0     -1.0                                  1         
+S154 ATCDFS_J032848.75-283523.6 C168,C169           SWIRE3_J032848.75-283523.6 3 28 48.75  -28 35 23.68    4.2    35.2    30.7    -1.0    52.4    427.5 99.0 99.0 24.0 22.5             -1 AGN ab  Radio double
+S155 ATCDFS_J032850.97-273826.8 C170                SWIRE3_J032850.93-273827.1 3 28 50.977 -27 38 26.87    0.4    78.4    58.2    40.9    -1.0     -1.0 99.0 99.0 23.6 22.5              1         
+S156 ATCDFS_J032851.61-280544.6 C171                SWIRE3_J032851.63-280544.3 3 28 51.610 -28 05 44.62    4.2    29.0    35.1    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              1         
+S157 ATCDFS_J032853.28-275401.3 C172                SWIRE3_J032853.28-275401.0 3 28 53.287 -27 54 01.35    0.3   180.7   163.9    48.2    -1.0     -1.0 99.0 99.0 99.0 22.2              1         
+S158 ATCDFS_J032854.03-273835.7 C173                SWIRE3_J032853.99-273835.4 3 28 54.031 -27 38 35.75    0.8    42.1    25.2    -1.0    -1.0     -1.0 99.0 99.0 22.9 21.6              1         
+S159 ATCDFS_J032854.45-271810.0 C174                                           3 28 54.452 -27 18 10.02    0.3    -1.0    -1.0    -1.0   303.0     -1.0                                  7         Weak uncatalogued source in IRAC band 1
+S160 ATCDFS_J032854.91-273759.6 C175                                           3 28 54.913 -27 37 59.60    0.3                                                                           7         Weak uncatalogued source in IRAC band 2 
+S161 ATCDFS_J032855.07-272833.6 C176                SWIRE3_J032855.08-272834.9 3 28 55.079 -27 28 33.60    0.4    57.7    42.1    -1.0    -1.0     -1.0                                  2         
+S162 ATCDFS_J032855.91-283022.3 C177                (296140)                   3 28 55.911 -28 30 22.38    0.7     5.3     7.4    -1.0    -1.0     -1.0 23.1 22.7 22.1 21.5              2         
+S163 ATCDFS_J032857.23-280020.9 C178                (318864)                   3 28 57.239 -28 00 20.95    0.3     6.1     8.9    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              2         
+S164 ATCDFS_J032900.20-273745.7 C179                                           3 29 00.200 -27 37 45.79    1.2                                                                           9         IFRS
+S165 ATCDFS_J032902.53-275142.5 C180                (325633)                   3 29 02.537 -27 51 42.54    0.8    -1.0    23.0    -1.0    -1.0     -1.0 99.0 99.0 99.0 22.4              2         
+S166 ATCDFS_J032903.17-271654.9 C181                (353941)                   3 29 03.172 -27 16 54.99    0.4     7.3    -1.0    -1.0    -1.0     -1.0                                  3         
+S167 ATCDFS_J032904.40-285137.3 C182                SWIRE3_J032904.42-285137.6 3 29 04.409 -28 51 37.35    5.6    46.1    36.1    44.9   252.3   5046.2 22.6 22.9 22.3 21.3      0.9085  1 AGN b   
+S168 ATCDFS_J032904.42-284751.3 C183                SWIRE3_J032904.38-284753.0 3 29 04.427 -28 47 51.32    0.9   638.9   604.0   351.4  1571.8   3348.8 22.8 21.6 20.1 19.0      0.2892  2 AGN s   z(b). Strong NII
+S169 ATCDFS_J032907.59-284117.4 C184                SWIRE3_J032907.63-284117.6 3 29 07.594 -28 41 17.46    1.3  3450.2  2462.7  2930.0 12242.2  17612.2 19.5 18.7 17.7 17.0      0.0670  1         M test classifies C184 and C186 as a double, but they both have sub-arcsec Spitzer IDs, and there is no Spitzer ID between them, so we classify them as a pair of galaxies. z(i)
+S170 ATCDFS_J032908.38-284132.4 C186                SWIRE3_J032908.34-284131.6 3 29 08.384 -28 41 32.48    1.7    13.0    17.3    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              1         See comment on C184
+S171 ATCDFS_J032909.37-284825.8 C185,C187,C190      SWIRE3_J032909.12-284825.4 3 29 09.374 -28 48 25.86    7.2   170.2   134.1    93.3    -1.0     -1.0 23.0 22.8 21.0 19.8              6 AGN a   Radio triple
+S172 ATCDFS_J032909.45-281834.1 C188                SWIRE3_J032909.46-281833.3 3 29 09.459 -28 18 34.17    1.1   541.5   482.9   389.8   432.3   1700.6 21.4 20.2 18.9 18.1              1         
+S173 ATCDFS_J032909.66-273013.7 C189                                           3 29 09.667 -27 30 13.76    0.3                                                                           9         IFRS
+S174 ATCDFS_J032910.95-272719.0 C191                SWIRE3_J032910.90-272717.7 3 29 10.954 -27 27 19.04    2.8   603.5   449.6   187.6   129.7     -1.0                                  2         
+S175 ATCDFS_J032914.04-273503.0 C193                SWIRE3_J032914.02-273502.1 3 29 14.043 -27 35 03.01    2.2    34.3    39.7    25.8    -1.0     -1.0 99.0 99.0 99.0 99.0              1         
+S176 ATCDFS_J032914.74-280959.7 C194                SWIRE3_J032914.73-281000.2 3 29 14.742 -28 09 59.71    0.4    54.7    44.7    -1.0    -1.0     -1.0 99.0 99.0 23.9 22.7              1         
+S177 ATCDFS_J032914.99-273102.9 C195                SWIRE3_J032914.98-273103.9 3 29 14.997 -27 31 02.96    0.3    23.9    22.5    -1.0    -1.0     -1.0                                  2         
+S178 ATCDFS_J032915.00-272332.6 C192,C196           SWIRE3_J032914.99-272332.6 3 29 15.00  -27 23 32.68  126.5   284.7   153.4   109.3   158.5    710.2                                 -1 AGN ab  Radio double
+S179 ATCDFS_J032919.66-274227.0 C197                SWIRE3_J032919.57-274227.7 3 29 19.661 -27 42 27.03    0.5   116.1    86.2    70.3    54.4     -1.0 22.4 21.7 20.3 19.5      0.3468  2         
+S180 ATCDFS_J032921.03-281053.6 C198                SWIRE3_J032921.00-281054.5 3 29 21.035 -28 10 53.67    0.5    20.5    27.5    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              1         C198 and C200 ID'd as double by M test, but both are coincident with IRAC sources, and there is no source between them. Thus classify as pair of galaxies.
+S181 ATCDFS_J032921.09-280800.3 C199                SWIRE3_J032921.08-280800.7 3 29 21.092 -28 08 00.34    4.5 14642.2  9644.4 17793.8 59250.5  57373.1 18.2 17.4 14.0 13.3      0.0377  1         z(g)
+S182 ATCDFS_J032921.30-281032.9 C200                SWIRE3_J032921.12-281035.0 3 29 21.305 -28 10 32.97    0.4   458.9   282.9   206.9   141.6    208.6 20.3 18.5 17.1 16.2              7 AGN b   Radio source coincident with IRAC source which is uncatalogued because of nearby bright IRAC source to SW. See also comments on C198
+S183 ATCDFS_J032921.65-283012.1 C201                SWIRE3_J032921.68-283012.9 3 29 21.655 -28 30 12.17    1.2   126.7   142.8    89.8    70.2     -1.0 99.0 99.0 99.0 99.0              1         
+S184 ATCDFS_J032921.81-283314.3 C202                SWIRE3_J032921.74-283312.1 3 29 21.815 -28 33 14.32    1.6   821.5   535.3   633.3  5399.2   4083.2 18.7 18.5 18.3 17.3              3         
+S185 ATCDFS_J032922.03-280419.5 C203                SWIRE3_J032922.03-280420.7 3 29 22.036 -28 04 19.51    0.3   209.9   174.8   197.1  1946.4   4274.2 21.7 20.9 20.2 19.3      0.1434  2         z(b)
+S186 ATCDFS_J032922.16-273749.1 C204                SWIRE3_J032922.16-273748.2 3 29 22.167 -27 37 49.13    0.4    28.1    34.0    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              1         
+S187 ATCDFS_J032922.62-274135.8 C205                SWIRE3_J032922.66-274136.1 3 29 22.625 -27 41 35.84    2.2    45.0    52.5    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              1         
+S188 ATCDFS_J032923.23-285512.0 C206                SWIRE3_J032923.21-285512.2 3 29 23.230 -28 55 12.01   28.8   168.8   119.5    80.1    63.5     -1.0 99.0 24.9 22.8 21.4              1         
+S189 ATCDFS_J032923.58-274018.1 C207                SWIRE3_J032923.52-274018.2 3 29 23.581 -27 40 18.13    0.5    96.8    94.5   126.3   209.3    498.4 99.0 99.0 24.1 22.9              1 AGN b   
+S190 ATCDFS_J032924.66-273210.0 C208                SWIRE3_J032924.66-273209.9 3 29 24.665 -27 32 10.06    0.8   285.3   294.8   428.1  2142.4  17944.9 18.4 18.7 18.3 17.9              1         
+S191 ATCDFS_J032924.71-273917.6 C209                SWIRE3_J032924.68-273917.5 3 29 24.719 -27 39 17.65    0.7  1349.3   943.1   357.2   355.5    242.7 20.2 19.0 17.9 17.2              1 AGN b   
+S192 ATCDFS_J032926.52-271844.0 C210                SWIRE3_J032926.50-271844.0 3 29 26.522 -27 18 44.05    8.4    76.8   101.8   129.1   199.2    355.6                                  1 AGN b   
+S193 ATCDFS_J032927.52-284018.0 C211                SWIRE3_J032927.56-284015.5 3 29 27.529 -28 40 18.09    2.0   199.8   109.5    87.6    53.6     -1.0 99.0 23.4 21.6 20.1      0.6837  3         z(b)
+S194 ATCDFS_J032928.59-283618.8 C212                                           3 29 28.594 -28 36 18.81    6.1                                                                           9         IFRS.
+S195 ATCDFS_J032929.55-284219.5 C213                SWIRE3_J032929.51-284218.2 3 29 29.554 -28 42 19.51    1.5  2107.3  1395.8  1831.8 11906.6   9905.7 19.0 18.5 17.8 17.2              2         
+S196 ATCDFS_J032929.61-274332.8 C214                SWIRE3_J032929.57-274331.3 3 29 29.613 -27 43 32.87    0.5   206.2   253.0   341.0   725.0   2866.6 21.0 20.8 19.8 19.1              2         
+S197 ATCDFS_J032929.62-281939.4 C215                SWIRE3_J032929.63-281939.8 3 29 29.629 -28 19 39.48    5.4   150.8    91.6    -1.0    -1.0     -1.0 99.0 23.5 21.7 20.2      0.6789  1         z(b)
+S198 ATCDFS_J032931.28-282008.2 C216                SWIRE3_J032931.23-282009.0 3 29 31.286 -28 20 08.29    1.1   477.3   297.5   151.1    83.3     -1.0 22.9 21.4 20.0 18.7              2         Spectroscopy (b) at this position showed a star 
+S199 ATCDFS_J032931.45-281721.4 C217                SWIRE3_J032931.44-281722.0 3 29 31.453 -28 17 21.46    0.7   231.7    82.7    63.0    42.8     -1.0 99.0 23.6 21.8 20.3      0.6900  1         z(b)
+S200 ATCDFS_J032931.84-280158.8 C218                (317693)                   3 29 31.843 -28 01 58.80    0.8     6.2     7.7    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              1         
+S201 ATCDFS_J032933.82-284140.2 C219                SWIRE3_J032933.80-284140.0 3 29 33.820 -28 41 40.25   14.9   165.0   121.2    83.2    82.5     -1.0 22.9 23.1 21.9 20.6      0.9822  1         z(b)
+S202 ATCDFS_J032934.27-273431.1 C220                SWIRE3_J032934.24-273431.8 3 29 34.276 -27 34 31.11    1.3    99.8    64.6    -1.0    33.2     -1.0 23.1 22.0 20.6 19.7              1         
+S203 ATCDFS_J032935.93-275703.5 C221                SWIRE3_J032935.95-275704.2 3 29 35.935 -27 57 03.54    1.8  2146.9  1439.9  2139.4 14102.2  13211.6 18.6 18.2 17.6 17.2              1         
+S204 ATCDFS_J032936.81-281955.3 C222                (304309)                   3 29 36.817 -28 19 55.36    0.4     4.8    -1.0    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              3         
+S205 ATCDFS_J032938.17-271447.1 C223                SWIRE3_J032938.08-271446.7 3 29 38.176 -27 14 47.16    1.6   353.5   226.4   126.9    -1.0     -1.0                                  2         
+S206 ATCDFS_J032938.96-280658.6 C224                SWIRE3_J032938.99-280658.8 3 29 38.968 -28 06 58.68    1.0    25.4    33.7    -1.0    -1.0    288.2 99.0 99.0 99.0 99.0              1 AGN b   
+S207 ATCDFS_J032940.91-283343.9 C225                (293548)                   3 29 40.914 -28 33 43.93    0.6    -1.0    -1.0   260.0  2189.3   4387.5 20.5 20.2 19.0 18.3              2         Maybe a pair of nuclei in IRAC image
+S208 ATCDFS_J032940.95-281830.5 C226                SWIRE3_J032940.94-281830.4 3 29 40.957 -28 18 30.55    0.9   595.8   918.1  1436.8  2502.2   9021.2 20.5 20.9 20.2 19.6      1.0676  1 AGN s   z(b). QSO
+S209 ATCDFS_J032941.22-280811.5 C227                SWIRE3_J032941.22-280811.6 3 29 41.227 -28 08 11.54   23.0   173.9    98.3    94.7    42.1     -1.0 99.0 22.9 21.2 19.9      0.5368  1         z(b)
+S210 ATCDFS_J032945.55-273217.9 C228                SWIRE3_J032945.52-273217.5 3 29 45.554 -27 32 17.97   11.1   128.8    67.3    60.4    -1.0     -1.0 99.0                             1         M test classified C228/C230 as double, but  there is no  SWIRE source between them. Uncertain ID, but probably a pair of galaxies in a  complex cluster.
+S211 ATCDFS_J032946.80-273641.1 C229                SWIRE3_J032946.77-273640.4 3 29 46.804 -27 36 41.14    1.2    11.6    12.8    -1.0    -1.0     -1.0 99.0 99.0 23.8 23.2              1         
+S212 ATCDFS_J032948.94-273148.9 C230                SWIRE3_J032949.13-273149.1 3 29 48.943 -27 31 48.98   18.9    17.5    23.4    -1.0    42.3    175.2 99.0 22.4 22.0 99.0              3 AGN b   See comment on C228
+S213 ATCDFS_J032949.48-285058.2 C231                SWIRE3_J032949.49-285057.3 3 29 49.482 -28 50 58.29    2.0  3015.8  2120.2  2478.3 12674.9   9981.5 20.7 20.0 19.2 18.2              1         edge-on spiral or lenticular? M-test associates C231 and C235, but both have good ID.
+S214 ATCDFS_J032949.80-273218.8 C232                SWIRE3_J032949.77-273219.0 3 29 49.800 -27 32 18.87    0.4    54.7    38.9    -1.0    -1.0     -1.0 99.0                             1         M test classifies C232, C233, C234 as associated. But C232 and C234 have good SWIRE IDs, and there is no SWIRE ID between them. C233 is uncertain, as it has no SWIRE ID. Possible an IFRS or a lobe from C232/C234?
+S215 ATCDFS_J032950.01-273152.6 C233                                           3 29 50.017 -27 31 52.64    1.1                                                                           9         IFRS? See comment to C232
+S216 ATCDFS_J032950.52-273133.8 C234                SWIRE3_J032950.46-273134.8 3 29 50.528 -27 31 33.87    1.0    41.4    27.8    -1.0    -1.0    258.9 99.0 22.6 21.8 99.0              2 AGN b   See comment to C232
+S217 ATCDFS_J032951.26-285032.2 C235                SWIRE3_J032951.42-285036.1 3 29 51.268 -28 50 32.26    1.3   534.2   527.4   311.1  1599.9   5342.5 20.3 20.2 19.3 18.6              4         IRAC galaxy is within radio contours, and is extended at same PA as radio image. Tidal tail in optical &irac.
+S218 ATCDFS_J032951.27-275252.5 C236                                           3 29 51.274 -27 52 52.52    1.9                                                                           7          faint uncatalogued source  in irac bands 1 & 2
+S219 ATCDFS_J032951.59-283710.8 C237                SWIRE3_J032951.58-283711.3 3 29 51.592 -28 37 10.84    1.3    52.0    59.2    71.0   140.1    629.7 99.0 99.0 24.0 22.5              1 AGN b   
+S220 ATCDFS_J032951.90-274907.3 C238                SWIRE3_J032951.87-274906.7 3 29 51.909 -27 49 07.31    0.4   204.9   102.9    83.7    -1.0     -1.0 99.0 23.6 22.0 20.5      0.6734  1         z(b)
+S221 ATCDFS_J032952.92-272934.1 C239                SWIRE3_J032953.01-272935.0 3 29 52.926 -27 29 34.14    2.5   118.3   219.1   373.7   607.5   2075.2                                  2 AGN b   
+S222 ATCDFS_J032953.06-275341.0 C240                SWIRE3_J032953.02-275341.2 3 29 53.061 -27 53 41.05    0.6    32.8    36.5    29.4    -1.0     -1.0 99.0 99.0 99.0 99.0              1         
+S223 ATCDFS_J032955.74-284603.8 C241                SWIRE3_J032955.73-284604.1 3 29 55.747 -28 46 03.87    4.3 13099.5  8225.0  7309.2  6003.8   4800.7 18.6 17.5 14.6 13.6      0.0369  1         See discussion in section 3.6.2 and  Fig. 3b. z(l)
+S224 ATCDFS_J032956.13-280956.8 C242                SWIRE3_J032956.11-280956.4 3 29 56.133 -28 09 56.85    0.7  1312.6   933.7   721.7  2512.5   1998.1 18.7 17.8 16.8 16.2 15.7 0.1235  1         z(g)
+S225 ATCDFS_J032956.21-271931.1 C243                SWIRE3_J032956.26-271931.2 3 29 56.219 -27 19 31.17    0.8  1652.3  1156.7  1618.3  9878.8  17304.1                          0.0687  1         z(g)
+S226 ATCDFS_J032956.56-284632.6 C244                SWIRE3_J032956.79-284629.5 3 29 56.561 -28 46 32.60    5.4 22958.4 13830.6  2101.7    -1.0     -1.0 19.2 18.1 15.4 16.4      0.0370  4         z(e). ESO418-G007. See discussion in section 3.6.2 and  Fig. 3b.
+S227 ATCDFS_J032957.24-272642.4 C245                SWIRE3_J032957.18-272641.9 3 29 57.249 -27 26 42.48    0.8   105.5   174.9   350.4   864.7   3308.3                                  2         
+S228 ATCDFS_J032958.80-280639.0 C246                SWIRE3_J032958.80-280639.8 3 29 58.808 -28 06 39.04    0.3    40.9    30.6    -1.0    -1.0     -1.0 99.0 99.0 23.8 22.6              1         M test classifies C246,C247 as double, but both have good Spitzer IDs, and morphology suggests a pair of interacting galaxies
+S229 ATCDFS_J032958.98-280626.4 C247                SWIRE3_J032958.95-280624.8 3 29 58.983 -28 06 26.45    0.8  2014.7  1356.3   910.5  4461.4   3463.1 19.9 19.1 18.1 17.4              2         see comment on C246
+S230 ATCDFS_J032959.51-281408.3 C248                SWIRE3_J032959.51-281409.2 3 29 59.515 -28 14 08.37    1.5    64.4   160.1   332.5   778.2   2573.6 99.0 99.0 99.0 99.0 99.0         1         
+S231 ATCDFS_J033001.17-274621.1 C249,C250           SWIRE3_J033001.17-274621.1 3 30 01.17  -27 46 21.18   17.8    11.1    11.4    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0             -1 AGN a   Radio double
+S232 ATCDFS_J033004.38-283942.9 C251                SWIRE3_J033004.46-283944.9 3 30 04.385 -28 39 42.94    0.6  1029.5   738.2   659.7  3655.7   3559.8 20.2 19.6 18.7 17.9              3         
+S233 ATCDFS_J033004.69-273208.0 C252                SWIRE3_J033004.69-273208.5 3 30 04.690 -27 32 08.03    0.2    56.9    48.7    72.2   159.6   1080.9 99.0 23.7 22.7 21.2              1         
+S234 ATCDFS_J033005.55-273831.4 C253                (336322)                   3 30 05.552 -27 38 31.42    0.7    -1.0     7.3    -1.0    32.2    265.5 99.0 99.0 99.0 99.0              2 AGN b   
+S235 ATCDFS_J033005.86-272653.2 C254                SWIRE3_J033005.85-272651.6 3 30 05.866 -27 26 53.24    0.4    73.3    51.7    -1.0    -1.0     -1.0                                  2         
+S236 ATCDFS_J033006.16-272824.6 C255                SWIRE3_J033006.24-272821.5 3 30 06.162 -27 28 24.66    0.3   170.7   300.0   499.0   858.6   2795.8                                  4         
+S237 ATCDFS_J033007.69-271530.9 C256                (355204)                   3 30 07.695 -27 15 30.90    0.9    -1.0    12.6    -1.0    -1.0    241.6                                  3 AGN b   
+S238 ATCDFS_J033008.26-280109.4 C257                SWIRE3_J033008.19-280108.5 3 30 08.264 -28 01 09.43    0.8    16.2    17.8    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              2         
+S239 ATCDFS_J033008.66-274137.0 C258                SWIRE3_J033008.69-274137.8 3 30 08.667 -27 41 37.02    0.4   129.8    72.7    70.4    -1.0     -1.0 99.0 23.7 21.9 20.5      0.6279  2         z(b)
+S240 ATCDFS_J033009.36-281850.3 C259                SWIRE3_J033009.33-281850.8 3 30 09.361 -28 18 50.31    2.5   520.0   373.0   149.3   291.9    450.7 22.2 21.0 19.7 18.8              1 AGN b   
+S241 ATCDFS_J033010.21-282653.0 C260                                           3 30 10.215 -28 26 53.01    1.3                                                                           9         IFRS?
+S242 ATCDFS_J033010.58-272712.3 C261                SWIRE3_J033010.72-272712.8 3 30 10.580 -27 27 12.38    0.4  1047.5   718.3   798.7  5691.6   4942.8                          0.1009  3         z(g)
+S243 ATCDFS_J033012.07-274614.0 C262                SWIRE3_J033012.07-274613.9 3 30 12.074 -27 46 14.02    0.5    40.0    34.3    -1.0   131.6   1360.0 99.0 23.4 22.0 20.8      0.6709  1 AGN s   z(b). Type 2 AGN?
+S244 ATCDFS_J033014.19-275051.6 C263                SWIRE3_J033014.16-275049.7 3 30 14.190 -27 50 51.68    1.7    70.2    59.4    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              2         
+S245 ATCDFS_J033014.24-282104.3 C264                SWIRE3_J033014.23-282104.8 3 30 14.248 -28 21 04.31    1.5   448.8   724.6  1141.8  2681.4  14352.4 20.4 20.1 19.0 18.4              1         
+S246 ATCDFS_J033015.91-284937.4 C265                SWIRE3_J033015.92-284936.5 3 30 15.918 -28 49 37.41    0.5    23.7    18.0    -1.0    -1.0     -1.0 23.7 24.1 23.4 22.4              1         
+S247 ATCDFS_J033016.96-273645.5 C266                SWIRE3_J033016.99-273646.0 3 30 16.967 -27 36 45.57    0.5    24.0    32.0    73.5    -1.0    509.2 23.8 23.7 23.3 99.0              1         
+S248 ATCDFS_J033019.98-285635.5 C267                SWIRE3_J033020.04-285634.3 3 30 19.985 -28 56 35.54    3.0   111.0    64.5    -1.0    -1.0     -1.0 99.0 99.0 22.7 21.2              2         
+S249 ATCDFS_J033021.90-280205.7 C268                SWIRE3_J033021.89-280206.1 3 30 21.904 -28 02 05.72   15.1   173.9   113.0    75.6    52.8    620.6 22.5 23.6 22.7 21.1              1 AGN b   
+S250 ATCDFS_J033022.29-272119.3 C269                SWIRE3_J033022.23-272118.3 3 30 22.296 -27 21 19.30    0.8    75.4    45.5    45.7    -1.0     -1.0                                  2         
+S251 ATCDFS_J033023.20-275356.1 C270                SWIRE3_J033023.22-275356.6 3 30 23.207 -27 53 56.16    2.6   108.1   175.2   328.0   617.2   2004.3 23.0 24.1 23.9 99.0              1 AGN b   M-test indicates double with C276, but both have good IDs, so member of a pair of galaxies
+S252 ATCDFS_J033023.39-273634.8 C271                SWIRE3_J033023.39-273634.8 3 30 23.396 -27 36 34.82    1.8    23.9    31.5    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              1         
+S253 ATCDFS_J033023.58-282530.8 C272                SWIRE3_J033023.57-282531.2 3 30 23.586 -28 25 30.86    0.5   373.3   490.4   768.9  1123.5   2903.1 20.0 20.1 20.2 19.5      0.6321  1 AGN s   z(b). QSO
+S254 ATCDFS_J033023.62-285342.5 C273                SWIRE3_J033023.57-285340.9 3 30 23.627 -28 53 42.59    1.7   153.3   110.8   137.9    78.0     -1.0 23.8 22.6 20.8 19.7      0.5101  2         z(b)
+S255 ATCDFS_J033024.08-275658.7 C274                                           3 30 24.083 -27 56 58.74    0.5                                                                           9         IFRS
+S256 ATCDFS_J033024.84-273419.6 C275                SWIRE3_J033024.96-273420.5 3 30 24.845 -27 34 19.68    0.4   316.1   260.0   167.8  1149.0   1545.2 20.2 20.0 19.1 18.5              3         
+S257 ATCDFS_J033025.19-275331.4 C276                SWIRE3_J033025.15-275330.1 3 30 25.191 -27 53 31.41    1.5   197.1    97.8    71.1    -1.0     -1.0 99.0 23.3 21.5 20.1              2         See comment on C270
+S258 ATCDFS_J033025.68-275017.9 C277                SWIRE3_J033025.72-275017.4 3 30 25.689 -27 50 17.93    0.3   607.4   456.9   356.8  3582.5   3412.4 20.1 19.5 18.7 18.0              1         
+S259 ATCDFS_J033026.16-281710.8 C278                SWIRE3_J033026.17-281711.1 3 30 26.161 -28 17 10.87    3.6   304.5   182.9   134.5    79.4     -1.0 23.7 23.2 21.7 20.1      0.6843  1         z(b)
+S260 ATCDFS_J033029.44-274328.7 C279                SWIRE3_J033029.42-274328.7 3 30 29.447 -27 43 28.78    1.6   196.3   128.4    95.3    63.7    519.7                                  1 AGN b   
+S261 ATCDFS_J033030.44-281606.1 C280                SWIRE3_J033030.43-281605.3 3 30 30.446 -28 16 06.16    1.6   174.0    75.7    79.2    55.5    280.0 99.0 23.7 22.3 21.2 20.6 0.6779  1 AGN b   z(b)
+S262 ATCDFS_J033032.83-273542.8 C281                SWIRE3_J033032.82-273542.5 3 30 32.836 -27 35 42.83    0.5   992.0   722.4   787.6  5424.1   4507.0 19.9 19.3 18.3 17.7              1         
+S263 ATCDFS_J033033.03-273255.5 C282                SWIRE3_J033033.05-273255.2 3 30 33.033 -27 32 55.52    0.5    18.6    23.2    -1.0    -1.0    525.8 99.0 99.0 99.0 99.0              1         
+S264 ATCDFS_J033033.17-284427.3 C283                (284745)                   3 30 33.174 -28 44 27.38    0.8     4.5    -1.0    -1.0    -1.0     -1.0                                  2         
+S265 ATCDFS_J033034.66-282706.5 C284                SWIRE3_J033034.56-282707.7 3 30 34.661 -28 27 06.51   18.6    29.3    38.9    56.0    53.3     -1.0 22.1 22.6 22.3 21.6 21.3         2         
+S266 ATCDFS_J033035.12-280336.4 C285                SWIRE3_J033035.11-280337.0 3 30 35.126 -28 03 36.45    0.5   624.7   422.8   405.5  4077.0   4036.5 19.4 19.0 18.3 17.6              1         
+S267 ATCDFS_J033036.04-283922.0 C286                SWIRE3_J033036.04-283922.2 3 30 36.044 -28 39 22.06    4.5   229.9   169.2    63.4    -1.0     -1.0 99.0 25.0 22.8 21.3              1         
+S268 ATCDFS_J033038.38-283400.7 C287                SWIRE3_J033038.36-283401.8 3 30 38.388 -28 34 00.79    1.9    18.1    22.2    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0         2         
+S269 ATCDFS_J033038.53-274535.1 C288                SWIRE3_J033038.50-274535.1 3 30 38.531 -27 45 35.11    0.6    51.1    39.2    36.3    35.1     -1.0                                  1         
+S270 ATCDFS_J033039.01-274814.9 C289                SWIRE3_J033038.97-274814.1 3 30 39.016 -27 48 14.96    0.5    40.4    33.1    -1.0    -1.0     -1.0                                  1         
+S271 ATCDFS_J033041.62-280604.5 C290                SWIRE3_J033041.65-280606.0 3 30 41.623 -28 06 04.55    0.2    17.9    19.9    -1.0    37.4     -1.0 99.0 99.0 99.0 99.0 99.0         2         
+S272 ATCDFS_J033042.78-285153.7 C291                SWIRE3_J033042.70-285151.6 3 30 42.788 -28 51 53.73   16.6   853.4   606.3   219.6   182.7     -1.0 20.5 19.4 18.2 17.5              3         
+S273 ATCDFS_J033043.47-272323.6 C292                SWIRE3_J033043.45-272323.3 3 30 43.471 -27 23 23.69    0.7   193.6    95.1    88.2    -1.0     -1.0                                  1         
+S274 ATCDFS_J033043.64-283754.1 C293                SWIRE3_J033043.64-283754.3 3 30 43.645 -28 37 54.10    0.5   176.4   101.4    98.8    39.6     -1.0 24.3 23.8 22.2 20.7      0.7544  1         z(b)
+S275 ATCDFS_J033043.69-284755.6 C294                                           3 30 43.69  -28 47 55.68    0.4                                                                           9         IFRS?
+S276 ATCDFS_J033044.23-282107.3 C295                SWIRE3_J033044.16-282107.4 3 30 44.234 -28 21 07.34    0.7   578.6   397.6   576.0  4603.5   8629.8 18.6 18.2 17.6 16.9 16.7         1         
+S277 ATCDFS_J033044.38-281834.6 C296                (305676)                   3 30 44.381 -28 18 34.67    0.5     7.3     8.9    -1.0    -1.0    704.2 99.0 99.0 99.0 99.0 99.0         1         
+S278 ATCDFS_J033046.17-273355.7 C297                SWIRE3_J033046.27-273354.8 3 30 46.177 -27 33 55.76    0.4    45.3    54.2    74.7   100.1    492.2 23.6 23.5 22.8 21.9              2         
+S279 ATCDFS_J033046.26-275517.5 C298                SWIRE3_J033046.27-275518.8 3 30 46.269 -27 55 17.52    0.5   118.5   117.5   161.0   350.7   3178.1 99.0 99.0 99.0 99.0              2         See discussion in Section 3.6.1 and Fig 3a.
+S280 ATCDFS_J033046.61-280835.9 C299                SWIRE3_J033046.61-280834.9 3 30 46.610 -28 08 35.99    0.3   368.5   290.5   126.2    99.3     -1.0 21.4 20.3 19.0 18.2              2         M test suggsts a double radio source with C300, but both galaxies have good Spitzer IDs, and there is no Spitzer ID between them. Thus a pair of galaxies.
+S281 ATCDFS_J033047.44-280820.4 C300                (313111)                   3 30 47.444 -28 08 20.44    0.3     7.1    -1.0    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0         1         See comment on C299
+S282 ATCDFS_J033047.65-283854.6 C301                SWIRE3_J033047.55-283854.0 3 30 47.657 -28 38 54.60   59.1   804.4   683.4   206.2   129.0     -1.0 22.3 20.9 19.1 18.2              2         
+S283 ATCDFS_J033048.68-274445.3 C302                                           3 30 48.686 -27 44 45.32    0.3                                                                           9         IFRS?
+S284 ATCDFS_J033049.19-281931.5 C303                SWIRE3_J033049.18-281930.6 3 30 49.195 -28 19 31.57    0.7   727.5   629.5   480.7  1957.4   2966.4 20.6 20.1 18.9 18.2      0.2162  1         z(g)
+S285 ATCDFS_J033049.56-284154.0 C304                (286925)                   3 30 49.561 -28 41 54.08    0.7     9.7    13.5    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0         1         
+S286 ATCDFS_J033051.40-273013.9 C306                SWIRE3_J033051.41-273013.7 3 30 51.409 -27 30 13.98   43.8    93.6    70.6    62.1    -1.0    181.7                                  1 AGN b   
+S287 ATCDFS_J033052.79-275459.0 C305,C307,C312      SWIRE3_J033052.80-275458.7 3 30 52.799 -27 54 59.08    3.2   160.6   100.9    62.7    45.3     -1.0 99.0 24.7 22.4 21.0      0.8934  6 AGN a   z(b). Radio Triple. See discussion in Section 3.6.1 and Fig 3a.
+S288 ATCDFS_J033053.05-272725.7 C308                SWIRE3_J033052.99-272725.3 3 30 53.059 -27 27 25.77    0.5    86.5    55.9    45.8    35.0     -1.0                                  1         
+S289 ATCDFS_J033054.76-273811.2 C309                SWIRE3_J033054.78-273811.0 3 30 54.768 -27 38 11.25    0.9    98.2    74.1    59.2   102.6    667.6 22.1 22.0 20.6 19.9      0.4815  1 AGN b   z(b)
+S290 ATCDFS_J033055.61-284852.4 C310                SWIRE3_J033055.63-284852.5 3 30 55.616 -28 48 52.41   10.5    49.7    53.7    84.7   166.2    817.9                                  1 AGN b   
+S291 ATCDFS_J033055.63-275201.7 C311                SWIRE3_J033055.67-275201.7 3 30 55.639 -27 52 01.79    4.5   319.6   220.2    85.3    65.0     -1.0 22.6 21.3 19.7 18.9      0.3382  1         See discussion in Section 3.6.1 and Fig 3a. z(a)
+S292 ATCDFS_J033056.94-285637.2 C313                SWIRE3_J033056.87-285637.8 3 30 56.949 -28 56 37.29   22.3    12.1    11.5    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              2         
+S293 ATCDFS_J033057.21-283520.4 C314                SWIRE3_J033057.22-283520.1 3 30 57.219 -28 35 20.42    2.3    18.3    23.6    -1.0    38.1    290.5 99.0 99.0 99.0 99.0 99.0         1 AGN b   
+S294 ATCDFS_J033057.75-280913.0 C315                                           3 30 57.755 -28 09 13.06    0.8                                                                           7         faint uncatalogued source in irac bands 1 & 2
+S295 ATCDFS_J033059.04-284417.2 C316                SWIRE3_J033059.00-284416.7 3 30 59.044 -28 44 17.20    0.7   198.2   134.6    91.6    74.9     -1.0 23.2 22.1 20.3 19.4      0.4238  1         z(b)
+S296 ATCDFS_J033059.49-281000.5 C317                SWIRE3_J033059.50-281001.0 3 30 59.498 -28 10 00.50    1.2  1851.5  1270.8  1784.2 12355.4  12107.0 19.2 18.9 18.1 17.5 17.2 0.0772  1         z(g)
+S297 ATCDFS_J033100.40-272110.0 C318                SWIRE3_J033100.42-272114.1 3 31 00.401 -27 21 10.03    0.4   182.7    91.5    58.7    -1.0     -1.0                                  4         
+S298 ATCDFS_J033101.22-273938.7 C319                SWIRE3_J033101.23-273938.7 3 31 01.220 -27 39 38.77    0.2    22.4    27.8    -1.0    -1.0    282.1 99.0 23.7 23.1 22.7              1         
+S299 ATCDFS_J033102.01-272920.4 C320                (343815)                   3 31 02.018 -27 29 20.44    0.4     6.7     7.9    -1.0    -1.0     -1.0                                  2         
+S300 ATCDFS_J033102.31-280119.2 C321                SWIRE3_J033102.32-280119.1 3 31 02.311 -28 01 19.20    0.4    54.9    77.9   161.2   404.6   1965.0 99.0 24.4 23.4 22.8              1         
+S301 ATCDFS_J033102.38-282023.7 C322                SWIRE3_J033102.45-282027.1 3 31 02.381 -28 20 23.75    0.5    64.4    73.2    51.4    45.3     -1.0 99.0 25.1 24.0 22.8 21.4         4         
+S302 ATCDFS_J033102.88-284230.9 C323                SWIRE3_J033102.87-284230.2 3 31 02.883 -28 42 30.90    0.4    31.5    48.7    87.8   100.8    815.7 23.9 24.9 23.9 23.9              1         
+S303 ATCDFS_J033105.45-284327.2 C324                (285588)                   3 31 05.458 -28 43 27.22    0.6     6.2     9.8    -1.0    -1.0     -1.0 23.5 23.7 23.5 22.9              2         
+S304 ATCDFS_J033105.58-280042.1 C325                SWIRE3_J033105.57-280042.3 3 31 05.589 -28 00 42.10    0.7    20.5    23.3    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              1         
+S305 ATCDFS_J033105.74-283257.9 C326                SWIRE3_J033105.73-283258.1 3 31 05.745 -28 32 57.94    0.5   478.7   338.5   244.7   892.2   2537.2 21.2 20.1 19.0 18.2              1         
+S306 ATCDFS_J033106.35-285217.5 C327                SWIRE3_J033106.35-285217.0 3 31 06.355 -28 52 17.56    6.7    18.2    21.9    -1.0    39.5     -1.0 21.3 22.1 22.3 21.8      2.1698  1 AGN s   Radio: complex. Spectroscopy:QSO.z(b)
+S307 ATCDFS_J033106.60-274516.3 C328,C329           SWIRE3_J033106.52-274514.7 3 31 06.607 -27 45 16.38    2.0    56.7    40.1    -1.0    -1.0     -1.0                                  2         Core-jet
+S308 ATCDFS_J033107.57-271920.1 C330                SWIRE3_J033107.55-271918.5 3 31 07.572 -27 19 20.19    0.8    13.1    16.3    -1.0    -1.0     -1.0                                  2         
+S309 ATCDFS_J033107.60-283146.4 C331                SWIRE3_J033107.62-283146.7 3 31 07.609 -28 31 46.45    2.0    94.6    77.4    94.4   106.4    186.3 99.0 25.5 24.2 22.6              1 AGN b   
+S310 ATCDFS_J033109.64-274038.6 C332                SWIRE3_J033109.56-274040.3 3 31 09.649 -27 40 38.68    0.4   102.2    50.2    -1.0    -1.0     -1.0 99.0 24.3 22.4 20.9      0.7310  3         z(ab)
+S311 ATCDFS_J033109.88-275225.1 C333                SWIRE3_J033109.80-275225.3 3 31 09.882 -27 52 25.17    0.2    39.1    36.4    -1.0    -1.0     -1.0 99.0 99.0 99.0 23.1              2         
+S312 ATCDFS_J033110.54-271645.4 C334                SWIRE3_J033110.56-271646.0 3 31 10.546 -27 16 45.47    0.9   535.3   539.9   539.2   997.8   3227.4                                  1         
+S313 ATCDFS_J033110.68-280321.5 C335                SWIRE3_J033110.67-280321.7 3 31 10.688 -28 03 21.54    0.3     8.3    12.3    -1.0    -1.0    294.0 99.0 99.0 99.0 99.0              1 AGN b   
+S314 ATCDFS_J033111.07-281725.9 C336                SWIRE3_J033111.09-281725.5 3 31 11.070 -28 17 25.99    1.1    26.6    21.0    -1.0    -1.0     -1.0 23.7 24.3 23.7 22.7              1         
+S315 ATCDFS_J033111.49-275258.6 C337                SWIRE3_J033111.47-275256.4 3 31 11.491 -27 52 58.67    0.2   102.6    94.9    -1.0    -1.0     -1.0 20.9 21.2 20.2 19.5      0.2652  3         z(ab)
+S316 ATCDFS_J033111.53-284430.7 C338                SWIRE3_J033111.48-284430.3 3 31 11.530 -28 44 30.76    9.8    79.2    35.8    -1.0    -1.0     -1.0 99.0 24.9 23.0 21.7              1         
+S317 ATCDFS_J033111.67-273144.0 C339                SWIRE3_J033111.69-273144.2 3 31 11.671 -27 31 44.01    2.7  1408.3  1343.5  1583.6  2640.4  13629.7 20.0 99.0 99.0 17.4              1         
+S318 ATCDFS_J033111.70-283720.3 C340                SWIRE3_J033111.70-283721.7 3 31 11.703 -28 37 20.30    1.6   163.5    86.6    86.4    51.6     -1.0 24.4 23.5 21.9 20.3      0.6842  2         z(b)
+S319 ATCDFS_J033113.96-273910.6 C341                SWIRE3_J033113.95-273910.6 3 31 13.960 -27 39 10.66    1.1    49.3    35.5    -1.0    -1.0     -1.0 99.0 99.0 23.6 99.0              1         
+S320 ATCDFS_J033114.03-284709.8 C343                SWIRE3_J033114.02-284708.5 3 31 14.031 -28 47 09.82    0.6  1986.5  1365.1   566.2  1450.7    607.0 20.6 19.4 18.5 17.5      0.1399  2         z(g)
+S321 ATCDFS_J033114.15-281650.9 C344                SWIRE3_J033114.13-281651.8 3 31 14.153 -28 16 50.99    0.4   473.5   393.0   365.6  3283.7   4928.4 20.4 19.4 18.4 18.5 20.0         1         
+S322 ATCDFS_J033114.52-280152.1 C345                SWIRE3_J033114.70-280152.4 3 31 14.529 -28 01 52.17    0.6   106.3    75.6    45.1    -1.0     -1.0 99.0 99.0 99.0 99.0              3         one of a line of 3 galaxies
+S323 ATCDFS_J033114.98-275518.6 C342,C346,C348      SWIRE3_J033115.04-275518.8 3 31 14.988 -27 55 18.64   10.4    73.4    98.9   145.9   208.6    557.4 20.6 21.4 20.6 99.0      1.3665  6 AGN abs Radio Triple. QSO. See discussion in Section 3.6.1 and Fig 3a. z(ab)
+S324 ATCDFS_J033115.99-274443.4 C347                SWIRE3_J033115.99-274442.9 3 31 15.997 -27 44 43.47    0.9    63.4    56.6    -1.0    -1.0     -1.0 99.0 99.0 24.1 99.0              1         
+S325 ATCDFS_J033117.34-280146.4 C349                SWIRE3_J033117.33-280147.3 3 31 17.343 -28 01 46.48    0.3   194.0   100.9    99.4    41.9     -1.0 99.0 99.0 99.0 20.3      0.6767  1         one of a line of 3 galaxies. z(a)
+S326 ATCDFS_J033118.75-274900.9 C350                (327776)                   3 31 18.751 -27 49 00.99    0.2     6.2     7.4    -1.0    -1.0    144.6 99.0 99.0 99.0 99.0              1 AGN b   
+S327 ATCDFS_J033120.18-280145.6 C351                (317908)                   3 31 20.180 -28 01 45.61    0.6     5.5    -1.0    -1.0    -1.0     -1.0 99.0 24.0 23.5 99.0              2         one of a line of 3 galaxies. IRAC image shows a diffuse extended galaxy
+S328 ATCDFS_J033122.60-281055.2 C352                (311254)                   3 31 22.607 -28 10 55.24    2.6     9.6    14.3    -1.0    -1.0    197.3 99.0 99.0 99.0 99.0 99.0         1 AGN b   
+S329 ATCDFS_J033123.30-274905.6 C353                SWIRE3_J033123.28-274906.1 3 31 23.305 -27 49 05.63    1.1   116.2    69.1    50.4    -1.0     -1.0 99.0 99.0 23.1 21.7              1         
+S330 ATCDFS_J033124.61-280455.5 C354                SWIRE3_J033124.61-280455.2 3 31 24.610 -28 04 55.54    0.4    40.5    39.6    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0 0.0006  1         z(a)
+S331 ATCDFS_J033124.89-275208.3 C355                (325411)                   3 31 24.892 -27 52 08.32   35.5    -1.0   227.6   161.8   137.5    393.0 23.2 23.6 22.9 21.7              1 AGN b   See discussion in Section 3.6.1 and Fig 3a.
+S332 ATCDFS_J033125.02-281333.4 C356                SWIRE3_J033125.02-281333.5 3 31 25.024 -28 13 33.45    5.7   119.1   169.3   271.1   509.9   1472.7 99.0 99.0 23.9 22.8 22.1         1 AGN b   
+S333 ATCDFS_J033125.06-285229.4 C357                SWIRE3_J033125.06-285228.8 3 31 25.062 -28 52 29.43    0.8   476.2   379.8   187.7   103.3     -1.0 22.2 20.8 19.1 18.2              1         
+S334 ATCDFS_J033125.29-275959.2 C358                SWIRE3_J033125.29-275959.0 3 31 25.294 -27 59 59.27    0.2    37.9    59.8   120.0   239.2    915.2 99.0 23.6 23.0 22.5              1         
+S335 ATCDFS_J033126.71-285630.3 C360                SWIRE3_J033126.70-285632.1 3 31 26.719 -28 56 30.32    1.2    39.7    30.6    -1.0    -1.0     -1.0 99.0 99.0 23.6 22.2              2         
+S336 ATCDFS_J033127.00-281811.2 C359,C368           SWIRE3_J033126.99-281811.2 3 31 27.00  -28 18 11.27  372.4   668.5   600.9   567.9   750.8   2720.3 20.6 19.5 18.0 17.2 16.9        -1 AGN ab  Complex and confused source - probably a radio double
+S337 ATCDFS_J033127.04-275958.5 C361                (319272)                   3 31 27.047 -27 59 58.50    0.4    -1.0    20.0    44.0    -1.0     -1.0 99.0 99.0 99.0 99.0              1         
+S338 ATCDFS_J033127.19-274247.0 C362                SWIRE3_J033127.18-274246.6 3 31 27.190 -27 42 47.07    1.6     8.5     7.4    -1.0    -1.0     -1.0 99.0 99.0 23.9 23.2              1         
+S339 ATCDFS_J033127.51-274440.1 C363                (331291)                   3 31 27.519 -27 44 40.13    0.1    -1.0    -1.0    53.7    49.2    496.0 99.0 99.0 99.0 99.0      0.2655  2         z(a)
+S340 ATCDFS_J033128.59-274934.9 C364                SWIRE3_J033128.57-274935.1 3 31 28.594 -27 49 34.93    0.5    38.9    28.1    -1.0    -1.0     -1.0 23.6 23.9 23.1 21.8              1         
+S341 ATCDFS_J033128.84-272245.7 C365                SWIRE3_J033128.66-272244.4 3 31 28.842 -27 22 45.77    2.0   431.9   225.3   133.6    92.6     -1.0                                  4         
+S342 ATCDFS_J033129.77-273218.4 C367                SWIRE3_J033129.76-273218.5 3 31 29.771 -27 32 18.48    4.1    69.8    65.7    39.1    65.0    573.3 99.0 24.2 23.2 99.0              1 AGN b   
+S343 ATCDFS_J033130.07-275602.5 C370                SWIRE3_J033130.05-275602.5 3 31 30.077 -27 56 02.52    0.9   254.1   151.6   157.7   149.9   1004.0 20.9 21.2 20.4 19.4      0.6780  1 SF  s   z(ab). Post-starburst.
+S344 ATCDFS_J033130.18-283655.1 C371                SWIRE3_J033130.10-283652.2 3 31 30.183 -28 36 55.10    0.3    31.8    33.5    43.3    69.6    423.4 23.2 23.9 23.2 22.5              4         
+S345 ATCDFS_J033130.21-284818.0 C372                                           3 31 30.218 -28 48 18.08    0.4                                                                           7         M test classifies C372 and C375 as double. C375 has good ID, and C372 is coincident with faint uncatalogued source in IRAC band 1  Thus we classify as a pair of galaxies.
+S346 ATCDFS_J033130.61-280425.2 C373                SWIRE3_J033130.59-280423.7 3 31 30.617 -28 04 25.26    0.3    11.2    12.9    -1.0    -1.0     -1.0 99.0 25.9 99.0 99.0              2         
+S347 ATCDFS_J033130.72-275734.0 C374                SWIRE3_J033130.73-275734.0 3 31 30.720 -27 57 34.05    0.3   192.9   173.2    63.9    52.8     -1.0 99.0 99.0 99.0 99.0              1         
+S348 ATCDFS_J033130.89-284843.2 C375                (281312)                   3 31 30.893 -28 48 43.27    0.7    -1.0    27.4    -1.0    -1.0    281.8 99.0 99.0 99.0 99.0              1 AGN b   See  comments to C372
+S349 ATCDFS_J033131.04-273815.7 C366,C369,C376      (336555)                   3 31 31.040 -27 38 15.73   10.5    -1.0    -1.0    68.5    41.3     -1.0 99.0 99.0 99.0 99.0              2         complex jet structure
+S350 ATCDFS_J033131.31-272847.1 C377                SWIRE3_J033131.33-272846.8 3 31 31.314 -27 28 47.11    1.7  8436.7  5452.8  4131.2  8468.2  12662.1                          0.0675  1         z(i)
+S351 ATCDFS_J033132.79-280117.3 C379                SWIRE3_J033132.82-280116.3 3 31 32.793 -28 01 17.32    0.2   551.5   421.3   271.8  2330.8   3735.2 20.4 19.6 18.6 18.0      0.1424  2         z(a)
+S352 ATCDFS_J033133.03-283131.3 C378,C380           SWIRE3_J033133.02-283131.3 3 31 33.03  -28 31 31.33   79.5    27.0    30.5    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0        -1 AGN a   Radio double - ID uncertain.
+S353 ATCDFS_J033134.21-273828.8 C381                SWIRE3_J033134.22-273828.4 3 31 34.219 -27 38 28.83    0.5   112.5    84.3    57.6    -1.0     -1.0 99.0 99.0 23.4 22.1              1          
+S354 ATCDFS_J033136.58-273126.1 C382                SWIRE3_J033136.55-273126.7 3 31 36.583 -27 31 26.10    0.2    21.5    32.2    41.3   145.5   1030.3                                  1         
+S355 ATCDFS_J033136.98-284107.2 C383                SWIRE3_J033136.97-284107.4 3 31 36.983 -28 41 07.21    1.3    20.8    26.1    48.0    -1.0    487.0 22.7 22.7 22.1 21.8              1 AGN b   
+S356 ATCDFS_J033137.69-272552.0 C384                SWIRE3_J033137.68-272551.0 3 31 37.693 -27 25 52.02    0.4    69.0    39.2    -1.0    -1.0     -1.0                                  2         
+S357 ATCDFS_J033138.06-284246.6 C385                SWIRE3_J033137.93-284244.6 3 31 38.069 -28 42 46.66    0.3    42.3    27.4    -1.0    -1.0     -1.0 22.9 22.9 22.2 21.2      0.8497  3         z(b)
+S358 ATCDFS_J033138.28-280811.0 C386                SWIRE3_J033138.27-280810.7 3 31 38.289 -28 08 11.05    0.3   133.7    72.8    64.2    48.2     -1.0 99.0 24.2 22.3 20.7 20.0 0.8649  1         z(b)
+S359 ATCDFS_J033138.47-275942.0 C387                SWIRE3_J033138.46-275942.2 3 31 38.473 -27 59 42.06    0.4    13.2    14.3    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              1         
+S360 ATCDFS_J033139.57-274119.4 C388                SWIRE3_J033139.54-274119.8 3 31 39.572 -27 41 19.40    0.2    41.1    56.9    88.1    96.9   1567.0 99.0 23.5 23.0 99.0              1         
+S361 ATCDFS_J033140.57-272937.4 C389                SWIRE3_J033140.63-272939.0 3 31 40.577 -27 29 37.42    0.3  2112.0  1574.3  1822.9  5554.3   7442.9                          0.0676  2         z(a)
+S362 ATCDFS_J033140.91-272017.3 C390                SWIRE3_J033140.90-272017.4 3 31 40.915 -27 20 17.37    1.8    19.9    21.6    -1.0    -1.0     -1.0                                  1         
+S363 ATCDFS_J033142.31-285120.4 C391                (279088)                   3 31 42.317 -28 51 20.44    0.4     7.2     9.7    -1.0    -1.0     -1.0 99.0 99.0 25.3 99.0              4         
+S364 ATCDFS_J033144.02-273835.8 C392                (336309)                   3 31 44.026 -27 38 35.88    0.2    -1.0    32.9    -1.0    52.2    405.3 99.0 23.8 99.0 99.0              1         
+S365 ATCDFS_J033145.22-281954.9 C393,C398           SWIRE3_J033145.54-281955.0 3 31 45.222 -28 19 54.91    5.0    81.5    59.3    42.0    -1.0     -1.0 99.0 24.1 22.3 20.9              5 AGN a   Probably asymmetric radio double
+S366 ATCDFS_J033145.99-285527.7 C394                (275636)                   3 31 45.994 -28 55 27.77    0.5     8.8    14.5    -1.0    -1.0    332.4 99.0 24.0 23.2 22.8              3 AGN b   
+S367 ATCDFS_J033146.08-280027.2 C395                SWIRE3_J033146.07-280026.7 3 31 46.080 -28 00 27.26    0.2    80.1    79.4    -1.0    48.5     -1.0 99.0 99.0 99.0 99.0              1         
+S368 ATCDFS_J033146.57-275734.8 C396                SWIRE3_J033146.57-275735.2 3 31 46.572 -27 57 34.84    0.3   150.5   125.9   110.9   310.2   1287.0 22.7 22.1 20.7 19.9      0.3641  1         z(ab)
+S369 ATCDFS_J033147.45-282604.9 C397                SWIRE3_J033147.44-282605.2 3 31 47.452 -28 26 04.95    1.9    45.2    48.8    39.7    53.2    286.3 24.0 24.3 23.6 22.7              1 AGN b   
+S370 ATCDFS_J033147.69-280856.6 C399                SWIRE3_J033147.70-280856.2 3 31 47.695 -28 08 56.66    0.2   157.1   101.3    86.6    51.6    317.1 23.6 23.0 21.4 20.2      0.6014  1 AGN s   z(ab) AGN?
+S371 ATCDFS_J033148.05-281009.4 C400                SWIRE3_J033148.03-281007.7 3 31 48.056 -28 10 09.46    0.2   252.1   259.2   209.5   807.5   2387.0 21.3 20.5 19.3 18.5 18.0 0.3809  2         z(a)
+S372 ATCDFS_J033149.55-281614.6 C401                SWIRE3_J033149.58-281614.8 3 31 49.555 -28 16 14.69    0.3   408.6   360.7   248.6  2036.4   2860.8 19.7 19.1 18.2 17.5 17.2 0.2124  1         z(g)
+S373 ATCDFS_J033149.86-280809.4 C402                SWIRE3_J033149.86-280809.5 3 31 49.869 -28 08 09.44    2.5   380.2   296.8   119.5   157.3    123.9 21.1 19.5 18.2 17.5 17.2 0.2189  1 AGN b   z(a)
+S374 ATCDFS_J033149.87-274838.8 C403                SWIRE3_J033149.91-274837.9 3 31 49.876 -27 48 38.80    2.1   318.5    60.2    72.8   474.9    580.5 99.0 99.0 99.0 99.0      0.1816  2 AGN b   z(a)
+S375 ATCDFS_J033149.94-284236.5 C404                SWIRE3_J033149.96-284234.9 3 31 49.941 -28 42 36.50    0.7   270.9   250.9   450.4   941.8   7100.0 22.2 21.9 20.6 19.6      0.5553  2 AGN s   z(b). Type 2 AGN?
+S376 ATCDFS_J033150.07-273947.1 C405                SWIRE3_J033150.13-273948.2 3 31 50.076 -27 39 47.19    0.6    58.3    42.7    -1.0    -1.0     -1.0 99.0 99.0 24.1 99.0              2         
+S377 ATCDFS_J033150.78-274704.0 C406                SWIRE3_J033150.77-274703.7 3 31 50.788 -27 47 04.03    0.5    18.5    21.4    -1.0    -1.0    450.8 23.5 23.7 23.4 23.0              1 AGN b   
+S378 ATCDFS_J033150.98-280910.6 C407                (312556)                   3 31 50.980 -28 09 10.65    0.2     3.9    -1.0    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0         1         
+S379 ATCDFS_J033151.50-272802.5 C408                (344795)                   3 31 51.509 -27 28 02.54    1.9     4.7     6.1    -1.0    -1.0     -1.0                                  1         
+S380 ATCDFS_J033152.12-273926.4 C409                SWIRE3_J033152.10-273926.4 3 31 52.122 -27 39 26.45    0.8    21.4    26.9    40.8    -1.0    493.9 99.0 24.9 24.6 99.0              1 AGN b   
+S381 ATCDFS_J033153.11-272636.5 C410                SWIRE3_J033153.15-272638.0 3 31 53.117 -27 26 36.58    0.3    23.8    27.0    -1.0    -1.0     -1.0                                  2         
+S382 ATCDFS_J033153.41-280221.1 C411                SWIRE3_J033153.42-280221.5 3 31 53.412 -28 02 21.13    0.5   122.9   105.3    80.5    60.0     -1.0 99.0 99.0 99.0 99.0              1         
+S383 ATCDFS_J033155.77-284003.7 C412                SWIRE3_J033155.74-284004.0 3 31 55.777 -28 40 03.78    0.4   489.9   350.3   168.7   161.0     -1.0 20.8 19.7 18.5 17.8      0.1809  1         z(g)
+S384 ATCDFS_J033156.07-285026.6 C413                SWIRE3_J033156.04-285026.4 3 31 56.070 -28 50 26.60    3.2    36.4    40.0    -1.0    -1.0     -1.0 99.0 99.0 99.0 23.7              1         one of a line of 3 galaxies
+S385 ATCDFS_J033156.33-284815.4 C414                SWIRE3_J033156.32-284814.7 3 31 56.333 -28 48 15.41    2.8   343.3   237.6   188.6   179.5   1293.9 22.3 22.2 21.1 20.1              1 AGN b   one of a line of 3 galaxies
+S386 ATCDFS_J033156.62-284927.5 C415                SWIRE3_J033156.60-284925.7 3 31 56.625 -28 49 27.56    0.6    84.3   107.2   115.6   199.3   1365.4 22.8 23.0 22.5 21.8              2         one of a line of 3 galaxies
+S387 ATCDFS_J033157.42-284041.0 C416                SWIRE3_J033157.45-284041.9 3 31 57.420 -28 40 41.06    0.4    30.0    41.7    49.6    64.5    630.2 25.0 24.8 24.7 23.9              2         
+S388 ATCDFS_J033157.78-282610.3 C417                SWIRE3_J033157.74-282610.5 3 31 57.781 -28 26 10.33    2.4    17.8    19.9    -1.0    -1.0     -1.0 99.0 25.0 24.3 23.6              1         
+S389 ATCDFS_J033157.85-272326.4 C418                                           3 31 57.855 -27 23 26.44    1.1                                                                           7         Faint uncatalogued source in IRAC band 1 coincident with radio source.
+S390 ATCDFS_J033157.94-284230.8 C419                SWIRE3_J033157.64-284229.6 3 31 57.947 -28 42 30.87    0.5    14.4    17.7    29.9    30.4    232.4 99.0 99.0 99.0 99.0 99.0         4 AGN b   Uncertain ID in complex region.
+S391 ATCDFS_J033158.23-281456.9 C420                SWIRE3_J033158.16-281457.1 3 31 58.239 -28 14 56.94    0.4    83.0    71.4    33.7    39.2    265.6 99.0 99.0 23.6 22.6 21.3         1 AGN b   
+S392 ATCDFS_J033200.84-273556.9 C421                SWIRE3_J033200.83-273556.6 3 32 00.844 -27 35 56.91    1.7    59.4    42.4    -1.0    -1.0     -1.0 99.0 25.1 23.3 22.1              1         
+S393 ATCDFS_J033201.44-274647.5 C422                SWIRE3_J033201.41-274646.9 3 32 01.440 -27 46 47.59   49.1    96.9   117.5    80.1    57.6     -1.0 99.0 99.0 99.0 99.0              1 AGN x   XID70(+0.47)
+S394 ATCDFS_J033201.77-281300.9 C423                SWIRE3_J033201.78-281302.7 3 32 01.775 -28 13 00.95    9.6   312.1   240.1    82.6    54.7     -1.0 22.4 20.3 18.8 17.9 17.5         2         
+S395 ATCDFS_J033202.83-275612.6 C424                SWIRE3_J033202.82-275613.3 3 32 02.836 -27 56 12.61    0.2    18.9    20.3    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              1         
+S396 ATCDFS_J033203.84-275804.6 C425                SWIRE3_J033203.87-275805.2 3 32 03.841 -27 58 04.61    0.2    12.5    12.2    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              1         
+S397 ATCDFS_J033204.97-282815.3 C427                SWIRE3_J033204.99-282815.6 3 32 04.970 -28 28 15.33    0.3   273.5   116.3   112.5    56.8     -1.0 24.6 23.6 21.7 20.1      0.7579  1         z(b)
+S398 ATCDFS_J033204.98-281647.9 C426,C429           SWIRE3_J033204.98-281647.9 3 32 04.98  -28 16 47.93    1.7    27.9    32.7    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0        -1 AGN a   Radio double. Not detected by M-test.
+S399 ATCDFS_J033205.38-283730.2 C428                SWIRE3_J033205.37-283730.2 3 32 05.383 -28 37 30.28    3.1   346.3   294.9   141.6   108.6     -1.0 22.4 20.9 19.3 18.5              1         
+S400 ATCDFS_J033206.10-273235.6 C430                SWIRE3_J033206.08-273235.4 3 32 06.100 -27 32 35.66    9.1   170.1    93.2    67.7    77.1    171.5 99.0 24.0 22.8 21.6              1 AGN b   
+S401 ATCDFS_J033206.13-283942.0 C431                SWIRE3_J033206.09-283941.5 3 32 06.133 -28 39 42.01    0.8   162.1   117.1    68.9    31.0     -1.0 24.7 23.6 21.8 20.3              1         
+S402 ATCDFS_J033208.36-283357.6 C432                SWIRE3_J033208.37-283357.7 3 32 08.369 -28 33 57.60    0.7   109.0    87.7   116.4   242.8   1204.8 99.0 24.7 23.0 21.4              1         
+S403 ATCDFS_J033208.54-274647.7 C433                SWIRE3_J033208.53-274648.6 3 32 08.548 -27 46 47.75    0.2   310.3   284.1   177.2   480.3   1216.2 22.7 21.6 20.1 19.3      0.3103  1 AGN cs  Afonso et al classify as disk galaxy containing AGN. z(abc)
+S404 ATCDFS_J033208.67-274734.4 C434                SWIRE3_J033208.67-274734.6 3 32 08.670 -27 47 34.43    1.7   434.3   531.5   659.1   986.7   3506.8 19.3 19.5 19.0 18.3      0.5444  1 AGN c   XID63(-0.52) Classified by Afonso et al. and by Croom et al as QSO1. z(acd)
+S405 ATCDFS_J033209.75-274247.4 C435                SWIRE3_J033209.71-274248.5 3 32 09.753 -27 42 47.42    0.2   162.7    68.0    56.0    -1.0     -1.0 99.0 24.4 23.0 21.1      0.7330  2 AGN c   XID594(-1.0) Afonso et al. classify as Type 1 AGN in spheroidal galaxy. z(c)
+S406 ATCDFS_J033209.85-282705.1 C436                SWIRE3_J033209.83-282705.3 3 32 09.850 -28 27 05.10    0.7  1128.9   780.4   812.6  5327.4   5006.9 19.2 18.8 18.0 17.4 17.1         1         
+S407 ATCDFS_J033210.13-275936.8 C438                SWIRE3_J033210.14-275938.4 3 32 10.132 -27 59 36.83    0.9   143.4    74.5    71.7    -1.0     -1.0 99.0 23.8 21.9 20.4      0.6819  2         z(ab)
+S408 ATCDFS_J033210.56-284703.0 C439                (282649)                   3 32 10.567 -28 47 03.07    0.5     6.0    -1.0    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              3         
+S409 ATCDFS_J033210.70-272635.5 C437,C440,C446      SWIRE3_J033210.74-272635.5 3 32 10.708 -27 26 35.59   42.4  1961.0  1345.8   657.2   259.0    299.9                          0.1469  6 AGN ab  weird complex source with tails. z(g)
+S410 ATCDFS_J033210.79-274627.8 C441                SWIRE3_J033210.77-274627.9 3 32 10.793 -27 46 27.85    0.2    63.7    71.9    49.5    -1.0     -1.0 99.0 99.0 99.0 99.0      1.6100  1 AGN c   Old massive spheroidal (Cimatti et al. 2004). Classified as AGN by Afonso on basis of Xray. z(j)
+S411 ATCDFS_J033210.91-274415.2 C442                SWIRE3_J033210.93-274415.3 3 32 10.915 -27 44 15.21    2.7    40.5    58.4    62.2    92.1     -1.0 22.7 22.9 22.4 21.8      1.6150  1 AGN c   XID60(-0.49). z(c). Afonso et al  classify as QSO1. M test classifies C442 and C447 as a double, but this is unlikely because of good SWIRE ID for C442, and because no SWIRE source between them.
+S412 ATCDFS_J033211.00-274053.8 C443                SWIRE3_J033211.07-274055.7 3 32 11.002 -27 40 53.86    0.3    34.8    22.6    -1.0    50.0     -1.0 21.7 21.3 20.6 20.1      0.1831  3 AGN c   XID97(-0.40). z(a).  Afonso classify it as a compact optical object, maybe AGN, 3.5 arcsec from bright spiral
+S413 ATCDFS_J033211.03-284001.3 C444                SWIRE3_J033210.99-284001.6 3 32 11.033 -28 40 01.30    1.9   116.2    78.6    77.9    -1.0     -1.0 24.7 23.0 21.3 20.0      0.5552  1         z(b)
+S414 ATCDFS_J033211.64-273726.1 C445                SWIRE3_J033211.64-273726.1 3 32 11.645 -27 37 26.16    3.6   255.0   350.4   480.9   629.0   1834.8 18.8 19.1 18.8 18.4              1 AGN b   
+S415 ATCDFS_J033213.07-274351.0 C447                                           3 32 13.077 -27 43 51.07    1.2                                                                           9         IFRS?  Afonso report no IR, optical, or Xray counterpart. M test classifies C442 and C447 as a double, but this is unlikely - see comments to C442
+S416 ATCDFS_J033213.27-274241.3 C448                SWIRE3_J033213.24-274241.1 3 32 13.277 -27 42 41.30    0.1   143.2    96.2   104.3   109.2    771.5 21.5 21.7 20.7 19.9      0.6061  1 AGN c   Afonso identify as complex system in optical, xray suggests type 2 AGN. z(abc)
+S417 ATCDFS_J033214.17-274910.7 C449                (183275)                   3 32 14.179 -27 49 10.78    0.1     6.9    12.3    -1.0    -1.0     -1.0 99.0 24.5 23.8 99.0              1         Afonso identify it as faint extended object with no Xray detection
+S418 ATCDFS_J033214.89-275640.7 C450                SWIRE3_J033214.81-275640.5 3 32 14.895 -27 56 40.79    0.2   300.5   175.7    84.3    -1.0     -1.0 99.0 23.9 22.0 20.3      0.7374  2         z(ab)
+S419 ATCDFS_J033215.10-284610.1 C451                SWIRE3_J033215.07-284610.0 3 32 15.106 -28 46 10.14    4.9   158.8    81.1    69.3    -1.0     -1.0 24.6 23.5 21.7 20.3              1         
+S420 ATCDFS_J033216.23-283256.7 C452                SWIRE3_J033216.20-283257.1 3 32 16.238 -28 32 56.79    0.3   117.6    59.4    -1.0    46.4     -1.0 24.8 24.1 22.3 20.7              1         
+S421 ATCDFS_J033217.05-275846.5 C453                SWIRE3_J033217.03-275846.5 3 32 17.051 -27 58 46.57    2.6    12.3    13.2    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0              1         
+S422 ATCDFS_J033217.16-282407.6 C454                SWIRE3_J033217.16-282406.7 3 32 17.163 -28 24 07.60    0.5   127.5    72.8    86.8   108.9   1597.7 99.0 24.4 23.0 21.7 21.2         1         
+S423 ATCDFS_J033218.01-274718.5 C455                SWIRE3_J033218.00-274719.1 3 32 18.011 -27 47 18.57    0.4   478.5   235.5   126.1    84.4     -1.0 99.0 23.6 21.6 20.0      0.7328  1 SF  c   XID566(-1.0) Afonso identify as luminous SF galaxy, possibly merging. z(abcf)
+S424 ATCDFS_J033218.69-281321.2 C457                SWIRE3_J033218.74-281321.2 3 32 18.696 -28 13 21.28    0.2   105.6   111.5    99.3   317.8   1953.7 20.5 20.4 19.7 19.8 19.1         1         
+S425 ATCDFS_J033219.17-275407.0 C456, C458, C462    SWIRE3_J033219.25-275406.2 3 32 19.177 -27 54 07.04    8.8   260.8   183.2    87.4    69.0     -1.0 99.0 24.4 23.0 21.6              6 AGN a   XID249(-0.12) Radio triple (C456, C458, C462). Also discussed by Afonso et al.
+S426 ATCDFS_J033219.28-284025.6 C459                SWIRE3_J033219.29-284024.8 3 32 19.288 -28 40 25.67    0.5    35.9    38.2    39.9    -1.0     -1.0 99.0 99.0 99.0 23.0              1         
+S427 ATCDFS_J033219.46-275219.1 C460                SWIRE3_J033219.49-275217.7 3 32 19.465 -27 52 19.12    0.3    51.3    44.0    -1.0    -1.0     -1.0 99.0 99.0 24.0 22.8      1.0960  2         Afonso note that it is an irregular, possibly a merger,  fit a photometric z=1.049, and state companion has Z(sp)=1.096. z(f)
+S428 ATCDFS_J033219.53-284432.2 C461                SWIRE3_J033219.51-284431.8 3 32 19.533 -28 44 32.24    0.5    10.7    13.9    -1.0    -1.0     -1.0 99.0 25.0 24.5 23.9              1         
+S429 ATCDFS_J033221.07-273529.7 C463                SWIRE3_J033221.07-273530.2 3 32 21.074 -27 35 29.72    0.2   152.9   143.9   194.5   307.2   2939.9 99.0 24.4 22.8 21.6              1         
+S430 ATCDFS_J033221.22-274435.3 C464                SWIRE3_J033221.26-274435.8 3 32 21.223 -27 44 35.31    0.2   184.5    88.3    84.1    -1.0     -1.0 99.0 23.0 21.2 20.0      0.5231  1 SF  c   Afonso identify as merger with SF. z(a)
+S431 ATCDFS_J033221.32-284816.0 C465                SWIRE3_J033221.29-284817.7 3 32 21.323 -28 48 16.06    1.5    24.7    34.2    76.7   134.4   1550.8 23.8 24.1 23.6 22.8              2         
+S432 ATCDFS_J033222.59-280023.6 C466                SWIRE3_J033222.61-280023.9 3 32 22.590 -28 00 23.69    0.4   756.8   539.8   535.4  4150.5   3152.0 20.0 19.4 18.6 17.9              1         
+S433 ATCDFS_J033222.62-274426.5 C467                SWIRE3_J033222.59-274426.0 3 32 22.627 -27 44 26.55    0.1   100.7    67.5    62.6    -1.0    574.8 22.9 22.8 21.8 20.7      0.7372  1 SF  c   Afonso identify as spiral , probably SF. z(abcdf)
+S434 ATCDFS_J033223.70-273649.1 C468                SWIRE3_J033223.68-273648.7 3 32 23.701 -27 36 49.18    0.1   500.0   352.2   303.5  2289.8   5912.0 20.4 19.5 18.6 17.9              1         
+S435 ATCDFS_J033223.79-275844.9 C469                SWIRE3_J033223.81-275845.8 3 32 23.793 -27 58 44.96    0.2   278.5   231.2   260.3  1777.3   3444.3 20.7 20.2 19.3 18.5      0.1239  1         z(a)
+S436 ATCDFS_J033226.82-280453.1 C470                SWIRE3_J033226.82-280453.8 3 32 26.828 -28 04 53.19    0.2   161.7    87.0    -1.0   126.5     -1.0 99.0 99.0 99.0 99.0 99.0         1         
+S437 ATCDFS_J033226.97-274106.7 C471                SWIRE3_J033227.00-274105.3 3 32 26.975 -27 41 06.71   16.6   376.2   439.2   545.5   656.9   1072.7 19.1 19.3 19.2 18.7      0.7386  2 AGN bc  XID42(-0.54) Afonso identify as Type 1 QSO. z(ac)
+S438 ATCDFS_J033228.08-285517.5 C472                SWIRE3_J033228.12-285517.4 3 32 28.089 -28 55 17.59    0.6    14.3    19.2    34.1    48.4    486.8 99.0 99.0 99.0 99.0 99.0         1 AGN b   
+S439 ATCDFS_J033228.76-274619.7 C474                SWIRE3_J033228.72-274620.5 3 32 28.763 -27 46 19.75    0.3    58.5    30.9    -1.0    -1.0     -1.0 99.0 24.2 22.8 21.4      0.7370  2         XID224(-1.0) z(cf)
+S440 ATCDFS_J033228.79-274356.1 C473,C476           SWIRE3_J033228.79-274356.1 3 32 28.79  -27 43 56.1     3.8   274.3   211.3    63.2    -1.0     -1.0                          0.2135 -1 AGN a   XID103(-0.69) Double RL source (C473, C476). See discussion in Section 3.6.3 and Fig. 3c.z(h)
+S441 ATCDFS_J033229.52-273028.8 C475                SWIRE3_J033229.12-273035.4 3 32 29.528 -27 30 28.84    1.4   828.6   561.4   269.8   220.5     -1.0                                  4 AGN a    strong spitzer ID at one end of core-jet src. 
+S442 ATCDFS_J033229.84-274423.8 C477                SWIRE3_J033229.89-274424.6 3 32 29.847 -27 44 23.88    0.9  1152.0   814.9  1164.8  8336.7   7307.5 19.4 19.0 18.4 17.8      0.0768  2 SF  cx  XID95(-0.7). z(ac) See discussion in Section 3.6.3 and Fig. 3c.
+S443 ATCDFS_J033229.97-274405.4 C478                SWIRE3_J033230.00-274405.3 3 32 29.974 -27 44 05.48    0.4   801.2   524.4   657.5  4342.2   4487.4 19.3 18.9 18.2 17.6      0.0760  1 SF  cx  XID116(-0.56). z(c).See discussion in Section 3.6.3 and Fig. 3c.
+S444 ATCDFS_J033230.52-275911.6 C479                SWIRE3_J033230.56-275911.5 3 32 30.529 -27 59 11.68    0.3   563.9   418.9   322.9  2639.6   4295.2 20.8 20.2 19.4 18.7      0.1248  1         z(a)
+S445 ATCDFS_J033231.44-281421.0 C480                SWIRE3_J033231.40-281420.3 3 32 31.447 -28 14 21.01    0.2   106.2    78.0    72.9    56.2    178.5 99.0 21.9 20.3 19.6 19.2 0.4459  1 AGN b   z(b)
+S446 ATCDFS_J033231.54-280433.5 C481                                           3 32 31.540 -28 04 33.53    0.3                                                                           9         IFRS
+S447 ATCDFS_J033232.04-280310.2 C482                SWIRE3_J033232.00-280310.0 3 32 32.041 -28 03 10.29   23.9    91.8   110.8   145.6   222.3    480.5 19.2 19.9 19.7 19.3      1.9552  1 AGN b   z(a)
+S448 ATCDFS_J033232.85-284015.1 C483                                           3 32 32.850 -28 40 15.15    1.0                                                                           7         next to bright star, but uncatalogued counterpart visible in irac 1 & 2
+S449 ATCDFS_J033233.36-283743.6 C484                SWIRE3_J033233.51-283745.5 3 32 33.361 -28 37 43.66   24.4   312.5   252.9   111.4    62.7     -1.0 22.1 20.4 18.8 17.9 17.5         3         extended with jet?
+S450 ATCDFS_J033233.48-275227.2 C485                (180824)                   3 32 33.480 -27 52 27.24    0.1     5.5    -1.0    -1.0    -1.0    293.8 99.0 99.0 99.0 99.0              2         Afonso don't detect it at optical, but it is weakly present in Xrays.
+S451 ATCDFS_J033234.06-280908.9 C486,C487           SWIRE3_J033234.06-280909.6 3 32 34.064 -28 09 08.91    0.6    15.0    19.5    37.5    54.9    320.9 99.0 99.0 99.0 99.0 99.0         1 AGN b   M-test indicates C486/C487 are a  double, but C486 has good SWIRE ID, and there is no Spitzer source between them.C487 has no SWIRE ID, so may be a jet from C486.
+S452 ATCDFS_J033237.04-272521.3 C488                (202322)                   3 32 37.042 -27 25 21.37    0.2     8.3    11.6    -1.0    -1.0     -1.0                                  1         
+S453 ATCDFS_J033237.73-275000.3 C489                SWIRE3_J033237.72-275000.7 3 32 37.737 -27 50 00.33    0.1    31.6    36.5    37.6    -1.0    169.8 99.0           99.0              1         Afonso et al. classify it as a complex optical system, with no xrays. Possible merger?
+S454 ATCDFS_J033238.08-281359.8 C491                SWIRE3_J033238.09-281358.9 3 32 38.082 -28 13 59.83    0.4    42.2    41.4    47.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0         1         
+S455 ATCDFS_J033238.81-283613.6 C490,C492,C496      SWIRE3_J033238.83-283615.4 3 32 38.811 -28 36 13.65    3.6    28.7    28.5    -1.0    -1.0     -1.0 99.0 99.0 99.0 22.7              6 AGN a   Radio triple
+S456 ATCDFS_J033238.82-282749.1 C493                SWIRE3_J033238.79-282749.9 3 32 38.828 -28 27 49.17    1.3   127.2    62.5    34.7    -1.0     -1.0 22.5 22.3 21.1 20.7 19.6         1         
+S457 ATCDFS_J033238.95-275700.6 C494                SWIRE3_J033238.92-275700.8 3 32 38.954 -27 57 00.66    0.1   277.4   315.3   365.3   954.2   3560.6 21.5 21.5 20.4 19.0      0.2970  1 AGN x   XID29(+0.39).z(ab)
+S458 ATCDFS_J033239.57-280312.5 C495                SWIRE3_J033239.71-280311.4 3 32 39.570 -28 03 12.57    0.2    57.4    62.0    42.7    -1.0    352.8 99.0           99.0              3         
+S459 ATCDFS_J033241.60-280128.0 C497                SWIRE3_J033241.60-280127.9 3 32 41.604 -28 01 28.06    0.4    38.3    26.2    -1.0    40.8    419.8                                  1         
+S460 ATCDFS_J033241.69-284408.4 C498                SWIRE3_J033241.69-284409.9 3 32 41.696 -28 44 08.48    0.3    27.0    30.3    49.7    84.4   1051.2 99.0 24.2 23.3 23.0 99.0         2         
+S461 ATCDFS_J033241.80-280552.5 C499                SWIRE3_J033241.79-280551.2 3 32 41.808 -28 05 52.52    0.3   113.8   120.2    94.0   436.8    826.8 99.0 22.4 21.3 20.4 19.9 0.2971  2         z(ab)
+S462 ATCDFS_J033242.83-273817.6 C500,C501           SWIRE3_J033242.82-273817.6 3 32 42.83  -27 38 17.66   72.3    45.5    46.7    -1.0    65.4     -1.0 99.0 99.0 99.0 20.5             -1 AGN a   Radio double
+S463 ATCDFS_J033244.16-275142.5 C502                SWIRE3_J033244.26-275141.3 3 32 44.165 -27 51 42.58    0.5   159.6   192.1   236.4   717.3   7102.8 99.0 99.0 99.0 19.7      0.2781  2         XID98(-1.0). z(ac). Source is at the mid-point of a pair of galaxies identified by Afonso, one possibly a Sy2.
+S464 ATCDFS_J033244.44-285126.1 C503                SWIRE3_J033244.48-285124.5 3 32 44.448 -28 51 26.18    0.4   222.4   157.3    84.7   114.8     -1.0 21.6 20.9 19.6 18.8              2         
+S465 ATCDFS_J033245.36-280449.7 C504                SWIRE3_J033245.30-280450.3 3 32 45.363 -28 04 49.73    2.9    55.7    56.2    -1.0    36.8    160.1           99.0 99.0 99.0         1 AGN b   
+S466 ATCDFS_J033245.75-285534.7 C505                SWIRE3_J033245.65-285535.5 3 32 45.750 -28 55 34.71    0.6   123.6    49.0    -1.0    -1.0     -1.0 99.0 99.0 23.3 21.7 99.0         2         
+S467 ATCDFS_J033245.85-283115.2 C506                SWIRE3_J033245.81-283114.8 3 32 45.857 -28 31 15.29    0.7   436.7   588.4   823.1  1421.3  10388.9 20.5 19.9 18.6 18.0 17.6         1         
+S468 ATCDFS_J033245.91-280850.7 C507                SWIRE3_J033245.91-280851.5 3 32 45.915 -28 08 50.70    0.2    20.1    24.1    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0         1         
+S469 ATCDFS_J033245.95-275745.2 C508                SWIRE3_J033245.97-275745.7 3 32 45.956 -27 57 45.29    0.2   832.2   598.9   583.3  3508.0   2422.2                          0.1039  1         z(a)
+S470 ATCDFS_J033246.02-282232.4 C509                SWIRE3_J033246.01-282232.3 3 32 46.021 -28 22 32.46    0.6   190.0   224.0   329.5   469.2   2526.9 20.1 20.3 19.9 19.7 19.1         1         
+S471 ATCDFS_J033248.86-283049.9 C510                SWIRE3_J033248.86-283052.3 3 32 48.867 -28 30 49.98    0.3   328.6   248.0   148.8  1196.3   1626.8 18.4 18.1 17.6 17.2 17.0         3         
+S472 ATCDFS_J033249.19-274050.7 C511                SWIRE3_J033249.19-274050.7 3 32 49.195 -27 40 50.71    4.7   133.6   215.7   352.0   595.5   2287.6                          0.5463  1 AGN bx  XID268(+1.0). z(h)
+S473 ATCDFS_J033249.33-275845.1 C512                SWIRE3_J033249.32-275845.1 3 32 49.334 -27 58 45.10    0.2    48.6    59.7    65.3    84.3    353.1                                  1         
+S474 ATCDFS_J033249.43-274235.3 C513                SWIRE3_J033249.41-274235.4 3 32 49.430 -27 42 35.35    3.2    32.1    28.9    -1.0    -1.0     -1.0                          0.9807  1         z(h)
+S475 ATCDFS_J033249.75-281820.5 C514                SWIRE3_J033249.65-281815.6 3 32 49.759 -28 18 20.55    0.7   141.7   103.7    59.1    54.6     -1.0                                  4         ID is uncertain. M-test classified C514 and C517 as a double, but there is no IRAC source between them. IRAC ID for C514 is offset, but  within contours. 
+S476 ATCDFS_J033249.80-285325.7 C515                SWIRE3_J033249.68-285325.8 3 32 49.808 -28 53 25.72    4.7   105.5    58.6    37.8    -1.0     -1.0 99.0 24.4 22.6 20.9 20.0         2         
+S477 ATCDFS_J033249.96-273435.9 C516                SWIRE3_J033250.00-273437.9 3 32 49.965 -27 34 35.90    0.5   172.7   130.9   116.0    -1.0     -1.0                                  3         a line of 3 (interacting?) galaxies falls within the extended radio source. Centre one chosen for ID.
+S478 ATCDFS_J033250.17-281807.7 C517                (161794)                   3 32 50.171 -28 18 07.78    0.6     9.1     5.4    -1.0    -1.0     -1.0 99.0 99.0 24.0 21.8 20.9         2         ID is uncertain. See comment on C514
+S479 ATCDFS_J033252.48-275942.1 C518                (175603)                   3 32 52.480 -27 59 42.18    0.2    -1.0    -1.0    -1.0    -1.0    235.7                                  3         
+S480 ATCDFS_J033252.99-281459.2 C519                (164209)                   3 32 52.995 -28 14 59.21    0.2     2.3    -1.0    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0         1         
+S481 ATCDFS_J033253.34-280200.1 C520                SWIRE3_J033253.30-280159.0 3 32 53.341 -28 02 00.15    0.9   148.1   118.9    67.5    -1.0     -1.0                                  2         
+S482 ATCDFS_J033256.47-275848.4 C521                SWIRE3_J033256.43-275848.2 3 32 56.472 -27 58 48.46    1.2  1317.3   910.9   559.3   277.1    293.1                          0.1474  1 AGN b   z(a)
+S483 ATCDFS_J033256.62-283043.9 C522                SWIRE3_J033256.63-283045.3 3 32 56.624 -28 30 43.94    0.4    83.6    60.8    53.8    -1.0     -1.0 99.0 25.2 23.5 21.9 20.9         2         
+S484 ATCDFS_J033257.17-280210.0 C523,C524           SWIRE3_J033257.17-280210.0 3 32 57.17  -28 02 10.03   23.1   359.0   224.5   118.8    58.8     -1.0                                 -1 AGN a   strong irac galaxy at median position of RL double. Undetected by M-test
+S485 ATCDFS_J033259.22-274325.6 C525                SWIRE3_J033259.19-274325.3 3 32 59.224 -27 43 25.64    0.2    52.4    56.3    -1.0    -1.0    313.2                                  1         
+S486 ATCDFS_J033300.91-272727.7 C526                (200346)                   3 33 00.919 -27 27 27.79    0.4     3.8    -1.0    -1.0    -1.0     -1.0                                  1         
+S487 ATCDFS_J033301.19-284720.7 C527                                           3 33 01.195 -28 47 20.77    1.1                                                                           9         IFRS. 
+S488 ATCDFS_J033302.69-275642.4 C528                (177798)                   3 33 02.692 -27 56 42.40    0.2    -1.0    -1.0    -1.0    34.1     -1.0                                  1         
+S489 ATCDFS_J033303.29-275326.4 C529                (180095)                   3 33 03.293 -27 53 26.47    0.1     3.6    -1.0    -1.0    -1.0     -1.0                                  2         
+S490 ATCDFS_J033303.74-273610.9 C530                SWIRE3_J033303.72-273611.1 3 33 03.742 -27 36 10.94    0.3   157.6   155.6   218.6   226.7    700.7                                  1         
+S491 ATCDFS_J033304.38-273804.3 C531                SWIRE3_J033304.46-273802.1 3 33 04.381 -27 38 04.31    0.1    62.5    52.9    44.8    74.9    646.2                                  3         
+S492 ATCDFS_J033305.15-274028.9 C532                SWIRE3_J033305.14-274027.9 3 33 05.155 -27 40 28.90    0.1    87.2    88.4    83.8   392.4   2173.4                          0.3100  1         z(a)
+S493 ATCDFS_J033305.43-281848.6 C533                SWIRE3_J033305.43-281849.1 3 33 05.437 -28 18 48.69    0.3    18.0    23.7    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0         1         
+S494 ATCDFS_J033305.66-273327.8 C534                SWIRE3_J033305.64-273328.4 3 33 05.664 -27 33 27.84    0.2   116.0   206.5   344.8   383.6    782.0                                  1         
+S495 ATCDFS_J033305.74-272405.0 C535                SWIRE3_J033305.69-272407.2 3 33 05.741 -27 24 05.05    0.3   130.1    57.8    43.9    -1.0     -1.0                                  3         
+S496 ATCDFS_J033306.16-273041.1 C536                SWIRE3_J033306.15-273040.2 3 33 06.164 -27 30 41.15    0.3    22.0    18.9    -1.0    -1.0     -1.0                                  1         
+S497 ATCDFS_J033307.24-274431.2 C537                SWIRE3_J033307.30-274432.9 3 33 07.244 -27 44 31.26    0.3   571.3   458.6   204.3  1022.2   1146.1                          0.2173  2         XID650(-1.0). z(a)
+S498 ATCDFS_J033307.35-281410.9 C538                SWIRE3_J033307.41-281410.6 3 33 07.356 -28 14 10.93    0.3   567.6   382.9   594.9  4076.7   3623.0 18.9 18.6 18.0 17.5 17.1         2         
+S499 ATCDFS_J033307.48-271939.2 C539                (206773)                   3 33 07.481 -27 19 39.28    2.0     6.9     8.2    -1.0    -1.0     -1.0                                  2         
+S500 ATCDFS_J033308.16-275033.2 C540                SWIRE3_J033308.15-275033.5 3 33 08.168 -27 50 33.26    1.0   130.0    71.5    53.4    68.4    612.0                                  1 AGN b   XID502(+0.26). 
+S501 ATCDFS_J033309.13-275846.7 C541                SWIRE3_J033309.10-275846.3 3 33 09.139 -27 58 46.70    0.1    71.6    50.0    44.9    53.5    441.3                          0.6685  1         z(a)
+S502 ATCDFS_J033309.73-274802.2 C542                SWIRE3_J033309.72-274801.9 3 33 09.731 -27 48 02.27    0.3   275.8   224.3   208.3  1993.5   2668.4                          0.1812  1         z(a)
+S503 ATCDFS_J033310.19-274842.0 C543                SWIRE3_J033310.18-274842.4 3 33 10.191 -27 48 42.06   19.3    48.1    45.3    43.2    40.2     -1.0                                  1         
+S504 ATCDFS_J033310.31-273306.2 C544                SWIRE3_J033310.28-273306.5 3 33 10.314 -27 33 06.22    0.1   174.8   168.2   123.6   712.1   1234.4                          0.2530  1         z(a)
+S505 ATCDFS_J033310.87-281854.7 C545                SWIRE3_J033310.93-281853.3 3 33 10.875 -28 18 54.79    1.3    24.5    20.4    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0         2         
+S506 ATCDFS_J033311.48-280319.0 C546                                           3 33 11.486 -28 03 19.09    0.2                                                                           9         IFRS?
+S507 ATCDFS_J033311.79-274138.2 C547                SWIRE3_J033311.77-274138.8 3 33 11.796 -27 41 38.25    0.2    40.7    36.9    -1.0    -1.0    212.4                                  1 AGN b   
+S508 ATCDFS_J033312.56-272729.6 C548                SWIRE3_J033312.51-272731.4 3 33 12.564 -27 27 29.68    0.2    63.5    52.3    45.7    43.7    407.5                                  2         
+S509 ATCDFS_J033313.12-274930.2 C549                SWIRE3_J033313.10-274930.4 3 33 13.123 -27 49 30.25    0.3    36.1    45.2    38.1    -1.0     -1.0                                  1         
+S510 ATCDFS_J033313.18-281935.9 C550                SWIRE3_J033313.12-281936.4 3 33 13.185 -28 19 35.93    1.1    62.2    38.6    29.9    -1.0     -1.0 99.0 25.0 23.0 21.4 20.7         2         
+S511 ATCDFS_J033313.73-284304.2 C551                SWIRE3_J033313.64-284306.6 3 33 13.737 -28 43 04.21    0.7   764.9   582.9   232.5  1142.0   2040.6 19.3 18.8 17.9 17.2 17.0         3         
+S512 ATCDFS_J033314.85-281934.3 C552                SWIRE3_J033314.79-281933.9 3 33 14.857 -28 19 34.34    9.4   145.1   104.8    62.1    42.5     -1.0 99.0 99.0 23.5 21.9 20.8         1         
+S513 ATCDFS_J033314.86-280432.2 C553                (171991)                   3 33 14.861 -28 04 32.20    0.5     8.3    13.1    37.8    -1.0     -1.0           99.0 99.0 99.0         1         
+S514 ATCDFS_J033314.98-275151.9 C554                SWIRE3_J033315.01-275150.8 3 33 14.982 -27 51 51.95    0.5   226.7   164.5    78.4    53.7     -1.0                                  2         
+S515 ATCDFS_J033316.09-272745.9 C555                SWIRE3_J033316.10-272746.1 3 33 16.097 -27 27 45.99    1.0   175.2    81.8    58.2    42.1     -1.0                                  1         
+S516 ATCDFS_J033316.32-285008.0 C556                SWIRE3_J033316.28-285008.0 3 33 16.326 -28 50 08.05    0.9    26.1    34.2    -1.0    -1.0    256.8 99.0 99.0 99.0 99.0 99.0         1 AGN b   
+S517 ATCDFS_J033316.34-274725.0 C557                SWIRE3_J033316.31-274725.0 3 33 16.340 -27 47 25.08    2.4    77.4    56.7    -1.0    -1.0     -1.0                                  1         
+S518 ATCDFS_J033316.45-275038.9 C558                SWIRE3_J033316.52-275039.7 3 33 16.456 -27 50 38.90    0.4   870.9   580.3   700.9  3826.5   3254.1                          0.0875  2         z(a)
+S519 ATCDFS_J033316.72-275630.4 C559                SWIRE3_J033316.70-275630.4 3 33 16.725 -27 56 30.40    0.9   140.4    81.3    57.8    -1.0    339.7                          0.6850  1 AGN b   z(a)
+S520 ATCDFS_J033316.75-280016.0 C560                (175200)                   3 33 16.754 -28 00 16.02    3.7     7.4    11.4    -1.0    -1.0     -1.0                                  1         
+S521 ATCDFS_J033316.95-274121.8 C561                SWIRE3_J033316.93-274121.9 3 33 16.954 -27 41 21.84    0.3   519.9   392.4   282.3  2356.1   2681.6                          0.1483  1         z(a)
+S522 ATCDFS_J033317.43-274947.8 C562                SWIRE3_J033317.40-274949.1 3 33 17.434 -27 49 47.89    0.3    22.3    30.0    -1.0    42.6    500.9                                  2         M-test classifies C562/C563 as a double, but both have good SWIRE IDs, and no SWIRE ID between them.
+S523 ATCDFS_J033318.66-274940.0 C563                SWIRE3_J033318.68-274940.2 3 33 18.668 -27 49 40.09    0.2   111.8    77.1    62.1    44.2     -1.0                                  1         see comment for C562
+S524 ATCDFS_J033318.88-284507.8 C564                SWIRE3_J033318.85-284508.3 3 33 18.885 -28 45 07.86    4.0    11.5    10.9    -1.0    -1.0     -1.0 99.0 25.0 99.0 99.0 99.0         1         
+S525 ATCDFS_J033319.03-281432.7 C565                SWIRE3_J033319.00-281432.8 3 33 19.037 -28 14 32.70    0.3  1187.1   829.4   765.5  4876.6   3320.5 20.3 18.2 17.2 16.5 16.1         1         
+S526 ATCDFS_J033319.04-273529.4 C566                SWIRE3_J033319.03-273531.4 3 33 19.044 -27 35 29.40    0.2   369.1   282.6   209.3  1783.2   2177.2                          0.1478  3         z(a)
+S527 ATCDFS_J033320.53-272713.2 C567,C568           (200516)                   3 33 20.53  -27 27 13.28    1.1    -1.0   166.0    49.1    -1.0     -1.0                          0.0000 -1 AGN a   Radio double close to SWIRE tile edge so no SWIRE id at 3.6um, but bright 3.6um src
+S528 ATCDFS_J033321.32-274138.9 C569                SWIRE3_J033321.28-274138.5 3 33 21.328 -27 41 38.91    0.3    49.1    35.8    -1.0    -1.0     -1.0                                  1         
+S529 ATCDFS_J033321.62-281329.9 C570                SWIRE3_J033321.67-281330.3 3 33 21.623 -28 13 29.92    0.8    44.8    29.4    -1.0    -1.0     -1.0 99.0 25.0 99.0 22.2 21.3         1         M-test classifies it as connected to C573,C574, but has good SWIRE ID, so probably separate
+S530 ATCDFS_J033323.71-281147.0 C571                SWIRE3_J033323.69-281150.8 3 33 23.718 -28 11 47.09    2.2  1282.2   808.1   536.9   310.5     -1.0 16.6 15.3 16.5 14.2 14.0         4         ID probably ok because extended source
+S531 ATCDFS_J033323.77-272406.9 C572                SWIRE3_J033323.78-272407.0 3 33 23.777 -27 24 06.91   27.1    47.7    59.0    47.4    38.2     -1.0                                  1         
+S532 ATCDFS_J033325.04-281320.9 C573,C574           SWIRE3_J033325.15-281319.4 3 33 25.041 -28 13 20.97    1.7    43.5    29.6    -1.0    -1.0    304.2 99.0 23.8 22.9 21.5 21.1         3 AGN b   M-test classifies it as double with C573, but C574 has good ID so C573 is probably a jet.
+S533 ATCDFS_J033325.82-274342.4 C575                SWIRE3_J033325.83-274342.8 3 33 25.824 -27 43 42.46    0.2   173.9    97.5    71.0    49.6     -1.0                          0.5371  1         z(a)
+S534 ATCDFS_J033326.74-283410.4 C576                SWIRE3_J033326.68-283409.9 3 33 26.747 -28 34 10.44    0.3   593.3   545.7   663.1  1955.7   3952.9 20.1 19.0 18.0 17.3 16.9         1         
+S535 ATCDFS_J033327.55-275725.7 C577                SWIRE3_J033327.50-275725.8 3 33 27.557 -27 57 25.76    0.6    25.3    24.9    -1.0    -1.0     -1.0                                  1         
+S536 ATCDFS_J033327.95-273025.4 C578                SWIRE3_J033328.01-273027.2 3 33 27.959 -27 30 25.46    0.2   115.0    89.7    83.8   877.2   1203.5                          0.1441  3         z(a)
+S537 ATCDFS_J033329.05-284334.0 C579                SWIRE3_J033329.09-284333.9 3 33 29.053 -28 43 34.09    0.4    79.1    55.9    43.4    -1.0     -1.0 99.0 99.0 23.8 22.3 99.0         1         
+S538 ATCDFS_J033330.20-283511.1 C580                                           3 33 30.200 -28 35 11.19    1.4                                                                           9         IFRS. 
+S539 ATCDFS_J033330.54-285428.2 C581                SWIRE3_J033330.51-285427.8 3 33 30.542 -28 54 28.22    9.1    14.2    16.3    -1.0    -1.0     -1.0 99.0 24.6 24.1 99.0 99.0         1         
+S540 ATCDFS_J033331.69-280623.7 C582                SWIRE3_J033331.69-280624.0 3 33 31.697 -28 06 23.78    0.4    87.4    82.3    93.1   294.8   2346.2 99.0 23.5 22.4 21.2 20.5 1.0230  1         z(ab)
+S541 ATCDFS_J033332.17-272917.2 C583                SWIRE3_J033332.16-272917.5 3 33 32.178 -27 29 17.20    0.3   462.5   435.2   492.7  2935.6   3808.2                                  1         
+S542 ATCDFS_J033332.35-282237.9 C584                SWIRE3_J033332.32-282238.1 3 33 32.353 -28 22 37.99    1.7   120.9    62.6    -1.0    -1.0     -1.0 99.0 99.0 99.0 21.8 20.8         1         
+S543 ATCDFS_J033332.56-273538.7 C585                SWIRE3_J033332.56-273538.6 3 33 32.567 -27 35 38.74    0.2   330.6   248.4   134.7    99.6    263.1                          0.5230  1         z(a)
+S544 ATCDFS_J033333.03-274600.0 C586                SWIRE3_J033333.11-274602.1 3 33 33.030 -27 46 00.05    0.1    65.9    41.3    45.6    -1.0     -1.0                                  3         
+S545 ATCDFS_J033333.41-275333.1 C587                                           3 33 33.413 -27 53 33.11    0.9                                                                           7         bright irac src in bands 1&2,  but close to bright star. We have a measured z of 0.0002, but this is probably the star.
+S546 ATCDFS_J033333.62-281403.9 C588                SWIRE3_J033333.63-281404.0 3 33 33.628 -28 14 03.99    2.3    60.7    77.1    92.7   133.3    254.1 21.1 22.1 21.3 21.0 20.8         1 AGN b   
+S547 ATCDFS_J033334.55-274750.3 C589                SWIRE3_J033334.56-274751.4 3 33 34.554 -27 47 50.38    0.5    71.7    51.3    -1.0    69.8   1166.0                                  2         
+S548 ATCDFS_J033335.26-274549.1 C590                SWIRE3_J033335.21-274550.1 3 33 35.260 -27 45 49.18    0.2   606.8   529.0   165.9  1739.9   2049.1                          0.2199  2         z(a)
+S549 ATCDFS_J033335.68-281353.4 C591                SWIRE3_J033335.66-281353.1 3 33 35.685 -28 13 53.44    0.3    21.8    23.8    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0         1         
+S550 ATCDFS_J033336.45-274354.3 C592                SWIRE3_J033336.41-274355.4 3 33 36.457 -27 43 54.35    0.2    54.1    76.2    97.8   106.1    479.7                                  2         
+S551 ATCDFS_J033336.82-273640.8 C593                (193071)                   3 33 36.820 -27 36 40.88    0.2     6.0    -1.0    -1.0    -1.0    121.0                                  1 AGN b   Lyman-break galaxy at z=3.65? See Hildebrandt et al (2005).
+S552 ATCDFS_J033337.12-272908.2 C594                SWIRE3_J033337.14-272906.6 3 33 37.128 -27 29 08.22    0.3   499.2   385.0   267.6  2600.9   3292.8                                  2         
+S553 ATCDFS_J033337.91-271737.4 C595                SWIRE3_J033337.92-271737.4 3 33 37.919 -27 17 37.44    1.0   115.2    76.8    66.6    -1.0     -1.0                                  1         
+S554 ATCDFS_J033338.00-275931.4 C596                SWIRE3_J033337.99-275932.5 3 33 38.000 -27 59 31.41    0.2    40.9    29.3    -1.0    39.0    433.8                                  2         
+S555 ATCDFS_J033338.00-283046.7 C597                SWIRE3_J033337.94-283046.7 3 33 38.002 -28 30 46.76    2.5    29.2    20.1    -1.0    -1.0     -1.0 99.0 99.0 99.0 23.0 22.2         1         
+S556 ATCDFS_J033338.01-284706.4 C598                SWIRE3_J033337.97-284706.9 3 33 38.014 -28 47 06.41    0.4    70.9    40.8    -1.0    -1.0     -1.0 99.0 24.0 22.3 20.8 19.9         1         
+S557 ATCDFS_J033338.33-280030.9 C599                SWIRE3_J033338.32-280030.6 3 33 38.337 -28 00 30.91    1.0   195.2    96.9    91.1    -1.0     -1.0                          0.6847  1         z(a)
+S558 ATCDFS_J033338.89-281804.6 C600                SWIRE3_J033338.86-281804.7 3 33 38.895 -28 18 04.66    1.2    19.2    21.9    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0         1         
+S559 ATCDFS_J033339.13-281704.9 C601                SWIRE3_J033339.11-281705.9 3 33 39.137 -28 17 04.98    0.3    58.2    43.0    -1.0    -1.0     -1.0 99.0 24.6 23.4 21.9 21.1         1         
+S560 ATCDFS_J033340.52-280834.8 C602                SWIRE3_J033340.55-280833.6 3 33 40.523 -28 08 34.86    0.2   180.3    82.2    57.8    -1.0     -1.0 99.0 23.4 21.7 20.2 19.7 0.6635  2         z(b)
+S561 ATCDFS_J033341.02-284357.6 C603                                           3 33 41.025 -28 43 57.66    0.3                                                                           7         faint source in irac bands 2,3,4 and mips band 1?
+S562 ATCDFS_J033341.14-284015.1 C604                SWIRE3_J033341.06-284015.2 3 33 41.145 -28 40 15.17   10.0    78.7    60.3    42.3    45.8     -1.0 99.0 99.0 23.1 21.5 20.7         2         
+S563 ATCDFS_J033341.30-273808.7 C605                SWIRE3_J033341.31-273808.9 3 33 41.308 -27 38 08.78    0.6   841.3   628.1   532.2  2476.7   8676.4                          0.1015  1         z(a)
+S564 ATCDFS_J033341.73-280737.4 C606                SWIRE3_J033341.75-280737.0 3 33 41.736 -28 07 37.45    0.6   504.1   544.8   266.8  1621.1   3464.6 19.3 19.0 18.0 17.3 17.0         1         
+S565 ATCDFS_J033342.36-274736.8 C607                SWIRE3_J033342.33-274736.9 3 33 42.368 -27 47 36.88    0.4     9.1    12.5    -1.0    -1.0     -1.0                                  1         
+S566 ATCDFS_J033343.63-282214.5 C608                SWIRE3_J033343.61-282214.3 3 33 43.638 -28 22 14.56    0.4   272.3   154.8   177.9   130.2    867.2 22.2 21.7 20.4 19.1 18.9 0.7471  1 SF  s   z(b). Post-starburst
+S567 ATCDFS_J033344.29-283324.7 C609                SWIRE3_J033344.31-283325.2 3 33 44.292 -28 33 24.72    0.2   126.5   119.8   133.8   372.3     -1.0 99.0 21.9 20.5 19.7 19.2         1         
+S568 ATCDFS_J033347.57-285536.4 C610                SWIRE3_J033347.56-285536.3 3 33 47.578 -28 55 36.43   82.8  1338.3  1567.0  1777.8  2428.0   4759.0 20.1 20.1 19.4 18.7 18.1         1 AGN b   
+S569 ATCDFS_J033348.72-280231.9 C611                SWIRE3_J033348.74-280232.0 3 33 48.726 -28 02 31.99    0.6    84.5    44.3    56.4    85.3    377.4                                  1 AGN b   
+S570 ATCDFS_J033349.00-281945.3 C612                SWIRE3_J033348.98-281944.9 3 33 49.007 -28 19 45.32    0.8    10.1    14.6    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0         1         
+S571 ATCDFS_J033349.05-273837.7 C613                (191592)                   3 33 49.057 -27 38 37.71    7.4    -1.0    48.5    61.7    63.1    202.1                                  1 AGN b   
+S572 ATCDFS_J033352.71-283944.2 C614                (144841)                   3 33 52.710 -28 39 44.20    0.6    -1.0    37.9    -1.0    -1.0    757.1 99.0 24.9 23.7 22.3 21.6         1         
+S573 ATCDFS_J033352.79-274344.3 C615                SWIRE3_J033352.81-274346.7 3 33 52.799 -27 43 44.33    0.2   136.0   138.3   106.6   938.1   1701.5                          0.2258  3         z(a)
+S574 ATCDFS_J033353.27-280507.3 C617                (171587)                   3 33 53.279 -28 05 07.31   11.9    10.9     8.1    -1.0    -1.0     -1.0      99.0 99.0 99.0 99.0         1         
+S575 ATCDFS_J033353.91-275548.5 C618                SWIRE3_J033353.93-275548.7 3 33 53.910 -27 55 48.54    0.3    85.2   106.0   102.4   120.2   1199.0                                  1         
+S576 ATCDFS_J033355.38-273708.4 C616,C619,C622      SWIRE3_J033355.42-273708.9 3 33 55.385 -27 37 08.46    3.4   455.2   347.4   155.2    95.0     -1.0                                  6 AGN a   Radio triple
+S577 ATCDFS_J033356.58-272444.5 C620,C621           SWIRE3_J033356.58-272444.4 3 33 56.58  -27 24 44.50   20.0   210.3   120.1   104.5    57.6     -1.0                                 -1 AGN a   Radio double
+S578 ATCDFS_J033358.28-274848.9 C623                SWIRE3_J033358.29-274848.8 3 33 58.283 -27 48 48.97    1.1    68.1    85.3    89.7   113.4    210.7                                  1 AGN b   
+S579 ATCDFS_J033358.98-283502.4 C624                SWIRE3_J033358.95-283504.0 3 33 58.989 -28 35 02.44    1.3    20.1    14.9    -1.0    -1.0    240.9 99.0 23.7 22.9 21.7 21.4         2 AGN b   
+S580 ATCDFS_J033359.00-271301.7 C625                SWIRE3_J033358.96-271301.3 3 33 59.002 -27 13 01.78    2.9    22.7    26.1    -1.0    -1.0     -1.0                                  1         
+S581 ATCDFS_J033400.12-273739.6 C626                SWIRE3_J033359.93-273739.2 3 34 00.127 -27 37 39.63    0.3   159.7   115.2    82.3    71.7    476.2                                  3         
+S582 ATCDFS_J033400.18-281010.0 C627                SWIRE3_J033400.19-281010.8 3 34 00.180 -28 10 10.09    0.8   157.1   144.9   175.0   445.1   2302.1 99.0 22.2 20.8 19.8 19.4 0.2811  1         z(b)
+S583 ATCDFS_J033401.61-272522.9 C629                SWIRE3_J033401.63-272524.5 3 34 01.619 -27 25 22.96    0.6    10.7    12.1    47.5    -1.0    191.2                                  2 AGN b   
+S584 ATCDFS_J033401.95-271432.3 C630                SWIRE3_J033401.98-271433.9 3 34 01.957 -27 14 32.38    1.4    69.4    47.8    -1.0    -1.0     -1.0                                  2         
+S585 ATCDFS_J033402.86-282405.6 C628,C631,C634      SWIRE3_J033402.83-282405.5 3 34 02.862 -28 24 05.68   17.8   167.3    87.6    62.0    -1.0     -1.0 99.0 24.0 22.1 20.6 99.0 0.6632  6 AGN as  Radio triple. z(b). Elliptical.
+S586 ATCDFS_J033403.26-272149.9 C632                SWIRE3_J033403.25-272151.7 3 34 03.269 -27 21 49.91    0.4   135.0    78.1    71.2    -1.0     -1.0                                  2         
+S587 ATCDFS_J033403.59-273923.3 C633                SWIRE3_J033403.57-273923.9 3 34 03.594 -27 39 23.35    0.2    86.5    91.5    74.7    73.0    526.1                                  1         
+S588 ATCDFS_J033404.70-284501.7 C635                                           3 34 04.709 -28 45 01.75    0.4                                                                           9         IFRS? Faint extended object nearby in MIPS24 image.
+S589 ATCDFS_J033405.40-283534.5 C636                SWIRE3_J033405.40-283535.6 3 34 05.401 -28 35 34.53    0.4   136.4   157.6   112.5    80.4     -1.0 99.0 24.5 23.8 22.7 21.8         2         
+S590 ATCDFS_J033405.54-272638.4 C637                SWIRE3_J033405.57-272637.8 3 34 05.540 -27 26 38.40    0.8    35.9    36.9    -1.0    -1.0     -1.0                                  1         
+S591 ATCDFS_J033405.56-274636.6 C638                SWIRE3_J033405.53-274636.5 3 34 05.567 -27 46 36.61    3.8    11.2    13.7    27.3    -1.0     -1.0                                  1         
+S592 ATCDFS_J033405.92-284326.7 C639                SWIRE3_J033405.91-284327.9 3 34 05.925 -28 43 26.77    0.5   247.4   183.1    96.7    87.2     -1.0 99.0 21.4 19.7 18.8 18.4         2         
+S593 ATCDFS_J033406.68-284142.4 C640                SWIRE3_J033406.72-284141.5 3 34 06.686 -28 41 42.41   10.5    52.8    42.7    -1.0    -1.0     -1.0 99.0 99.0 99.0 22.7 21.5         2         
+S594 ATCDFS_J033408.80-272118.2 C641                SWIRE3_J033408.79-272119.8 3 34 08.806 -27 21 18.26    0.5    71.7    85.9    76.7    64.3    336.8                                  2 AGN b   
+S595 ATCDFS_J033409.21-271322.8 C642                SWIRE3_J033409.09-271324.9 3 34 09.213 -27 13 22.89    0.6    84.2    86.7    -1.0   191.2    657.2                                  3         
+S596 ATCDFS_J033409.24-283144.9 C643                SWIRE3_J033409.24-283144.9 3 34 09.241 -28 31 44.99    4.4    17.9    23.6    -1.0    -1.0     -1.0 99.0 24.8 99.0 99.0 99.0         1         
+S597 ATCDFS_J033409.27-282420.1 C644                SWIRE3_J033409.29-282419.2 3 34 09.275 -28 24 20.10   79.4    96.5    42.7    -1.0    -1.0     -1.0 99.0 23.3 21.9 20.6 20.2 0.6967  1         z(b)
+S598 ATCDFS_J033409.44-271441.5 C645                SWIRE3_J033409.51-271441.1 3 34 09.443 -27 14 41.51    0.4   361.4   588.4   962.3  2418.6  10371.1                                  2         
+S599 ATCDFS_J033409.95-275213.1 C646                SWIRE3_J033409.97-275212.4 3 34 09.953 -27 52 13.18    2.4    19.5    22.8    -1.0    75.6   1022.6                                  1 AGN b   
+S600 ATCDFS_J033410.73-281908.7 C647                (160657)                   3 34 10.739 -28 19 08.70    0.6    -1.0    -1.0    -1.0    -1.0    226.0 23.1 22.9 99.0 99.0 99.0         2 AGN b   ID uncertain - close to bright star
+S601 ATCDFS_J033410.87-282723.4 C648                SWIRE3_J033410.85-282723.7 3 34 10.872 -28 27 23.45    1.3   176.4   101.1    85.2    57.4    547.9 99.0 24.3 22.5 21.0 20.4         1 AGN b   
+S602 ATCDFS_J033412.26-281630.6 C649                SWIRE3_J033412.23-281630.5 3 34 12.260 -28 16 30.64    1.9    33.2    34.5    34.4    31.8     -1.0 99.0 99.0 99.0 99.0 99.0         1         
+S603 ATCDFS_J033413.75-283547.4 C650                SWIRE3_J033413.77-283548.0 3 34 13.759 -28 35 47.47   13.2    18.6    19.7    -1.0    -1.0     -1.0 99.0 25.2 99.0 99.0 99.0         1         
+S604 ATCDFS_J033414.48-274221.3 C651                SWIRE3_J033414.46-274222.2 3 34 14.481 -27 42 21.38    0.5   955.8   668.0   768.1  4602.1   5904.7                          0.1025  1         z(k)
+S605 ATCDFS_J033417.11-282504.3 C652                SWIRE3_J033417.13-282502.7 3 34 17.119 -28 25 04.30    3.2   282.4   183.9   112.0    42.7     -1.0 99.0 23.4 21.6 20.0 19.4 0.6634  2         z(b). Elliptical
+S606 ATCDFS_J033417.69-273931.9 C653                SWIRE3_J033417.71-273932.4 3 34 17.693 -27 39 31.97    0.7   882.0   707.6   744.8  5288.8   6776.0                                  1         
+S607 ATCDFS_J033418.62-272521.2 C654                SWIRE3_J033418.69-272522.1 3 34 18.622 -27 25 21.28    0.9  1192.1   882.8   744.1  6253.0   8323.2                          0.1269  2         z(k)
+S608 ATCDFS_J033418.77-284543.0 C655                                           3 34 18.771 -28 45 43.03    0.5                                                                           7         ID not in SWIRE catalogue, but visible on SWIRE images. 
+S609 ATCDFS_J033421.62-280208.8 C656                (173748)                   3 34 21.627 -28 02 08.82    0.2     3.9     4.8    -1.0    -1.0    300.1                                  2         
+S610 ATCDFS_J033422.82-284909.8 C657                SWIRE3_J033422.76-284910.6 3 34 22.821 -28 49 09.88    0.9    37.7    37.6    -1.0    -1.0     -1.0 99.0 99.0 24.2 23.4 99.0         2         
+S611 ATCDFS_J033423.56-274426.4 C658                SWIRE3_J033423.53-274426.1 3 34 23.562 -27 44 26.46    0.5    68.5    43.4    -1.0    -1.0     -1.0                                  1         
+S612 ATCDFS_J033423.84-272526.7 C659                SWIRE3_J033423.82-272527.1 3 34 23.842 -27 25 26.75   17.9    42.8    26.3    -1.0    -1.0     -1.0                                  1         
+S613 ATCDFS_J033424.58-274530.2 C660                SWIRE3_J033424.57-274531.7 3 34 24.586 -27 45 30.23    0.4  1286.2   921.6   828.7  3771.2   4386.8                                  2         
+S614 ATCDFS_J033425.12-272953.3 C661                SWIRE3_J033425.21-272953.1 3 34 25.122 -27 29 53.32    0.3   563.8   415.9   243.9  1991.2   2029.0                                  2         
+S615 ATCDFS_J033426.91-274401.7 C663                SWIRE3_J033426.89-274401.7 3 34 26.913 -27 44 01.71   51.3   338.9   206.5   131.3    69.0     -1.0                                  1         
+S616 ATCDFS_J033427.77-284236.3 C664                SWIRE3_J033427.84-284235.6 3 34 27.773 -28 42 36.34    0.5    14.0    16.6    -1.0    49.4    571.5 99.0 99.0 99.0 99.0 99.0         2         
+S617 ATCDFS_J033429.36-273235.2 C665                SWIRE3_J033429.43-273234.7 3 34 29.365 -27 32 35.27    0.4    19.6    20.3    -1.0    -1.0     -1.0                                  2         
+S618 ATCDFS_J033429.75-271744.9 C662,C666,C676      SWIRE3_J033429.74-271745.2 3 34 29.754 -27 17 44.95   42.5    25.6    28.0    -1.0    -1.0    603.3                                  6 AGN ab  Radio triple
+S619 ATCDFS_J033430.10-271201.9 C667                SWIRE3_J033430.16-271204.7 3 34 30.102 -27 12 01.92    1.3    37.6    33.2    -1.0    -1.0     -1.0                                  4         
+S620 ATCDFS_J033430.54-275754.4 C668                SWIRE3_J033430.53-275754.3 3 34 30.543 -27 57 54.47    4.4   289.1   186.8   124.6    72.4     -1.0                                  1         
+S621 ATCDFS_J033430.65-271915.0 C669                SWIRE3_J033430.66-271914.7 3 34 30.650 -27 19 15.07    1.4  1648.0  1221.2  1468.6 10364.3  25644.0                                  1         isolated galaxy near  complex
+S622 ATCDFS_J033430.66-281807.6 C670                SWIRE3_J033430.64-281808.6 3 34 30.660 -28 18 07.68    1.8    63.1    50.5    26.4    -1.0     -1.0 99.0 25.0 23.6 22.3 21.4         2         A line of 4 galaxies, all with good SWIRE IDs 
+S623 ATCDFS_J033430.85-281757.0 C671                (161883)                   3 34 30.856 -28 17 57.07    1.5     3.9    -1.0    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0         2         A line of 4 galaxies, all with good SWIRE IDs 
+S624 ATCDFS_J033431.12-282525.5 C672                SWIRE3_J033431.07-282525.8 3 34 31.122 -28 25 25.57   39.2    60.9    59.6    -1.0    58.9     -1.0 99.0 23.8 23.2 22.3 21.4         1         
+S625 ATCDFS_J033431.78-273207.3 C673                SWIRE3_J033431.73-273210.0 3 34 31.785 -27 32 07.33    0.4   231.0   174.0    86.5    -1.0     -1.0                                  3         
+S626 ATCDFS_J033432.63-281729.6 C674                SWIRE3_J033432.61-281730.5 3 34 32.632 -28 17 29.68    0.5    20.0    26.7    -1.0    -1.0    207.7 99.0 25.0 99.0 99.0 99.0         1 AGN b   A line of 4 galaxies, all with good SWIRE IDs 
+S627 ATCDFS_J033433.50-281709.8 C675                (162483)                   3 34 33.503 -28 17 09.84    0.3     6.1    11.9    -1.0    30.9     -1.0 99.0 99.0 99.0 99.0 99.0         1         A line of 4 galaxies, all with good SWIRE IDs 
+S628 ATCDFS_J033434.10-280510.0 C677                (171553)                   3 34 34.101 -28 05 10.02    0.6     6.6     7.1    30.3    -1.0     -1.0           99.0 99.0 99.0         3         
+S629 ATCDFS_J033435.05-274312.8 C678                SWIRE3_J033435.06-274311.3 3 34 35.055 -27 43 12.88    0.3   238.5   156.6    87.9    -1.0     -1.0                                  2         
+S630 ATCDFS_J033436.27-284236.6 C680                SWIRE3_J033436.23-284238.9 3 34 36.272 -28 42 36.66    0.4   211.9   221.7   186.0   687.2   2424.5 99.0 22.0 20.5 19.6 19.1         3         
+S631 ATCDFS_J033437.36-272652.2 C679,C681,C683      SWIRE3_J033437.35-272652.2 3 34 37.36  -27 26 52.26   19.6   113.8    73.3    70.1    33.0     -1.0                                 -1 AGN a   Radio double
+S632 ATCDFS_J033437.80-275914.3 C682                (175891)                   3 34 37.803 -27 59 14.33    0.2     8.1    10.2    -1.0    -1.0     -1.0                                  1         
+S633 ATCDFS_J033438.46-282952.9 C684                SWIRE3_J033438.38-282955.5 3 34 38.464 -28 29 52.90    0.4   461.3   305.3   172.6   173.8     -1.0 20.9 19.2 18.0 17.3 17.3         3         
+S634 ATCDFS_J033439.15-272348.1 C685                SWIRE3_J033439.16-272346.7 3 34 39.159 -27 23 48.19    1.0   115.7    70.3    51.8    -1.0     -1.0                                  2         
+S635 ATCDFS_J033439.75-282258.9 C686                SWIRE3_J033439.68-282257.9 3 34 39.752 -28 22 58.98    0.4   267.4   162.4    89.2    -1.0     -1.0 99.0 23.1 21.4 19.9 19.6 0.6626  2         z(b). Elliptical
+S636 ATCDFS_J033440.09-280510.5 C687                                           3 34 40.092 -28 05 10.54    0.2                                                                           7         Maybe an IFRS: maybe faint smudge in irac band 1 
+S637 ATCDFS_J033440.95-275632.4 C688                SWIRE3_J033440.88-275630.3 3 34 40.958 -27 56 32.42    0.4   984.1   689.6   699.0  4539.7   3282.6      19.7 18.7 17.9              3         
+S638 ATCDFS_J033441.11-274017.3 C689                SWIRE3_J033441.14-274018.4 3 34 41.116 -27 40 17.38    0.5   408.9   299.0   115.5    77.0     -1.0      21.4 19.6 18.8              2         
+S639 ATCDFS_J033441.14-284940.9 C690                SWIRE3_J033441.14-284940.9 3 34 41.147 -28 49 40.96    5.3    18.1    24.1    -1.0    41.7    557.9 99.0 99.0 99.0 99.0 99.0         1 AGN b   
+S640 ATCDFS_J033442.39-281529.1 C691                SWIRE3_J033442.40-281528.4 3 34 42.390 -28 15 29.13    0.8   714.0   496.2   218.2   160.1     -1.0 20.2 18.4 17.3 16.5 16.1         1         
+S641 ATCDFS_J033443.62-280016.4 C692                SWIRE3_J033443.65-280017.4 3 34 43.625 -28 00 16.44    0.4    63.4    48.4    -1.0    -1.0     -1.0      99.0 99.0 22.1              2         
+S642 ATCDFS_J033444.18-272947.3 C693                                           3 34 44.180 -27 29 47.38    0.3                                                                           7         Maybe an IFRS: maybe faint smudge in irac band 1 
+S643 ATCDFS_J033444.30-281627.9 C694                SWIRE3_J033444.27-281628.8 3 34 44.302 -28 16 27.92    0.8    36.2    27.1    35.4    -1.0    217.1 99.0 23.8 23.2 22.2 21.7         1 AGN b   
+S644 ATCDFS_J033445.16-272718.6 C695                SWIRE3_J033445.16-272718.6 3 34 45.162 -27 27 18.61    0.9   103.7    48.8    -1.0    -1.0     -1.0                                  1         
+S645 ATCDFS_J033447.99-283009.5 C696                SWIRE3_J033447.96-283009.8 3 34 47.993 -28 30 09.53    1.3  2082.6  1377.9  2773.2  9996.1   8065.0 17.3 16.8 16.1 15.5 15.1         1         
+S646 ATCDFS_J033448.15-281041.9 C697                SWIRE3_J033448.19-281041.1 3 34 48.158 -28 10 41.98    0.3    36.6    37.4    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 22.8         2         
+S647 ATCDFS_J033448.68-282207.3 C698                SWIRE3_J033448.62-282205.8 3 34 48.683 -28 22 07.38    2.7   189.3    89.0    81.6    -1.0     -1.0 99.0 23.5 21.7 20.2 19.7 0.6632  2         z(b). Elliptical
+S648 ATCDFS_J033448.99-281145.5 C699                SWIRE3_J033448.98-281145.1 3 34 48.997 -28 11 45.57    1.8  1423.0   928.6   491.4   294.1    294.9 20.1 18.9 17.8 17.0 16.6 0.1039  1 AGN b   z(k)
+S649 ATCDFS_J033452.84-275813.0 C700                (176594)                   3 34 52.846 -27 58 13.05    5.7     3.1    -1.0    -1.0    -1.0     -1.0      99.0 99.0 99.0              1         
+S650 ATCDFS_J033454.00-272920.2 C701                SWIRE3_J033453.92-272921.3 3 34 54.001 -27 29 20.24    0.3    12.0    16.6    -1.0    -1.0    206.5                                  2 AGN b   
+S651 ATCDFS_J033454.30-284633.5 C702                SWIRE3_J033454.31-284633.4 3 34 54.301 -28 46 33.57    1.9    40.7    50.4    49.2    56.2     -1.0 99.0 99.0 24.0 22.8 99.0         1         
+S652 ATCDFS_J033456.51-274719.6 C703                SWIRE3_J033456.51-274720.5 3 34 56.510 -27 47 19.62    0.6   209.3   180.9   115.6    67.8     -1.0                                  1         
+S653 ATCDFS_J033456.67-283426.3 C704                SWIRE3_J033456.70-283425.2 3 34 56.679 -28 34 26.37    0.2    13.1    16.0    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0         2         
+S654 ATCDFS_J033457.19-274132.1 C705                SWIRE3_J033457.16-274133.0 3 34 57.195 -27 41 32.17    0.6    43.3    45.3    37.6    -1.0     -1.0      99.0 99.0 99.0              1         one of a pair of galaxies
+S655 ATCDFS_J033457.31-274205.6 C706                SWIRE3_J033457.24-274205.6 3 34 57.316 -27 42 05.68    0.5    47.4    48.6    -1.0    -1.0     -1.0      99.0 99.0 99.0              1         one of a pair of galaxies
+S656 ATCDFS_J033457.34-282158.8 C707                SWIRE3_J033457.33-282158.6 3 34 57.344 -28 21 58.86    0.6    16.8    22.2    -1.0    -1.0    274.5 99.0 99.0 99.0 99.0 99.0         1 AGN b   
+S657 ATCDFS_J033457.72-281614.9 C708                (163177)                   3 34 57.724 -28 16 14.95    0.4    -1.0    10.2    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0         2         
+S658 ATCDFS_J033457.91-272637.7 C709                SWIRE3_J033457.87-272637.6 3 34 57.910 -27 26 37.76    0.9   119.1    88.1   130.9    65.7    545.5                                  1 AGN b   
+S659 ATCDFS_J033500.80-285519.6 C710                SWIRE3_J033500.83-285519.6 3 35 00.803 -28 55 19.62    4.2    56.8    75.7    76.7   183.7   1543.6 99.0 99.0 99.0 99.0 99.0         1 AGN b   
+S660 ATCDFS_J033503.17-275350.7 C711                SWIRE3_J033503.15-275350.8 3 35 03.170 -27 53 50.71    1.1   347.7   221.9   123.5    68.5     -1.0      22.7 21.0 19.6              1         
+S661 ATCDFS_J033504.24-282124.9 C712                SWIRE3_J033504.22-282125.5 3 35 04.246 -28 21 24.98    3.0    44.4    41.3    -1.0    -1.0     -1.0 99.0 99.0 23.9 22.6 21.5         1         
+S662 ATCDFS_J033504.75-274135.9 C713                SWIRE3_J033504.77-274134.8 3 35 04.755 -27 41 35.92    1.0    85.0    52.7    41.6    34.8    296.1      23.3 22.3 21.1              2 AGN b   
+S663 ATCDFS_J033505.31-272149.6 C714                SWIRE3_J033505.58-272148.9 3 35 05.319 -27 21 49.68    0.5   131.9    99.7   126.7   161.2    763.6                                  4         
+S664 ATCDFS_J033508.40-275704.7 C715                SWIRE3_J033508.39-275704.2 3 35 08.405 -27 57 04.78    1.8    28.4    38.7    -1.0    -1.0     -1.0      99.0 99.0 99.0              1         
+S665 ATCDFS_J033508.74-275136.2 C716                SWIRE3_J033508.75-275136.3 3 35 08.749 -27 51 36.24    5.3    13.6    16.1    -1.0    -1.0     -1.0      99.0 99.0 99.0              1         
+S666 ATCDFS_J033509.72-282911.6 C717                (152839)                   3 35 09.727 -28 29 11.66    0.4    -1.0    -1.0    -1.0  4874.2   5650.5 19.4 99.0 13.9 99.0 99.0         2         close to confusing bright IRAC source
+S667 ATCDFS_J033510.03-274039.3 C718                SWIRE3_J033510.04-274038.8 3 35 10.033 -27 40 39.34    1.1   100.7    64.7    73.9    43.8   1058.6      22.5 21.5 20.4              1 AGN b   
+S668 ATCDFS_J033510.50-285431.1 C719                SWIRE3_J033510.39-285428.2 3 35 10.508 -28 54 31.17    0.8    45.2    46.4    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0         4         complex region in irac.
+S669 ATCDFS_J033510.79-273146.0 C720                (197008)                   3 35 10.799 -27 31 46.09    0.3     7.5    -1.0    -1.0    -1.0     -1.0                                  3         
+S670 ATCDFS_J033511.62-280559.6 C721                (170937)                   3 35 11.621 -28 05 59.67    1.8     4.7    -1.0    -1.0    -1.0     -1.0      25.3 99.0 99.0              1         
+S671 ATCDFS_J033512.13-281437.6 C722                SWIRE3_J033512.20-281438.0 3 35 12.136 -28 14 37.61    0.4   238.7   184.3   195.0   218.0    542.8 99.0 23.1 21.6 20.2 19.6         2         
+S672 ATCDFS_J033513.06-273814.7 C723                SWIRE3_J033513.05-273814.9 3 35 13.064 -27 38 14.71    1.7    45.2    53.9    56.1    -1.0     -1.0      99.0 99.0 99.0              1         
+S673 ATCDFS_J033514.34-283845.0 C724                SWIRE3_J033514.28-283843.7 3 35 14.342 -28 38 45.07    0.4    12.1    12.2    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0         2         
+S674 ATCDFS_J033514.54-281922.9 C725                SWIRE3_J033514.54-281922.9 3 35 14.542 -28 19 22.98    1.5    13.7    28.0    61.1   221.9    940.4 99.0 99.0 99.0 99.0 99.0         1 AGN b   
+S675 ATCDFS_J033516.02-275438.0 C726                SWIRE3_J033516.02-275436.7 3 35 16.029 -27 54 38.04    0.7    17.8    25.1    -1.0    -1.0     -1.0      99.0 99.0 99.0              2         
+S676 ATCDFS_J033517.15-273504.5 C727                (194152)                   3 35 17.158 -27 35 04.53    0.3    15.9    10.1    -1.0    -1.0    265.1      99.0 24.2 23.5              4 AGN b   
+S677 ATCDFS_J033517.21-275420.2 C728                SWIRE3_J033517.18-275420.4 3 35 17.210 -27 54 20.26    7.6   316.7   209.1    99.6    59.3     -1.0      24.4 22.7 21.1              1         
+S678 ATCDFS_J033517.44-275908.2 C729                                           3 35 17.448 -27 59 08.28    0.5                                                                           7         faint source in irac bands 1&2
+S679 ATCDFS_J033517.71-275050.1 C730                SWIRE3_J033517.71-275050.2 3 35 17.716 -27 50 50.18    4.4    24.0    29.5    -1.0    52.7     -1.0                                  1         
+S680 ATCDFS_J033517.78-285407.7 C731                SWIRE3_J033517.75-285407.1 3 35 17.787 -28 54 07.72    2.5    12.1    15.5    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0         1         
+S681 ATCDFS_J033518.32-284506.5 C732                (140599)                   3 35 18.329 -28 45 06.58    1.5    -1.0     6.9    -1.0    -1.0    167.7 99.0 99.0 99.0 99.0 99.0         1 AGN b   
+S682 ATCDFS_J033518.48-275742.2 C733                                           3 35 18.488 -27 57 42.23    0.3                                                                           9         IFRS? 
+S683 ATCDFS_J033520.07-284259.1 C734                SWIRE3_J033520.07-284258.5 3 35 20.079 -28 42 59.10    0.8   164.9   218.4   284.9   398.9   1220.4 19.9 20.2 19.9 19.6 19.3         1         
+S684 ATCDFS_J033520.46-274655.2 C735                SWIRE3_J033520.51-274654.9 3 35 20.462 -27 46 55.20    0.4   230.5   433.3   885.5  1932.1   5702.2                                  1         
+S685 ATCDFS_J033521.97-275414.0 C736                SWIRE3_J033521.96-275414.5 3 35 21.978 -27 54 14.03    2.2    26.9    35.7    50.4    43.9    414.3      24.2 23.8 23.2              1 AGN b   
+S686 ATCDFS_J033522.04-275730.8 C737                SWIRE3_J033521.91-275731.3 3 35 22.045 -27 57 30.81    0.6    22.7    28.1    -1.0    -1.0     -1.0      24.9 24.1 23.6              3         
+S687 ATCDFS_J033522.39-273258.0 C738                SWIRE3_J033522.27-273259.2 3 35 22.393 -27 32 58.00    2.8    98.0    64.8    42.5    -1.0     -1.0      23.4 21.7 20.4              3         In group of galaxies 
+S688 ATCDFS_J033522.79-280845.4 C740                (168835)                   3 35 22.794 -28 08 45.44    0.5     9.3    14.9    -1.0    50.1    256.1 99.0 99.0 99.0 99.0 99.0         3 AGN b   
+S689 ATCDFS_J033522.83-283348.1 C742                SWIRE3_J033522.93-283346.3 3 35 22.832 -28 33 48.17    0.4   106.6    74.2    53.9    46.5    235.1 99.0 99.0 99.0 99.0 99.0         3 AGN b   
+S690 ATCDFS_J033522.92-275602.1 C739,C741           SWIRE3_J033522.91-275602.1 3 35 22.92  -27 56 02.11   64.8    37.2    41.9    42.2    -1.0    178.7      99.0 99.0 24.0             -1 AGN ab  Radio double
+S691 ATCDFS_J033523.04-273330.6 C743                SWIRE3_J033523.01-273329.8 3 35 23.041 -27 33 30.60   17.9   147.3    81.6    62.7    -1.0     -1.0      23.0 21.3 20.0              1         In group of galaxies 
+S692 ATCDFS_J033523.06-280001.3 C744                SWIRE3_J033522.85-275959.1 3 35 23.069 -28 00 01.33    2.8    41.4    33.5    -1.0    -1.0     -1.0      23.7 23.0 22.2              4         
+S693 ATCDFS_J033523.15-284434.9 C745                SWIRE3_J033523.14-284434.6 3 35 23.159 -28 44 34.95    4.5    22.6    23.6    -1.0    -1.0     -1.0 99.0 24.4 24.0 99.0 99.0         1         
+S694 ATCDFS_J033525.08-273313.2 C746                                           3 35 25.088 -27 33 13.25    0.6                                                                           9         IFRS?
+S695 ATCDFS_J033525.21-285445.9 C747                SWIRE3_J033525.21-285446.2 3 35 25.219 -28 54 45.94    1.6    19.6    20.5    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0         1         
+S696 ATCDFS_J033525.25-283105.2 C748                                           3 35 25.256 -28 31 05.20    0.3                                                                           9         IFRS
+S697 ATCDFS_J033526.79-284101.6 C749                (143731)                   3 35 26.797 -28 41 01.60    0.9     4.5    -1.0    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0         2         
+S698 ATCDFS_J033527.50-271950.7 C750                SWIRE3_J033527.50-271950.8 3 35 27.504 -27 19 50.70   93.5   176.5   165.0   138.4   167.7    643.0                                  1 AGN b   
+S699 ATCDFS_J033528.31-275021.8 C751                SWIRE3_J033528.30-275022.0 3 35 28.316 -27 50 21.80    1.8   587.7   430.5   137.9   102.8     -1.0                                  1         
+S700 ATCDFS_J033529.26-283847.4 C752                SWIRE3_J033529.19-283848.1 3 35 29.263 -28 38 47.44    0.5    89.3    65.7    48.5    -1.0    257.1 22.6 22.1 20.8 19.7 19.4         2 AGN b   
+S701 ATCDFS_J033529.42-285156.5 C753                SWIRE3_J033529.46-285154.5 3 35 29.424 -28 51 56.54    1.7   716.0   521.4   194.3   146.7     -1.0 20.6 18.8 17.5 16.7 16.4         3         
+S702 ATCDFS_J033530.22-281108.4 C754                SWIRE3_J033530.19-281108.5 3 35 30.229 -28 11 08.45    0.8    32.2    38.5    -1.0    56.2    376.3 99.0 99.0 99.0 99.0 99.0         1 AGN b   
+S703 ATCDFS_J033531.02-272702.2 C755                                           3 35 31.025 -27 27 02.20   26.1                                                                           9         IFRS?. 
+S704 ATCDFS_J033532.11-274547.6 C756                SWIRE3_J033532.11-274545.2 3 35 32.115 -27 45 47.61    2.2   164.4    84.6    55.3    40.6     -1.0                                  3         
+S705 ATCDFS_J033532.19-284801.0 C757                SWIRE3_J033532.19-284801.1 3 35 32.192 -28 48 01.08    0.9   222.5   417.8  1084.8  2999.4  10830.1 99.0 24.2 22.0 20.7 20.1         1         
+S706 ATCDFS_J033533.22-280621.8 C758                                           3 35 33.224 -28 06 21.85    0.3                                                                           9          IFRS?
+S707 ATCDFS_J033533.96-273313.4 C759,C760,C761,C764 SWIRE3_J033533.90-273310.9 3 35 33.963 -27 33 13.46    9.4   451.6   512.5   724.7   966.6   2208.2      19.8 19.5 18.9              3 AGN b   Centre of a linear complex (jets or grav arc?)
+S708 ATCDFS_J033534.47-284213.3 C763                SWIRE3_J033534.66-284221.7 3 35 34.479 -28 42 13.31    0.5    79.8    53.1    -1.0    44.3     -1.0 99.0 22.7 21.3 20.4 19.9         4         
+S709 ATCDFS_J033535.20-281729.0 C762,C765           SWIRE3_J033535.20-281729.0 3 35 35.20  -28 17 29.00    8.4    34.5    25.3    -1.0    -1.0     -1.0 99.0 99.0 99.0 22.6 21.9        -1 AGN a   Radio double
+S710 ATCDFS_J033536.48-282618.2 C766                (154935)                   3 35 36.488 -28 26 18.27    0.3     4.1    -1.0    -1.0    -1.0     -1.0 99.0 99.0 99.0 99.0 99.0         1         
+S711 ATCDFS_J033536.91-282146.8 C767                SWIRE3_J033536.90-282145.8 3 35 36.915 -28 21 46.88    0.8    74.3    51.3    -1.0    -1.0     -1.0 99.0 99.0 23.9 22.3 21.3         2         
+S712 ATCDFS_J033537.03-273433.2 C768                SWIRE3_J033537.03-273432.9 3 35 37.037 -27 34 33.26    1.6   183.2    83.4    57.1    56.7     -1.0      23.7 22.4 20.9              1         Near S709
+S713 ATCDFS_J033537.52-275057.8 C769                SWIRE3_J033537.50-275057.6 3 35 37.525 -27 50 57.88   16.4    25.5    30.6    -1.0    -1.0     -1.0      22.9 22.4 21.8              1         
+S714 ATCDFS_J033538.16-274400.6 C770                                           3 35 38.168 -27 44 00.65    0.4                                                                           9         IFRS? 
+S715 ATCDFS_J033538.79-283012.1 C771                SWIRE3_J033538.73-283012.9 3 35 38.797 -28 30 12.14    0.6   227.9   106.8   100.6    49.2     -1.0 99.0 99.0 22.3 20.7 20.0         2         
+S716 ATCDFS_J033539.74-280443.9 C772                                           3 35 39.749 -28 04 43.97    0.8                                                                           7         irac src in bands 1 and 2 but close to a bright star
+S717 ATCDFS_J033540.76-274824.0 C773                SWIRE3_J033540.63-274821.1 3 35 40.768 -27 48 24.06    0.4    28.6    22.6    -1.0    -1.0     -1.0                                  4         
+S718 ATCDFS_J033544.35-282050.9 C776                SWIRE3_J033544.37-282050.8 3 35 44.350 -28 20 50.90    1.2   136.3   169.5   314.7   570.2   4320.8 99.0 23.8 22.5 21.2 20.5         1         
+S719 ATCDFS_J033542.53-274343.8 C774,C775,C777      SWIRE3_J033542.52-274344.1 3 35 42.53  -27 43 43.82    5.4  2477.4  1659.0  1039.5   655.2     -1.0                                 -1 AGN a   Radio double
+S720 ATCDFS_J033546.38-283805.2 C778                (146056)                   3 35 46.383 -28 38 05.27    1.6    12.0    19.8    37.8    57.9     -1.0                                  1         
+S721 ATCDFS_J033548.20-284402.3 C779                SWIRE3_J033548.21-284402.1 3 35 48.204 -28 44 02.33   12.4    74.8    88.2   102.5   127.5    360.3 22.3 22.8 22.3 21.7 21.8         1 AGN b   
+S722 ATCDFS_J033549.15-274918.5 C780                SWIRE3_J033549.18-274918.8 3 35 49.152 -27 49 18.56   11.0   926.2   811.0   757.1  5632.4   9761.8                                  1 AGN b   
+S723 ATCDFS_J033553.33-272740.4 C781                SWIRE3_J033553.33-272740.4 3 35 53.336 -27 27 40.45  126.9   601.9   503.9   286.6  1015.3   3090.0                                  1 AGN b   
+S724 ATCDFS_J033553.48-275510.9 C782                SWIRE3_J033553.44-275512.8 3 35 53.480 -27 55 10.97    1.0    22.8    25.9    -1.0    -1.0     -1.0      25.3 99.0 99.0              2         
+S725 ATCDFS_J033553.58-280956.8 C783                SWIRE3_J033553.56-280952.4 3 35 53.589 -28 09 56.84    0.5   940.1   721.3   178.5    95.8     -1.0      20.4 18.9 18.2              4         on edge of bright nearby galaxy
+S726 ATCDFS_J033553.63-282923.5 C784                SWIRE3_J033553.59-282922.4 3 35 53.634 -28 29 23.54    1.2   292.0   224.2    99.0    82.4     -1.0 99.0 99.0 23.7 22.0 20.9         2         

@@ -1,0 +1,15 @@
+<bindings 
+    version="2.0"
+    xmlns="http://java.sun.com/xml/ns/jaxb" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:obs="http://au.csiro/askap/observation">
+  <globalBindings>
+    <javaType 
+        xmlType="xs:dateTime"
+        name="java.time.LocalDateTime"
+        parseMethod="java.time.LocalDateTime.parse"/>
+    <javaType 
+        xmlType="obs:ObservationTime"
+        name="au.csiro.casda.datadeposit.observation.assembler.ObservationTime"/>
+  </globalBindings>
+</bindings>

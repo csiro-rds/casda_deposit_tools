@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+<VOTABLE version="1.2"
+ xmlns="http://www.ivoa.net/xml/VOTable/v1.2">
+<RESOURCE>
+<TABLE name="results">
+<DESCRIPTION>Unparseable file because VOTABLE is v1.2</DESCRIPTION>
+<DATA>
+<TABLEDATA>
+</TABLEDATA>
+</DATA>
+</TABLE>
+</RESOURCE>
+</VOTABLE>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema
+    targetNamespace="http://au.csiro/askap/observation" 
+    xmlns:obs="http://au.csiro/askap/observation" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    elementFormDefault="qualified">
+    
+	<xs:simpleType name="FieldCentreType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\[\s*(\+|\-)?\d+(\.\d+)?\s*,\s*(\+|\-)?\d+(\.\d+)?\s*\]"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Polarisations">
+		<xs:restriction base="xs:string">
+			<!-- From http://www.cfa.harvard.edu/sma/miriad/manuals/SMAuguide/smauserhtml/node66.html -->
+			<!-- This pattern is not precise but should be sufficient. Eg. it allows 
+				"I, XX, LL, q" which is meaningless. -->
+			<xs:pattern value="\[((XX|XY|YX|YY|xx|xy|yx|yy)\s*,?\s*){1,4}\]"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="ObservationTime">
+	   <xs:union memberTypes="xs:decimal xs:dateTime" />
+	</xs:simpleType>
+	
+	<xs:element name='dataset'>
+		<xs:complexType>
+            <xs:sequence>
+                <xs:choice maxOccurs="unbounded">
+                    <xs:element ref='obs:identity' minOccurs='1' maxOccurs='1' />
+                    <xs:element ref='obs:observation' minOccurs='1' maxOccurs='1' />
+                    <xs:element ref='obs:images' minOccurs='0' maxOccurs='unbounded' />
+                    <xs:element ref='obs:catalogues' minOccurs='0' maxOccurs='unbounded' />
+                    <xs:element ref='obs:measurement_sets' minOccurs='0' maxOccurs='unbounded' />
+                    <xs:element ref='obs:evaluations' minOccurs='0' maxOccurs='unbounded' />
+                </xs:choice>
+            </xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='identity'>
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref='obs:telescope' />
+				<xs:element ref='obs:sbids' minOccurs="0"  maxOccurs='1'/>
+				<xs:element ref='obs:sbid' />
+				<xs:element ref='obs:obsprogram' />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='telescope' type="obs:nonEmptyString" />
+
+	<xs:element name='sbids'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='obs:sbid' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='sbid'>
+	   <xs:simpleType>
+           <xs:union memberTypes="obs:numberGreaterThanZero" />
+       </xs:simpleType>
+	</xs:element> 
+
+	<xs:element name='obsprogram'  type="obs:nonEmptyString" />
+
+	<xs:element name='project'>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+                <xs:pattern value="([A-Za-z0-9])+"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+	<xs:element name='observation'>
+		<xs:complexType>
+			<xs:all>
+				<xs:element name='obsstart' type="obs:ObservationTime" />
+				<xs:element name='obsend' type="obs:ObservationTime" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='images'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='obs:image' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='image'>
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref='obs:format' />
+				<xs:element ref='obs:filename' />
+                <xs:element ref='obs:project' />
+                <xs:element name='type' type='obs:nonEmptyString' />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='format' type="obs:nonEmptyString" />
+
+    <xs:element name='filename' type="obs:nonEmptyString" />
+
+    <xs:simpleType name="catalogue_type">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="continuum-island"/>
+            <xs:enumeration value="continuum-component"/>
+            <xs:enumeration value="polarisation-component"/>
+            <xs:enumeration value="spectral-line-absorption"/>
+            <xs:enumeration value="spectral-line-emission"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+	<xs:element name='catalogues'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='obs:catalogue' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='catalogue'>
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref='obs:format' />
+                <xs:element name='type' type='obs:catalogue_type' />
+                <xs:element ref='obs:filename' />
+				<xs:element ref='obs:project' />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='measurement_sets'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='obs:measurement_set' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='measurement_set'>
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref='obs:format' />
+				<xs:element ref='obs:filename' />
+				<xs:element ref='obs:project' />
+				<xs:element ref='obs:scans' />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name='scans'>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref='obs:scan' minOccurs='1' maxOccurs='unbounded' />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	
+	<xs:element name='scan'>
+	    <xs:complexType>
+	        <xs:all>
+	            <xs:element name='id' type='xs:int' />
+	            <xs:element name='scanstart' type="obs:ObservationTime" />
+                <xs:element name='scanend' type="obs:ObservationTime" />
+                <xs:element name="fieldcentre">  
+                    <xs:complexType>  
+                        <xs:simpleContent>  
+                            <xs:extension base="obs:FieldCentreType">  
+                                <xs:attribute name="units" type="xs:string" use="required" fixed="rad"/>  
+                            </xs:extension>  
+                        </xs:simpleContent>  
+                    </xs:complexType>  
+                </xs:element>
+                <xs:element name='coordsystem' type="obs:nonEmptyString" />
+                <xs:element name='fieldname' type="obs:nonEmptyString" />
+                <xs:element name='polarisations' type="obs:Polarisations" />
+                <xs:element name='numchan' type="xs:int" />
+                <xs:element name='centrefreq' type="obs:frequencyInHz" />
+                <xs:element name='chanwidth' type="obs:frequencyInHz" />
+	        </xs:all>
+	    </xs:complexType>
+	</xs:element>
+
+	<xs:element name='evaluations'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='obs:evaluation' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='evaluation'>
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref='obs:format' />
+				<xs:element ref='obs:filename' />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="emptyString">
+		<xs:restriction base="xs:string">
+			<xs:length value="0" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="numberGreaterThanZero">
+		<xs:restriction base="xs:long">
+			<xs:minInclusive value="1" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="nonEmptyString">
+            <xs:restriction base="xs:string">
+                <xs:minLength value="1" />
+            </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="frequencyInHz">
+        <xs:simpleContent>
+            <xs:extension base="xs:double">
+                <xs:attribute name="units" type="xs:string" use="required" fixed="Hz" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+</xs:schema>

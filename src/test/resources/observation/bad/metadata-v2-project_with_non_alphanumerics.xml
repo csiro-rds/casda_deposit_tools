@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+ <dataset xmlns="http://au.csiro/askap/observation">
+	<identity>
+		<telescope>ASKAP</telescope>
+		<sbid>1</sbid>
+		<obsprogram>test</obsprogram>
+	</identity>
+
+	<observation>
+		<obsstart>2013-11-19T02:30:00.000</obsstart>
+		<obsend>2013-11-19T03:30:00.000</obsend>
+	</observation>
+
+    <images>
+        <image>
+            <format>fits</format>
+            <filename>/scratch/askap/12345/image.i.clean.restored.fits</filename>
+            <project>AS_007</project>
+            <type>cont_restored_T0</type>
+            <scans>
+                <scan>
+                    <id>0</id>
+                    <scanstart>2013-11-19T02:30:00.000</scanstart>
+                    <scanend>2013-11-19T03:00:00.000</scanend>
+                    <fieldcentre units="rad">[-3.02, -0.785]</fieldcentre>
+                    <coordsystem>J2000</coordsystem>
+                    <fieldname>Fornax</fieldname>
+                    <polarisations>[XX, XY, YX, YY]</polarisations>
+                    <numchan>16416</numchan>
+                    <centrefreq units="Hz">123.45</centrefreq>
+                    <chanwidth units="Hz">18518.0</chanwidth>
+                </scan>
+            </scans>
+        </image>
+    </images>
+</dataset>

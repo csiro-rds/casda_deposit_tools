@@ -1,0 +1,16 @@
+deposit/*
+deposit/*/READY
+deposit/*/DONE
+!README.md
+!*.sh
+!*.rb
+!deposit/jruby-complete-1.7.19.jar
+!deposit/11111
+!deposit/11112
+!deposit/22222
+!deposit/22223
+!deposit/22224
+!deposit/22225
+!deposit/22226
+!deposit/33333
+!deposit/55555

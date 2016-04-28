@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataset xmlns="http://au.csiro/askap/observation">
+	<identity>
+		<telescope>ASKAP</telescope>
+		<sbid>12351</sbid>
+		<obsprogram>test</obsprogram>
+	</identity>
+
+	<observation>
+		<obsstart>2013-11-19T02:30:00.000</obsstart>
+		<obsend>2013-11-19T03:30:00.000</obsend>
+	</observation>
+
+	<images>
+		<image>
+			<format>fits</format>
+			<filename>validFile.fits</filename>
+            <project>AS007</project>
+            <type>cont_restored_T0</type>
+		</image>
+
+	</images>
+
+	<catalogues>
+		<catalogue>
+			<format>votable</format>
+            <type>continuum-component</type>
+			<filename>no_file.xml</filename>
+			<project>AS007</project>
+		</catalogue>
+	</catalogues>
+
+</dataset>

@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<VOTABLE version="1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns="http://www.ivoa.net/xml/VOTable/v1.3"
+ xmlns:stc="http://www.ivoa.net/xml/STC/v1.30" >
+  <COOSYS ID="J2000" equinox="J2000" system="galactic"/>
+  <RESOURCE name="Absorption object catalogue from Selavy source-finding">
+    <TABLE name="Absorption object catalogue">
+      <DESCRIPTION></DESCRIPTION>
+      <PARAM ID="catalogueName" arraysize="63" datatype="char" name="Catalogue Name" ucd="" value="spectral_line_absorption"/>
+	  <PARAM ID="indexedFields" arraysize="255" datatype="char" name="Indexed Fields" ucd="" value="ra_deg_cont,dec_deg_cont"/>
+	  <PARAM ID="principalFields" arraysize="255" datatype="char" name="Principal Fields" ucd="" value="ra_deg_cont, dec_deg_cont"/>
+      <PARAM name="table_version" ucd="meta.version" datatype="char" arraysize="255" value="casda.spectral_line_absorption_description_v0.7"/>
+      <PARAM name="imageFile" ucd="meta.file;meta.fits" datatype="char" arraysize="255" value="validFile.fits"/>
+      <PARAM name="flagSubsection" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="flagStatSec" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="searchType" ucd="meta.note" datatype="char" arraysize="7" value="spatial"/>
+      <PARAM name="flagNegative" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="flagBaseline" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="flagRobustStats" ucd="meta.code" datatype="boolean" value="1"/>
+      <PARAM name="flagFDR" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="snrCut" ucd="stat.snr;phot;stat.min" datatype="float" value="5"/>
+      <PARAM name="flagGrowth" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="minPix" ucd="" datatype="int" value="2"/>
+      <PARAM name="minChannels" ucd="" datatype="int" value="3"/>
+      <PARAM name="minVoxels" ucd="" datatype="int" value="4"/>
+      <PARAM name="flagAdjacent" ucd="meta.code" datatype="boolean" value="1"/>
+      <PARAM name="threshVelocity" ucd="" datatype="float" value="7"/>
+      <PARAM name="flagRejectBeforeMerge" ucd="" datatype="boolean" value="0"/>
+      <PARAM name="flagTwoStageMerging" ucd="" datatype="boolean" value="1"/>
+      <PARAM name="pixelCentre" ucd="" datatype="char" arraysize="8" value="centroid"/>
+      <PARAM name="flagSmooth" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="flagATrous" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="thresholdActual" ucd="" datatype="float" value="0"/>
+      <PARAM name="noiseMeanActual" ucd="" datatype="float" value="0"/>
+      <PARAM name="noiseSpreadActual" ucd="" datatype="float" value="0"/>
+      <FIELD name="image_id" ID="col_image_id" ucd="meta.id" datatype="char" unit="--" arraysize="50"/>
+      <FIELD name="date_time_ut" ID="col_date_time_ut" ucd="time.start" datatype="char" unit="--" arraysize="50"/>
+      <FIELD name="cont_component_id" ID="col_cont_component_id" ucd="meta.id.parent" datatype="char" unit="--" arraysize="22"/>
+      <FIELD name="cont_flux" ID="col_fint" ucd="phot.flux.density;em.radio;spect.continuum" datatype="float" unit="mJy" width="9" precision="3"/>
+      <FIELD name="object_id" ID="col_object_id" ucd="meta.id;meta.main" datatype="char" unit="--" arraysize="24"/>
+      <FIELD name="object_name" ID="col_object_name" ucd="meta.id" datatype="char" unit="" arraysize="15"/>
+      <FIELD name="ra_hms_cont" ID="col_ra" ucd="pos.eq.ra" ref="J2000" datatype="char" unit="" arraysize="12"/>
+      <FIELD name="dec_dms_cont" ID="col_dec" ucd="pos.eq.dec" ref="J2000" datatype="char" unit="" arraysize="13"/>
+      <FIELD name="ra_deg_cont" ID="col_rajd" ucd="pos.eq.ra;meta.main" ref="J2000" datatype="double" unit="deg" width="11" precision="6"/>
+      <FIELD name="dec_deg_cont" ID="col_decjd" ucd="pos.eq.dec;meta.main" ref="J2000" datatype="double" unit="deg" width="11" precision="6"/>
+      <FIELD name="ra_deg_cont_err" ID="col_raerr" ucd="stat.error;pos.eq.ra" ref="J2000" datatype="float" unit="arcsec" width="11" precision="2"/>
+      <FIELD name="dec_deg_cont_err" ID="col_decerr" ucd="stat.error;pos.eq.dec" ref="J2000" datatype="float" unit="arcsec" width="11" precision="2"/>
+      <FIELD name="freq_uw" ID="col_freq_uw" ucd="em.freq;meta.main" datatype="float" unit="MHz" width="11" precision="1"/>
+      <FIELD name="freq_uw_err" ID="col_freq_uw_err" ucd="stat.error;em.freq;meta.main" datatype="float" unit="MHz" width="11" precision="1"/>
+      <FIELD name="freq_w" ID="col_freq_w" ucd="em.freq" datatype="float" unit="MHz" width="11" precision="1"/>
+      <FIELD name="freq_w_err" ID="col_freq_w_err" ucd="stat.error;em.freq" datatype="float" unit="MHz" width="11" precision="1"/>
+      <FIELD name="z_hi_uw" ID="col_z_hi_uw" ucd="src.redshift;em.line.HI;meta.main" datatype="float" unit="" width="11" precision="1"/>
+      <FIELD name="z_hi_uw_err" ID="col_z_hi_uw_err" ucd="stat.error;src.redshift;em.line.HI;meta.main" datatype="float" unit="" width="11" precision="1"/>
+      <FIELD name="z_hi_w" ID="col_z_hi_w" ucd="src.redshift;em.line.HI" datatype="float" unit="" width="11" precision="1"/>
+      <FIELD name="z_hi_w_err" ID="col_z_hi_w_err" ucd="stat.error;src.redshift;em.line.HI" datatype="float" unit="" width="11" precision="1"/>
+      <FIELD name="z_hi_peak" ID="col_z_hi_peak" ucd="src.redshift;em.line.HI;phys.absorption.opticalDepth;stat.max" datatype="float" unit="" width="11" precision="1"/>
+      <FIELD name="z_hi_peak_err" ID="col_z_hi_peak_err" ucd="stat.error;src.redshift;em.line.HI;phys.absorption.opticalDepth;stat.max" datatype="float" unit="" width="11" precision="1"/>
+      <FIELD name="w50" ID="col_w50" ucd="phys.absorption;spect.line.width;em.freq" datatype="float" unit="kHz" width="11" precision="1"/>
+      <FIELD name="w50_err" ID="col_w50_err" ucd="stat.error;phys.absorption;spect.line.width;em.freq" datatype="float" unit="kHz" width="11" precision="1"/>
+      <FIELD name="w20" ID="col_w20" ucd="phys.absorption;askap:spect.line.width20;em.freq" datatype="float" unit="kHz" width="11" precision="1"/>
+      <FIELD name="w20_err" ID="col_w20_err" ucd="stat.error;phys.absorption;askap:spect.line.width20;em.freq" datatype="float" unit="kHz" width="11" precision="1"/>
+      <FIELD name="rms_imagecube" ID="col_rms_imagecube" ucd="stat.stdev;phot.flux.density" datatype="float" unit="mJy/beam" width="10" precision="3"/>
+      <FIELD name="opt_depth_peak" ID="col_opt_depth_peak" ucd="phys.absorption.opticalDepth;stat.max" datatype="float" unit="" width="10" precision="3"/>
+      <FIELD name="opt_depth_peak_err" ID="col_opt_depth_err" ucd="stat.error;phys.absorption.opticalDepth;stat.max" datatype="float" unit="" width="10" precision="3"/>
+      <FIELD name="opt_depth_int" ID="col_opt_depth_int" ucd="phys.absorption.opticalDepth;askap:arith.integrated" datatype="float" unit="km/s" width="10" precision="3"/>
+      <FIELD name="opt_depth_int_err" ID="col_opt_depth_int_err" ucd="stat.error;phys.absorption.opticalDepth;askap:arith.integrated" datatype="float" unit="km/s" width="10" precision="3"/>
+      <FIELD name="flag_s1" ID="col_flag_a1" ucd="meta.code" datatype="int" unit="" width="5"/>
+      <FIELD name="flag_s2" ID="col_flag_a2" ucd="meta.code" datatype="int" unit="" width="5"/>
+      <FIELD name="flag_s3" ID="col_flag_a3" ucd="meta.code" datatype="int" unit="" width="5"/>
+      <DATA>
+        <TABLEDATA>
+        <TR>
+          <TD>absCatTest.fits</TD>
+          <TD>2014-04-07T01:30:51</TD>
+          <TD>SB10001_absCatTest_0a</TD>
+          <TD>9780.916</TD>
+          <TD>SB10001_absCatTest_0a_0</TD>
+          <TD>J183340-210340</TD>
+          <TD>18:33:40.1</TD>
+          <TD>-21:03:40</TD>
+          <TD>278.416931</TD>
+          <TD>-21.061312</TD>
+          <TD>21.56</TD>
+          <TD>13.19</TD>
+          <TD>756.7</TD>
+          <TD>9.5</TD>
+          <TD>754.7</TD>
+          <TD>5.3</TD>
+          <TD>0.9</TD>
+          <TD>4.4</TD>
+          <TD>0.7</TD>
+          <TD>5.5</TD>
+          <TD>0.3</TD>
+          <TD>21.8</TD>
+          <TD>7.7</TD>
+          <TD>3.5</TD>
+          <TD>6.1</TD>
+          <TD>9.1</TD>
+          <TD>75.163</TD>
+          <TD>6.903</TD>
+          <TD>1.123</TD>
+          <TD>7.001</TD>
+          <TD>8.765</TD>
+          <TD>1</TD>
+          <TD>0</TD>
+          <TD>2</TD>
+        </TR>
+        </TABLEDATA>
+      </DATA>
+    </TABLE>
+  </RESOURCE>
+</VOTABLE>

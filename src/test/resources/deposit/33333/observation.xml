@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataset xmlns="http://au.csiro/askap/observation">
+    <identity>
+        <telescope>ASKAP</telescope>
+        <sbid>33333</sbid>
+        <obsprogram>test</obsprogram>
+    </identity>
+
+    <observation>
+        <obsstart>2013-11-19T02:30:00.000</obsstart>
+        <obsend>2013-11-19T03:30:00.000</obsend>
+    </observation>
+
+    <images>
+        <!--
+            Multiple images provided here to support image cone search.
+            
+            These images have been copied from the wcslibcli project and then had a PROJECT header value added
+            according to the values below.  Please see the images README in that project for details on image locations.
+        -->
+        <image>
+            <format>fits</format>
+            <filename>image1.fits</filename>
+            <project>AS007</project>
+        </image>
+        <image>
+            <format>fits</format>
+            <filename>image2.fits</filename>
+            <project>AS007</project>
+        </image>
+        <image>
+            <format>fits</format>
+            <filename>image3.fits</filename>
+            <project>AS014</project>
+        </image>
+        <image>
+            <format>fits</format>
+            <filename>image4.fits</filename>
+            <project>AS007</project>
+        </image>
+        <image>
+            <format>fits</format>
+            <filename>image5.fits</filename>
+            <project>AS014</project>
+        </image>
+        <image>
+            <format>fits</format>
+            <filename>image6.fits</filename>
+            <project>AS014</project>
+        </image>
+        <image>
+            <format>fits</format>
+            <filename>image7.fits</filename>
+            <project>AS014</project>
+        </image>
+        <image>
+            <format>fits</format>
+            <filename>image8.fits</filename>
+            <project>AS016</project>
+        </image>
+        <image>
+            <format>fits</format>
+            <filename>image9.fits</filename>
+            <project>AS016</project>
+        </image>
+        <image>
+            <format>fits</format>
+            <filename>image10.fits</filename>
+            <project>AS016</project>
+        </image>
+    </images>
+
+    <catalogues>
+        <catalogue>
+            <format>votable</format>
+            <type>continuum-island</type>
+            <filename>selavy-results.islands.xml</filename>
+            <project>AS007</project>
+        </catalogue>
+        <catalogue>
+            <format>votable</format>
+            <type>continuum-component</type>
+            <filename>selavy-results.components.xml</filename>
+            <project>AS007</project>
+        </catalogue>
+        <catalogue>
+            <format>votable</format>
+            <type>polarisation-component</type>
+            <filename>selavy-results_polarisation.xml</filename>
+            <project>AS007</project>
+        </catalogue>
+        
+    </catalogues>
+
+    <measurement_sets>
+        <measurement_set>
+            <format>tar</format>
+            <filename>ms.tar</filename>
+            <project>AS007</project>
+            <scans>
+                <scan>
+                    <id>0</id>
+                    <scanstart>2014-12-20T02:15:16</scanstart>
+                    <scanend>2014-12-20T02:25:16</scanend>
+                    <fieldcentre units="rad">[-1.13701, -1.112]</fieldcentre>
+                    <coordsystem>J2000</coordsystem>
+                    <fieldname>B1934-638_beam0</fieldname>
+                    <polarisations>[XX, XY, YX, YY]</polarisations>
+                    <numchan>16416</numchan>
+                    <centrefreq units="Hz">863481481</centrefreq>
+                    <chanwidth units="Hz">18519</chanwidth>
+                </scan>
+                <scan>
+                    <id>1</id>
+                    <scanstart>2014-12-20T02:25:21</scanstart>
+                    <scanend>2014-12-20T02:35:26</scanend>
+                    <fieldcentre units="rad">[-1.13701, -1.112]</fieldcentre>
+                    <coordsystem>J2000</coordsystem>
+                    <fieldname>B1934-638_beam0</fieldname>
+                    <polarisations>[XX, XY, YX, YY]</polarisations>
+                    <numchan>16416</numchan>
+                    <centrefreq units="Hz">863481481</centrefreq>
+                    <chanwidth units="Hz">18519</chanwidth>
+                </scan>
+                <scan>
+                    <id>2</id>
+                    <scanstart>2014-12-20T02:35:31</scanstart>
+                    <scanend>2014-12-20T02:45:41</scanend>
+                    <fieldcentre units="rad">[-1.13701, -1.112]</fieldcentre>
+                    <coordsystem>J2000</coordsystem>
+                    <fieldname>B1934-638_beam0</fieldname>
+                    <polarisations>[XX, XY, YX, YY]</polarisations>
+                    <numchan>16416</numchan>
+                    <centrefreq units="Hz">863481481</centrefreq>
+                    <chanwidth units="Hz">18519</chanwidth>
+                </scan>
+                <scan>
+                    <id>3</id>
+                    <scanstart>2014-12-20T02:45:46</scanstart>
+                    <scanend>2014-12-20T02:55:56</scanend>
+                    <fieldcentre units="rad">[-1.13701, -1.112]</fieldcentre>
+                    <coordsystem>J2000</coordsystem>
+                    <fieldname>B1934-638_beam1</fieldname>
+                    <polarisations>[XX, XY, YX, YY]</polarisations>
+                    <numchan>16416</numchan>
+                    <centrefreq units="Hz">863481481</centrefreq>
+                    <chanwidth units="Hz">18519</chanwidth>
+                </scan>
+                <scan>
+                    <id>4</id>
+                    <scanstart>2014-12-20T02:56:01</scanstart>
+                    <scanend>2014-12-20T03:06:11</scanend>
+                    <fieldcentre units="rad">[-1.13701, -1.112]</fieldcentre>
+                    <coordsystem>J2000</coordsystem>
+                    <fieldname>B1934-638_beam2</fieldname>
+                    <polarisations>[XX, XY, YX, YY]</polarisations>
+                    <numchan>16416</numchan>
+                    <centrefreq units="Hz">863481481</centrefreq>
+                    <chanwidth units="Hz">18519</chanwidth>
+                </scan>
+                <scan>
+                    <id>5</id>
+                    <scanstart>2014-12-20T03:06:16</scanstart>
+                    <scanend>2014-12-20T03:16:26</scanend>
+                    <fieldcentre units="rad">[-1.13701, -1.112]</fieldcentre>
+                    <coordsystem>J2000</coordsystem>
+                    <fieldname>B1934-638_beam3</fieldname>
+                    <polarisations>[XX, XY, YX, YY]</polarisations>
+                    <numchan>16416</numchan>
+                    <centrefreq units="Hz">863481481</centrefreq>
+                    <chanwidth units="Hz">18519</chanwidth>
+                </scan>
+                <scan>
+                    <id>6</id>
+                    <scanstart>2014-12-20T03:16:31</scanstart>
+                    <scanend>2014-12-20T03:26:41</scanend>
+                    <fieldcentre units="rad">[-1.13701, -1.112]</fieldcentre>
+                    <coordsystem>J2000</coordsystem>
+                    <fieldname>B1934-638_beam4</fieldname>
+                    <polarisations>[XX, XY, YX, YY]</polarisations>
+                    <numchan>16416</numchan>
+                    <centrefreq units="Hz">863481481</centrefreq>
+                    <chanwidth units="Hz">18519</chanwidth>
+                </scan>
+                <scan>
+                    <id>7</id>
+                    <scanstart>2014-12-20T03:26:46</scanstart>
+                    <scanend>2014-12-20T03:36:56</scanend>
+                    <fieldcentre units="rad">[-1.13701, -1.112]</fieldcentre>
+                    <coordsystem>J2000</coordsystem>
+                    <fieldname>B1934-638_beam5</fieldname>
+                    <polarisations>[XX, XY, YX, YY]</polarisations>
+                    <numchan>16416</numchan>
+                    <centrefreq units="Hz">863481481</centrefreq>
+                    <chanwidth units="Hz">18519</chanwidth>
+                </scan>
+                <scan>
+                    <id>8</id>
+                    <scanstart>2014-12-20T03:37:01</scanstart>
+                    <scanend>2014-12-20T03:47:11</scanend>
+                    <fieldcentre units="rad">[-1.13701, -1.112]</fieldcentre>
+                    <coordsystem>J2000</coordsystem>
+                    <fieldname>B1934-638_beam6</fieldname>
+                    <polarisations>[XX, XY, YX, YY]</polarisations>
+                    <numchan>16416</numchan>
+                    <centrefreq units="Hz">863481481</centrefreq>
+                    <chanwidth units="Hz">18519</chanwidth>
+                </scan>
+                <scan>
+                    <id>9</id>
+                    <scanstart>2014-12-20T03:47:16</scanstart>
+                    <scanend>2014-12-20T03:57:26</scanend>
+                    <fieldcentre units="rad">[-1.13701, -1.112]</fieldcentre>
+                    <coordsystem>J2000</coordsystem>
+                    <fieldname>B1934-638_beam7</fieldname>
+                    <polarisations>[XX, XY, YX, YY]</polarisations>
+                    <numchan>16416</numchan>
+                    <centrefreq units="Hz">863481481</centrefreq>
+                    <chanwidth units="Hz">18519</chanwidth>
+                </scan>
+            </scans>
+        </measurement_set>
+    </measurement_sets>
+
+    <evaluations>
+        <evaluation>
+            <format>pdf</format>
+            <filename>evaluations.pdf</filename>
+        </evaluation>
+    </evaluations>
+</dataset>

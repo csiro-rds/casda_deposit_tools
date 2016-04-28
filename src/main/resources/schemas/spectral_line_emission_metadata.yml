@@ -1,0 +1,924 @@
+# Definition of the expected structure of all spectral_line_emission VOTable files.
+#  
+params:
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.ParamConstraint
+        name: imageFile
+        datatype: char
+        maxarraysize: 101 
+fields:
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: object_id
+        datatype: char
+        unit: 
+        maxarraysize: 27
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: object_name
+        datatype: char
+        unit: 
+        maxarraysize: 15
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: ra_hms_w
+        datatype: char
+        unit:
+        maxarraysize: 11
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: dec_dms_w
+        datatype: char
+        unit:
+        maxarraysize: 20
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: ra_deg_w
+        ref: J2000 
+        datatype: double
+        unit: deg
+        maxwidth: 11
+        maxprecision: 6
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: ra_deg_w_err
+        ref: J2000 
+        datatype: float
+        unit: arcsec
+        maxwidth: 11
+        maxprecision: 2
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: dec_deg_w
+        ref: J2000 
+        datatype: double
+        unit: deg
+        maxwidth: 11
+        maxprecision: 6
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: dec_deg_w_err
+        ref: J2000 
+        datatype: float
+        unit: arcsec
+        maxwidth: 11
+        maxprecision: 2
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: ra_deg_uw
+        ref: J2000 
+        datatype: double
+        unit: deg
+        maxwidth: 11
+        maxprecision: 6
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: ra_deg_uw_err
+        ref: J2000 
+        datatype: float
+        unit: arcsec
+        maxwidth: 11
+        maxprecision: 2
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: dec_deg_uw
+        ref: J2000 
+        datatype: double
+        unit: deg
+        maxwidth: 11
+        maxprecision: 6
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: dec_deg_uw_err
+        ref: J2000 
+        datatype: float
+        unit: arcsec
+        maxwidth: 11
+        maxprecision: 2
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: glong_w
+        ref: J2000 
+        datatype: double
+        unit: deg
+        maxwidth: 11
+        maxprecision: 6
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: glong_w_err
+        ref: J2000 
+        datatype: float
+        unit: arcsec
+        maxwidth: 11
+        maxprecision: 2
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: glat_w
+        ref: J2000 
+        datatype: double
+        unit: deg
+        maxwidth: 11
+        maxprecision: 6
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: glat_w_err
+        ref: J2000 
+        datatype: float
+        unit: arcsec
+        maxwidth: 11
+        maxprecision: 2
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: glong_uw
+        ref: J2000 
+        datatype: double
+        unit: deg
+        maxwidth: 11
+        maxprecision: 6
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: glong_uw_err
+        ref: J2000 
+        datatype: float
+        unit: arcsec
+        maxwidth: 11
+        maxprecision: 2     
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: glat_uw
+        ref: J2000 
+        datatype: double
+        unit: deg
+        maxwidth: 11
+        maxprecision: 6
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: glat_uw_err
+        ref: J2000 
+        datatype: float
+        unit: arcsec
+        maxwidth: 11
+        maxprecision: 2
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: maj_axis
+        datatype: float
+        unit: arcsec
+        maxwidth: 12
+        maxprecision: 2       
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: min_axis
+        datatype: float
+        unit: arcsec
+        maxwidth: 6
+        maxprecision: 2          
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: pos_ang
+        datatype: float
+        unit: deg
+        maxwidth: 7
+        maxprecision: 2        
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: maj_axis_fit
+        datatype: float
+        unit: arcsec
+        maxwidth: 6
+        maxprecision: 2         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: maj_axis_fit_err
+        datatype: float
+        unit: arcsec
+        maxwidth: 6
+        maxprecision: 2         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: min_axis_fit
+        datatype: float
+        unit: arcsec
+        maxwidth: 6
+        maxprecision: 2         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: min_axis_fit_err
+        datatype: float
+        unit: arcsec
+        maxwidth: 6
+        maxprecision: 2         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: pos_ang_fit
+        datatype: float
+        unit: deg
+        maxwidth: 7
+        maxprecision: 2             
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: pos_ang_fit_err
+        datatype: float
+        unit: deg
+        maxwidth: 7
+        maxprecision: 2            
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: size_x
+        datatype: int
+        unit: 
+        maxwidth: 4        
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: size_y
+        datatype: int
+        unit: 
+        maxwidth: 4           
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: size_z
+        datatype: int
+        unit: 
+        maxwidth: 4           
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: n_vox
+        datatype: int
+        unit: 
+        maxwidth: 9       
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: asymmetry_2d
+        datatype: float
+        unit: 
+        maxwidth: 5
+        maxprecision: 3          
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: asymmetry_2d_err
+        datatype: float
+        unit:
+        maxwidth: 5
+        maxprecision: 3         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: asymmetry_3d
+        datatype: float
+        unit: 
+        maxwidth: 5
+        maxprecision: 3
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: asymmetry_3d_err
+        datatype: float
+        unit: 
+        maxwidth: 5
+        maxprecision: 3  
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: freq_uw
+        datatype: double
+        unit: MHz
+        maxwidth: 11
+        maxprecision: 6       
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: freq_uw_err
+        datatype: double
+        unit: MHz
+        maxwidth: 11
+        maxprecision: 6         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: freq_w
+        datatype: double
+        unit: MHz
+        maxwidth: 11
+        maxprecision: 6         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: freq_w_err
+        datatype: double
+        unit: MHz
+        maxwidth: 11
+        maxprecision: 6         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: freq_peak
+        datatype: double
+        unit: MHz
+        maxwidth: 11
+        maxprecision: 6        
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: vel_uw
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 3         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: vel_uw_err
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 3           
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: vel_w
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 3           
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: vel_w_err
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 3           
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: vel_peak
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 3           
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: integ_flux
+        datatype: float
+        unit: Jy.km/s
+        maxwidth: 10
+        maxprecision: 3           
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: integ_flux_err
+        datatype: float
+        unit: Jy.km/s
+        maxwidth: 10
+        maxprecision: 3          
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: flux_voxel_max
+        datatype: float
+        unit: mJy/beam
+        maxwidth: 10
+        maxprecision: 3         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: flux_voxel_min
+        datatype: float
+        unit: mJy/beam
+        maxwidth: 10
+        maxprecision: 3  
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: flux_voxel_mean
+        datatype: float
+        unit: mJy/beam
+        maxwidth: 10
+        maxprecision: 3       
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: flux_voxel_stdev
+        datatype: float
+        unit: mJy/beam
+        maxwidth: 10
+        maxprecision: 3         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: flux_voxel_rms
+        datatype: float
+        unit: mJy/beam
+        maxwidth: 10
+        maxprecision: 3         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: rms_imagecube
+        datatype: float
+        unit: mJy/beam
+        maxwidth: 10
+        maxprecision: 3         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: w50_freq
+        datatype: float
+        unit: kHz
+        maxwidth: 11
+        maxprecision: 4             
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: w50_freq_err
+        datatype: float
+        unit: kHz
+        maxwidth: 11
+        maxprecision: 4          
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: cw50_freq
+        datatype: float
+        unit: kHz
+        maxwidth: 11
+        maxprecision: 4   
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: cw50_freq_err
+        datatype: float
+        unit: kHz
+        maxwidth: 11
+        maxprecision: 4           
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: w20_freq
+        datatype: float
+        unit: kHz
+        maxwidth: 11
+        maxprecision: 4         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: w20_freq_err
+        datatype: float
+        unit: kHz
+        maxwidth: 11
+        maxprecision: 4          
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: cw20_freq
+        datatype: float
+        unit: kHz
+        maxwidth: 11
+        maxprecision: 4          
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: cw20_freq_err
+        datatype: float
+        unit: kHz
+        maxwidth: 11
+        maxprecision: 4          
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: w50_vel
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 4              
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: w50_vel_err
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 4         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: cw50_vel
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 4         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: cw50_vel_err
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 4         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: w20_vel
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 4         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: w20_vel_err
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 4         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: cw20_vel
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 4  
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: cw20_vel_err
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 4  
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: freq_w50_clip_uw
+        datatype: double
+        unit: MHz
+        maxwidth: 11
+        maxprecision: 6   
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: freq_w50_clip_uw_err
+        datatype: double
+        unit: MHz
+        maxwidth: 11
+        maxprecision: 6         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: freq_cw50_clip_uw
+        datatype: double
+        unit: MHz
+        maxwidth: 11
+        maxprecision: 6         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: freq_cw50_clip_uw_err
+        datatype: double
+        unit: MHz
+        maxwidth: 11
+        maxprecision: 6        
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: freq_w20_clip_uw
+        datatype: double
+        unit: MHz
+        maxwidth: 11
+        maxprecision: 6       
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: freq_w20_clip_uw_err
+        datatype: double
+        unit: MHz
+        maxwidth: 11
+        maxprecision: 6        
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: freq_cw20_clip_uw
+        datatype: double
+        unit: MHz
+        maxwidth: 11
+        maxprecision: 6         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: freq_cw20_clip_uw_err
+        datatype: double
+        unit: MHz
+        maxwidth: 11
+        maxprecision: 6        
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: vel_w50_clip_uw
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 3       
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: vel_w50_clip_uw_err
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 3         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: vel_cw50_clip_uw
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 3         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: vel_cw50_clip_uw_err
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 3          
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: vel_w20_clip_uw
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 3       
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: vel_w20_clip_uw_err
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 3         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: vel_cw20_clip_uw
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 3         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: vel_cw20_clip_uw_err
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 3          
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: freq_w50_clip_w
+        datatype: double
+        unit: MHz
+        maxwidth: 11
+        maxprecision: 6     
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: freq_w50_clip_w_err
+        datatype: double
+        unit: MHz
+        maxwidth: 11
+        maxprecision: 6         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: freq_cw50_clip_w
+        datatype: double
+        unit: MHz
+        maxwidth: 11
+        maxprecision: 7    
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: freq_cw50_clip_w_err
+        datatype: double
+        unit: MHz
+        maxwidth: 11
+        maxprecision: 6             
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: freq_w20_clip_w
+        datatype: double
+        unit: MHz
+        maxwidth: 11
+        maxprecision: 6     
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: freq_w20_clip_w_err
+        datatype: double
+        unit: MHz
+        maxwidth: 11
+        maxprecision: 6         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: freq_cw20_clip_w
+        datatype: double
+        unit: MHz
+        maxwidth: 11
+        maxprecision: 6    
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: freq_cw20_clip_w_err
+        datatype: double
+        unit: MHz
+        maxwidth: 11
+        maxprecision: 6              
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: vel_w50_clip_w
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 3         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: vel_w50_clip_w_err
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 3       
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: vel_cw50_clip_w
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 3         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: vel_cw50_clip_w_err
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 3         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: vel_w20_clip_w
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 3         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: vel_w20_clip_w_err
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 3       
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: vel_cw20_clip_w
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 3         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: vel_cw20_clip_w_err
+        datatype: float
+        unit: km/s
+        maxwidth: 11
+        maxprecision: 3          
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: integ_flux_w50_clip
+        datatype: float
+        unit: Jy.km/s
+        maxwidth: 10
+        maxprecision: 3                    
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: integ_flux_w50_clip_err
+        datatype: float
+        unit: Jy.km/s
+        maxwidth: 10
+        maxprecision: 3        
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: integ_flux_cw50_clip
+        datatype: float
+        unit: Jy.km/s
+        maxwidth: 10
+        maxprecision: 3        
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: integ_flux_cw50_clip_err
+        datatype: float
+        unit: Jy.km/s
+        maxwidth: 10
+        maxprecision: 3                    
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: integ_flux_w20_clip
+        datatype: float
+        unit: Jy.km/s
+        maxwidth: 10
+        maxprecision: 3        
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: integ_flux_w20_clip_err
+        datatype: float
+        unit: Jy.km/s
+        maxwidth: 10
+        maxprecision: 3            
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: integ_flux_cw20_clip
+        datatype: float
+        unit: Jy.km/s
+        maxwidth: 10
+        maxprecision: 3                    
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: integ_flux_cw20_clip_err
+        datatype: float
+        unit: Jy.km/s
+        maxwidth: 10
+        maxprecision: 3        
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: bf_a
+        datatype: float
+        unit: Jy.km/s
+        maxwidth: 10
+        maxprecision: 3         
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: bf_a_err
+        datatype: float
+        unit: Jy.km/s
+        maxwidth: 10
+        maxprecision: 3            
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: bf_w
+        datatype: double
+        unit: MHz
+        maxwidth: 10
+        maxprecision: 6           
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: bf_w_err
+        datatype: double
+        unit: MHz
+        maxwidth: 10
+        maxprecision: 6        
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: bf_b1
+        datatype: float
+        unit: 
+        maxwidth: 10
+        maxprecision: 3        
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: bf_b1_err
+        datatype: float
+        unit: 
+        maxwidth: 10
+        maxprecision: 3        
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: bf_b2
+        datatype: float
+        unit: 
+        maxwidth: 10
+        maxprecision: 3        
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: bf_b2_err
+        datatype: float
+        unit: 
+        maxwidth: 10
+        maxprecision: 3    
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: bf_xe
+        datatype: double
+        unit: MHz
+        maxwidth: 10
+        maxprecision: 6        
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: bf_xe_err
+        datatype: double
+        unit: MHz
+        maxwidth: 10
+        maxprecision: 6           
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: bf_xp
+        datatype: double
+        unit: MHz
+        maxwidth: 10
+        maxprecision: 6                    
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: bf_xp_err
+        datatype: double
+        unit: MHz
+        maxwidth: 10
+        maxprecision: 6            
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: bf_c
+        datatype: float
+        unit:
+        maxwidth: 10
+        maxprecision: 3  
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: bf_c_err
+        datatype: float
+        unit:
+        maxwidth: 10
+        maxprecision: 3  
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: bf_n
+        datatype: float
+        unit:
+        maxwidth: 10
+        maxprecision: 3  
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: bf_n_err
+        datatype: float
+        unit:
+        maxwidth: 10
+        maxprecision: 3 
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: flag_s1
+        datatype: int
+        unit: 
+        maxwidth: 5
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: flag_s2
+        datatype: int
+        unit: 
+        maxwidth: 5
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: flag_s3
+        datatype: int
+        unit: 
+        maxwidth: 5 
