@@ -3,3 +3,7 @@ jdk:
   - oraclejdk8
 env:
   - env=ci
+
+  
+after_failure:
+  - cat build/test-results/TEST-au.csiro.casda.datadeposit.observation.ObservationParserTest.xml
