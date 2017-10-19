@@ -1,10 +1,14 @@
 package au.csiro.casda.datadeposit.catalogue.continuum;
 
-import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.is;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -17,9 +21,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import au.csiro.casda.datadeposit.DepositState;
 import au.csiro.casda.datadeposit.catalogue.CatalogueParser;
 import au.csiro.casda.datadeposit.observation.jpa.repository.CatalogueRepository;
 import au.csiro.casda.datadeposit.observation.jpa.repository.ContinuumComponentRepository;
@@ -79,7 +85,7 @@ public class ContinuumComponentCatalogueParserTest
             String catalogueFilename = getPathForGoodTestCase("param.extra");
             configureMockRepositories(catalogueFilename, "src/test/resources/image/good/validFile.fits");
 
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
             // this would throw an exception if parsing failed, but we expect it to be ok
         }
 
@@ -89,7 +95,7 @@ public class ContinuumComponentCatalogueParserTest
             String catalogueFilename = getPathForGoodTestCase("field.extra");
             configureMockRepositories(catalogueFilename, "src/test/resources/image/good/validFile.fits");
 
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
             // this would throw an exception if parsing failed, but we expect it to be ok
         }
 
@@ -99,7 +105,11 @@ public class ContinuumComponentCatalogueParserTest
             String catalogueFilename = getPathForGoodTestCase("param.attributes.value.lessthan");
             configureMockRepositories(catalogueFilename, "src/test/resources/image/good/validFile.fits");
 
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
+
+            ArgumentCaptor<DepositState> queryCaptor = ArgumentCaptor.forClass(DepositState.class);
+            verify(catalogue).setDepositState(queryCaptor.capture());
+            assertThat(queryCaptor.getValue().getType(), is(DepositState.Type.PROCESSED));
         }
 
     }
@@ -115,7 +125,7 @@ public class ContinuumComponentCatalogueParserTest
             String filename = RandomStringUtils.randomAlphabetic(30);
             expectedException.expect(FileNotFoundException.class);
             expectedException.expectMessage(containsString(filename));
-            parser.parseFile(12345, filename, filename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, filename, filename, CatalogueParser.Mode.NORMAL, null);
         }
     }
 
@@ -139,7 +149,7 @@ public class ContinuumComponentCatalogueParserTest
             expectedException.expect(CatalogueParser.DatabaseException.class);
             expectedException.expectMessage(
                     containsString("Could not find matching Observation record for sbid '" + sbid.toString() + "'"));
-            parser.parseFile(sbid, filename, imageCubeFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(sbid, filename, imageCubeFilename, CatalogueParser.Mode.NORMAL, null);
         }
     }
 
@@ -165,7 +175,7 @@ public class ContinuumComponentCatalogueParserTest
             expectedException.expect(CatalogueParser.DatabaseException.class);
             expectedException.expectMessage(containsString("Could not find matching Catalogue record for filename '"
                     + filename + "' on Observation '" + sbid.toString() + "'"));
-            parser.parseFile(sbid, filename, imageCubeFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(sbid, filename, imageCubeFilename, CatalogueParser.Mode.NORMAL, null);
         }
     }
 
@@ -193,7 +203,7 @@ public class ContinuumComponentCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString("Cannot find the declaration of element 'AVOTABLE'"));
 
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -205,7 +215,7 @@ public class ContinuumComponentCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(
                     containsString("Error in TABLE : " + "Missing PARAM matching name: 'imageFile', datatype: 'char'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -217,7 +227,7 @@ public class ContinuumComponentCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(
                     containsString("Attribute 'ucdDIFFERENT' is not allowed to appear in element 'PARAM'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
 
         }
 
@@ -230,7 +240,7 @@ public class ContinuumComponentCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException
                     .expectMessage(containsString("Attribute 'extra' is not allowed to appear in element 'PARAM'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -241,7 +251,7 @@ public class ContinuumComponentCatalogueParserTest
 
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString("Attribute 'datatype' must appear on element 'PARAM'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -251,7 +261,7 @@ public class ContinuumComponentCatalogueParserTest
             configureMockRepositories(catalogueFilename, "src/test/resources/image/good/validFile.fits");
 
             // optional attribute missing is now ok
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -263,7 +273,7 @@ public class ContinuumComponentCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString(
                     "Error in PARAM 'imageFile' : " + "Attribute 'arraysize' ('260') exceeds maximum of '255'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -290,7 +300,7 @@ public class ContinuumComponentCatalogueParserTest
                             + "too/long/too/long/too/long/too/long/too/long/too/long/too/long/tooo/long/too/long/too/long/"
                             + "too/long/too/long/too/long/too/long/too/long/too/long/too/long/too/long/too/long/too/long/"
                             + "too/long/too/long/good/image.i.clean.restored.fits' is wider than 255 chars"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -323,7 +333,7 @@ public class ContinuumComponentCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(
                     containsString("Error in PARAM 'Reference frequency' : " + "Value 'OOPS9e+08' is not a 'float'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -356,7 +366,7 @@ public class ContinuumComponentCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString(
                     "Error in TABLE : " + "Missing FIELD matching name: 'ra_hms_cont', datatype: 'char'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -368,7 +378,7 @@ public class ContinuumComponentCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(
                     containsString("Attribute 'ucdDIFFERENT' is not allowed to appear in element 'FIELD'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -380,7 +390,7 @@ public class ContinuumComponentCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException
                     .expectMessage(containsString("Attribute 'extra' is not allowed to appear in element 'FIELD'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -391,7 +401,7 @@ public class ContinuumComponentCatalogueParserTest
 
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString("Attribute 'datatype' must appear on element 'FIELD'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -403,7 +413,7 @@ public class ContinuumComponentCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException
                     .expectMessage(containsString("Error in FIELD 'ra_hms_cont' : Attribute 'ref' is required"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -413,7 +423,7 @@ public class ContinuumComponentCatalogueParserTest
             configureMockRepositories(catalogueFilename, "src/test/resources/image/good/validFile.fits");
 
             // arraysize missing is no longer a problem - maxarraysize will check against the field width
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -424,7 +434,7 @@ public class ContinuumComponentCatalogueParserTest
 
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString("Error in 1st TR : Additional TD"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -435,7 +445,7 @@ public class ContinuumComponentCatalogueParserTest
 
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString("Error in 1st TR : Missing TD"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -458,7 +468,7 @@ public class ContinuumComponentCatalogueParserTest
                     + "this file name is way way way way way way way way way way way way way way "
                     + "way way way way way way way way way way way way way way way way way way "
                     + "way way way way way too long for this field' is wider than 70 chars"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -470,7 +480,7 @@ public class ContinuumComponentCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(
                     containsString("Error in 31st TD (FIELD 'flag_c3') of 1st TR : " + "Value 'OOPS0' is not a 'int'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -482,7 +492,7 @@ public class ContinuumComponentCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString(
                     "Error in 32nd TD (FIELD 'flag_c4') of 1st TR : " + "Value '123456789' is wider than 8 chars"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -501,7 +511,7 @@ public class ContinuumComponentCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString(
                     "Error in 6th TD (FIELD 'ra_deg_cont') of 1st TR : " + "Value '3OOPS36.689324' is not a 'double'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -513,7 +523,7 @@ public class ContinuumComponentCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString("Error in 6th TD (FIELD 'ra_deg_cont') of 1st TR : "
                     + "Value '1234336.689324' is wider than 12 chars"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -525,7 +535,7 @@ public class ContinuumComponentCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString("Error in 6th TD (FIELD 'ra_deg_cont') of 1st TR : "
                     + "Value '33.689324123' is more precise than 6 decimal places"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -537,7 +547,7 @@ public class ContinuumComponentCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString(
                     "Error in 6th TD (FIELD 'ra_deg_cont') of 2nd TR : " + "Value 'OOPS' is not a 'double'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
     }

@@ -181,7 +181,7 @@ public class ScanTest extends AbstractPersistenceTest
     {
         exception.expect(allOf(
                 constraintViolation(Scan.class, "polarisations",
-                        "must match \"\\[((XX|XY|YX|YY|xx|xy|yx|yy)\\s*,?\\s*){1,4}\\]\""),
+                        "must match \"/((XX|XY|YX|YY|xx|xy|yx|yy)/){1,4}\""),
                 assertions((e) -> assertPersistedScanCount(0L))));
         Scan scan = TestScanBuilderFactory.createBuilder().setPolarisations("").build();
         assertThat(scanRepository.count(), is(0L));
@@ -193,7 +193,7 @@ public class ScanTest extends AbstractPersistenceTest
     {
         exception.expect(allOf(
                 constraintViolation(Scan.class, "polarisations",
-                        "must match \"\\[((XX|XY|YX|YY|xx|xy|yx|yy)\\s*,?\\s*){1,4}\\]\""),
+                        "must match \"/((XX|XY|YX|YY|xx|xy|yx|yy)/){1,4}\""),
                 assertions((e) -> assertPersistedScanCount(0L))));
         Scan scan = TestScanBuilderFactory.createBuilder().setPolarisations("[X,]").build();
         assertThat(scanRepository.count(), is(0L));

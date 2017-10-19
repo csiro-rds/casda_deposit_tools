@@ -96,7 +96,8 @@ public class XmlObservationParserTest
         assertEquals("2013-11-19T02:30:00Z[UTC]", firstScan.getScanstart().toString());
         assertEquals(0, firstScan.getId());
         assertEquals("Fornax", firstScan.getFieldname());
-
+        assertEquals("validFile_fits_large_thumbnail.jpg", dataset.getImages().get(0).getThumbnailLarge());
+        assertEquals("validFile_fits_small_thumbnail.png", dataset.getImages().get(0).getThumbnailSmall());
         assertEquals("2013-11-19T02:30:00Z[UTC]", dataset.getObservation().getObsstart().toString());
     }
 
@@ -277,6 +278,22 @@ public class XmlObservationParserTest
                 .getResource("observation/bad/metadata-v2-invalid-field-centre.xml"));
     }
 
+    @Test
+    public void testInvalidStartDate() throws Exception
+    {
+        expectedException.expect(XmlObservationParserTest.unmarshallExceptionCausedByException(SAXParseException.class,
+                "Value '1853-11-19T02:30:00.000' is not facet-valid"));
+        XmlObservationParser.parseDataSetXML(TestUtils.getResource("observation/bad/observationInvalidStartDate.xml"));
+    }
+    
+    @Test
+    public void testInvalidEndDate() throws Exception
+    {
+        expectedException.expect(XmlObservationParserTest.unmarshallExceptionCausedByException(SAXParseException.class,
+                "Value '1853-11-19T03:30:00.000' is not facet-valid"));
+        XmlObservationParser.parseDataSetXML(TestUtils.getResource("observation/bad/observationInvalidEndDate.xml"));
+    }
+    
     private XmlObservation getDataset(String filename) throws JAXBException, SAXException, IOException
     {
         XmlObservation dataset = XmlObservationParser.parseDataSetXML(TestUtils.getResource(filename));

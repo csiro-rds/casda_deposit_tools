@@ -6,7 +6,8 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doReturn;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,14 +16,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.ivoa.vo.DataType;
-
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import au.csiro.casda.datadeposit.observation.jdbc.repository.SimpleJdbcRepository;
 import au.csiro.casda.datadeposit.votable.parser.VisitableVoTableParam;
 import freemarker.template.TemplateException;
+import net.ivoa.vo.DataType;
 
 /*
  * #%L
@@ -44,11 +46,15 @@ import freemarker.template.TemplateException;
 public class Level7VoTableVisitorTest
 {
     private Level7VoTableVisitor visitor;
+    
+    @Mock
+    private SimpleJdbcRepository simpleJdbcRepository;
 
     @Before
     public void setup() throws IOException, TemplateException
     {
-        visitor = new Level7VoTableVisitor(mock(SimpleJdbcRepository.class), 255);
+        MockitoAnnotations.initMocks(this);
+        visitor = new Level7VoTableVisitor(simpleJdbcRepository, 255);
     }
 
     @Test
@@ -64,7 +70,7 @@ public class Level7VoTableVisitorTest
         columns.add(buildColumn("flag1", "BOOLEAN", null, true, false, "", false, "this is a label"));
         String tableScript =
                 visitor.getCreateLevel7CatalogueTableDdl("AS007", 123456, "testTable", "someDescription", columns,
-                        "filename");
+                        "filename", 123455);
         assertThat(tableScript, containsString("source_name VARCHAR(19)"));
         assertThat(tableScript, containsString("ra_deg_cont DOUBLE PRECISION"));
         assertThat(tableScript, containsString("COMMENT ON TABLE casda.testTable"));
@@ -116,8 +122,8 @@ public class Level7VoTableVisitorTest
         params.add(v);
         visitor.processParams(params);
         String tableScript =
-                visitor.getUpdateVotapMetadataForLevel7CatalogueDdl("AS007", "testTable",
-                        "Foreign key from testTable to catalogue table", columns);
+                visitor.getUpdateVotapMetadataForLevel7CatalogueDdl("AS007", "testTable_v01",
+                        "Foreign key from testTable to catalogue table", columns, "testTable", 1, 1234);
 
         assertThat(tableScript, containsString("INSERT INTO casda.tap_tables"));
         assertThat(tableScript, containsString("INSERT INTO casda.tap_columns"));
@@ -126,7 +132,8 @@ public class Level7VoTableVisitorTest
         assertThat(tableScript, containsString("ra_deg_cont"));
         assertThat(tableScript, containsString("VALUES ((SELECT max(cast(numericalkeys.nums[1] as int)) + 1 from "
                 + "(SELECT regexp_matches(key_id, '^\\d+$') as nums from casda.tap_keys) as numericalkeys), "
-                + "'AS007.testTable', 'casda.catalogue', 'Foreign key from testTable to catalogue table');"));
+                + "'AS007.testTable_v01', 'casda.catalogue', 'Foreign key from testTable_v01 to catalogue table');"));
+        assertThat(tableScript, containsString("WHERE lc.dc_common_id = 1234"));
     }
 
     @Test
@@ -192,6 +199,91 @@ public class Level7VoTableVisitorTest
         visitor.processParams(params);
 
         assertThat(visitor.getErrors(), is(empty()));
+    }
+
+    @Test
+    public void testValidateTableNameVersion() throws Exception
+    {
+        assertThat(visitor.getErrors(), is(empty()));
+        visitor.setFailFast(false);
+        int dcCommonId = 42;
+        visitor.setDcCommonId(dcCommonId);
+        
+        String tableName = "A_valid_And_correct_name";
+        String[] firstVer = new String[] { tableName.toLowerCase() + "_v01", String.valueOf(dcCommonId) };
+        List<Map<String, Object>> mapList = createTableVersionList(
+                new String[][] { firstVer, { tableName.toLowerCase() + "_v02", String.valueOf(dcCommonId) } });
+
+        doReturn(true).when(simpleJdbcRepository).tableExists(firstVer[0].toLowerCase());
+        doReturn(mapList).when(simpleJdbcRepository).findTableVersions(anyString());
+
+        Collection<VisitableVoTableParam> params = new ArrayList<>();
+        VisitableVoTableParam param = buildParam("Catalogue Name", tableName);
+        params.add(param);
+        visitor.processParams(params);
+
+        assertThat(visitor.getErrors(), is(empty()));
+        assertThat(visitor.getCatalogueName(), is(tableName.toLowerCase()+"_v03".toLowerCase()));
+    }
+
+    @Test
+    public void testValidateTableNameVersionDuplicate() throws Exception
+    {
+        assertThat(visitor.getErrors(), is(empty()));
+        visitor.setFailFast(false);
+        int dcCommonId = 42;
+        int dcCommonIdNew = 100;
+        visitor.setDcCommonId(dcCommonIdNew);
+
+        String tableName = "A_valid_And_correct_name";
+        String[] firstVer = new String[] { tableName.toLowerCase() + "_v01", String.valueOf(dcCommonId) };
+        List<Map<String, Object>> mapList = createTableVersionList(
+                new String[][] { firstVer, { tableName.toLowerCase() + "_v02", String.valueOf(dcCommonId) } });
+
+        doReturn(true).when(simpleJdbcRepository).tableExists(firstVer[0].toLowerCase());
+        doReturn(mapList).when(simpleJdbcRepository).findTableVersions(anyString());
+
+        Collection<VisitableVoTableParam> params = new ArrayList<>();
+        VisitableVoTableParam param = buildParam("Catalogue Name", tableName);
+        params.add(param);
+        visitor.processParams(params);
+
+        List<Throwable> errors = visitor.getErrors();
+        assertThat(errors, is(not(empty())));
+        assertThat(errors.get(0).getMessage(), is("Error in PARAM 'Catalogue Name' : " + "catalogue with name '"
+                + tableName.toLowerCase() + "_v01" + "' already exists"));
+    }
+
+    private List<Map<String, Object>> createTableVersionList(String[][] strings)
+    {
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (String[] entry : strings)
+        {
+            Map<String, Object> entryMap = new HashMap<>();
+            entryMap.put("entries_table_name", entry[0]);
+            entryMap.put("dc_common_id", Integer.parseInt(entry[1]));
+            list.add(entryMap);
+        }
+        return list;
+    }
+
+    @Test
+    public void testValidateTableManualVersion() throws Exception
+    {
+        assertThat(visitor.getErrors(), is(empty()));
+        visitor.setFailFast(false);
+
+        Collection<VisitableVoTableParam> params = new ArrayList<>();
+        VisitableVoTableParam param = buildParam("Catalogue Name", "has_version_v01");
+        params.add(param);
+        visitor.processParams(params);
+
+        List<Throwable> errors = visitor.getErrors();
+        assertThat(errors, is(not(empty())));
+        assertThat(errors.get(0).getMessage(),
+                is("Error in PARAM 'Catalogue Name' : "
+                        + "value contains a trailing version. Table versions are "
+                        + "managed automatically and should not be manually provided."));
     }
 
     private VisitableVoTableParam buildParam(String name, String value)

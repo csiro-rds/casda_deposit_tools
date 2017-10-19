@@ -1,11 +1,14 @@
 package au.csiro.casda.datadeposit.fits;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +17,7 @@ import nom.tam.fits.Fits;
 import nom.tam.fits.FitsException;
 import nom.tam.fits.Header;
 
+import org.apache.commons.lang3.CharEncoding;
 import org.springframework.stereotype.Component;
 
 /*
@@ -43,7 +47,8 @@ public class FitsFileParser
     private static final int HEADER_TABLE_INDEX = 0;
 
     /** Constant for header values which are double but must default to null instead of zero */
-    private static final List<String> DOUBLE_EXCEPTIONS = new ArrayList<String>(Arrays.asList("TMIN", "TMAX"));
+    private static final List<String> DOUBLE_EXCEPTIONS = new ArrayList<String>(Arrays.asList(
+    		AskapFitsKey.TMIN.getKeyword(), AskapFitsKey.TMAX.getKeyword(), AskapFitsKey.REST_FREQUENCY.getKeyword()));
 
     /**
      * A FITS file handle.
@@ -68,7 +73,7 @@ public class FitsFileParser
      */
     public Map<AskapFitsKey, Object> getHeaderValues() throws FitsException, IOException
     {
-        Map<AskapFitsKey, Object> valueMap = new HashMap<>();
+        Map<AskapFitsKey, Object> valueMap = new LinkedHashMap<>();
         BasicHDU basicHDU = fitsFile.getHDU(HEADER_TABLE_INDEX);
         Header basicHeader = basicHDU.getHeader();
 
@@ -99,6 +104,29 @@ public class FitsFileParser
             }
         }
         return valueMap;
+    }
+    
+    /**
+     * retrieve the Fits header as a string
+     * 
+     * @return The string containing the header values
+     * @throws IOException
+     *             If the file cannot be opened
+     * @throws FitsException
+     *             If the file cannot be processed as a FITS file
+     */
+    public String getHeaderAsString() throws FitsException, IOException
+    {
+ 
+        BasicHDU basicHDU = fitsFile.getHDU(HEADER_TABLE_INDEX);
+        Header basicHeader = basicHDU.getHeader();
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos, true, CharEncoding.UTF_8);
+        
+        basicHeader.dumpHeader(ps);
+        
+        return new String(baos.toByteArray(), Charset.defaultCharset());
     }
 
     /**

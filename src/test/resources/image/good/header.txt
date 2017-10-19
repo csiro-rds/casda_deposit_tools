@@ -1,0 +1,12 @@
+SIMPLE  =                    T / file does conform to FITS standard             
+BITPIX  =                  -32 / number of bits per data pixel                  
+NAXIS   =                    2 / number of data axes                            
+INTIME  =               1.0001                                                  
+OBJECT  = 'bar     '                                                            
+PROJECT = 'VAST    '                                                            
+BMAJ    =                10.01                                                  
+TMIN    =               23.456                                                  
+TMAX    =            1.1111e02                                                  
+BMIN    =              1.0e-02                                                  
+RESTFRQ =   1.420405745510E+09 / Rest Frequency (Hz)                            
+END                                                                             

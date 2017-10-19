@@ -1,11 +1,14 @@
 package au.csiro.casda.datadeposit.catalogue.continuum;
 
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.is;
 
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -18,9 +21,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import au.csiro.casda.datadeposit.DepositState;
 import au.csiro.casda.datadeposit.catalogue.CatalogueParser;
 import au.csiro.casda.datadeposit.observation.jpa.repository.CatalogueRepository;
 import au.csiro.casda.datadeposit.observation.jpa.repository.ContinuumIslandRepository;
@@ -80,7 +85,7 @@ public class ContinuumIslandCatalogueParserTest
             String catalogueFilename = getPathForGoodTestCase("param.extra");
             configureMockRepositories(catalogueFilename, "src/test/resources/image/good/validFile.fits");
 
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
             // this would throw an exception if parsing failed, but we expect it to be ok
         }
 
@@ -90,7 +95,7 @@ public class ContinuumIslandCatalogueParserTest
             String catalogueFilename = getPathForGoodTestCase("field.extra");
             configureMockRepositories(catalogueFilename, "src/test/resources/image/good/validFile.fits");
 
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
             // this would throw an exception if parsing failed, but we expect it to be ok
         }
 
@@ -100,7 +105,20 @@ public class ContinuumIslandCatalogueParserTest
             String catalogueFilename = getPathForGoodTestCase("param.attributes.value.lessthan");
             configureMockRepositories(catalogueFilename, "src/test/resources/image/good/validFile.fits");
 
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
+        }
+
+        @Test
+        public void askapsoftNgc7232() throws Exception
+        {
+            String catalogueFilename = getPathForGoodTestCase("ngc7232");
+            configureMockRepositories(catalogueFilename, "image.i.ngc7232.cont.linmos.taylor.0.restored");
+
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
+
+            ArgumentCaptor<DepositState> queryCaptor = ArgumentCaptor.forClass(DepositState.class);
+            verify(catalogue).setDepositState(queryCaptor.capture());
+            assertThat(queryCaptor.getValue().getType(), is(DepositState.Type.PROCESSED));
         }
 
     }
@@ -116,7 +134,7 @@ public class ContinuumIslandCatalogueParserTest
             String filename = RandomStringUtils.randomAlphabetic(30);
             expectedException.expect(FileNotFoundException.class);
             expectedException.expectMessage(containsString(filename));
-            parser.parseFile(12345, filename, filename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, filename, filename, CatalogueParser.Mode.NORMAL, null);
         }
     }
 
@@ -140,7 +158,7 @@ public class ContinuumIslandCatalogueParserTest
             expectedException.expect(CatalogueParser.DatabaseException.class);
             expectedException.expectMessage(
                     containsString("Could not find matching Observation record for sbid '" + sbid.toString() + "'"));
-            parser.parseFile(sbid, filename, imageCubeFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(sbid, filename, imageCubeFilename, CatalogueParser.Mode.NORMAL, null);
         }
     }
 
@@ -166,7 +184,7 @@ public class ContinuumIslandCatalogueParserTest
             expectedException.expect(CatalogueParser.DatabaseException.class);
             expectedException.expectMessage(containsString("Could not find matching Catalogue record for filename '"
                     + filename + "' on Observation '" + sbid.toString() + "'"));
-            parser.parseFile(sbid, filename, imageCubeFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(sbid, filename, imageCubeFilename, CatalogueParser.Mode.NORMAL, null);
         }
     }
 
@@ -195,7 +213,7 @@ public class ContinuumIslandCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString("Cannot find the declaration of element 'AVOTABLE'"));
 
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -207,7 +225,7 @@ public class ContinuumIslandCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(
                     containsString("Error in TABLE : " + "Missing PARAM matching name: 'imageFile', datatype: 'char'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -219,7 +237,7 @@ public class ContinuumIslandCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(
                     containsString("Attribute 'ucdDIFFERENT' is not allowed to appear in element 'PARAM'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -231,7 +249,7 @@ public class ContinuumIslandCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException
                     .expectMessage(containsString("Attribute 'extra' is not allowed to appear in element 'PARAM'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -242,7 +260,7 @@ public class ContinuumIslandCatalogueParserTest
 
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString("Attribute 'datatype' must appear on element 'PARAM'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -252,7 +270,7 @@ public class ContinuumIslandCatalogueParserTest
             configureMockRepositories(catalogueFilename, "src/test/resources/image/good/validFile.fits");
 
             // optional attribute missing is now ok
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -264,7 +282,7 @@ public class ContinuumIslandCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString(
                     "Error in PARAM 'imageFile' : " + "Attribute 'arraysize' ('260') exceeds maximum of '255'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -291,7 +309,7 @@ public class ContinuumIslandCatalogueParserTest
                     + "too/long/tooo/long/too/long/too/long/too/long/too/long/too/long/too/long/too/long/too/long/"
                     + "too/long/too/long/too/long/too/long/too/long/too/long/good/image.i.clean.restored.fits' "
                     + "is wider than 255 chars"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -352,7 +370,7 @@ public class ContinuumIslandCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString(
                     "Error in TABLE : " + "Missing FIELD matching name: 'ra_hms_cont', datatype: 'char'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -364,7 +382,7 @@ public class ContinuumIslandCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(
                     containsString("Attribute 'ucdDIFFERENT' is not allowed to appear in element 'FIELD'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -376,7 +394,7 @@ public class ContinuumIslandCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException
                     .expectMessage(containsString("Attribute 'extra' is not allowed to appear in element 'FIELD'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -387,7 +405,7 @@ public class ContinuumIslandCatalogueParserTest
 
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString("Attribute 'datatype' must appear on element 'FIELD'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -399,7 +417,7 @@ public class ContinuumIslandCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException
                     .expectMessage(containsString("Error in FIELD 'ra_hms_cont' : Attribute 'ref' is required"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -409,7 +427,7 @@ public class ContinuumIslandCatalogueParserTest
             configureMockRepositories(catalogueFilename, "src/test/resources/image/good/validFile.fits");
 
             // arraysize missing is no longer a problem - maxarraysize will check against the field width
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -420,7 +438,7 @@ public class ContinuumIslandCatalogueParserTest
 
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString("Error in 1st TR : Additional TD"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -431,7 +449,7 @@ public class ContinuumIslandCatalogueParserTest
 
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString("Error in 1st TR : Missing TD"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -451,7 +469,7 @@ public class ContinuumIslandCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString("Error in 2nd TD (FIELD 'island_name') of 1st TR : "
                     + "Value 'J222633-623305 TOO LONG' is wider than 15 chars"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -463,7 +481,7 @@ public class ContinuumIslandCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString(
                     "Error in 3rd TD (FIELD 'n_components') of 1st TR : " + "Value '1OOPS' is not a 'int'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -475,7 +493,7 @@ public class ContinuumIslandCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString(
                     "Error in 3rd TD (FIELD 'n_components') of 1st TR : " + "Value '123456' is wider than 5 chars"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -494,7 +512,7 @@ public class ContinuumIslandCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString(
                     "Error in 6th TD (FIELD 'ra_deg_cont') of 1st TR : " + "Value '3OOPS36.641196' is not a 'double'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -506,7 +524,7 @@ public class ContinuumIslandCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString("Error in 6th TD (FIELD 'ra_deg_cont') of 1st TR : "
                     + "Value '1223336.641196' is wider than 12 chars"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -518,7 +536,7 @@ public class ContinuumIslandCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString("Error in 6th TD (FIELD 'ra_deg_cont') of 1st TR : "
                     + "Value '33.6411961' is more precise than 6 decimal places"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
         @Test
@@ -530,7 +548,7 @@ public class ContinuumIslandCatalogueParserTest
             expectedException.expect(CatalogueParser.MalformedFileException.class);
             expectedException.expectMessage(containsString(
                     "Error in 6th TD (FIELD 'ra_deg_cont') of 2nd TR : " + "Value 'OOPS' is not a 'double'"));
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
         }
 
     }

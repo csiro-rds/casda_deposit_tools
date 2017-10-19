@@ -56,6 +56,7 @@
 		<evaluation>
 			<format>pdf</format>
 			<filename>/scratch/askap/12345/evaluation.pdf</filename>
+			<project>AS031</project>
 			<!-- error01 - 'unknown' element not in content model -->
 			<unknown>Error</unknown>
 		</evaluation>

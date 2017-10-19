@@ -1,5 +1,7 @@
 package au.csiro.casda.datadeposit.observation.assembler;
 
+import java.io.File;
+
 import au.csiro.casda.datadeposit.observation.ObservationParser.MalformedFileException;
 import au.csiro.casda.datadeposit.observation.parser.XmlObservation;
 import au.csiro.casda.entity.observation.Observation;
@@ -51,12 +53,36 @@ public interface ObservationAssembler
      *            the JAXB root element for the parsed observation.
      * @param fileIdMaxSize
      *            allowed max file Id.
+     * @param parentFilePath
+     *            the path to observation folder  
+     * @param cubeletEnabled
+     *            Are cubelets allowed to be deposited in this environment
      * @return a new Observation
      * @throws ObservationAlreadyExistsException
      *             if an Observation already exists for the parsed observation's SBID.
      * @throws MalformedFileException 
      * 			   Thrown when parse fails due to errors in xml file
      */
-    public Observation createObservationFromParsedObservation(XmlObservation parsedObservation, int fileIdMaxSize)
+    public Observation createObservationFromParsedObservation(XmlObservation parsedObservation, int fileIdMaxSize,
+            File parentFilePath, boolean cubeletEnabled)
             throws ObservationAlreadyExistsException, MalformedFileException;
+
+    /**
+     * Updates an existing Observation from a parsed observation.
+     * 
+     * @param parsedObservation
+     *            the JAXB root element for the parsed observation.
+     * @param fileIdMaxSize
+     *            allowed max file Id.
+     * @param parentFilePath
+     *            the path to observation folder  
+     * @param cubeletEnabled
+     *            Are cubelets allowed to be deposited in this environment
+     * @return the updated Observation
+     * @throws MalformedFileException 
+     *             Thrown when parse fails due to errors in xml file
+     */
+    public Observation updateObservationFromParsedObservation(XmlObservation parsedObservation, int fileIdMaxSize,
+            File parentFilePath, boolean cubeletEnabled)
+            throws MalformedFileException;
 }

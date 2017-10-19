@@ -14,13 +14,18 @@ package au.csiro.casda.datadeposit.observation;
 
 
 import static org.hamcrest.text.MatchesPattern.matchesPattern;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.sameInstance;
+import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 
 import org.apache.logging.log4j.Level;
@@ -96,7 +101,7 @@ public class ObservationCommandLineImporterTest extends AbstractArgumentsDrivenC
     {
         exit.expectSystemExitWithStatus(1);
         Exception exception = new FileNotFoundException();
-        doThrow(exception).when(observationParser).parseFile(anyInt(), anyString());
+        doThrow(exception).when(observationParser).parseFile(anyInt(), anyString(), anyBoolean());
 
         runAndCheckConditionsIgnoringExit(() -> {
             importer.run("-sbid", "12345", "-infile", "foo");
@@ -110,7 +115,7 @@ public class ObservationCommandLineImporterTest extends AbstractArgumentsDrivenC
     {
         exit.expectSystemExitWithStatus(1);
         Exception exception = new MalformedFileException("Oops!");
-        doThrow(exception).when(observationParser).parseFile(anyInt(), anyString());
+        doThrow(exception).when(observationParser).parseFile(anyInt(), anyString(), anyBoolean());
 
         runAndCheckConditionsIgnoringExit(() -> {
             importer.run("-sbid", "12345", "-infile", "foo");
@@ -125,7 +130,7 @@ public class ObservationCommandLineImporterTest extends AbstractArgumentsDrivenC
     {
         exit.expectSystemExitWithStatus(1);
         Exception exception = new RepositoryException("Oops!");
-        doThrow(exception).when(observationParser).parseFile(anyInt(), anyString());
+        doThrow(exception).when(observationParser).parseFile(anyInt(), anyString(), anyBoolean());
 
         runAndCheckConditionsIgnoringExit(() -> {
             importer.run("-sbid", "12345", "-infile", "foo");
@@ -144,7 +149,7 @@ public class ObservationCommandLineImporterTest extends AbstractArgumentsDrivenC
         String infile = "src/test/resources/observation/good/metadata-v2-good01.xml";
 
         Observation observation = new Observation(sbid);
-        Mockito.doReturn(observation).when(observationParser).parseFile(12345, infile);
+        Mockito.doReturn(observation).when(observationParser).parseFile(12345, infile, false);
 
         runAndCheckConditionsIgnoringExit(() -> {
             importer.run("-sbid", Integer.toString(sbid), "-infile", infile);
@@ -156,6 +161,27 @@ public class ObservationCommandLineImporterTest extends AbstractArgumentsDrivenC
                     matchesPattern(".*\\[volumeKB: \\d+\\].*"),
                     matchesPattern(".*\\[fileId: observations-" + sbid + "\\].*")), sameInstance((Throwable) null));
         });
+    }
+    
+    @Test
+    public void testCreationOfErrorFile() throws Exception
+    {
+        assertFalse(new File("src/test/resources/observation/bad/ERROR").exists());
+        exit.expectSystemExitWithStatus(1);
+        Exception exception = new RepositoryException("Oops!");
+        doThrow(exception).when(observationParser).parseFile(anyInt(), anyString(), anyBoolean());
+        try
+        {
+            importer.run
+            ("-sbid", "12345", "-infile", "src/test/resources/observation/bad/metadata-v2-catalogue_type_unknown.xml");
+            fail();
+        }
+        catch(Exception e)
+        {
+            File file = new File("src/test/resources/observation/bad/ERROR");
+            assertTrue(file.exists());
+            assertTrue(file.delete());      
+        }
     }
 
     @Override

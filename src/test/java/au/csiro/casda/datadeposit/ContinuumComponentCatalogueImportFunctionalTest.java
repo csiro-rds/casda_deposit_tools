@@ -77,7 +77,7 @@ public class ContinuumComponentCatalogueImportFunctionalTest extends FunctionalT
         }
 
         Observation observation = observationRepository.findAll().iterator().next();
-        Catalogue catalogue = observation.getCataloguesOfType(CatalogueType.CONTINUUM_COMPONENT).get(0);
+        Catalogue catalogue = observation.getCataloguesOfType(CatalogueType.CONTINUUM_COMPONENT).get(1);
         ImageCube imageCube = observation.getImageCubes().get(0);
 
         assertEquals(8.64e+08, catalogue.getFreqRef(), 1.0);
@@ -116,10 +116,15 @@ public class ContinuumComponentCatalogueImportFunctionalTest extends FunctionalT
         assertEquals(21.08, continuumCatalogue.getMajAxisDeconv(), 1e-2);
         assertEquals(15.45, continuumCatalogue.getMinAxisDeconv(), 1e-2);
         assertEquals(-43.78, continuumCatalogue.getPosAngDeconv(), 1e-2);
+        assertEquals(null, continuumCatalogue.getMajAxisDeconvErr());
+        assertEquals(null, continuumCatalogue.getMinAxisDeconvErr());
+        assertEquals(null, continuumCatalogue.getPosAngDeconvErr());
         assertEquals(1194.4159, continuumCatalogue.getChiSquaredFit(), 1e-4);
         assertEquals(2590.406, continuumCatalogue.getRmsFitGauss(), 1e-3);
         assertEquals(7.77, continuumCatalogue.getSpectralIndex(), 1e-2);
         assertEquals(4.44, continuumCatalogue.getSpectralCurvature(), 1e-2);
+        assertEquals(null, continuumCatalogue.getSpectralIndexErr());
+        assertEquals(null, continuumCatalogue.getSpectralCurvatureErr());
         assertEquals(1.477, continuumCatalogue.getRmsImage(), 1e-3);
         assertEquals(1l, new Short(continuumCatalogue.getHasSiblings()).longValue());
         assertEquals(2l, new Short(continuumCatalogue.getFitIsEstimate()).longValue());
@@ -168,6 +173,87 @@ public class ContinuumComponentCatalogueImportFunctionalTest extends FunctionalT
         }
 
         assertEquals(count, continuumComponentRepository.count());
+    }
+
+    @Test
+    @Transactional
+    public void testNewContinuumComponentCatalogueDatafileLoadedAndPersistedToDatabase()
+    {
+        String sbid = "12345";
+        String depositDir = "src/test/resources/functional_test/";
+        importObservation(sbid, depositDir + "observation.xml");
+
+        String continuumCatalogueDatafile = "selavy-results.components-new.xml";
+        try
+        {
+            catalogueCommandLineImporter.run("-catalogue-type", "continuum-component", "-parent-id", sbid,
+                    "-catalogue-filename", continuumCatalogueDatafile, "-infile",
+                    depositDir + continuumCatalogueDatafile);
+            failTestCase();
+        }
+        catch (CheckExitCalled e)
+        {
+            assertEquals("Continuum catalogue data import failed - please check log for details", 0,
+                    e.getStatus().intValue());
+        }
+
+        Observation observation = observationRepository.findAll().iterator().next();
+        Catalogue catalogue = observation.getCataloguesOfType(CatalogueType.CONTINUUM_COMPONENT).get(0);
+        ImageCube imageCube = observation.getImageCubes().get(0);
+
+        assertEquals(8.64e+08, catalogue.getFreqRef(), 1.0);
+
+        assertSame(imageCube, catalogue.getImageCube());
+
+        assertEquals(2, continuumComponentRepository.countByCatalogue(catalogue));
+
+        ContinuumComponent continuumCatalogue = continuumComponentRepository
+                .findByCatalogueOrderByIdAsc(catalogue, new PageRequest(0, 1)).iterator().next();
+
+        assertEquals(12345, continuumCatalogue.getSbid().intValue());
+        assertEquals(catalogue.getProject().getId(), continuumCatalogue.getProjectId());
+        assertEquals("_Images/SB_609_617_639_643_659_no617b6_withBeam_Freq_Stokes.fits_1",
+                continuumCatalogue.getIslandId());
+        assertEquals("_Images/SB_609_617_639_643_659_no617b6_withBeam_Freq_Stokes.fits_1a",
+                continuumCatalogue.getComponentId());
+        assertEquals("J222645-623529", continuumCatalogue.getComponentName());
+        assertEquals("22:26:45.4", continuumCatalogue.getRaHmsCont());
+        assertEquals("-62:35:29", continuumCatalogue.getDecDmsCont());
+        assertEquals(336.689324, continuumCatalogue.getRaDegCont(), 1e-6);
+        assertEquals(-62.591524, continuumCatalogue.getDecDegCont(), 1e-6);
+        assertEquals(21.56, continuumCatalogue.getRaErr(), 1e-2);
+        assertEquals(5.79, continuumCatalogue.getDecErr(), 1e-2);  
+        assertEquals(864.000, continuumCatalogue.getFreq(), 1e-1);
+        assertEquals(1312.663, continuumCatalogue.getFluxPeak(), 1e-3);
+        assertEquals(8.456, continuumCatalogue.getFluxPeakErr(), 1e-3);
+        assertEquals(1440.637, continuumCatalogue.getFluxInt(), 1e-3);
+        assertEquals(1.963, continuumCatalogue.getFluxIntErr(), 1e-3);
+        assertEquals(80.09, continuumCatalogue.getMajAxis(), 1e-2);
+        assertEquals(48.60, continuumCatalogue.getMinAxis(), 1e-2);
+        assertEquals(156.33, continuumCatalogue.getPosAng(), 1e-2);
+        assertEquals(6.21, continuumCatalogue.getMajAxisErr(), 1e-2);
+        assertEquals(11.45, continuumCatalogue.getMinAxisErr(), 1e-2);
+        assertEquals(33.64, continuumCatalogue.getPosAngErr(), 1e-2);
+        assertEquals(21.08, continuumCatalogue.getMajAxisDeconv(), 1e-2);
+        assertEquals(15.45, continuumCatalogue.getMinAxisDeconv(), 1e-2);
+        assertEquals(-43.78, continuumCatalogue.getPosAngDeconv(), 1e-2);
+        assertEquals(0.11, continuumCatalogue.getMajAxisDeconvErr(), 1e-2);
+        assertEquals(0.22, continuumCatalogue.getMinAxisDeconvErr(), 1e-2);
+        assertEquals(0.33, continuumCatalogue.getPosAngDeconvErr(), 1e-2);
+        assertEquals(1194.4159, continuumCatalogue.getChiSquaredFit(), 1e-4);
+        assertEquals(2590.406, continuumCatalogue.getRmsFitGauss(), 1e-3);
+        assertEquals(7.77, continuumCatalogue.getSpectralIndex(), 1e-2);
+        assertEquals(4.44, continuumCatalogue.getSpectralCurvature(), 1e-2);
+        assertEquals(1.44, continuumCatalogue.getSpectralIndexErr(), 1e-2);
+        assertEquals(2.55, continuumCatalogue.getSpectralCurvatureErr(), 1e-2);
+        assertEquals(1.477, continuumCatalogue.getRmsImage(), 1e-3);
+        assertEquals(1l, new Short(continuumCatalogue.getHasSiblings()).longValue());
+        assertEquals(2l, new Short(continuumCatalogue.getFitIsEstimate()).longValue());
+        assertEquals(3l, new Short(continuumCatalogue.getFlagC3()).longValue());
+        assertEquals(4l, new Short(continuumCatalogue.getFlagC4()).longValue());
+        assertEquals(null, continuumCatalogue.getComment());
+        assertEquals(0.248997058, catalogue.getEmMin(), 1e-8);
+        assertEquals(0.346982012, catalogue.getEmMax(), 1e-8);
     }
 
     @Test

@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <VOTABLE version="1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://www.ivoa.net/xml/VOTable/v1.3"
-         xmlns:stc="http://www.ivoa.net/xml/STC/v1.30" >
+ xmlns="http://www.ivoa.net/xml/VOTable/v1.3"
+ xmlns:stc="http://www.ivoa.net/xml/STC/v1.30" >
   <COOSYS ID="J2000" equinox="J2000" system="eq_FK5"/>
-  <RESOURCE name="Polarisation Catalogue from Selavy source-finding">
-    <TABLE name="Polarisation Catalogue">
+  <RESOURCE name="">
+    <TABLE name="">
       <DESCRIPTION></DESCRIPTION>
-      <PARAM name="table_version" ucd="meta.version" datatype="char" arraysize="39" value="casda.polarisation_description_v0.5"/>
-      <PARAM name="imageFile" ucd="meta.file;meta.fits" datatype="char" arraysize="63" value="src/test/resources/image/good/validFile.fits"/>
+      <PARAM name="table_version" ucd="meta.version" datatype="char" arraysize="24" value="casda.polarisation_v0.6"/>
+      <PARAM name="imageFile" ucd="meta.file;meta.fits" datatype="char" arraysize="56" value="src/test/resources/image/good/validFile.fits"/>
       <PARAM name="flagSubsection" ucd="meta.code" datatype="boolean" value="1"/>
-      <PARAM name="subsection" ucd="" datatype="char" arraysize="23" value="[1:2950,1:2084,1:1,1:1]"/>
+      <PARAM name="subsection" ucd="" datatype="char" arraysize="23" value="[1:1536,1:1536,1:1,1:1]"/>
       <PARAM name="flagStatSec" ucd="meta.code" datatype="boolean" value="0"/>
       <PARAM name="StatSec" ucd="" datatype="char" arraysize="7" value="[*,*,*]"/>
       <PARAM name="searchType" ucd="meta.note" datatype="char" arraysize="7" value="spatial"/>
@@ -17,9 +17,9 @@
       <PARAM name="flagBaseline" ucd="meta.code" datatype="boolean" value="0"/>
       <PARAM name="flagRobustStats" ucd="meta.code" datatype="boolean" value="1"/>
       <PARAM name="flagFDR" ucd="meta.code" datatype="boolean" value="0"/>
-      <PARAM name="threshold" ucd="phot.flux;stat.min" datatype="float" value="6"/>
+      <PARAM name="threshold" ucd="phot.flux;stat.min" datatype="float" value="5"/>
       <PARAM name="flagGrowth" ucd="meta.code" datatype="boolean" value="1"/>
-      <PARAM name="growthThreshold" ucd="phot.flux;stat.min" datatype="float" value="4"/>
+      <PARAM name="growthThreshold" ucd="phot.flux;stat.min" datatype="float" value="3"/>
       <PARAM name="minPix" ucd="" datatype="int" value="3"/>
       <PARAM name="minChannels" ucd="" datatype="int" value="0"/>
       <PARAM name="minVoxels" ucd="" datatype="int" value="3"/>
@@ -31,56 +31,104 @@
       <PARAM name="pixelCentre" ucd="" datatype="char" arraysize="8" value="centroid"/>
       <PARAM name="flagSmooth" ucd="meta.code" datatype="boolean" value="0"/>
       <PARAM name="flagATrous" ucd="meta.code" datatype="boolean" value="0"/>
-      <PARAM name="Reference frequency" ucd="em.freq;meta.main" datatype="float" unit="Hz" value="8.64e+08"/>
-      <PARAM name="thresholdActual" ucd="" datatype="float" unit="Jy/beam" value="6"/>
-      <FIELD name="component_id" ID="col_component_id" ucd="meta.id;meta.main" datatype="char" unit="none" arraysize="50" precision="2" />
-      <FIELD name="component_name" ID="col_component_name" ucd="meta.id" datatype="char" unit="none" arraysize="50" precision="2" />
-      <FIELD name="ra_deg_cont" ID="col_ra_deg_cont" ucd="pos.eq.ra;meta.main" datatype="double" unit="deg" width="50" precision="6" />
-      <FIELD name="dec_deg_cont" ID="col_dec_deg_cont" ucd="pos.eq.dec;meta.main" datatype="double" unit="deg" width="50" precision="6" />
-      <FIELD name="flux_I_median" ID="col_flux_I_median" ucd="phot.flux.density;em.radio" datatype="double" unit="mJy/beam" width="50" precision="2" />
-      <FIELD name="flux_Q_median" ID="col_flux_Q_median" ucd="phot.flux.density;em.radio;askap:phys.polarization.stokes.Q" datatype="double" unit="mJy/beam" width="50" precision="2" />
-      <FIELD name="flux_U_median" ID="col_flux_U_median" ucd="phot.flux.density;em.radio;askap:phys.polarization.stokes.U" datatype="double" unit="mJy/beam" width="50" precision="2" />
-      <FIELD name="flux_V_median" ID="col_flux_V_median" ucd="phot.flux.density;em.radio;askap:phys.polarization.stokes.V" datatype="double" unit="mJy/beam" width="50" precision="4" />
-      <FIELD name="rms_I" ID="col_rms_I" ucd="stat.stdev;phot.flux.density" datatype="double" unit="mJy/beam" width="50" precision="4" />
-      <FIELD name="rms_Q" ID="col_rms_Q" ucd="stat.stdev;phot.flux.density;askap:phys.polarization.stokes.Q" datatype="double" unit="mJy/beam" width="50" precision="4" />
-      <FIELD name="rms_U" ID="col_rms_U" ucd="stat.stdev;phot.flux.density;askap:phys.polarization.stokes.U" datatype="double" unit="mJy/beam" width="50" precision="4" />
-      <FIELD name="rms_V" ID="col_rms_V" ucd="stat.stdev;phot.flux.density;askap:phys.polarization.stokes.V" datatype="double" unit="mJy/beam" width="50" precision="4" />
-      <FIELD name="co_1" ID="col_co_1" ucd="stat.fit.param;spect.continuum" datatype="double" unit="none" width="50" precision="2" />
-      <FIELD name="co_2" ID="col_co_2" ucd="stat.fit.param;spect.continuum" datatype="double" unit="none" width="50" precision="2" />
-      <FIELD name="co_3" ID="col_co_3" ucd="stat.fit.param;spect.continuum" datatype="double" unit="none" width="50" precision="2" />
-      <FIELD name="co_4" ID="col_co_4" ucd="stat.fit.param;spect.continuum" datatype="double" unit="none" width="50" precision="2" />
-      <FIELD name="co_5" ID="col_co_5" ucd="stat.fit.param;spect.continuum" datatype="double" unit="none" width="50" precision="2" />
-      <FIELD name="lambda_ref_sq" ID="col_lambda_ref_sq" ucd="askap:em.wl.squared" datatype="double" unit="m2" width="50" precision="2" />
-      <FIELD name="rmsf_fwhm" ID="col_rmsf_fwhm" ucd="phys.polarization.rotMeasure;askap:phys.polarization.rmsfWidth" datatype="double" unit="rad/m2" width="50" precision="2" />
-      <FIELD name="pol_peak" ID="col_pol_peak" ucd="phot.flux.density;phys.polarization.rotMeasure;stat.max" datatype="double" unit="mJy/beam" width="50" precision="2" />
-      <FIELD name="pol_peak_debias" ID="col_pol_peak_debias" ucd="phot.flux.density;phys.polarization.rotMeasure;stat.max;askap:meta.corrected" datatype="double" unit="mJy/beam" width="50" precision="2" />
-      <FIELD name="pol_peak_err" ID="col_pol_peak_err" ucd="stat.error;phot.flux.density;phys.polarization.rotMeasure;stat.max" datatype="double" unit="mJy/beam" width="50" precision="2" />
-      <FIELD name="pol_peak_fit" ID="col_pol_peak_fit" ucd="phot.flux.density;phys.polarization.rotMeasure;stat.max;stat.fit" datatype="double" unit="mJy/beam" width="50" precision="2" />
-      <FIELD name="pol_peak_fit_debias" ID="col_pol_peak_fit_debias" ucd="phot.flux.density;phys.polarization.rotMeasure;stat.max;stat.fit;askap:meta.corrected" datatype="double" unit="mJy/beam" width="50" precision="2" />
-      <FIELD name="pol_peak_fit_err" ID="col_pol_peak_fit_err" ucd="stat.error;phot.flux.density;phys.polarization.rotMeasure;stat.max;stat.fit" datatype="double" unit="mJy/beam" width="50" precision="2" />
-      <FIELD name="pol_peak_fit_snr" ID="col_pol_peak_fit_snr" ucd="stat.snr;phot.flux.density;phys.polarization.rotMeasure;stat.max;stat.fit" datatype="double" unit="none" width="50" precision="2" />
-      <FIELD name="pol_peak_fit_snr_err" ID="col_pol_peak_fit_snr_err" ucd="stat.error;stat.snr;phot.flux.density;phys.polarization.rotMeasure;stat.max;stat.fit" datatype="double" unit="none" width="50" precision="2" />
-      <FIELD name="fd_peak" ID="col_fd_peak" ucd="phys.polarization.rotMeasure " datatype="double" unit="rad/m2" width="50" precision="2" />
-      <FIELD name="fd_peak_err" ID="col_fd_peak_err" ucd="stat.error;phys.polarization.rotMeasure " datatype="double" unit="rad/m2" width="50" precision="2" />
-      <FIELD name="fd_peak_fit" ID="col_fd_peak_fit" ucd="phys.polarization.rotMeasure;stat.fit" datatype="double" unit="rad/m2" width="50" precision="2" />
-      <FIELD name="fd_peak_fit_err" ID="col_fd_peak_fit_err" ucd="stat.error;phys.polarization.rotMeasure;stat.fit" datatype="double" unit="rad/m2" width="50" precision="2" />
-      <FIELD name="pol_ang_ref" ID="col_pol_ang_ref" ucd="askap:phys.polarization.angle" datatype="double" unit="deg" width="50" precision="2" />
-      <FIELD name="pol_ang_ref_err" ID="col_pol_ang_ref_err" ucd="stat.error;askap:phys.polarization.angle" datatype="double" unit="deg" width="50" precision="2" />
-      <FIELD name="pol_ang_zero" ID="col_pol_ang_zero" ucd="askap:phys.polarization.angle;askap:meta.corrected" datatype="double" unit="deg" width="50" precision="2" />
-      <FIELD name="pol_ang_zero_err" ID="col_pol_ang_zero_err" ucd="stat.error;askap:phys.polarization.angle;askap:meta.corrected" datatype="double" unit="deg" width="50" precision="2" />
-      <FIELD name="pol_frac" ID="col_pol_frac" ucd="phys.polarization" datatype="double" unit="none" width="50" precision="2" />
-      <FIELD name="pol_frac_err" ID="col_pol_frac_err" ucd="stat.error;phys.polarization" datatype="double" unit="none" width="50" precision="2" />
-      <FIELD name="complex_1" ID="col_complex_1" ucd="stat.value;phys.polarization" datatype="double" unit="none" width="50" precision="2" />
-      <FIELD name="complex_2" ID="col_complex_2" ucd="stat.value;phys.polarization" datatype="double" unit="none" width="50" precision="2" />
-      <FIELD name="flag_p1" ID="col_flag_p1" ucd="meta.code" datatype="boolean" unit="none" width="50" precision="2" />
-      <FIELD name="flag_p2" ID="col_flag_p2" ucd="meta.code" datatype="boolean" unit="none" width="50" precision="2" />
-      <FIELD name="flag_p3" ID="col_flag_p3" ucd="meta.code" datatype="char" unit="none" arraysize="50" precision="2" />
-      <FIELD name="flag_p4" ID="col_flag_p4" ucd="meta.code" datatype="char" unit="none" arraysize="50" precision="2" />
+      <PARAM name="Reference frequency" ucd="em.freq;meta.main" datatype="float" unit="Hz" value="1.40049e+09"/>
+      <PARAM name="thresholdActual" ucd="" datatype="float" unit="Jy/beam" value="5"/>
+      <FIELD name="component_id" ID="col_component_id" ucd="meta.id;meta.main" datatype="char" unit="--" arraysize="63"/>
+      <FIELD name="component_name" ID="col_component_name" ucd="meta.id" datatype="char" unit="" arraysize="15"/>
+      <FIELD name="ra_deg_cont" ID="col_ra_deg_cont" ucd="pos.eq.ra;meta.main" ref="J2000" datatype="double" unit="deg" width="12" precision="6"/>
+      <FIELD name="dec_deg_cont" ID="col_dec_deg_cont" ucd="pos.eq.dec;meta.main" ref="J2000" datatype="double" unit="deg" width="13" precision="6"/>
+      <FIELD name="flux_I_median" ID="col_flux_i_med" ucd="phot.flux.density;em.radio" datatype="double" unit="mJy/beam" width="11" precision="3"/>
+      <FIELD name="flux_Q_median" ID="col_flux_q_med" ucd="phot.flux.density;em.radio;askap:phys.polarization.stokes.Q" datatype="double" unit="mJy/beam" width="11" precision="3"/>
+      <FIELD name="flux_U_median" ID="col_flux_u_med" ucd="phot.flux.density;em.radio;askap:phys.polarization.stokes.U" datatype="double" unit="mJy/beam" width="11" precision="3"/>
+      <FIELD name="flux_V_median" ID="col_flux_v_med" ucd="phot.flux.density;em.radio;askap:phys.polarization.stokes.V" datatype="double" unit="mJy/beam" width="11" precision="3"/>
+      <FIELD name="rms_I" ID="col_rms_i" ucd="stat.stdev;phot.flux.density" datatype="double" unit="mJy/beam" width="11" precision="3"/>
+      <FIELD name="rms_Q" ID="col_rms_q" ucd="stat.stdev;phot.flux.density;askap:phys.polarization.stokes.Q" datatype="double" unit="mJy/beam" width="11" precision="3"/>
+      <FIELD name="rms_U" ID="col_rms_u" ucd="stat.stdev;phot.flux.density;askap:phys.polarization.stokes.U" datatype="double" unit="mJy/beam" width="11" precision="3"/>
+      <FIELD name="rms_V" ID="col_rms_v" ucd="stat.stdev;phot.flux.density;askap:phys.polarization.stokes.V" datatype="double" unit="mJy/beam" width="11" precision="3"/>
+      <FIELD name="co_1" ID="col_co_1" ucd="stat.fit.param;spect.continuum" datatype="double" unit="" width="8" precision="3"/>
+      <FIELD name="co_2" ID="col_co_2" ucd="stat.fit.param;spect.continuum" datatype="double" unit="" width="8" precision="3"/>
+      <FIELD name="co_3" ID="col_co_3" ucd="stat.fit.param;spect.continuum" datatype="double" unit="" width="8" precision="3"/>
+      <FIELD name="co_4" ID="col_co_4" ucd="stat.fit.param;spect.continuum" datatype="double" unit="" width="8" precision="3"/>
+      <FIELD name="co_5" ID="col_co_5" ucd="stat.fit.param;spect.continuum" datatype="double" unit="" width="8" precision="3"/>
+      <FIELD name="lambda_ref_sq" ID="col_lambda_ref_sq" ucd="askap:em.wl.squared" datatype="double" unit="m2" width="14" precision="4"/>
+      <FIELD name="rmsf_fwhm" ID="col_rmsf_fwhm" ucd="phys.polarization.rotMeasure;askap:phys.polarization.rmsfWidth" datatype="double" unit="rad/m2" width="10" precision="4"/>
+      <FIELD name="pol_peak" ID="col_pol_peak" ucd="phot.flux.density;phys.polarization.rotMeasure;stat.max" datatype="double" unit="mJy/beam" width="11" precision="3"/>
+      <FIELD name="pol_peak_debias" ID="col_pol_peak_debias" ucd="phot.flux.density;phys.polarization.rotMeasure;stat.max;askap:meta.corrected" datatype="double" unit="mJy/beam" width="16" precision="3"/>
+      <FIELD name="pol_peak_err" ID="col_pol_peak_err" ucd="stat.error;phot.flux.density;phys.polarization.rotMeasure;stat.max" datatype="double" unit="mJy/beam" width="13" precision="3"/>
+      <FIELD name="pol_peak_fit" ID="col_pol_peak_fit" ucd="phot.flux.density;phys.polarization.rotMeasure;stat.max;stat.fit" datatype="double" unit="mJy/beam" width="13" precision="3"/>
+      <FIELD name="pol_peak_fit_debias" ID="col_pol_peak_fit_debias" ucd="phot.flux.density;phys.polarization.rotMeasure;stat.max;stat.fit;askap:meta.corrected" datatype="double" unit="mJy/beam" width="20" precision="3"/>
+      <FIELD name="pol_peak_fit_err" ID="col_pol_peak_fit_err" ucd="stat.error;phot.flux.density;phys.polarization.rotMeasure;stat.fit;stat.max" datatype="double" unit="mJy/beam" width="17" precision="3"/>
+      <FIELD name="pol_peak_fit_snr" ID="col_pol_peak_fit_snr" ucd="stat.snr;phot.flux.density;phys.polarization.rotMeasure;stat.max;stat.fit" datatype="double" unit="" width="17" precision="3"/>
+      <FIELD name="pol_peak_fit_snr_err" ID="col_pol_peak_fit_snr_err" ucd="stat.error;stat.snr;phot.flux.density;phys.polarization.rotMeasure;stat.fit;stat.max" datatype="double" unit="" width="21" precision="3"/>
+      <FIELD name="fd_peak" ID="col_fd_peak" ucd="phys.polarization.rotMeasure" datatype="double" unit="rad/m2" width="9" precision="4"/>
+      <FIELD name="fd_peak_err" ID="col_fd_peak_err" ucd="stat.error;phys.polarization.rotMeasure" datatype="double" unit="rad/m2" width="12" precision="4"/>
+      <FIELD name="fd_peak_fit" ID="col_fd_peak_fit" ucd="phys.polarization.rotMeasure;stat.fit" datatype="double" unit="rad/m2" width="12" precision="4"/>
+      <FIELD name="fd_peak_fit_err" ID="col_fd_peak_fit_err" ucd="stat.error;phys.polarization.rotMeasure;stat.fit" datatype="double" unit="rad/m2" width="16" precision="4"/>
+      <FIELD name="pol_ang_ref" ID="col_pol_angle_ref" ucd="askap:phys.polarization.angle" datatype="double" unit="deg" width="12" precision="3"/>
+      <FIELD name="pol_ang_ref_err" ID="col_pol_angle_ref_err" ucd="stat.error;askap:phys.polarization.angle" datatype="double" unit="deg" width="16" precision="3"/>
+      <FIELD name="pol_ang_zero" ID="col_pol_ang_zero" ucd="askap:phys.polarization.angle;meta.corrected" datatype="double" unit="deg" width="13" precision="3"/>
+      <FIELD name="pol_ang_zero_err" ID="col_pol_ang_zero_err" ucd="stat.error;askap:phys.polarization.angle;meta.corrected" datatype="double" unit="deg" width="17" precision="3"/>
+      <FIELD name="pol_frac" ID="col_pol_frac" ucd="phys.polarization" datatype="double" unit="" width="9" precision="2"/>
+      <FIELD name="pol_frac_err" ID="col_pol_frac_err" ucd="stat.error;phys.polarization" datatype="double" unit="" width="13" precision="5"/>
+      <FIELD name="complex_1" ID="col_complex_1" ucd="stat.value;phys.polarization" datatype="double" unit="" width="10" precision="2"/>
+      <FIELD name="complex_2" ID="col_complex_2" ucd="stat.value;phys.polarization" datatype="double" unit="" width="10" precision="2"/>
+      <FIELD name="flag_is_detection" ID="col_flag_is_detection" ucd="meta.code" datatype="int" unit="" width="18"/>
+      <FIELD name="flag_edge" ID="col_flag_edge" ucd="meta.code" datatype="int" unit="" width="10"/>
+      <FIELD name="flag_p3" ID="col_flag_3" ucd="meta.code" datatype="int" unit="" width="7"/>
+      <FIELD name="flag_p4" ID="col_flag_4" ucd="meta.code" datatype="int" unit="" width="7"/>
       <DATA>
         <TABLEDATA>
-          <TR>
-            <TD>SB001_image_1a</TD> <TD>J1234-4321</TD> <TD>12.582438</TD> <TD>-43.352742</TD> <TD>1.0</TD> <TD>0.5</TD> <TD>-0.4</TD> <TD>0.0010</TD> <TD>0.0010</TD> <TD>0.0012</TD> <TD>0.0013</TD> <TD>0.0012</TD> <TD>1.0</TD> <TD>1.0</TD> <TD>1.0</TD> <TD>1.0</TD> <TD>1.0</TD> <TD>0.09</TD> <TD>5.0</TD> <TD>1.5</TD> <TD>1.4</TD> <TD>0.01</TD> <TD>1.55</TD> <TD>1.42</TD> <TD>0.01</TD> <TD>150.0</TD> <TD>1.0</TD> <TD>50.0</TD> <TD>5.0</TD> <TD>52.0</TD> <TD>5.2</TD> <TD>30.0</TD> <TD>1.0</TD> <TD>45.0</TD> <TD>1.0</TD> <TD>8.0</TD> <TD>0.1</TD> <TD>0.0</TD> <TD>0.0</TD> <TD>1</TD> <TD>0</TD> <TD>0.0</TD> <TD>0.0</TD>
-          </TR>
+        <TR>
+          <TD>  SB2012_image.i.NGC7232.cont.sb2012.NGC7232.linmos.restored_1a</TD><TD> J222116-461542</TD><TD>  335.316498</TD><TD>   -46.261799</TD><TD>     71.703</TD><TD>     14.566</TD><TD>     -0.379</TD><TD>      1.560</TD><TD>      2.870</TD><TD>      2.870</TD><TD>      2.870</TD><TD>      2.870</TD><TD>  72.310</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>        0.0458</TD><TD> 1256.7396</TD><TD>     14.872</TD><TD>          14.859</TD><TD>        0.409</TD><TD>       14.872</TD><TD>              14.859</TD><TD>            0.409</TD><TD>           36.368</TD><TD>                0.000</TD><TD>   5.0000</TD><TD>     17.2783</TD><TD>      4.7775</TD><TD>         17.2783</TD><TD>      -0.365</TD><TD>           0.788</TD><TD>       -0.594</TD><TD>          129.010</TD><TD>     0.21</TD><TD>      0.00058</TD><TD>      1.00</TD><TD>      8.92</TD><TD>                 1</TD><TD>         1</TD><TD>      0</TD><TD>      0</TD>
+        </TR>
+        <TR>
+          <TD>  SB2012_image.i.NGC7232.cont.sb2012.NGC7232.linmos.restored_2a</TD><TD> J222254-452723</TD><TD>  335.727600</TD><TD>   -45.456532</TD><TD>     18.431</TD><TD>    -14.868</TD><TD>     -0.368</TD><TD>      0.247</TD><TD>      1.870</TD><TD>      1.870</TD><TD>      1.870</TD><TD>      1.870</TD><TD>  17.617</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>        0.0458</TD><TD> 1282.3630</TD><TD>     15.249</TD><TD>          15.243</TD><TD>        0.272</TD><TD>       15.249</TD><TD>              15.243</TD><TD>            0.272</TD><TD>           56.155</TD><TD>                0.000</TD><TD>  -5.0000</TD><TD>     11.4180</TD><TD>     -3.5253</TD><TD>         11.4179</TD><TD>     -89.292</TD><TD>           0.510</TD><TD>      -89.063</TD><TD>          123.023</TD><TD>     0.87</TD><TD>      0.00038</TD><TD>      1.00</TD><TD>      6.79</TD><TD>                 1</TD><TD>         1</TD><TD>      0</TD><TD>      0</TD>
+        </TR>
+        <TR>
+          <TD>  SB2012_image.i.NGC7232.cont.sb2012.NGC7232.linmos.restored_3a</TD><TD> J221923-453838</TD><TD>  334.847046</TD><TD>   -45.643974</TD><TD>     12.636</TD><TD>      6.523</TD><TD>      0.444</TD><TD>     -0.283</TD><TD>      1.382</TD><TD>      1.382</TD><TD>      1.382</TD><TD>      1.382</TD><TD>  13.482</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>        0.0458</TD><TD> 1268.4685</TD><TD>      6.573</TD><TD>           6.566</TD><TD>        0.200</TD><TD>        6.573</TD><TD>               6.566</TD><TD>            0.200</TD><TD>           32.852</TD><TD>                0.000</TD><TD>  10.0000</TD><TD>     19.3057</TD><TD>      7.9361</TD><TD>         19.3055</TD><TD>       1.292</TD><TD>           0.872</TD><TD>        0.834</TD><TD>          662.003</TD><TD>     0.49</TD><TD>      0.00028</TD><TD>      1.00</TD><TD>     82.57</TD><TD>                 1</TD><TD>         1</TD><TD>      0</TD><TD>      0</TD>
+        </TR>
+        <TR>
+          <TD>  SB2012_image.i.NGC7232.cont.sb2012.NGC7232.linmos.restored_4a</TD><TD> J221912-454928</TD><TD>  334.803253</TD><TD>   -45.824650</TD><TD>     11.090</TD><TD>      1.963</TD><TD>     -0.023</TD><TD>     -0.240</TD><TD>      1.524</TD><TD>      1.524</TD><TD>      1.524</TD><TD>      1.524</TD><TD>  11.103</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>        0.0458</TD><TD> 1258.8109</TD><TD>      2.261</TD><TD>           2.236</TD><TD>        0.219</TD><TD>        2.261</TD><TD>               2.236</TD><TD>            0.219</TD><TD>           10.330</TD><TD>                0.000</TD><TD>  15.0000</TD><TD>     60.9293</TD><TD>     17.0577</TD><TD>         60.9289</TD><TD>      -1.176</TD><TD>           2.773</TD><TD>       -1.863</TD><TD>         5571.285</TD><TD>     0.20</TD><TD>      0.00031</TD><TD>      1.00</TD><TD>     13.76</TD><TD>                 1</TD><TD>         1</TD><TD>      0</TD><TD>      0</TD>
+        </TR>
+        <TR>
+          <TD>  SB2012_image.i.NGC7232.cont.sb2012.NGC7232.linmos.restored_5a</TD><TD> J222014-455652</TD><TD>  335.059326</TD><TD>   -45.948029</TD><TD>     10.132</TD><TD>      2.319</TD><TD>     -0.071</TD><TD>      0.378</TD><TD>      1.482</TD><TD>      1.482</TD><TD>      1.482</TD><TD>      1.482</TD><TD>  19.782</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>        0.0458</TD><TD> 1240.3199</TD><TD>      2.643</TD><TD>           2.623</TD><TD>        0.213</TD><TD>        2.643</TD><TD>               2.623</TD><TD>            0.213</TD><TD>           12.425</TD><TD>                0.000</TD><TD>   0.0000</TD><TD>     49.9130</TD><TD>     -0.4346</TD><TD>         49.9129</TD><TD>      -0.996</TD><TD>           2.306</TD><TD>       -0.996</TD><TD>         4085.918</TD><TD>     0.13</TD><TD>      0.00030</TD><TD>      1.00</TD><TD>     15.68</TD><TD>                 1</TD><TD>         1</TD><TD>      0</TD><TD>      0</TD>
+        </TR>
+        <TR>
+          <TD>  SB2012_image.i.NGC7232.cont.sb2012.NGC7232.linmos.restored_6a</TD><TD> J222316-452358</TD><TD>  335.817566</TD><TD>   -45.399639</TD><TD>      8.944</TD><TD>     -6.694</TD><TD>      0.453</TD><TD>      0.230</TD><TD>      2.310</TD><TD>      2.310</TD><TD>      2.310</TD><TD>      2.310</TD><TD>   9.103</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>        0.0459</TD><TD> 1279.9803</TD><TD>      6.347</TD><TD>           6.327</TD><TD>        0.329</TD><TD>        6.347</TD><TD>               6.327</TD><TD>            0.329</TD><TD>           19.285</TD><TD>                0.000</TD><TD> -20.0000</TD><TD>     33.1860</TD><TD>    -19.1918</TD><TD>         33.1859</TD><TD>      89.397</TD><TD>           1.486</TD><TD>       90.315</TD><TD>          712.736</TD><TD>     0.70</TD><TD>      0.00047</TD><TD>      1.00</TD><TD>      0.74</TD><TD>                 1</TD><TD>         1</TD><TD>      0</TD><TD>      0</TD>
+        </TR>
+        <TR>
+          <TD>  SB2012_image.i.NGC7232.cont.sb2012.NGC7232.linmos.restored_7a</TD><TD> J222053-460250</TD><TD>  335.222809</TD><TD>   -46.047302</TD><TD>      6.188</TD><TD>      1.753</TD><TD>     -0.333</TD><TD>      0.428</TD><TD>      1.669</TD><TD>      1.669</TD><TD>      1.669</TD><TD>      1.669</TD><TD>   9.759</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>        0.0458</TD><TD> 1248.2335</TD><TD>      1.899</TD><TD>           1.864</TD><TD>        0.000</TD><TD>        0.000</TD><TD>               0.000</TD><TD>            0.000</TD><TD>            7.118</TD><TD>                0.000</TD><TD>   0.0000</TD><TD>      0.0000</TD><TD>      0.0000</TD><TD>          0.0000</TD><TD>       0.000</TD><TD>           0.000</TD><TD>        0.000</TD><TD>            0.000</TD><TD>     0.00</TD><TD>      0.00000</TD><TD>      1.00</TD><TD>      0.74</TD><TD>                 0</TD><TD>         0</TD><TD>      0</TD><TD>      0</TD>
+        </TR>
+        <TR>
+          <TD>  SB2012_image.i.NGC7232.cont.sb2012.NGC7232.linmos.restored_8a</TD><TD> J222046-455148</TD><TD>  335.193726</TD><TD>   -45.863567</TD><TD>      7.556</TD><TD>      4.510</TD><TD>     -0.334</TD><TD>     -0.123</TD><TD>      1.269</TD><TD>      1.269</TD><TD>      1.269</TD><TD>      1.269</TD><TD>   8.060</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>        0.0458</TD><TD> 1224.8372</TD><TD>      4.392</TD><TD>           4.383</TD><TD>        0.181</TD><TD>        4.392</TD><TD>               4.383</TD><TD>            0.181</TD><TD>           24.227</TD><TD>                0.000</TD><TD> -10.0000</TD><TD>     25.2783</TD><TD>     -9.9734</TD><TD>         25.2783</TD><TD>      -0.844</TD><TD>           1.182</TD><TD>       -0.386</TD><TD>         1473.510</TD><TD>     0.54</TD><TD>      0.00026</TD><TD>      1.00</TD><TD>     14.16</TD><TD>                 1</TD><TD>         1</TD><TD>      0</TD><TD>      0</TD>
+        </TR>
+        <TR>
+          <TD>  SB2012_image.i.NGC7232.cont.sb2012.NGC7232.linmos.restored_9a</TD><TD> J221816-460007</TD><TD>  334.569336</TD><TD>   -46.002174</TD><TD>      3.768</TD><TD>      0.492</TD><TD>     -0.024</TD><TD>     -0.182</TD><TD>      2.607</TD><TD>      2.607</TD><TD>      2.607</TD><TD>      2.607</TD><TD>   4.872</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>        0.0458</TD><TD> 1249.8889</TD><TD>      2.999</TD><TD>       -1000.000</TD><TD>        0.000</TD><TD>        0.000</TD><TD>               0.000</TD><TD>            0.000</TD><TD>            1.879</TD><TD>                0.000</TD><TD>   0.0000</TD><TD>      0.0000</TD><TD>      0.0000</TD><TD>          0.0000</TD><TD>       0.000</TD><TD>           0.000</TD><TD>        0.000</TD><TD>            0.000</TD><TD>     0.00</TD><TD>      0.00000</TD><TD>      1.00</TD><TD>     14.16</TD><TD>                 0</TD><TD>         0</TD><TD>      0</TD><TD>      0</TD>
+        </TR>
+        <TR>
+          <TD> SB2012_image.i.NGC7232.cont.sb2012.NGC7232.linmos.restored_10a</TD><TD> J222107-461331</TD><TD>  335.281128</TD><TD>   -46.225521</TD><TD>      4.781</TD><TD>      1.293</TD><TD>     -0.241</TD><TD>     -0.049</TD><TD>      2.505</TD><TD>      2.505</TD><TD>      2.505</TD><TD>      2.505</TD><TD>   7.181</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>        0.0458</TD><TD> 1241.3313</TD><TD>      2.858</TD><TD>       -1000.000</TD><TD>        0.000</TD><TD>        0.000</TD><TD>               0.000</TD><TD>            0.000</TD><TD>            3.858</TD><TD>                0.000</TD><TD>   0.0000</TD><TD>      0.0000</TD><TD>      0.0000</TD><TD>          0.0000</TD><TD>       0.000</TD><TD>           0.000</TD><TD>        0.000</TD><TD>            0.000</TD><TD>     0.00</TD><TD>      0.00000</TD><TD>      1.00</TD><TD>     14.16</TD><TD>                 0</TD><TD>         0</TD><TD>      0</TD><TD>      0</TD>
+        </TR>
+        <TR>
+          <TD> SB2012_image.i.NGC7232.cont.sb2012.NGC7232.linmos.restored_11a</TD><TD> J221822-454207</TD><TD>  334.592499</TD><TD>   -45.702145</TD><TD>      3.061</TD><TD>      1.014</TD><TD>      0.187</TD><TD>     -0.273</TD><TD>      1.918</TD><TD>      1.918</TD><TD>      1.918</TD><TD>      1.918</TD><TD>   4.038</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>        0.0458</TD><TD> 1254.3872</TD><TD>      2.212</TD><TD>       -1000.000</TD><TD>        0.000</TD><TD>        0.000</TD><TD>               0.000</TD><TD>            0.000</TD><TD>            4.463</TD><TD>                0.000</TD><TD>   0.0000</TD><TD>      0.0000</TD><TD>      0.0000</TD><TD>          0.0000</TD><TD>       0.000</TD><TD>           0.000</TD><TD>        0.000</TD><TD>            0.000</TD><TD>     0.00</TD><TD>      0.00000</TD><TD>      1.00</TD><TD>     14.16</TD><TD>                 0</TD><TD>         0</TD><TD>      0</TD><TD>      0</TD>
+        </TR>
+        <TR>
+          <TD> SB2012_image.i.NGC7232.cont.sb2012.NGC7232.linmos.restored_11b</TD><TD> J221820-454107</TD><TD>  334.583740</TD><TD>   -45.685429</TD><TD>      0.255</TD><TD>      0.384</TD><TD>      0.255</TD><TD>     -0.124</TD><TD>      1.986</TD><TD>      1.986</TD><TD>      1.986</TD><TD>      1.986</TD><TD>   1.591</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>        0.0458</TD><TD> 1249.3859</TD><TD>      2.267</TD><TD>       -1000.000</TD><TD>        0.000</TD><TD>        0.000</TD><TD>               0.000</TD><TD>            0.000</TD><TD>            1.381</TD><TD>                0.000</TD><TD>   0.0000</TD><TD>      0.0000</TD><TD>      0.0000</TD><TD>          0.0000</TD><TD>       0.000</TD><TD>           0.000</TD><TD>        0.000</TD><TD>            0.000</TD><TD>     0.00</TD><TD>      0.00000</TD><TD>      1.00</TD><TD>     14.16</TD><TD>                 0</TD><TD>         0</TD><TD>      0</TD><TD>      0</TD>
+        </TR>
+        <TR>
+          <TD> SB2012_image.i.NGC7232.cont.sb2012.NGC7232.linmos.restored_12a</TD><TD> J222112-460700</TD><TD>  335.303467</TD><TD>   -46.116776</TD><TD>      4.006</TD><TD>      0.424</TD><TD>     -0.245</TD><TD>      0.379</TD><TD>      1.924</TD><TD>      1.924</TD><TD>      1.924</TD><TD>      1.924</TD><TD>   3.239</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>        0.0458</TD><TD> 1233.1129</TD><TD>      2.182</TD><TD>       -1000.000</TD><TD>        0.000</TD><TD>        0.000</TD><TD>               0.000</TD><TD>            0.000</TD><TD>            2.020</TD><TD>                0.000</TD><TD>   0.0000</TD><TD>      0.0000</TD><TD>      0.0000</TD><TD>          0.0000</TD><TD>       0.000</TD><TD>           0.000</TD><TD>        0.000</TD><TD>            0.000</TD><TD>     0.00</TD><TD>      0.00000</TD><TD>      1.00</TD><TD>     14.16</TD><TD>                 0</TD><TD>         0</TD><TD>      0</TD><TD>      0</TD>
+        </TR>
+        <TR>
+          <TD> SB2012_image.i.NGC7232.cont.sb2012.NGC7232.linmos.restored_13a</TD><TD> J221838-454347</TD><TD>  334.661835</TD><TD>   -45.729828</TD><TD>      1.597</TD><TD>      0.271</TD><TD>      0.257</TD><TD>     -0.022</TD><TD>      1.722</TD><TD>      1.722</TD><TD>      1.722</TD><TD>      1.722</TD><TD>   3.450</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>        0.0458</TD><TD> 1276.9844</TD><TD>      1.988</TD><TD>       -1000.000</TD><TD>        0.000</TD><TD>        0.000</TD><TD>               0.000</TD><TD>            0.000</TD><TD>            1.189</TD><TD>                0.000</TD><TD>   0.0000</TD><TD>      0.0000</TD><TD>      0.0000</TD><TD>          0.0000</TD><TD>       0.000</TD><TD>           0.000</TD><TD>        0.000</TD><TD>            0.000</TD><TD>     0.00</TD><TD>      0.00000</TD><TD>      1.00</TD><TD>     14.16</TD><TD>                 0</TD><TD>         0</TD><TD>      0</TD><TD>      0</TD>
+        </TR>
+        <TR>
+          <TD> SB2012_image.i.NGC7232.cont.sb2012.NGC7232.linmos.restored_14a</TD><TD> J221903-460949</TD><TD>  334.764374</TD><TD>   -46.163799</TD><TD>      5.871</TD><TD>      0.174</TD><TD>     -0.466</TD><TD>      0.398</TD><TD>      2.871</TD><TD>      2.871</TD><TD>      2.871</TD><TD>      2.871</TD><TD>   5.760</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>        0.0459</TD><TD> 1241.9080</TD><TD>      3.229</TD><TD>       -1000.000</TD><TD>        0.000</TD><TD>        0.000</TD><TD>               0.000</TD><TD>            0.000</TD><TD>            1.162</TD><TD>                0.000</TD><TD>   0.0000</TD><TD>      0.0000</TD><TD>      0.0000</TD><TD>          0.0000</TD><TD>       0.000</TD><TD>           0.000</TD><TD>        0.000</TD><TD>            0.000</TD><TD>     0.00</TD><TD>      0.00000</TD><TD>      1.00</TD><TD>     14.16</TD><TD>                 0</TD><TD>         0</TD><TD>      0</TD><TD>      0</TD>
+        </TR>
+        <TR>
+          <TD> SB2012_image.i.NGC7232.cont.sb2012.NGC7232.linmos.restored_15a</TD><TD> J222055-461201</TD><TD>  335.229980</TD><TD>   -46.200489</TD><TD>      1.902</TD><TD>      0.526</TD><TD>      0.105</TD><TD>     -0.044</TD><TD>      2.275</TD><TD>      2.275</TD><TD>      2.275</TD><TD>      2.275</TD><TD>   2.921</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>        0.0458</TD><TD> 1238.7975</TD><TD>      2.556</TD><TD>       -1000.000</TD><TD>        0.000</TD><TD>        0.000</TD><TD>               0.000</TD><TD>            0.000</TD><TD>            2.255</TD><TD>                0.000</TD><TD>   0.0000</TD><TD>      0.0000</TD><TD>      0.0000</TD><TD>          0.0000</TD><TD>       0.000</TD><TD>           0.000</TD><TD>        0.000</TD><TD>            0.000</TD><TD>     0.00</TD><TD>      0.00000</TD><TD>      1.00</TD><TD>     14.16</TD><TD>                 0</TD><TD>         0</TD><TD>      0</TD><TD>      0</TD>
+        </TR>
+        <TR>
+          <TD> SB2012_image.i.NGC7232.cont.sb2012.NGC7232.linmos.restored_16a</TD><TD> J222000-455739</TD><TD>  335.001221</TD><TD>   -45.960861</TD><TD>      2.038</TD><TD>      0.175</TD><TD>      0.045</TD><TD>      0.374</TD><TD>      1.577</TD><TD>      1.577</TD><TD>      1.577</TD><TD>      1.577</TD><TD>   2.599</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>   0.000</TD><TD>        0.0458</TD><TD> 1259.7458</TD><TD>      1.752</TD><TD>       -1000.000</TD><TD>        0.000</TD><TD>        0.000</TD><TD>               0.000</TD><TD>            0.000</TD><TD>            0.325</TD><TD>                0.000</TD><TD>   0.0000</TD><TD>      0.0000</TD><TD>      0.0000</TD><TD>          0.0000</TD><TD>       0.000</TD><TD>           0.000</TD><TD>        0.000</TD><TD>            0.000</TD><TD>     0.00</TD><TD>      0.00000</TD><TD>      1.00</TD><TD>     14.16</TD><TD>                 0</TD><TD>         0</TD><TD>      0</TD><TD>      0</TD>
+        </TR>
         </TABLEDATA>
       </DATA>
     </TABLE>

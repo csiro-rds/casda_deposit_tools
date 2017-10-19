@@ -81,7 +81,7 @@ public class ObservationFunctionalTest extends FunctionalTestBase
                 equalTo("2013-11-19T03:30:00.000" + "Z"));
         assertThat(observation.getTelescope(), equalTo("ASKAP"));
 
-        assertThat(catalogueRepository.count(), is(5L));
+        assertThat(catalogueRepository.count(), is(7L));
         for (Catalogue catalogue : catalogueRepository.findAll())
         {
             assertThat(observation.getCatalogues().contains(catalogue), is(true));
@@ -89,15 +89,23 @@ public class ObservationFunctionalTest extends FunctionalTestBase
 
         List<Catalogue> continuumComponentCatalogues =
                 observation.getCataloguesOfType(CatalogueType.CONTINUUM_COMPONENT);
-        assertThat(continuumComponentCatalogues.size(), is(1));
+        assertThat(continuumComponentCatalogues.size(), is(2));
         Catalogue continuumComponentCatalogue = continuumComponentCatalogues.get(0);
+        assertThat(continuumComponentCatalogue.getFormat(), is("votable"));
+        assertThat(continuumComponentCatalogue.getFilename(), is("selavy-results.components-new.xml"));
+        assertThat(continuumComponentCatalogue.getProject().getShortName(), is("AS007"));
+        continuumComponentCatalogue = continuumComponentCatalogues.get(1);
         assertThat(continuumComponentCatalogue.getFormat(), is("votable"));
         assertThat(continuumComponentCatalogue.getFilename(), is("selavy-results.components.xml"));
         assertThat(continuumComponentCatalogue.getProject().getShortName(), is("AS007"));
 
         List<Catalogue> continuumIslandCatalogues = observation.getCataloguesOfType(CatalogueType.CONTINUUM_ISLAND);
-        assertThat(continuumIslandCatalogues.size(), is(1));
+        assertThat(continuumIslandCatalogues.size(), is(2));
         Catalogue continuumIslandCatalogue = continuumIslandCatalogues.get(0);
+        assertThat(continuumIslandCatalogue.getFormat(), is("votable"));
+        assertThat(continuumIslandCatalogue.getFilename(), is("selavy-results.islands-new.xml"));
+        assertThat(continuumIslandCatalogue.getProject().getShortName(), is("AS007"));
+        continuumIslandCatalogue = continuumIslandCatalogues.get(1);
         assertThat(continuumIslandCatalogue.getFormat(), is("votable"));
         assertThat(continuumIslandCatalogue.getFilename(), is("selavy-results.islands.xml"));
         assertThat(continuumIslandCatalogue.getProject().getShortName(), is("AS007"));
@@ -142,7 +150,7 @@ public class ObservationFunctionalTest extends FunctionalTestBase
         assertThat(imageCube.getSResolutionMax(), is(nullValue()));
         assertThat(imageCube.getSResolutionMin(), is(nullValue()));
         assertThat(imageCube.getStokesParameters(), is(nullValue()));
-        assertThat(imageCube.getTargetName(), is(nullValue()));
+        assertThat(imageCube.getObjectName(), is(nullValue()));
         assertThat(imageCube.getTMax(), is(nullValue()));
         assertThat(imageCube.getTMin(), is(nullValue()));
 
@@ -174,7 +182,7 @@ public class ObservationFunctionalTest extends FunctionalTestBase
         assertThat(firstScan.getFieldCentreX(), is(-3.02));
         assertThat(firstScan.getFieldCentreY(), is(-0.785));
         assertThat(firstScan.getFieldName(), is("Fornax"));
-        assertThat(firstScan.getPolarisations(), is("[XX, XY, YX, YY]"));
+        assertThat(firstScan.getPolarisations(), is("/XX/XY/YX/YY/"));
         assertThat(firstScan.getNumChannels(), is(16416));
         assertThat(firstScan.getCentreFrequency(), is(1400000000.0));
         assertThat(firstScan.getChannelWidth(), is(18518.0));
@@ -186,7 +194,7 @@ public class ObservationFunctionalTest extends FunctionalTestBase
         assertThat(secondScan.getFieldCentreX(), is(-2.12));
         assertThat(secondScan.getFieldCentreY(), is(-0.895));
         assertThat(secondScan.getFieldName(), is("Fornax-2"));
-        assertThat(secondScan.getPolarisations(), is("[XX, YX, YY]"));
+        assertThat(secondScan.getPolarisations(), is("/XX/YX/YY/"));
         assertThat(secondScan.getNumChannels(), is(16406));
         assertThat(secondScan.getCentreFrequency(), is(1300000000.0));
         assertThat(secondScan.getChannelWidth(), is(18818.0));
@@ -196,7 +204,7 @@ public class ObservationFunctionalTest extends FunctionalTestBase
             assertThat(measurementSet.getScans().contains(scan), is(true));
         }
 
-        assertEquals(1, evaluationFileRepository.count());
+        assertEquals(2, evaluationFileRepository.count());
         for (EvaluationFile evaluationFile : evaluationFileRepository.findAll())
         {
             assertThat(observation.getEvaluationFiles().contains(evaluationFile), is(true));

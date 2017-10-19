@@ -27,6 +27,9 @@ public enum AskapFitsKey
     /** Beam type */
     BTYPE("BTYPE", FitsHeaderFieldType.STRING),
 
+    /** Beam unit */
+    BUNIT("BUNIT", FitsHeaderFieldType.STRING),
+
     /** Bean width - major axis of the ellipse */
     BMAJ("BMAJ", FitsHeaderFieldType.DOUBLE),
 
@@ -49,7 +52,10 @@ public enum AskapFitsKey
     INSTRUME("INSTRUME", FitsHeaderFieldType.STRING),
 
     /** name of the project involved with acquiring the data */
-    PROJECT("PROJECT", FitsHeaderFieldType.STRING);
+    PROJECT("PROJECT", FitsHeaderFieldType.STRING),
+	
+    /** the rest frequency of a fits object */
+    REST_FREQUENCY("RESTFRQ", FitsHeaderFieldType.DOUBLE);
     
     /** The key of the enum */
     private final String keyword;

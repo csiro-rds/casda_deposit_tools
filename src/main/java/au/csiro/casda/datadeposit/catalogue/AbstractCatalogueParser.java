@@ -27,6 +27,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.xml.sax.SAXException;
 
+import au.csiro.casda.datadeposit.DepositStateImpl;
+import au.csiro.casda.datadeposit.DepositState.Type;
 import au.csiro.casda.datadeposit.observation.jpa.repository.AbstractCatalogueEntryRepository;
 import au.csiro.casda.datadeposit.observation.jpa.repository.CatalogueRepository;
 import au.csiro.casda.datadeposit.observation.jpa.repository.ObservationRepository;
@@ -236,6 +238,8 @@ public abstract class AbstractCatalogueParser<T> implements CatalogueParser
      *            the file to parse
      * @param mode
      *            the CatalogueParser.MODE to use when parsing
+     * @param dcCommonId
+     *            The base collection id shared by all versions of this data collection.
      * @return the Catalogue
      * @throws FileNotFoundException
      *             if the specified file could not be found
@@ -248,8 +252,9 @@ public abstract class AbstractCatalogueParser<T> implements CatalogueParser
      */
     @Override
     @Transactional(rollbackOn = { Exception.class })
-    public Catalogue parseFile(Integer sbid, String catalogueFilename, String catalogueDatafile, Mode mode)
-            throws FileNotFoundException, MalformedFileException, DatabaseException, ValidationModeSignal 
+    public Catalogue parseFile(Integer sbid, String catalogueFilename, String catalogueDatafile, Mode mode,
+            Integer dcCommonId)
+            throws FileNotFoundException, MalformedFileException, DatabaseException, ValidationModeSignal
     {
      // Note: For some weird reason (looks like a compiler bug), we can't use the try-with-resources here.
         if (sbid == null)
@@ -283,6 +288,9 @@ public abstract class AbstractCatalogueParser<T> implements CatalogueParser
                         catalogueFilename, sbid));
             }
             parseCatalogueDatafile(catalogue, catalogueDatafile, mode);
+
+            // Advance the deposit status of the catalogue here to avoid concurrent mod errors 
+            catalogue.setDepositState(new DepositStateImpl(Type.PROCESSED, catalogue));
 
             try
             {

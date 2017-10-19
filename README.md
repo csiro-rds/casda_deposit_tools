@@ -83,11 +83,11 @@ Querying NGAS
 
 To query status of file in NGAS:
 
-    > curl http://casda-d-app.pawsey.ivec.org:7777/STATUS?file_id=<file_id>
+    > curl http://casda-d-app.pawsey.org.au:7777/STATUS?file_id=<file_id>
 
 To retrieve file from NGAS:
 
-    > curl http://casda-d-app.pawsey.ivec.org:7777/RETRIEVE?file_id=<file_id>
+    > curl http://casda-d-app.pawsey.org.au:7777/RETRIEVE?file_id=<file_id>
 
 where the `file_id` is of the format:
 

@@ -92,11 +92,75 @@ fields:
         maxprecision: 5
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: flux_int_err
+        datatype: float
+        unit: mJy
+        maxwidth: 12
+        maxprecision: 5
+        optional: true
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: flux_peak
         datatype: float
         unit: mJy/beam
         maxwidth: 11
         maxprecision: 4
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: mean_background
+        datatype: float
+        unit: mJy/beam
+        maxwidth: 11
+        maxprecision: 4
+        optional: true
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: background_noise
+        datatype: float
+        unit: mJy/beam
+        maxwidth: 11
+        maxprecision: 4
+        optional: true
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: max_residual
+        datatype: float
+        unit: mJy/beam
+        maxwidth: 11
+        maxprecision: 4
+        optional: true
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: min_residual
+        datatype: float
+        unit: mJy/beam
+        maxwidth: 11
+        maxprecision: 4
+        optional: true
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: mean_residual
+        datatype: float
+        unit: mJy/beam
+        maxwidth: 11
+        maxprecision: 4
+        optional: true
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: rms_residual
+        datatype: float
+        unit: mJy/beam
+        maxwidth: 11
+        maxprecision: 4
+        optional: true
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: stddev_residual
+        datatype: float
+        unit: mJy/beam
+        maxwidth: 11
+        maxprecision: 4
+        optional: true
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: x_min
@@ -129,44 +193,60 @@ fields:
         maxwidth: 9
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: solid_angle
+        datatype: float
+        unit: arcmin2
+        maxwidth: 9
+        maxprecision: 2
+        optional: true
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: beam_area
+        datatype: float
+        unit: arcmin2
+        maxwidth: 9
+        maxprecision: 2
+        optional: true
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: x_ave
         datatype: float
         unit: 
-        maxwidth: 7
+        maxwidth: 8
         maxprecision: 2
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: y_ave
         datatype: float
         unit: 
-        maxwidth: 7
+        maxwidth: 8
         maxprecision: 2
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: x_cen
         datatype: float
         unit: 
-        maxwidth: 7
+        maxwidth: 8
         maxprecision: 2
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: y_cen
         datatype: float
         unit: 
-        maxwidth: 7
+        maxwidth: 8
         maxprecision: 2
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: x_peak
         datatype: int
         unit: 
-        maxwidth: 7
+        maxwidth: 8
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: y_peak
         datatype: int
         unit: 
-        maxwidth: 7
+        maxwidth: 8
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: flag_i1

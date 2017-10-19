@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
 import au.csiro.casda.datadeposit.catalogue.AbstractCatalogueParser;
 import au.csiro.casda.datadeposit.catalogue.AbstractCatalogueVoTableVisitor;
 import au.csiro.casda.datadeposit.catalogue.CatalogueParser;
@@ -94,9 +95,9 @@ public class Level7CatalogueParser extends AbstractCatalogueParser<Level7Collect
      */
     @Override
     @Transactional(rollbackOn = { Exception.class })
-    public Catalogue parseFile(Integer collectionId, String catalogueFilename, String catalogueDatafile, Mode mode)
-            throws FileNotFoundException, CatalogueParser.MalformedFileException, CatalogueParser.DatabaseException,
-            CatalogueParser.ValidationModeSignal
+    public Catalogue parseFile(Integer collectionId, String catalogueFilename, String catalogueDatafile, Mode mode,
+            Integer dcCommonId) throws FileNotFoundException, CatalogueParser.MalformedFileException,
+            CatalogueParser.DatabaseException, CatalogueParser.ValidationModeSignal
     {
         File catalogueFile = new File(catalogueDatafile);
 
@@ -136,8 +137,9 @@ public class Level7CatalogueParser extends AbstractCatalogueParser<Level7Collect
                     // create a dummy level 7 collection and project to test
                     // these will be rolled back by the transaction in validate mode
                     level7Collection = new Level7Collection(collectionId);
-                    level7Collection.setProject(new Project("VALIDATE"));
-                    Catalogue catalogue = new Catalogue(CatalogueType.LEVEL7);
+                    level7Collection.setProject(new Project("AB1234"));
+                    level7Collection.setDcCommonId(dcCommonId);
+                    Catalogue catalogue = new Catalogue(CatalogueType.DERIVED_CATALOGUE);
                     catalogue.setFilename(catalogueFile.getName());
                     catalogue.setFormat("VOTABLE");
                     level7Collection.addCatalogue(catalogue);
@@ -218,8 +220,10 @@ public class Level7CatalogueParser extends AbstractCatalogueParser<Level7Collect
 
         this.voTableVisitor.setProjectCode(level7Collection.getProject().getOpalCode());
         this.voTableVisitor.setLevel7CollectionId(level7Collection.getDapCollectionId());
+        this.voTableVisitor.setDcCommonId(level7Collection.getDcCommonId());
         this.voTableVisitor.setFilename(new File(catalogueDatafile).getName());
         this.voTableVisitor.setFailFast(mode != Mode.VALIDATE_ONLY);
+
         try
         {
             table.accept(this.voTableVisitor);

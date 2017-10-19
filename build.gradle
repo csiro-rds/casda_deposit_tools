@@ -34,8 +34,8 @@ description = 'CASDA Data Deposit'
 
 ext {
     majorVersion = 1
-    minorVersion = 2
-    springBootVersion = '1.2.5.RELEASE'
+    minorVersion = 8
+    springBootVersion = '1.3.6.RELEASE'
     installDir = 'build/install/'+project.name
 }
 
@@ -45,9 +45,18 @@ targetCompatibility = 1.8
 repositories {
     mavenLocal() // Required when we use locally-built versions of CSIRO projects
     mavenCentral()
-    maven { url "http://jenkins-cdc.it.csiro.au:8085/nexus/content/repositories/cd/" }
-    maven { url "http://jenkins-cdc.it.csiro.au:8085/nexus/content/repositories/releases/" }
-    maven { url "http://jenkins-cdc.it.csiro.au:8085/nexus/content/repositories/thirdparty/" }
+    ivy {
+        url 'https://github.com/csiro-rds/casda_deposit_manager/raw/master/'
+        layout ('pattern') {
+            artifact 'lib/[artifact]-[revision](-[classifier])(.[ext])'
+        }
+    }
+    ivy {
+        url 'https://github.com/csiro-rds/casda_vo_tools/raw/master/'
+        layout ('pattern') {
+            artifact 'external-libs/[artifact]-[revision](-[classifier])(.[ext])'
+        }
+    }
     maven { url "http://download.osgeo.org/webdav/geotools" }
     maven { url "http://www.hibernatespatial.org/repository" }
 }
@@ -61,28 +70,27 @@ configurations {
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-integration:${springBootVersion}") {
-        exclude group: "org.springframework.integration", module: "spring-integration-http"
-    }
+    compile("org.springframework.boot:spring-boot-starter-integration:${springBootVersion}") 
     compile("com.beust:jcommander:1.48")
     compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
     compile("org.postgresql:postgresql:9.3-1103-jdbc41")
-    
+    compile group: 'org.projectreactor', name: 'reactor-core', version: '1.1.4.RELEASE'
     compile("org.springframework.boot:spring-boot-starter-log4j2:${springBootVersion}")
     
     // CASDA DEPENDENCIES
-    compile 'au.csiro:casda_commons:1.0.165'
-    compile 'au.csiro:job_manager:1.0.14'
+    compile "au.csiro:casda_commons:1.0.261"
+    compile "au.csiro:job_manager:1.1.24"
     
     
     // for processing FITS files
-    compile ('au.csiro:atnf-ivoa-tools:1.0.5') { 
+    compile ('au.csiro:atnf-ivoa-tools:1.0.8') { 
         exclude(module:'slf4j-nop') 
     }
     
     compile("org.hibernate:hibernate-spatial:4.3") {
         exclude(module: 'postgresql')
         exclude(module:'slf4j-nop')
+        exclude(module: 'postgis-jdbc')
     }
     
     // String-templating library
@@ -97,6 +105,17 @@ dependencies {
     compile("org.jdom:jdom:2.0.2")
     
     compile("com.fasterxml.jackson.core:jackson-databind:2.5.4")
+
+    compile("org.apache.commons:commons-lang3:3.4")    
+    compile("org.apache.commons:commons-collections4:4.0")
+    // for date time with time zone information
+    compile("joda-time:joda-time:2.8.2")
+    // for using joda's date time with hibernate
+    compile("org.jadira.usertype:usertype.core:4.0.0.GA")
+	compile("nom.tam:fits:1.10.0")
+	compile("commons-lang:commons-lang:2.4")
+	compile("javax.validation:validation-api:1.1.0.Final")
+	
 
     runtime("org.hibernate:hibernate-validator:5.2.1.Final")
     runtime("org.glassfish.web:el-impl:2.2")
@@ -162,11 +181,11 @@ tasks.withType(Test) {
     } 
 }
 
-test {
-    testLogging {
-        events 'started'
-    }
-}
+//test {
+//    testLogging {
+//        events 'started'
+//    }
+//}
 
 //=====================================================================================================================
 //
@@ -294,7 +313,20 @@ project.ext.scripts = [
     [
         mainClassName: 'au.csiro.casda.datadeposit.copy.RegisterArtefactCommandLineTool',
         applicationName: 'register_artefact'
+    ],
+    [
+        mainClassName: 'au.csiro.casda.datadeposit.encapsulation.EncapsulationCommandLineImporter',
+        applicationName: 'encapsulate'
+    ],
+    [
+        mainClassName: 'au.csiro.casda.datadeposit.level7.DataCopyCommand',
+        applicationName: 'data_copy'
+    ],
+    [
+        mainClassName: 'au.csiro.casda.datadeposit.validationmetric.ValidationMetricCommandLineImporter',
+        applicationName: 'validation_metric_import'
     ]
+    
 ]
 
 // empty this task out, and add all the startscripts below
@@ -349,6 +381,7 @@ applicationDistribution.with {
 	
     into("bin") {
         from(file("build/scripts"))
+        from(file("src/main/python"))
         include "*"
     }
 }

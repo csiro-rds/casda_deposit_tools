@@ -66,9 +66,10 @@ public abstract class TestImageCubeBuilderFactory
         protected void populateFields(ImageCube imageCube)
         {
             super.populateFields(imageCube);
-            if (imageCube.getParent() != null && !imageCube.getParent().getImageCubes().contains(imageCube))
+            if (imageCube.getParent() != null
+                    && !((Observation) imageCube.getParent()).getImageCubes().contains(imageCube))
             {
-                imageCube.getParent().addImageCube(imageCube);
+                ((Observation)imageCube.getParent()).addImageCube(imageCube);
             }
             if (imageCube.getProject() != null && !imageCube.getProject().getImageCubes().contains(imageCube))
             {

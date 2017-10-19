@@ -603,7 +603,7 @@ public class StageArtefactCommandLineToolTest extends AbstractArgumentsDrivenCom
 
     public class Level7Collection
     {
-        private String parentType = "level7";
+        private String parentType = "derived-catalogue";
 
         @Test
         public void stagerIsAskedToStageFile() throws IOException

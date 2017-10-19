@@ -4,7 +4,7 @@
 <INFO name="QUERY_STATUS" value="OK">Successful query</INFO>
 <TABLE name="results">
 <DESCRIPTION>Catalogue containing unusual data types</DESCRIPTION>
-<PARAM ID="catalogueName" arraysize="63" datatype="char" name="Catalogue Name" ucd="" value="Level7_unusual"/>
+<PARAM ID="catalogueName" arraysize="59" datatype="char" name="Catalogue Name" ucd="" value="Level7_unusual"/>
 <PARAM ID="projectCode" arraysize="255" datatype="char" name="Project Code" ucd="" value="AS031"/>
 <PARAM ID="indexedFields" arraysize="255" datatype="char" name="Indexed Fields" ucd="" value="source_name,ra_deg_cont,dec_deg_cont"/>
 <PARAM ID="principalFields" arraysize="255" datatype="char" name="Principal Fields" ucd="" value="source_name,ra_deg_cont, dec_deg_cont"/>

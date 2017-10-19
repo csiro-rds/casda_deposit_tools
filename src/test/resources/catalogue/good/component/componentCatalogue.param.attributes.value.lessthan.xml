@@ -53,10 +53,15 @@
       <FIELD name="maj_axis_deconv" ID="col_maj_deconv" ucd="phys.angSize.smajAxis;em.radio;askap:meta.deconvolved" datatype="float" unit="arcsec" width="16" precision="2"/>
       <FIELD name="min_axis_deconv" ID="col_min_deconv" ucd="phys.angSize.sminAxis;em.radio;askap:meta.deconvolved" datatype="float" unit="arcsec" width="16" precision="2"/>
       <FIELD name="pos_ang_deconv" ID="col_pa_deconv" ucd="phys.angSize;pos.posAng;em.radio;askap:meta.deconvolved" datatype="float" unit="deg" width="15" precision="2"/>
+      <FIELD name="maj_axis_deconv_err" ID="col_maj_axis_deconv_err" ucd="stat.error;phys.angSize.smajAxis;em.radio;askap:meta.deconvolved" datatype="float" unit="arcsec" width="4" precision="2"/>
+      <FIELD name="min_axis_deconv_err" ID="col_min_axis_deconv_err" ucd="stat.error;phys.angSize.sminAxis;em.radio;askap:meta.deconvolved" datatype="float" unit="arcsec" width="4" precision="2"/>
+      <FIELD name="pos_ang_deconv_err" ID="col_pos_ang_deconv_err" ucd="stat.error;phys.angSize;pos.posAng;em.radio;askap:meta.deconvolved" datatype="float" unit="deg" width="4" precision="2"/>
       <FIELD name="chi_squared_fit" ID="col_chisqfit" ucd="stat.fit.chi2" datatype="float" unit="--" width="17" precision="4"/>
       <FIELD name="rms_fit_gauss" ID="col_rmsfit" ucd="stat.stdev;stat.fit" datatype="float" unit="mJy/beam" width="14" precision="3"/>
       <FIELD name="spectral_index" ID="col_alpha" ucd="spect.index;em.radio" datatype="float" unit="--" width="15" precision="2"/>
       <FIELD name="spectral_curvature" ID="col_beta" ucd="askap:spect.curvature;em.radio" datatype="float" unit="--" width="19" precision="2"/>
+      <FIELD name="spectral_index_err" ID="col_spectral_index_err" ucd="stat.error;spect.index;em.radio" datatype="float" unit="--" width="4" precision="2"/>
+      <FIELD name="spectral_curvature_err" ID="col_spectral_curvature_err" ucd="stat.error;askap:spect.curvature;em.radio" datatype="float" unit="--" width="4" precision="2"/>
       <FIELD name="rms_image" ID="col_rmsimage" ucd="stat.stdev;phot.flux.density" datatype="float" unit="mJy/beam" width="11" precision="3"/>
       <FIELD name="has_siblings" ID="col_flag1" ucd="meta.code" datatype="int" unit="" width="8"/>
       <FIELD name="fit_is_estimate" ID="col_flag2" ucd="meta.code" datatype="int" unit="" width="8"/>
@@ -67,7 +72,7 @@
       <DATA>
         <TABLEDATA>
         <TR>
-          <TD>    _Images/SB_609_617_639_643_659_no617b6_withBeam_Freq_Stokes.fits_1</TD><TD>    _Images/SB_609_617_639_643_659_no617b6_withBeam_Freq_Stokes.fits_1a</TD><TD> J222645-623529</TD><TD>  22:26:45.4</TD><TD>    -62:35:29</TD><TD>  336.689324</TD><TD>   -62.591524</TD><TD>       0.00</TD><TD>       0.00</TD><TD>      864.0</TD><TD>   1312.663</TD><TD>         0.000</TD><TD> 1440.637</TD><TD>        0.000</TD><TD>    80.09</TD><TD>    48.60</TD><TD>  156.33</TD><TD>         0.00</TD><TD>         0.00</TD><TD>        0.00</TD><TD>           21.08</TD><TD>           15.45</TD><TD>         -43.78</TD><TD>        1194.4159</TD><TD>      2590.406</TD><TD>           0.00</TD><TD>               0.00</TD><TD>      1.477</TD><TD>       0</TD><TD>       0</TD><TD>       0</TD><TD>       0</TD><TD>                                                                                                    </TD>
+          <TD>  image.i.ngc7232.cont.linmos.taylor.0.restored_1</TD><TD>  image.i.ngc7232.cont.linmos.taylor.0.restored_1a</TD><TD> J221655-452147</TD><TD> 22:16:55.8</TD><TD> -45:21:47</TD><TD> 334.232312</TD><TD> -45.363235</TD><TD> 0.00</TD><TD> 0.00</TD><TD> 1400.5</TD><TD> 1726.833</TD><TD> 0.000</TD><TD> 1726.833</TD><TD> 0.000</TD><TD> 30.33</TD><TD> 22.89</TD><TD>  65.89</TD><TD> 0.00</TD><TD> 0.00</TD><TD>  0.00</TD><TD>  0.00</TD><TD>  0.00</TD><TD>  65.89</TD><TD>0.00</TD><TD>0.00</TD><TD>0.00</TD><TD> 999.000</TD><TD>    0.000</TD><TD>-0.00</TD><TD>0.00</TD><TD>0.00</TD><TD>0.00</TD><TD> 2.916</TD><TD>    1</TD><TD>    1</TD><TD>    0</TD><TD>    0</TD><TD>                                                                                                    </TD>
         </TR>
         </TABLEDATA>
       </DATA>

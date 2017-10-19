@@ -80,7 +80,7 @@ public class SpectralLineAbsorptionCatalogueImportFunctionalTest extends Functio
         }
 
         assertEquals(1, imageCubeRepository.count());
-        assertEquals(5, catalogueRepository.count());
+        assertEquals(7, catalogueRepository.count());
         Observation observation = observationRepository.findAll().iterator().next();
         assertEquals(1, observation.getCataloguesOfType(CatalogueType.SPECTRAL_LINE_ABSORPTION).size());
         Catalogue catalogue = observation.getCataloguesOfType(CatalogueType.SPECTRAL_LINE_ABSORPTION).get(0);

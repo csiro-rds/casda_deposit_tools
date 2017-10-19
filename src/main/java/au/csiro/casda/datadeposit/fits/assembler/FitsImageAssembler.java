@@ -28,23 +28,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.GeometryFactory;
+
 import au.csiro.casda.Utils;
 import au.csiro.casda.datadeposit.fits.AskapFitsKey;
 import au.csiro.casda.datadeposit.fits.FitsFileParser;
 import au.csiro.casda.datadeposit.fits.StokesPolarisationMapping;
 import au.csiro.casda.datadeposit.fits.service.FitsImageService.FitsImportException;
 import au.csiro.casda.datadeposit.fits.service.FitsImageService.ProjectCodeMismatchException;
+import au.csiro.casda.entity.observation.FitsObject;
 import au.csiro.casda.entity.observation.ImageCube;
 import au.csiro.casda.jobmanager.ProcessJob;
-import au.csiro.casda.jobmanager.SimpleToolJobProcessBuilder;
+import au.csiro.casda.jobmanager.ProcessJobBuilder.ProcessJobFactory;
+import au.csiro.casda.jobmanager.SimpleToolProcessJobBuilder;
 import au.csiro.casda.jobmanager.SingleJobMonitor;
 import au.csiro.util.AstroConversion;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryFactory;
 
 /**
  * Component used to populate an ImageCube's fields from certain header values in a FITS file.
@@ -64,6 +66,8 @@ public class FitsImageAssembler
 
     private FitsFileParser fitsFileParser;
 
+    private ProcessJobFactory processJobFactory;
+
     /**
      * Constructor
      * 
@@ -71,21 +75,24 @@ public class FitsImageAssembler
      *            an EL-string containing the command and arguments used to find the image geometry
      * @param fitsFileParser
      *            the FitsFileParser used to obtain non-geometric headers
+     * @param processJobFactory
+     *            the factory to be used to create job processes.
      */
     @Autowired
     public FitsImageAssembler(@Value("${image.geometry.command.and.args}") String imageGeometryCommandAndArgs,
-            FitsFileParser fitsFileParser)
+            FitsFileParser fitsFileParser, ProcessJobFactory processJobFactory)
     {
         super();
         this.imageGeometryCommandAndArgs = imageGeometryCommandAndArgs;
         this.fitsFileParser = fitsFileParser;
+        this.processJobFactory = processJobFactory;
     }
 
     /**
-     * Populates an Image Cube with details from a FITS file's headers.
+     * Populates an Image Cube or Spectrum with details from a FITS file's headers.
      * 
-     * @param imageCube
-     *            the image cube entity that we wish to populate
+     * @param fitsObject
+     *            the image cube or spectrum entity that we wish to populate
      * @param fitsFile
      *            a fits File that will be parsed to populate certain fields of the imageCube
      * @throws ProjectCodeMismatchException
@@ -95,33 +102,42 @@ public class FitsImageAssembler
      * @throws FileNotFoundException
      *             if the fitsFile could not be found
      */
-    public void populateImageCube(ImageCube imageCube, File fitsFile)
+    public void populateFitsObject(FitsObject fitsObject, File fitsFile)
             throws FitsImportException, ProjectCodeMismatchException, FileNotFoundException
     {
 
-        logger.debug("Populating ImageCube entity");
+        logger.debug("Populating FitsObject entity");
 
         Map<AskapFitsKey, Object> headerValues = getFitsHeaders(fitsFile);
-
+        
         // populate the new values
         String projectName = (String) headerValues.get(AskapFitsKey.PROJECT);
-        String imageCubeProjectName = imageCube.getProject().getOpalCode();
-        if (!StringUtils.equals(imageCubeProjectName, projectName))
+        String objectProjectName = fitsObject.getProject().getOpalCode();
+        if (!StringUtils.equals(objectProjectName, projectName))
         {
-            throw new ProjectCodeMismatchException(imageCube.getProject(), projectName);
+            throw new ProjectCodeMismatchException(fitsObject.getProject(), projectName);
         }
 
-        populateImageCubeGeometry(imageCube, fitsFile);
+        populateGeometry(fitsObject, fitsFile);
 
-        imageCube.setTargetName((String) headerValues.get(AskapFitsKey.OBJECT));
+        fitsObject.setHeader(getHeaderAsString());
+        fitsObject.setObjectName((String) headerValues.get(AskapFitsKey.OBJECT));
+        fitsObject.setRestFrequency((Double) headerValues.get(AskapFitsKey.REST_FREQUENCY));
+        
+        if (fitsObject instanceof ImageCube)
+        {
+            ImageCube imageCube = (ImageCube) fitsObject;
+            imageCube.setSResolution((Double) headerValues.get(AskapFitsKey.BMAJ));
+            imageCube.setSResolutionMin((Double) headerValues.get(AskapFitsKey.BMIN));
+            imageCube.setSResolutionMax((Double) headerValues.get(AskapFitsKey.BMAJ));
+        }
+        
+        fitsObject.setBUnit((String) headerValues.get(AskapFitsKey.BUNIT));
+        fitsObject.setBType((String) headerValues.get(AskapFitsKey.BTYPE));
 
-        imageCube.setSResolution((Double) headerValues.get(AskapFitsKey.BMAJ));
-        imageCube.setSResolutionMin((Double) headerValues.get(AskapFitsKey.BMIN));
-        imageCube.setSResolutionMax((Double) headerValues.get(AskapFitsKey.BMAJ));
-
-        imageCube.setTMin((Double) headerValues.get(AskapFitsKey.TMIN)); // TODO check keyword
-        imageCube.setTMax((Double) headerValues.get(AskapFitsKey.TMAX)); // TODO check keyword
-        imageCube.setTExptime((Double) headerValues.get(AskapFitsKey.INTIME)); // TODO check keyword
+        fitsObject.setTMin((Double) headerValues.get(AskapFitsKey.TMIN)); // TODO check keyword
+        fitsObject.setTMax((Double) headerValues.get(AskapFitsKey.TMAX)); // TODO check keyword
+        fitsObject.setTExptime((Double) headerValues.get(AskapFitsKey.INTIME)); // TODO check keyword
     }
 
     private Map<AskapFitsKey, Object> getFitsHeaders(File fitsFile) throws FitsImportException, FileNotFoundException
@@ -142,11 +158,32 @@ public class FitsImageAssembler
             throw new FitsImportException(ex);
         }
     }
-
-    private void populateImageCubeGeometry(ImageCube imageCube, File fitsFile) throws FitsImportException
+    
+    private String getHeaderAsString() throws FitsImportException, FileNotFoundException
     {
-        SimpleToolJobProcessBuilder builder =
-                new SimpleToolJobProcessBuilder(Utils.elStringToArray(this.imageGeometryCommandAndArgs));
+        try
+        {
+            return fitsFileParser.getHeaderAsString();
+        }
+        catch (FileNotFoundException ex)
+        {
+            throw ex;
+        }
+        catch (Exception ex) // because there are other exceptions not wrapped in FitsException
+        {
+            throw new FitsImportException(ex);
+        }
+    }
+
+    private void populateGeometry(FitsObject fitsObject, File fitsFile) throws FitsImportException
+    {
+        ImageCube imageCube = null;
+        if (fitsObject instanceof ImageCube)
+        {
+            imageCube = (ImageCube) fitsObject; 
+        }
+        SimpleToolProcessJobBuilder builder =
+                new SimpleToolProcessJobBuilder(processJobFactory, Utils.elStringToArray(this.imageGeometryCommandAndArgs));
 
         builder.setProcessParameter("infile", fitsFile.toString());
 
@@ -219,16 +256,21 @@ public class FitsImageAssembler
                     /*
                      * min freq will be max wavelength and vice versa
                      */
-                    imageCube.setEmMin(
+                    fitsObject.setEmMin(
                             AstroConversion.frequencyToWavelength(Double.parseDouble(axis.get("max").asText())));
-                    imageCube.setEmMax(
+                    fitsObject.setEmMax(
                             AstroConversion.frequencyToWavelength(Double.parseDouble(axis.get("min").asText())));
-                    imageCube.setChannelWidth(Double.parseDouble(axis.get("pixelSize").asText()));
-                    imageCube.setEmResPower(new BigDecimal(axis.get("centre").asText())
-                            .divide(new BigDecimal(axis.get("pixelSize").asText()), MathContext.DECIMAL128)
-                            .doubleValue());
-                    imageCube.setCentreFrequency(Double.parseDouble(axis.get("centre").asText()));
-                    imageCube.setNoOfChannels(Integer.parseInt(axis.get("numPixels").asText()));
+                    fitsObject.setChannelWidth(Double.parseDouble(axis.get("pixelSize").asText()));
+                    fitsObject.setCentreFrequency(Double.parseDouble(axis.get("centre").asText()));
+                    fitsObject.setNoOfChannels(Integer.parseInt(axis.get("numPixels").asText()));
+                    fitsObject.setEmResolution(
+                            (fitsObject.getEmMax() - fitsObject.getEmMin()) / fitsObject.getNoOfChannels());
+                    if (imageCube != null)
+                    {
+                        imageCube.setEmResPower(new BigDecimal(axis.get("centre").asText())
+                                .divide(new BigDecimal(axis.get("pixelSize").asText()), MathContext.DECIMAL128)
+                                .doubleValue());
+                    }
                 }
                 if ("STOKES".equals(axis.get("name").asText()))
                 {
@@ -292,19 +334,22 @@ public class FitsImageAssembler
                         }
                         stokesList.add(stokesValue.getStokesValue());
                     }
-                    imageCube.setStokesParameters(STOKES_PARAMETERS_DELIMITER
+                    fitsObject.setStokesParameters(STOKES_PARAMETERS_DELIMITER
                             + StringUtils.join(stokesList, STOKES_PARAMETERS_DELIMITER) + STOKES_PARAMETERS_DELIMITER);
                 }
                 i += 1;
                 axis = axes.get(i);
             }
-            if (imageCube.getStokesParameters() == null)
+            if (fitsObject.getStokesParameters() == null)
             {
-                imageCube.setStokesParameters(STOKES_PARAMETERS_DELIMITER + STOKES_PARAMETERS_DELIMITER);
+                fitsObject.setStokesParameters(STOKES_PARAMETERS_DELIMITER + STOKES_PARAMETERS_DELIMITER);
             }
-            imageCube.setSFov(sFov == null ? null : Math.abs(sFov));
-            imageCube.setNoOfPixels(numPixels);
-            imageCube.setCellSize(cellSize == null ? null : Math.abs(cellSize));
+            if (imageCube != null)
+            {
+                imageCube.setSFov(sFov == null ? null : Math.abs(sFov));
+                imageCube.setNoOfPixels(numPixels);
+                imageCube.setCellSize(cellSize == null ? null : Math.abs(cellSize));
+            }
 
             geometryDetails.get("corners");
 
@@ -330,13 +375,13 @@ public class FitsImageAssembler
 
             Geometry geometry =
                     (new GeometryFactory()).createPolygon(coordinates.toArray(new Coordinate[coordinates.size()]));
-            imageCube.setSRegion(geometry);
+            fitsObject.setSRegion(geometry);
 
             // Centre
             JsonNode centre = geometryDetails.get("centre");
-            imageCube.setRaDeg(Double.parseDouble(centre.get("RA").asText()));
-            imageCube.setDecDeg(Double.parseDouble(centre.get("DEC").asText()));
-            imageCube.setDimensions(geometryDetails.toString());
+            fitsObject.setRaDeg(Double.parseDouble(centre.get("RA").asText()));
+            fitsObject.setDecDeg(Double.parseDouble(centre.get("DEC").asText()));
+            fitsObject.setDimensions(geometryDetails.toString());
         }
         catch (FitsImportException ex)
         {

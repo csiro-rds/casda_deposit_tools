@@ -124,10 +124,12 @@ public class PolarisationComponentVoTableVisitor extends AbstractCatalogueVoTabl
                 (polarisationComponent, value) -> polarisationComponent.setComplex1(Double.parseDouble(value)));
         APPLIERS.put("complex_2",
                 (polarisationComponent, value) -> polarisationComponent.setComplex2(Double.parseDouble(value)));
-        APPLIERS.put("flag_p1", (polarisationComponent, value) -> polarisationComponent.setFlagP1("t".equals(value)));
-        APPLIERS.put("flag_p2", (polarisationComponent, value) -> polarisationComponent.setFlagP2("t".equals(value)));
-        APPLIERS.put("flag_p3", (polarisationComponent, value) -> polarisationComponent.setFlagP3(value));
-        APPLIERS.put("flag_p4", (polarisationComponent, value) -> polarisationComponent.setFlagP4(value));
+        APPLIERS.put("flag_is_detection",
+                (polarisationComponent, value) -> polarisationComponent.setFlagIsDetection(Integer.parseInt(value)));
+        APPLIERS.put("flag_edge",
+                (polarisationComponent, value) -> polarisationComponent.setFlagEdge(Integer.parseInt(value)));
+        APPLIERS.put("flag_p3", (polarisationComponent, value) -> polarisationComponent.setFlagP3(Integer.parseInt(value)));
+        APPLIERS.put("flag_p4", (polarisationComponent, value) -> polarisationComponent.setFlagP4(Integer.parseInt(value)));
     }
 
     private PolarisationComponentRepository polarisationComponentRepository;

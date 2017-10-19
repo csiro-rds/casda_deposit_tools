@@ -219,6 +219,18 @@ public class FieldConstraint
     }
 
     /**
+     * A helper method used to set an attribute constraint for FieldKey.OPTIONAL. Typically used by code that relies on a
+     * bean-like interface (eg: yaml deserialisation).
+     * 
+     * @param optional
+     *            a String
+     */
+    public void setOptional(String optional)
+    {
+        setConstraintForKey("true".equalsIgnoreCase(optional) ? "true" : "false" , FieldKey.OPTIONAL);
+    }
+
+    /**
      * Returns whether this constraint is applicable to the given field/param.
      * <p>
      * Applicability is determined using the following criteria:

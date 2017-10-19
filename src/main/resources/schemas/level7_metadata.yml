@@ -5,7 +5,7 @@ params:
         !!au.csiro.casda.datadeposit.votable.parser.ParamConstraint
         name: Catalogue Name
         datatype: char
-        maxarraysize: 63
+        maxarraysize: 59
     -
         !!au.csiro.casda.datadeposit.votable.parser.ParamConstraint
         name: Indexed Fields

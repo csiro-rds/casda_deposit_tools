@@ -75,7 +75,7 @@ public abstract class TestScanBuilderFactory
             setDefault("fieldCentreX", RandomUtils.nextDouble() % (2 * Math.PI));
             setDefault("fieldCentreY", RandomUtils.nextDouble() % (2 * Math.PI));
             setDefault("coordSystem", RandomStringUtils.randomAlphabetic(5));
-            setDefault("polarisations", "[XX,YY]");
+            setDefault("polarisations", "/XX/YY/");
             setDefault("numChannels", RandomUtils.nextInt(99) + 1);
             setDefault("centreFrequency", RandomUtils.nextDouble());
             setDefault("channelWidth", RandomUtils.nextDouble());

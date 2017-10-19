@@ -17,6 +17,8 @@
 			<filename>validFile.fits</filename>
             <project>AS007</project>
             <type>cont_restored_T0</type>
+            <thumbnail_large>validFile_fits_large_thumbnail.jpg</thumbnail_large>
+            <thumbnail_small>validFile_fits_small_thumbnail.png</thumbnail_small>
 		</image>
 
 	</images>
@@ -79,6 +81,7 @@
 	<evaluations>
 		<evaluation>
 			<format>pdf</format>
+            <project>AS007</project>
 			<filename>no_file.pdf</filename>
 		</evaluation>
 	</evaluations>

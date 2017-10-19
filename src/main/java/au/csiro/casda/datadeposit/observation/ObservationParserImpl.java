@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
-import java.util.Set;
 
 import javax.transaction.Transactional;
 import javax.xml.bind.JAXBException;
@@ -31,6 +30,7 @@ import au.csiro.casda.datadeposit.observation.jpa.repository.ObservationReposito
 import au.csiro.casda.datadeposit.observation.jpa.repository.ProjectRepository;
 import au.csiro.casda.datadeposit.observation.parser.XmlObservation;
 import au.csiro.casda.datadeposit.observation.parser.XmlObservationParser;
+import au.csiro.casda.entity.observation.EncapsulationFile;
 import au.csiro.casda.entity.observation.Observation;
 import au.csiro.casda.entity.observation.ObservationMetadataFile;
 
@@ -65,6 +65,14 @@ public class ObservationParserImpl implements ObservationParser
     @Autowired
     @Value("${fileIdMaxSize}")
     private int fileIdMaxSize;
+    
+    @Autowired
+    @Value("${thumbnail.max.size.kilobytes}")
+    private long thumbnailMaxSize;
+
+    @Autowired
+    @Value("${cubelets.enabled:false}")
+    private boolean cubeletsEnabled;
 
     /**
      * Constructs an ObservationParserImpl that uses the given repositories for access to and updating of persistent
@@ -99,22 +107,26 @@ public class ObservationParserImpl implements ObservationParser
      *            a simpleJdbcRepository
      * @param fileIdMaxSize
      *            Allowed max file Id int
+     * @param thumbnailMaxSize
+     *            Allowed max size of thumbnail
      * 
      */
     public ObservationParserImpl(ProjectRepository projectRepository, ObservationRepository observationRepository,
-            SimpleJdbcRepository simpleJdbcRepository, @Value("${fileIdMaxSize}") int fileIdMaxSize)
+            SimpleJdbcRepository simpleJdbcRepository, @Value("${fileIdMaxSize}") int fileIdMaxSize,
+            @Value("${thumbnail.max.size.kilobytes}") long thumbnailMaxSize)
     {
         super();
         this.projectRepository = projectRepository;
         this.observationRepository = observationRepository;
         this.simpleJdbcRepository = simpleJdbcRepository;
         this.fileIdMaxSize = fileIdMaxSize;
+        this.thumbnailMaxSize = thumbnailMaxSize;
     }
 
     /** {@inheritDoc} */
     @Override
     @Transactional(rollbackOn = { Exception.class })
-    public Observation parseFile(Integer sbid, String observationMetadataFilename)
+    public Observation parseFile(Integer sbid, String observationMetadataFilename, boolean redeposit)
             throws FileNotFoundException, MalformedFileException, RepositoryException
     {
         String fullPath = FilenameUtils.getFullPath(observationMetadataFilename);
@@ -137,8 +149,17 @@ public class ObservationParserImpl implements ObservationParser
         Observation observation = null;
         try
         {
-            observation = observationAssembler.createObservationFromParsedObservation(dataset, fileIdMaxSize);
-            Set<ChildDepositableArtefact> artefacts = observation.getDepositableArtefacts();
+            if (redeposit)
+            {
+                observation = observationAssembler.updateObservationFromParsedObservation(dataset, fileIdMaxSize,
+                        new File(obsFilePath), cubeletsEnabled);
+            }
+            else
+            {
+                observation = observationAssembler.createObservationFromParsedObservation(dataset, fileIdMaxSize,
+                        new File(obsFilePath), cubeletsEnabled);
+            }
+            List<ChildDepositableArtefact> artefacts = observation.getDepositableArtefacts();
             validateFileExistsAndSetFilesize(artefacts, obsFilePath);
         }
         catch (ObservationAlreadyExistsException e)
@@ -179,9 +200,19 @@ public class ObservationParserImpl implements ObservationParser
                     observation.getIdentity().getSbid()));
         }
 
+        validateDateProgression(observation.getObservation());
+
         for (Image image : observation.getImages())
         {
             validateFileName(image.getFilename(), "Image");
+            if (StringUtils.isNotBlank(image.getThumbnailLarge()))
+            {
+                validateThumbnail(image.getThumbnailLarge());
+            }
+            if (StringUtils.isNotBlank(image.getThumbnailSmall()))
+            {
+                validateThumbnail(image.getThumbnailSmall());
+            }
             validateImageType(image, "Image", validTypes);
         }
         for (Catalogue catalogue : observation.getCatalogues())
@@ -192,9 +223,45 @@ public class ObservationParserImpl implements ObservationParser
         {
             validateFileName(measurementSet.getFilename(), "Measurement set");
         }
-        for (au.csiro.casda.datadeposit.observation.jaxb.Evaluation measurementSet : observation.getEvaluationFiles())
+        for (au.csiro.casda.datadeposit.observation.jaxb.Evaluation evaluation : observation.getEvaluationFiles())
         {
-            validateFileName(measurementSet.getFilename(), "Evaluation file");
+        	validateFileName(evaluation.getFilename(), "Evaluation file");
+        }
+    }
+
+    /**
+     * validates the observation dates to ensure the start date is before the end date
+     * @param observation the observation
+     * @throws MalformedFileException an exception created when the date order is invalid.
+     */
+    private void validateDateProgression(au.csiro.casda.datadeposit.observation.jaxb.Observation observation)
+            throws MalformedFileException
+    {
+        if (observation.getObsend().asModifiedJulianDate() <= observation.getObsstart().asModifiedJulianDate())
+        {
+            throw new MalformedFileException(String.format("Observation contains an observation End date/time "
+                    + "which is earlier than or equal to the observation start time."));
+        }
+    }
+    
+    /**
+     * Validates thumbnail format and ensure the formats are restricted to png and jpeg
+     * 
+     * @param fileName
+     *            the file name of the thumbnail
+     * @throws MalformedFileException
+     *             an exception created when the date order is invalid.
+     */
+    private void validateThumbnail(String fileName) throws MalformedFileException
+    {
+        validateFileName(fileName, "Thumbnail");
+        fileName = fileName.toLowerCase();
+        String format = FilenameUtils.getExtension(fileName);
+        if (!StringUtils.equals(format, "png") && !StringUtils.equals(format, "jpg")
+                && !StringUtils.equals(format, "jpeg"))
+        {
+            throw new MalformedFileException(
+                    String.format("%s Thumbnail format [%s] is not supported.", fileName, format));
         }
     }
 
@@ -202,11 +269,11 @@ public class ObservationParserImpl implements ObservationParser
      * checks the image type against the list of allowed types in the database (excluding 'unknown')
      * 
      * @param fileType
-     *         The file type for reporting purposes
-     * @param image 
-     *          the image cube.
+     *            The file type for reporting purposes
+     * @param image
+     *            the image cube.
      * @param validTypes
-     *          The list of acceptable image types to test against that parsed from the observation xml.
+     *            The list of acceptable image types to test against that parsed from the observation xml.
      * @throws MalformedFileException
      *             raise an exception for invalid types
      */
@@ -243,14 +310,17 @@ public class ObservationParserImpl implements ObservationParser
         }
     }
 
-    private void validateFileExistsAndSetFilesize(Set<ChildDepositableArtefact> artefacts, String parentFilePath)
+    private void validateFileExistsAndSetFilesize(List<ChildDepositableArtefact> artefacts, String parentFilePath)
             throws MalformedFileException
     {
         File artefactFile = null;
         for (ChildDepositableArtefact artefact : artefacts)
         {
-            if (!(artefact instanceof ObservationMetadataFile))
+            if (!(artefact instanceof ObservationMetadataFile) && !(artefact instanceof EncapsulationFile)
+                    && !(artefact.isDeposited()))
             {
+                // We only want the non-deposited files as when redpositing we don;t expect the existing files to be
+                // recreated
                 logger.debug("****** CollectionName: {}; filename: {}; type: {}", artefact.getCollectionName(),
                         artefact.getFilename(), artefact.getDepositableArtefactTypeName());
 
@@ -263,6 +333,14 @@ public class ObservationParserImpl implements ObservationParser
                 }
                 // store the file size in kilobytes
                 artefact.setFilesize(ObservationParser.calculateFileSizeKb(artefactFile));
+                if ("thumbnail".equals(artefact.getDepositableArtefactTypeName())
+                        && artefact.getFilesize() > thumbnailMaxSize)
+                {
+                    throw new MalformedFileException(
+                            String.format("%s file name [%s] size [%d KB] is larger than allowed size [%d KB].",
+                                    artefact.getDepositableArtefactTypeName(), artefact.getFilename().trim(),
+                                    artefact.getFilesize(), thumbnailMaxSize));
+                }             
             }
         }
     }

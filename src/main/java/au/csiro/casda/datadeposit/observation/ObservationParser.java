@@ -111,6 +111,8 @@ public interface ObservationParser
      *            the scheduling block id of the observation for which to import the catalogue data
      * @param observationMetadataFile
      *            the file to parse
+     * @param redeposit
+     *            true if this is a redeposit adding new data products to an already deposited observation 
      * @return the Observation
      * @throws FileNotFoundException
      *             if the specified file could not be found
@@ -119,8 +121,8 @@ public interface ObservationParser
      * @throws RepositoryException
      *             if there were any issues persisting the observation data to the database
      */
-    public Observation parseFile(Integer sbid, String observationMetadataFile) throws FileNotFoundException,
-            MalformedFileException, RepositoryException;
+    public Observation parseFile(Integer sbid, String observationMetadataFile, boolean redeposit)
+            throws FileNotFoundException, MalformedFileException, RepositoryException;
 
     /**
      * Calculates the size of a file, in kilobytes.

@@ -91,6 +91,12 @@ public class ContinuumComponentVoTableVisitor extends AbstractCatalogueVoTableVi
                 (continuumComponent, value) -> continuumComponent.setMinAxisDeconv(Float.parseFloat(value)));
         APPLIERS.put("pos_ang_deconv",
                 (continuumComponent, value) -> continuumComponent.setPosAngDeconv(Float.parseFloat(value)));
+        APPLIERS.put("maj_axis_deconv_err",
+                (continuumComponent, value) -> continuumComponent.setMajAxisDeconvErr(Float.parseFloat(value)));
+        APPLIERS.put("min_axis_deconv_err",
+                (continuumComponent, value) -> continuumComponent.setMinAxisDeconvErr(Float.parseFloat(value)));
+        APPLIERS.put("pos_ang_deconv_err",
+                (continuumComponent, value) -> continuumComponent.setPosAngDeconvErr(Float.parseFloat(value)));
         APPLIERS.put("chi_squared_fit",
                 (continuumComponent, value) -> continuumComponent.setChiSquaredFit(Float.parseFloat(value)));
         APPLIERS.put("rms_fit_gauss",
@@ -99,13 +105,20 @@ public class ContinuumComponentVoTableVisitor extends AbstractCatalogueVoTableVi
                 (continuumComponent, value) -> continuumComponent.setSpectralIndex(Float.parseFloat(value)));
         APPLIERS.put("spectral_curvature",
                 (continuumComponent, value) -> continuumComponent.setSpectralCurvature(Float.parseFloat(value)));
+        APPLIERS.put("spectral_index_err",
+                (continuumComponent, value) -> continuumComponent.setSpectralIndexErr(Float.parseFloat(value)));
+        APPLIERS.put("spectral_curvature_err",
+                (continuumComponent, value) -> continuumComponent.setSpectralCurvatureErr(Float.parseFloat(value)));
         APPLIERS.put("rms_image",
                 (continuumComponent, value) -> continuumComponent.setRmsImage(Float.parseFloat(value)));
         APPLIERS.put("has_siblings", 
                 (continuumComponent, value) -> continuumComponent.setHasSiblings(Short.parseShort(value)));
         APPLIERS.put("fit_is_estimate", 
                 (continuumComponent, value) -> continuumComponent.setFitIsEstimate(Short.parseShort(value)));
+        // We have two aliases for the flag_c3 field for backwards compatibility
         APPLIERS.put("flag_c3", (continuumComponent, value) -> continuumComponent.setFlagC3(Short.parseShort(value)));
+        APPLIERS.put("spectral_index_from_tt",
+                (continuumComponent, value) -> continuumComponent.setFlagC3(Short.parseShort(value)));
         APPLIERS.put("flag_c4", (continuumComponent, value) -> continuumComponent.setFlagC4(Short.parseShort(value)));
         APPLIERS.put("comment", (continuumComponent, value) -> continuumComponent.setComment(value));
     }

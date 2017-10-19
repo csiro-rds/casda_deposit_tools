@@ -222,7 +222,47 @@ public enum CasdaDataDepositEvents implements CasdaEvent
     /**
      * Successful staging of Level 7 deposit artefact
      */
-    E132;
+    E132,
+
+    /**
+     * Unable to write ERROR file
+     */
+    E151,
+
+    /**
+     * Successfully created encapsulation.
+     */
+    E154,
+
+    /**
+     * Unable to create encapsulation
+     */
+    E155,
+    
+    /**
+     * validation.metric.ingest.failure.parameters
+     */
+    E186,
+
+    /**
+     * validation.metric.ingest.failure.file.missing
+     */
+    E187,
+
+    /**
+     * validation.metric.ingest.failure.file.malformed
+     */
+    E188,
+
+    /**
+     * validation.metric.ingest.failure.database
+     */
+    E189,
+
+    /**
+     * validation.metric.ingest.success
+     */
+    E190;
 
     private static Properties eventProperties = new Properties();
 

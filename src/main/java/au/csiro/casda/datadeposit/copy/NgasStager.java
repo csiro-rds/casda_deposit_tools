@@ -15,9 +15,11 @@ import org.springframework.stereotype.Service;
 import org.stringtemplate.v4.ST;
 
 import au.csiro.casda.Utils;
+import au.csiro.casda.exception.CommandLineServiceException;
 import au.csiro.casda.jobmanager.JobManager;
 import au.csiro.casda.jobmanager.JobManager.Job;
-import au.csiro.casda.jobmanager.SimpleToolJobProcessBuilder;
+import au.csiro.casda.jobmanager.ProcessJobBuilder.ProcessJobFactory;
+import au.csiro.casda.jobmanager.SimpleToolProcessJobBuilder;
 
 /*
  * #%L
@@ -45,6 +47,7 @@ public class NgasStager implements JobManager.JobMonitor
     private String ngasStagingDirectory;
     private boolean failed;
     private String failureCause;
+    private ProcessJobFactory processJobFactory;
 
     /**
      * Constructor
@@ -55,15 +58,18 @@ public class NgasStager implements JobManager.JobMonitor
      *            the directory on the NGAS server used to stage files for a REGISTER command
      * @param ngasCopyCommand
      *            the external command (with any arguments) to run to copy an artefact into the NGAS staging area
+     * @param processJobFactory
+     *            the factory to be used to create job processes.
      */
     @Autowired
     public NgasStager( @Value("${ngas.server.name}") String ngasServerName,
             @Value("${ngas.staging.directory}") String ngasStagingDirectory,
-            @Value("${ngas.copy.command}") String ngasCopyCommand)
+            @Value("${ngas.copy.command}") String ngasCopyCommand, ProcessJobFactory processJobFactory)
     {
         this.ngasStagingDirectory = ngasStagingDirectory;
         this.ngasStageCommand = Utils.elStringToArray(ngasCopyCommand);
         this.ngasServerName = ngasServerName;
+        this.processJobFactory = processJobFactory;
     }
 
     /**
@@ -117,8 +123,8 @@ public class NgasStager implements JobManager.JobMonitor
 			throw new StagingException(parentId, infile, getNgasStagingPath(stagingVolume), fileId, ioe.getMessage());
 		}
 
-        SimpleToolJobProcessBuilder stageProcessBuilder;
-        stageProcessBuilder = new SimpleToolJobProcessBuilder(this.ngasStageCommand);
+		SimpleToolProcessJobBuilder stageProcessBuilder;
+        stageProcessBuilder = new SimpleToolProcessJobBuilder(processJobFactory, this.ngasStageCommand);
         stageProcessBuilder.setProcessParameter("ngas_server_name", this.ngasServerName);
         stageProcessBuilder.setProcessParameter("ngas_staging_directory", getNgasStagingPath(stagingVolume));
         stageProcessBuilder.setProcessParameter("parent-id", parentId.toString());
@@ -199,7 +205,9 @@ public class NgasStager implements JobManager.JobMonitor
     @Override
     public void jobFailed(Job job, Throwable e)
     {
-        this.jobFailed(job, ExceptionUtils.getStackTrace(e));
+    	String output = e instanceof CommandLineServiceException ? 
+    			((CommandLineServiceException)e).getMessage() : ExceptionUtils.getStackTrace(e);
+        this.jobFailed(job, output);
     }
 
     /**

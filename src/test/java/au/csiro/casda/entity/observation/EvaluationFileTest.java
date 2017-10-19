@@ -133,7 +133,6 @@ public class EvaluationFileTest extends AbstractPersistenceTest
     {
         assertThat(evaluationFileRepository.count(), is(0L));
         EvaluationFile evaluationFile = TestEvaluationFileBuilderFactory.createBuilder().build();
-
         observationRepository.save(evaluationFile.getParent());
 
         assertThat(evaluationFileRepository.count(), is(1L));

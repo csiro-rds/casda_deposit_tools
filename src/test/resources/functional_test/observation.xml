@@ -34,6 +34,18 @@
 			<filename>selavy-results.components.xml</filename>
 			<project>AS007</project>
 		</catalogue>
+        <catalogue>
+            <format>votable</format>
+            <type>continuum-island</type>
+            <filename>selavy-results.islands-new.xml</filename>
+            <project>AS007</project>
+        </catalogue>
+		<catalogue>
+			<format>votable</format>
+            <type>continuum-component</type>
+			<filename>selavy-results.components-new.xml</filename>
+			<project>AS007</project>
+		</catalogue>
 		<catalogue>
 			<format>votable</format>
             <type>polarisation-component</type>
@@ -90,7 +102,13 @@
 
 	<evaluations>
 		<evaluation>
+			<format>validation-metrics</format>
+            <project>AS007</project>
+			<filename>valid_validation_metric_file.xml</filename>
+		</evaluation>
+		<evaluation>
 			<format>pdf</format>
+            <project>AS007</project>
 			<filename>no_file.pdf</filename>
 		</evaluation>
 	</evaluations>

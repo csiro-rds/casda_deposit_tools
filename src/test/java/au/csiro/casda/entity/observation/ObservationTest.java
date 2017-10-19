@@ -509,7 +509,6 @@ public class ObservationTest extends AbstractPersistenceTest
         EvaluationFile evaluationFile1 =
                 TestEvaluationFileBuilderFactory.createBuilder().setParent(observation)
                         .setFilename(evaluationFile1Filename).build();
-
         observationRepository.save(observation);
 
         commit();
@@ -522,7 +521,6 @@ public class ObservationTest extends AbstractPersistenceTest
         EvaluationFile evaluationFile2 =
                 TestEvaluationFileBuilderFactory.createBuilder().setParent(observation)
                         .setFilename(evaluationFile2Filename).build();
-
         observationRepository.save(observation);
 
         commit();
@@ -535,7 +533,6 @@ public class ObservationTest extends AbstractPersistenceTest
         EvaluationFile evaluationFile3 =
                 TestEvaluationFileBuilderFactory.createBuilder().setParent(observation)
                         .setFilename(evaluationFile3Filename).build();
-
         observationRepository.save(observation);
 
         commit();

@@ -55,6 +55,7 @@
 	<evaluations>
 		<evaluation>
 			<format>pdf</format>
+			<project>AS007</project>
 			<filename>no_file.pdf</filename>
 		</evaluation>
 	</evaluations>

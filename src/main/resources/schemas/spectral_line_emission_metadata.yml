@@ -12,7 +12,7 @@ fields:
         name: object_id
         datatype: char
         unit: 
-        maxarraysize: 27
+        maxarraysize: 255
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: object_name
@@ -227,19 +227,19 @@ fields:
         name: size_x
         datatype: int
         unit: 
-        maxwidth: 4        
+        maxwidth: 6        
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: size_y
         datatype: int
         unit: 
-        maxwidth: 4           
+        maxwidth: 6           
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: size_z
         datatype: int
         unit: 
-        maxwidth: 4           
+        maxwidth: 6           
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: n_vox
@@ -251,28 +251,28 @@ fields:
         name: asymmetry_2d
         datatype: float
         unit: 
-        maxwidth: 5
+        maxwidth: 6
         maxprecision: 3          
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: asymmetry_2d_err
         datatype: float
         unit:
-        maxwidth: 5
+        maxwidth: 6
         maxprecision: 3         
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: asymmetry_3d
         datatype: float
         unit: 
-        maxwidth: 5
+        maxwidth: 6
         maxprecision: 3
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: asymmetry_3d_err
         datatype: float
         unit: 
-        maxwidth: 5
+        maxwidth: 6
         maxprecision: 3  
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
@@ -381,7 +381,7 @@ fields:
         maxprecision: 3       
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
-        name: flux_voxel_stdev
+        name: flux_voxel_stddev
         datatype: float
         unit: mJy/beam
         maxwidth: 10

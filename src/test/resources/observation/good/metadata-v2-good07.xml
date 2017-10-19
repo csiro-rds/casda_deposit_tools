@@ -17,6 +17,8 @@
 			<filename>alidFile.fits</filename>
             <project>AS007</project>
             <type>cont_restored_T0</type>
+            <thumbnail_large></thumbnail_large>
+            <thumbnail_small></thumbnail_small>
 		</image>
 
 	</images>

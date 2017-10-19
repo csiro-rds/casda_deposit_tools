@@ -35,4 +35,15 @@ public interface ImageCubeRepository extends CrudRepository<ImageCube, Long>
      * @return an ImageCube
      */
     public ImageCube findByObservationSbidAndFilename(Integer sbid, String filename);
+
+    /**
+     * Returns the first ImageCube associated with the given Level7CollectionId and filename
+     * 
+     * @param level7CollectionId
+     *            the level7CollectionId of a level 7 Collection
+     * @param filename
+     *            a String
+     * @return an ImageCube
+     */
+    public ImageCube findByLevel7CollectionDapCollectionIdAndFilename(long level7CollectionId, String filename);
 }

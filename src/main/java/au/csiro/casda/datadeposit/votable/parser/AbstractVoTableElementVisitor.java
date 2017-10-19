@@ -1375,11 +1375,13 @@ public abstract class AbstractVoTableElementVisitor implements VoTableElementVis
         }
         for (FieldConstraint missingField : missingFields)
         {
-            recordFieldError(
-                    getPrimaryRequiredFieldKeyForFieldConstraint(missingField),
-                    getPrimaryRequiredFieldKeyForFieldConstraint(missingField).getValueForObject(missingField),
-                    new MalformedVoTableException(this, VisitorAction.VISIT_TABLE, null, String.format(
-                            "Missing FIELD matching %s", missingField.getSimpleFieldDescription())));
+            if (!"true".equals(missingField.getConstraintForFieldKey(FieldKey.OPTIONAL)))
+            {
+                recordFieldError(getPrimaryRequiredFieldKeyForFieldConstraint(missingField),
+                        getPrimaryRequiredFieldKeyForFieldConstraint(missingField).getValueForObject(missingField),
+                        new MalformedVoTableException(this, VisitorAction.VISIT_TABLE, null,
+                                String.format("Missing FIELD matching %s", missingField.getSimpleFieldDescription())));
+            }
         }
         this.processFields(this.fields);
     }

@@ -20,7 +20,9 @@
 	</xs:simpleType>
 	
 	<xs:simpleType name="ObservationTime">
-	   <xs:union memberTypes="xs:decimal xs:dateTime" />
+		<xs:restriction base="xs:dateTime">
+	      <xs:minInclusive value="1900-01-01T00:00:00.00"/>
+	    </xs:restriction>
 	</xs:simpleType>
 	
 	<xs:element name='dataset'>
@@ -99,6 +101,11 @@
 				<xs:element ref='obs:filename' />
                 <xs:element ref='obs:project' />
                 <xs:element name='type' type='obs:nonEmptyString' />
+                <xs:element name='thumbnail_large' type='obs:nillableString' minOccurs='0'/>
+                <xs:element name='thumbnail_small' type='obs:nillableString' minOccurs='0'/>
+                <xs:element ref="obs:spectra" minOccurs='0'/>
+                <xs:element ref="obs:moment_maps" minOccurs='0'/>
+                <xs:element ref="obs:cubelets" minOccurs='0'/>
 			</xs:all>
 		</xs:complexType>
 	</xs:element>
@@ -106,6 +113,68 @@
 	<xs:element name='format' type="obs:nonEmptyString" />
 
     <xs:element name='filename' type="obs:nonEmptyString" />
+
+
+	<xs:element name='spectra'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='obs:spectrum' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='spectrum'>
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref='obs:format' />
+				<xs:element ref='obs:filename' />
+				<xs:element name='type' type='obs:nonEmptyString' />
+				<xs:element name='thumbnail' type='obs:nillableString' minOccurs='0'/>
+				<xs:element name='number' type='obs:numberGreaterThanZero' />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name='moment_maps'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='obs:moment_map' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='moment_map'>
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref='obs:format' />
+				<xs:element ref='obs:filename' />
+				<xs:element name='type' type='obs:nonEmptyString' />
+				<xs:element name='thumbnail' type='obs:nillableString' minOccurs='0'/>
+				<xs:element name='number' type='obs:numberGreaterThanZero' />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	
+		<xs:element name='cubelets'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='obs:cubelet' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='cubelet'>
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref='obs:format' />
+				<xs:element ref='obs:filename' />
+				<xs:element name='type' type='obs:nonEmptyString' />
+				<xs:element name='thumbnail' type='obs:nillableString' minOccurs='0'/>
+				<xs:element name='number' type='obs:numberGreaterThanZero' />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
 
     <xs:simpleType name="catalogue_type">
         <xs:restriction base="xs:string">
@@ -200,6 +269,7 @@
 		<xs:complexType>
 			<xs:all>
 				<xs:element ref='obs:format' />
+                <xs:element ref='obs:project' />
 				<xs:element ref='obs:filename' />
 			</xs:all>
 		</xs:complexType>
@@ -220,6 +290,12 @@
 	<xs:simpleType name="nonEmptyString">
             <xs:restriction base="xs:string">
                 <xs:minLength value="1" />
+            </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="nillableString">
+            <xs:restriction base="xs:string">
+                <xs:minLength value="0" />
             </xs:restriction>
     </xs:simpleType>
 

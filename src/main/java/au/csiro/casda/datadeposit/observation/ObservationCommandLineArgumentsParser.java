@@ -44,6 +44,11 @@ public class ObservationCommandLineArgumentsParser extends
         @Parameter(names = "-sbid", description = "the scheduling block id of the Observation", required = true)
         private int sbid;
 
+        @Parameter(names = "-redeposit",
+                description = "this is a redeposit adding new data products to an already deposited Observation",
+                required = false)
+        private boolean redeposit = false;
+
         /**
          * @return the infile argument (if supplied)
          */
@@ -58,6 +63,11 @@ public class ObservationCommandLineArgumentsParser extends
         public int getSbid()
         {
             return sbid;
+        }
+
+        public boolean isRedeposit()
+        {
+            return redeposit;
         }
     }
 

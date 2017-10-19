@@ -75,7 +75,7 @@ public class PolarisationComponentCatalogueImportFunctionalTest extends Function
         }
 
         assertEquals(1, imageCubeRepository.count());
-        assertEquals(5, catalogueRepository.count());
+        assertEquals(7, catalogueRepository.count());
         Observation observation = observationRepository.findAll().iterator().next();
         assertEquals(1, observation.getCataloguesOfType(CatalogueType.POLARISATION_COMPONENT).size());
         Catalogue catalogue = observation.getCataloguesOfType(CatalogueType.POLARISATION_COMPONENT).get(0);
@@ -83,55 +83,57 @@ public class PolarisationComponentCatalogueImportFunctionalTest extends Function
 
         assertSame(imageCube, catalogue.getImageCube());
 
-        assertEquals(1, polarisationComponentRepository.countByCatalogue(catalogue));
-
         PolarisationComponent polarisationCatalogue =
                 polarisationComponentRepository.findByCatalogue(catalogue, new PageRequest(0, 1)).iterator().next();
 
-        assertEquals("SB001_image_1a", polarisationCatalogue.getComponentId());
-        assertEquals("J1234-4321", polarisationCatalogue.getComponentName());
-        assertEquals(12.582438, polarisationCatalogue.getRaDegCont(), 1e-6);
-        assertEquals(-43.352742, polarisationCatalogue.getDecDegCont(), 1e-6);
-        assertEquals(1.01, polarisationCatalogue.getFluxIMedian(), 1e-2);
-        assertEquals(0.53, polarisationCatalogue.getFluxQMedian(), 1e-2);
-        assertEquals(-0.42, polarisationCatalogue.getFluxUMedian(), 1e-2);
-        assertEquals(0.0010, polarisationCatalogue.getFluxVMedian(), 1e-4);
-        assertEquals(0.0010, polarisationCatalogue.getRmsI(), 1e-4);
-        assertEquals(0.0012, polarisationCatalogue.getRmsQ(), 1e-4);
-        assertEquals(0.0013, polarisationCatalogue.getRmsU(), 1e-4);
-        assertEquals(0.0012, polarisationCatalogue.getRmsV(), 1e-4);
-        assertEquals(1.09, polarisationCatalogue.getCo1(), 1e-2);
-        assertEquals(1.18, polarisationCatalogue.getCo2(), 1e-2);
-        assertEquals(1.27, polarisationCatalogue.getCo3(), 1e-2);
-        assertEquals(1.36, polarisationCatalogue.getCo4(), 1e-2);
-        assertEquals(1.45, polarisationCatalogue.getCo5(), 1e-2);
-        assertEquals(0.09, polarisationCatalogue.getLambdaRefSq(), 1e-2);
-        assertEquals(5.51, polarisationCatalogue.getRmsfFwhm(), 1e-2);
-        assertEquals(1.57, polarisationCatalogue.getPolPeak(), 1e-2);
-        assertEquals(1.41, polarisationCatalogue.getPolPeakDebias(), 1e-2);
-        assertEquals(0.01, polarisationCatalogue.getPolPeakErr(), 1e-2);
-        assertEquals(1.55, polarisationCatalogue.getPolPeakFit(), 1e-2);
-        assertEquals(1.42, polarisationCatalogue.getPolPeakFitDebias(), 1e-2);
-        assertEquals(0.01, polarisationCatalogue.getPolPeakFitErr(), 1e-2);
-        assertEquals(150.0, polarisationCatalogue.getPolPeakFitSnr(), 1e-2);
-        assertEquals(14.06, polarisationCatalogue.getPolPeakFitSnrErr(), 1e-2);
-        assertEquals(50.13, polarisationCatalogue.getFdPeak(), 1e-2);
-        assertEquals(5.66, polarisationCatalogue.getFdPeakErr(), 1e-2);
-        assertEquals(52.68, polarisationCatalogue.getFdPeakFit(), 1e-2);
-        assertEquals(5.23, polarisationCatalogue.getFdPeakFitErr(), 1e-2);
-        assertEquals(30.09, polarisationCatalogue.getPolAngRef(), 1e-2);
-        assertEquals(1.07, polarisationCatalogue.getPolAngRefErr(), 1e-2);
-        assertEquals(45.88, polarisationCatalogue.getPolAngZero(), 1e-2);
-        assertEquals(1.53, polarisationCatalogue.getPolAngZeroErr(), 1e-2);
-        assertEquals(8.91, polarisationCatalogue.getPolFrac(), 1e-2);
-        assertEquals(0.14, polarisationCatalogue.getPolFracErr(), 1e-2);
-        assertEquals(0.37, polarisationCatalogue.getComplex1(), 1e-2);
-        assertEquals(0.82, polarisationCatalogue.getComplex2(), 1e-2);
-        assertEquals(true, polarisationCatalogue.isFlagP1());
-        assertEquals(false, polarisationCatalogue.isFlagP2());
-        assertEquals("0.0", polarisationCatalogue.getFlagP3());
-        assertEquals("1.0", polarisationCatalogue.getFlagP4());
+        assertEquals("SB2338_image.i.NGC7232.cont.sb2338.NGC7232_A_T0-0A.linmos.restored_1000a",
+                polarisationCatalogue.getComponentId());
+        assertEquals("J215812-432858", polarisationCatalogue.getComponentName());
+        assertEquals(329.552673, polarisationCatalogue.getRaDegCont(), 1e-6);
+        assertEquals(-43.482868, polarisationCatalogue.getDecDegCont(), 1e-6);
+        assertEquals(3.4850, polarisationCatalogue.getFluxIMedian(), 1e-2);
+        assertEquals(0.040735, polarisationCatalogue.getFluxQMedian(), 1e-2);
+        assertEquals(-0.01641708331590052694082260131835938, polarisationCatalogue.getFluxUMedian(), 1e-8);
+        assertEquals(0.2011, polarisationCatalogue.getFluxVMedian(), 1e-4);
+        assertEquals(2.402, polarisationCatalogue.getRmsI(), 1e-4);
+        assertEquals(2.036, polarisationCatalogue.getRmsQ(), 1e-4);
+        assertEquals(1.80754, polarisationCatalogue.getRmsU(), 1e-4);
+        assertEquals(1.854, polarisationCatalogue.getRmsV(), 1e-4);
+        assertEquals(4.938, polarisationCatalogue.getCo1(), 1e-2);
+        assertEquals(0.000, polarisationCatalogue.getCo2(), 1e-2);
+        assertEquals(0.000, polarisationCatalogue.getCo3(), 1e-2);
+        assertEquals(0.000, polarisationCatalogue.getCo4(), 1e-2);
+        assertEquals(0.000, polarisationCatalogue.getCo5(), 1e-2);
+        assertEquals(0.0459, polarisationCatalogue.getLambdaRefSq(), 1e-3);
+        assertEquals(1289.6588, polarisationCatalogue.getRmsfFwhm(), 1e-4);
+        assertEquals(2.204, polarisationCatalogue.getPolPeak(), 1e-3);
+        assertEquals(-1000.000, polarisationCatalogue.getPolPeakDebias(), 1e-2);
+        assertEquals(0.000, polarisationCatalogue.getPolPeakErr(), 1e-2);
+        assertEquals(0.000, polarisationCatalogue.getPolPeakFit(), 1e-2);
+        assertEquals(0.000, polarisationCatalogue.getPolPeakFitDebias(), 1e-2);
+        assertEquals(0.000, polarisationCatalogue.getPolPeakFitErr(), 1e-2);
+        assertEquals(1.303, polarisationCatalogue.getPolPeakFitSnr(), 1e-2);
+        assertEquals(0.000, polarisationCatalogue.getPolPeakFitSnrErr(), 1e-2);
+        assertEquals(0.000, polarisationCatalogue.getFdPeak(), 1e-2);
+        assertEquals(0.000, polarisationCatalogue.getFdPeakErr(), 1e-2);
+        assertEquals(0.000, polarisationCatalogue.getFdPeakFit(), 1e-2);
+        assertEquals(0.000, polarisationCatalogue.getFdPeakFitErr(), 1e-2);
+        assertEquals(0.000, polarisationCatalogue.getPolAngRef(), 1e-2);
+        assertEquals(0.000, polarisationCatalogue.getPolAngRefErr(), 1e-2);
+        assertEquals(0.000, polarisationCatalogue.getPolAngZero(), 1e-2);
+        assertEquals(0.000, polarisationCatalogue.getPolAngZeroErr(), 1e-2);
+        assertEquals(0.000, polarisationCatalogue.getPolFrac(), 1e-2);
+        assertEquals(0.000, polarisationCatalogue.getPolFracErr(), 1e-2);
+        assertEquals(1.00, polarisationCatalogue.getComplex1(), 1e-2);
+        assertEquals(12.515, polarisationCatalogue.getComplex2(), 1e-2);
+        assertEquals(0, polarisationCatalogue.isFlagIsDetection());
+        assertEquals(0, polarisationCatalogue.isFlagEdge());
+        assertEquals(0, polarisationCatalogue.getFlagP3());
+        assertEquals(0, polarisationCatalogue.getFlagP4());
 
+
+        assertEquals(7, polarisationComponentRepository.countByCatalogue(catalogue));
+        
     }
 
     @Test

@@ -42,6 +42,8 @@ import au.csiro.casda.datadeposit.observation.jpa.repository.TestContinuumCompon
 import au.csiro.casda.datadeposit.observation.jpa.repository.TestContinuumIslandRepository;
 import au.csiro.casda.datadeposit.observation.jpa.repository.TestSpectralLineAbsorptionRepository;
 import au.csiro.casda.datadeposit.observation.jpa.repository.TestSpectralLineEmissionRepository;
+import au.csiro.casda.datadeposit.observation.jpa.repository.ValidationMetricRepository;
+import au.csiro.casda.datadeposit.observation.jpa.repository.ValidationMetricValueRepository;
 import au.csiro.casda.datadeposit.observation.service.RepositoryTestHelper;
 
 /*
@@ -112,6 +114,10 @@ public class FunctionalTestBase
     private PrintStream systemOut;
     
     private SimpleJdbcRepository simpleJdbcRepository;
+    
+    protected ValidationMetricValueRepository validationMetricValueRepository;
+    
+    protected ValidationMetricRepository validationMetricRepository;
 
     public FunctionalTestBase() throws Exception
     {
@@ -148,6 +154,8 @@ public class FunctionalTestBase
         spectralLineAbsorptionRepository = rfs.getRepository(TestSpectralLineAbsorptionRepository.class);
         spectralLineEmissionRepository = rfs.getRepository(TestSpectralLineEmissionRepository.class);
         scanRepository = rfs.getRepository(ScanRepository.class);
+        validationMetricValueRepository = rfs.getRepository(ValidationMetricValueRepository.class);
+        validationMetricRepository = rfs.getRepository(ValidationMetricRepository.class);
 
         // Wipe the database
         

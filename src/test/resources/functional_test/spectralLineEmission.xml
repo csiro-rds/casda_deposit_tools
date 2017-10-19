@@ -86,7 +86,7 @@
       <FIELD name="flux_voxel_max" ID="col_flux_voxel_max" ucd="askap:phot.flux.density.voxel;stat.max;em.radio" datatype="float" unit="mJy/beam" width="10" precision="3"/>
       <FIELD name="flux_voxel_min" ID="col_flux_voxel_min" ucd="askap:phot.flux.density.voxel;stat.min;em.radio" datatype="float" unit="mJy/beam" width="10" precision="3"/>
       <FIELD name="flux_voxel_mean" ID="col_flux_voxel_mean" ucd="askap:phot.flux.density.voxel;stat.mean;em.radio" datatype="float" unit="mJy/beam" width="10" precision="3"/>
-      <FIELD name="flux_voxel_stdev" ID="col_flux_voxel_stdev" ucd="askap:phot.flux.density.voxel;stat.stdev;em.radio" datatype="float" unit="mJy/beam" width="10" precision="3"/>
+      <FIELD name="flux_voxel_stddev" ID="col_flux_voxel_stdev" ucd="askap:phot.flux.density.voxel;stat.stdev;em.radio" datatype="float" unit="mJy/beam" width="10" precision="3"/>
       <FIELD name="flux_voxel_rms" ID="col_flux_voxel_rms" ucd="askap:phot.flux.density.voxel;askap:stat.rms;em.radio" datatype="float" unit="mJy/beam" width="10" precision="3"/>
       <FIELD name="rms_imagecube" ID="col_rms_imagecube" ucd="stat.stdev;phot.flux.density" datatype="float" unit="mJy/beam" width="10" precision="3"/>
       <FIELD name="w50_freq" ID="col_w50_freq" ucd="askap:em.freq.width" datatype="float" unit="kHz" width="11" precision="4"/>

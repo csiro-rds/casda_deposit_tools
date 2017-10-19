@@ -190,6 +190,22 @@ public enum FieldKey
     },
 
     /**
+     * Identifies if the field can be skipped in a table and still be valid.
+     */
+    OPTIONAL(false, false, (f) -> null)
+    {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void validateAttributeConstraint(Field field, FieldConstraint fieldConstraint)
+                throws FieldFormatException
+        {
+            // Not an actual attribute
+        }
+    },
+
+    /**
      * Represents the 'width' attribute of a Field/Param
      */
     WIDTH(false, false, (f) -> f.getWidth() == null ? null : f.getWidth().toString())

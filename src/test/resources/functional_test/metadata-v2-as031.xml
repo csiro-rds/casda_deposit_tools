@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataset xmlns="http://au.csiro/askap/observation">
+	<identity>
+		<telescope>ASKAP</telescope>
+		<sbid>12345</sbid>
+		<obsprogram>test</obsprogram>
+	</identity>
+
+	<observation>
+		<obsstart>2013-11-19T02:30:00.000</obsstart>
+		<obsend>2013-11-19T03:30:00.000</obsend>
+	</observation>
+
+	<images>
+		<image>
+			<format>fits</format>
+			<filename>validFile.fits</filename>
+            <project>AS031</project>
+            <type>cont_restored_T0</type>
+            <spectra>
+            	<spectrum>
+            		<format>fits</format>
+            		<filename>beta.image2.*.sir.fits</filename>
+            		<type>spectral_integrated_restored</type>
+            		<thumbnail>beta.image2.*.sir.png</thumbnail>
+            		<number>1</number>
+            	</spectrum>
+            </spectra>
+           	<moment_maps>
+           		<moment_map>
+            		<format>fits</format>
+            		<filename>mom0_*.fits</filename>
+            		<type>spectral_restored_mom0</type>
+            		<thumbnail>mom0_*.png</thumbnail>
+            		<number>1</number>
+           		</moment_map>
+           	</moment_maps>
+           	<cubelets>
+           		<cubelet>
+            		<format>fits</format>
+            		<filename>cube*.fits</filename>
+            		<type>spectral_restored_mom0</type>
+            		<thumbnail>cubelet*.png</thumbnail>
+            		<number>1</number>
+           		</cubelet>
+           	</cubelets>
+		</image>
+	</images>
+
+	<catalogues>
+		<catalogue>
+			<format>votable</format>
+            <type>continuum-component</type>
+			<filename>selavy-results.components.xml</filename>
+			<project>AS031</project>
+		</catalogue>
+	</catalogues>
+
+	<measurement_sets>
+		<measurement_set>
+			<format>tar</format>
+			<filename>no_file.ms.tar</filename>
+			<project>VAST</project>
+			<scans>
+			    <scan>
+					<id>0</id>
+					<scanstart>2013-11-19T02:30:00.000</scanstart>
+					<scanend>2013-11-19T03:30:00.000</scanend>
+					<fieldcentre units="rad">[-3.02, -0.785]</fieldcentre>
+					<coordsystem>J2000</coordsystem>
+					<fieldname>Fornax</fieldname>
+					<polarisations>[XX, XY, YX, YY]</polarisations>
+					<numchan>16416</numchan>
+					<centrefreq units="Hz">1400000000.0</centrefreq>
+					<chanwidth units="Hz">18518.0</chanwidth>
+				</scan>
+			</scans>
+		</measurement_set>
+	</measurement_sets>
+
+	<evaluations>
+		<evaluation>
+			<format>pdf</format>
+            <project>AS031</project>
+			<filename>no_file.pdf</filename>
+		</evaluation>
+	</evaluations>
+</dataset>

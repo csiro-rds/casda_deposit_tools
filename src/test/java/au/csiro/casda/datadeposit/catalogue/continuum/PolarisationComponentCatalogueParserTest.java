@@ -1,17 +1,23 @@
 package au.csiro.casda.datadeposit.catalogue.continuum;
 
+import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
+import static org.hamcrest.CoreMatchers.is;
 
 import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import au.csiro.casda.datadeposit.DepositState;
 import au.csiro.casda.datadeposit.catalogue.CatalogueParser;
 import au.csiro.casda.datadeposit.observation.jpa.repository.CatalogueRepository;
 import au.csiro.casda.datadeposit.observation.jpa.repository.ObservationRepository;
@@ -74,8 +80,12 @@ public class PolarisationComponentCatalogueParserTest
             String catalogueFilename = getPathForGoodTestCase("sample-polarisation");
             configureMockRepositories(catalogueFilename, "src/test/resources/image/good/validFile.fits");
 
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
             // this would throw an exception if parsing failed, but we expect it to be ok
+
+            ArgumentCaptor<DepositState> queryCaptor = ArgumentCaptor.forClass(DepositState.class);
+            verify(catalogue).setDepositState(queryCaptor.capture());
+            assertThat(queryCaptor.getValue().getType(), is(DepositState.Type.PROCESSED));
         }
 
     }

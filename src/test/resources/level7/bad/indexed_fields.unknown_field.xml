@@ -4,7 +4,7 @@
 <INFO name="QUERY_STATUS" value="OK">Successful query</INFO>
 <TABLE name="results">
 <DESCRIPTION>Atlas Sources for Project Foo</DESCRIPTION>
-<PARAM ID="catalogueName" arraysize="63" datatype="char" name="Catalogue Name" ucd="" value="my_level7_catalogue"/>
+<PARAM ID="catalogueName" arraysize="59" datatype="char" name="Catalogue Name" ucd="" value="my_level7_catalogue"/>
 <PARAM ID="projectCode" arraysize="255" datatype="char" name="Project Code" ucd="" value="AS007"/>
 <PARAM ID="indexedFields" arraysize="255" datatype="char" name="Indexed Fields" ucd="" value="foo,ra_deg_cont,dec_deg_cont"/>
 <PARAM ID="principalFields" arraysize="255" datatype="char" name="Principal Fields" ucd="" value="ra_deg_cont, dec_deg_cont"/>

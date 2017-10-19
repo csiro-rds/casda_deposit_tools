@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.JAXBElement;
@@ -78,6 +80,8 @@ public class Level7VoTableVisitor extends AbstractVoTableElementVisitor
 
     private Long level7CollectionId;
 
+    private Integer dcCommonId;
+
     private String filename;
 
     private String description;
@@ -97,6 +101,10 @@ public class Level7VoTableVisitor extends AbstractVoTableElementVisitor
     private Set<String> principalFields;
 
     private int descriptionMaxLength;
+
+    private String catalogueBaseName;
+
+    private int catalogueVersion;
 
     /**
      * Constructor
@@ -179,15 +187,19 @@ public class Level7VoTableVisitor extends AbstractVoTableElementVisitor
     @Override
     protected void processParams(Collection<VisitableVoTableParam> params)
     {
-        this.params = params;
+        final String catalogueNameFormat = "%s_v%02d";
+        this.params = new ArrayList<VisitableVoTableParam>(params);
         Optional<VisitableVoTableParam> catalogueNameParam = getParamWithName(params, "Catalogue Name");
         if (catalogueNameParam.isPresent() && !hasErrorsForParam(catalogueNameParam.get()))
         {
-            this.catalogueName = StringUtils.lowerCase(catalogueNameParam.get().getConvertedValue());
+            catalogueBaseName = StringUtils.lowerCase(catalogueNameParam.get().getConvertedValue());
+            catalogueVersion = 1;
+            
+            this.catalogueName = String.format(catalogueNameFormat, catalogueBaseName, catalogueVersion);
 
             try
             {
-                if (StringUtils.isBlank(this.catalogueName))
+                if (StringUtils.isBlank(catalogueBaseName))
                 {
                     recordParamError("Catalogue Name", new MalformedVoTableException(this, VisitorAction.VISIT_PARAM,
                             catalogueNameParam.get(), "value cannot be blank"));
@@ -198,11 +210,34 @@ public class Level7VoTableVisitor extends AbstractVoTableElementVisitor
                             catalogueNameParam.get(), "value contains forbidden characters ("
                                     + "it must contain only letters, numbers and underscores)"));
                 }
+                else if (catalogueBaseName.matches(".*_v[0-9]+$"))
+                {
+                    recordParamError("Catalogue Name", new MalformedVoTableException(this, VisitorAction.VISIT_PARAM,
+                            catalogueNameParam.get(), "value contains a trailing version. Table versions are managed "
+                                    + "automatically and should not be manually provided."));
+                }
                 else if (repository.tableExists(this.catalogueName))
                 {
-                    recordParamError("Catalogue Name",
-                            new MalformedVoTableException(this, VisitorAction.VISIT_PARAM, catalogueNameParam.get(),
-                                    String.format("catalogue with name '%s' already exists", this.catalogueName)));
+                    // Query catalogue table using base name, check common id against the one in catalogue
+                    // If not the same, reject
+                    List<Map<String, Object>> tableVersions = repository.findTableVersions(catalogueBaseName + "_v");
+                    if (!String.valueOf(dcCommonId).equals(String.valueOf(tableVersions.get(0).get("dc_common_id"))))
+                    {
+                        recordParamError("Catalogue Name",
+                                new MalformedVoTableException(this, VisitorAction.VISIT_PARAM, catalogueNameParam.get(),
+                                        String.format("catalogue with name '%s' already exists", this.catalogueName)));
+                    }
+                    else
+                    {
+                        String maxName =
+                                String.valueOf(tableVersions.get(tableVersions.size() - 1).get("entries_table_name"));
+                        Pattern pattern = Pattern.compile("v([0-9]+)$");
+                        Matcher matcher = pattern.matcher(maxName);
+                        matcher.find();
+                        int maxCurrVersion = Integer.parseInt(matcher.group(1));
+                        catalogueVersion = maxCurrVersion + 1;
+                        this.catalogueName = String.format(catalogueNameFormat, catalogueBaseName, catalogueVersion);
+                    }
                 }
             }
             catch (SQLException e)
@@ -210,6 +245,16 @@ public class Level7VoTableVisitor extends AbstractVoTableElementVisitor
                 throw new RuntimeException(e.getMessage());
             }
         }
+
+        
+        VisitableVoTableParam thisVerParam = new VisitableVoTableParam();
+        thisVerParam.setName("This version");
+        thisVerParam.setValue("v"+String.valueOf(this.catalogueVersion));
+        this.params.add(thisVerParam);
+        VisitableVoTableParam latestVerParam = new VisitableVoTableParam();
+        latestVerParam.setName("Latest version");
+        latestVerParam.setValue("v"+String.valueOf(this.catalogueVersion));
+        this.params.add(latestVerParam);
 
         Optional<VisitableVoTableParam> indexedFieldsParam = getParamWithName(params, "Indexed Fields");
         if (indexedFieldsParam.isPresent() && !hasErrorsForParam(indexedFieldsParam.get()))
@@ -306,9 +351,9 @@ public class Level7VoTableVisitor extends AbstractVoTableElementVisitor
             return;
         }
         repository.executeStatement(this.getCreateLevel7CatalogueTableDdl(this.projectCode, this.level7CollectionId,
-                this.catalogueName, this.description, this.columns, this.filename));
+                this.catalogueName, this.description, this.columns, this.filename, this.dcCommonId));
         repository.executeStatement(getUpdateVotapMetadataForLevel7CatalogueDdl(this.projectCode, this.catalogueName,
-                this.description, this.columns));
+                this.description, this.columns, this.catalogueBaseName, this.catalogueVersion, this.dcCommonId));
     }
 
     /** {@inheritDoc} */
@@ -349,14 +394,17 @@ public class Level7VoTableVisitor extends AbstractVoTableElementVisitor
      *            a List of Maps containing the definition of the Catalogue entry table's columns
      * @param filename
      *            the filename of the catalogue
+     * @param level7DcCommonId 
+     *            the common id of the level 7 collection associated with this catalogue
      * @return the DDL
      */
     String getCreateLevel7CatalogueTableDdl(String projectCode, long level7CollectionId, String catalogueName,
-            String catalogueDescription, List<Map<String, Object>> columns, String filename)
+            String catalogueDescription, List<Map<String, Object>> columns, String filename, int level7DcCommonId)
     {
         Map<String, Object> model = new HashMap<>();
         model.put("schema", "casda");
         model.put("level7CollectionId", level7CollectionId);
+        model.put("level7DcCommonId", level7DcCommonId);
         model.put("filename", filename);
         model.put("projectCode", projectCode);
         model.put("level7CatalogueName", catalogueName);
@@ -435,14 +483,24 @@ public class Level7VoTableVisitor extends AbstractVoTableElementVisitor
      *            a description of the Catalogue
      * @param columns
      *            a List of Maps containing the definition of the Catalogue entry table's columns
+     * @param catalogueVersion
+     *            the version number of the catalogue 
+     * @param catalogueBaseName 
+     *            the name of the catalogue without any version 
+     * @param dcCommonId 
+     *            the id shared between all versions of the data collection defining the catalogue 
      * @return the DDL
      */
     String getUpdateVotapMetadataForLevel7CatalogueDdl(String projectCode, String catalogueName,
-            String catalogueDescription, List<Map<String, Object>> columns)
+            String catalogueDescription, List<Map<String, Object>> columns, String catalogueBaseName,
+            int catalogueVersion, Integer dcCommonId)
     {
         Map<String, Object> model = new HashMap<>();
         model.put("schema", "casda");
         model.put("projectCode", projectCode);
+        model.put("level7CatalogueBaseName", catalogueBaseName);
+        model.put("level7CatalogueVersion", String.valueOf(catalogueVersion));
+        model.put("level7DcCommonId", String.valueOf(dcCommonId));
         model.put("level7CatalogueName", catalogueName);
         model.put("level7CatalogueTableDescription", catalogueDescription);
         model.put("generationDate", new SimpleDateFormat("yyyy-MM-dd").format(this.generationDate));
@@ -499,9 +557,19 @@ public class Level7VoTableVisitor extends AbstractVoTableElementVisitor
         this.level7CollectionId = level7CollectionId;
     }
 
+    public void setDcCommonId(Integer dcCommonId)
+    {
+        this.dcCommonId = dcCommonId;
+    }
+
     public void setFilename(String filename)
     {
         this.filename = filename;
+    }
+
+    String getCatalogueName()
+    {
+        return catalogueName;
     }
 
 }

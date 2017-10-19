@@ -45,7 +45,7 @@ public class StageArtefactCommandLineArgumentsParser extends
         private String parentId;
 
         @Parameter(names = "-parent-type", description = "the kind of deposit to stage "
-                    + "(observation or level7 ", required = true)
+                    + "(observation or derived-catalogue ", required = true)
         private String parentType;
 
         @Parameter(names = "-staging_volume", description = "the 'volume' to which to stage the depositable artefact",
@@ -128,7 +128,7 @@ public class StageArtefactCommandLineArgumentsParser extends
         if(! CommonCommandLineArguments.LEVEL7_PARENT_TYPE.equalsIgnoreCase(getArgs().getParentType()) &&
                 ! CommonCommandLineArguments.OBSERVATION_PARENT_TYPE.equalsIgnoreCase(getArgs().getParentType()))
         {
-            throw new ParameterException("Parameter parent-type must be either 'level7' or 'observation'");
+            throw new ParameterException("Parameter parent-type must be either 'derived-catalogue' or 'observation'");
         }
     }
 }

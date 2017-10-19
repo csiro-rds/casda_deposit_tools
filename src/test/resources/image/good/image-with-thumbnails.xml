@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataset xmlns="http://au.csiro/askap/observation">
+	<identity>
+		<telescope>ASKAP</telescope>
+		<sbid>610</sbid>
+		<sbids>
+			<sbid>609</sbid>
+		</sbids>
+		<obsprogram>test</obsprogram>
+	</identity>
+
+	<observation>
+		<obsstart>2013-11-19T02:30:00.000</obsstart>
+		<obsend>2013-11-19T03:30:00.000</obsend>
+	</observation>
+
+	<images>
+        <image>
+            <format>fits</format>
+            <filename>emu.image.fits</filename>
+            <project>AS014</project>
+            <type>cont_restored_T0</type>
+            <thumbnail_large>img_large.png</thumbnail_large>
+            <thumbnail_small>img_small.png</thumbnail_small>
+            <spectra/>
+        </image>
+	</images>
+</dataset>

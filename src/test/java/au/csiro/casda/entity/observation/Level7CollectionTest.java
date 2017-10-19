@@ -73,7 +73,7 @@ public class Level7CollectionTest extends AbstractPersistenceTest
         assertThat(level7Collection.getProject(), is(notNullValue()));
 
         Catalogue catalogue =
-                TestCatalogueBuilderFactory.createBuilder().setCatalogueType(CatalogueType.LEVEL7)
+                TestCatalogueBuilderFactory.createBuilder().setCatalogueType(CatalogueType.DERIVED_CATALOGUE)
                         .setParent(level7Collection).setProject(level7Collection.getProject()).build();
         assertEquals(1, level7Collection.getCatalogues().size());
         assertEquals(level7Collection.getProject(), catalogue.getProject());
@@ -86,8 +86,8 @@ public class Level7CollectionTest extends AbstractPersistenceTest
         exception.expectMessage("Catalogues in a level 7 collection must all be associated with the same project");
 
         Level7Collection level7Collection = TestLevel7CollectionBuilderFactory.createBuilder().build();
-        TestCatalogueBuilderFactory.createBuilder().setCatalogueType(CatalogueType.LEVEL7).setParent(level7Collection)
-                .build();
+        TestCatalogueBuilderFactory.createBuilder().setCatalogueType(CatalogueType.DERIVED_CATALOGUE)
+                .setParent(level7Collection).build();
     }
 
     @Test
@@ -138,8 +138,8 @@ public class Level7CollectionTest extends AbstractPersistenceTest
         assertThat(catalogueRepository.count(), is(0L));
 
         Level7Collection level7Collection = TestLevel7CollectionBuilderFactory.createBuilder().build();
-        TestCatalogueBuilderFactory.createBuilder().setCatalogueType(CatalogueType.LEVEL7).setParent(level7Collection)
-                .setProject(level7Collection.getProject()).build();
+        TestCatalogueBuilderFactory.createBuilder().setCatalogueType(CatalogueType.DERIVED_CATALOGUE)
+                .setParent(level7Collection).setProject(level7Collection.getProject()).build();
 
         level7CollectionRepository.save(level7Collection);
 

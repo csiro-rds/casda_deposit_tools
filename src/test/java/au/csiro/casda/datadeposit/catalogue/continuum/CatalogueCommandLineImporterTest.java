@@ -377,7 +377,7 @@ public class CatalogueCommandLineImporterTest extends AbstractArgumentsDrivenCom
 
         CatalogueParser parser = mock(CatalogueParser.class);
         doReturn(mock(Catalogue.class)).when(parser).parseFile(Mockito.anyInt(), Mockito.anyString(),
-                Mockito.anyString(), Mockito.any());
+                Mockito.anyString(), Mockito.any(),Mockito.anyInt());
         beanPostProcessor.overrideBean(CatalogueParser.class, parser);
         importer = createCatalogueCommandLineImporterWithParser(parser);
 
@@ -392,7 +392,7 @@ public class CatalogueCommandLineImporterTest extends AbstractArgumentsDrivenCom
                     try
                     {
                         verify(parser).parseFile(parentId, fileName, "src/test/resources/catalogue/good/" + fileName,
-                                CatalogueParser.Mode.NORMAL);
+                                CatalogueParser.Mode.NORMAL, null);
                     }
                     catch (Exception e)
                     {
@@ -427,7 +427,7 @@ public class CatalogueCommandLineImporterTest extends AbstractArgumentsDrivenCom
             public void setUp() throws Exception
             {
                 exception = new FileNotFoundException(fileName + " not found");
-                doThrow(exception).when(parser).parseFile(anyInt(), anyString(), anyString(), any());
+                doThrow(exception).when(parser).parseFile(anyInt(), anyString(), anyString(), any(), Mockito.anyInt());
                 args =
                         new String[] { "-catalogue-type", "continuum-component", "-parent-id", parentId.toString(),
                                 "-catalogue-filename", fileName, "-infile", fileName };
@@ -460,7 +460,7 @@ public class CatalogueCommandLineImporterTest extends AbstractArgumentsDrivenCom
             public void setUp() throws Exception
             {
                 exception = new CatalogueParser.DatabaseException(RandomStringUtils.randomAlphabetic(100));
-                doThrow(exception).when(parser).parseFile(anyInt(), anyString(), anyString(), any());
+                doThrow(exception).when(parser).parseFile(anyInt(), anyString(), anyString(), any(), anyInt());
                 args =
                         new String[] { "-catalogue-type", "continuum-component", "-parent-id", parentId.toString(),
                                 "-catalogue-filename", fileName, "-infile", fileName };
@@ -496,7 +496,7 @@ public class CatalogueCommandLineImporterTest extends AbstractArgumentsDrivenCom
                 exception =
                         new CatalogueParser.MalformedFileException(
                                 RandomStringUtils.randomAlphabetic(lengthOfRandomString));
-                doThrow(exception).when(parser).parseFile(anyInt(), anyString(), anyString(), any());
+                doThrow(exception).when(parser).parseFile(anyInt(), anyString(), anyString(), any(), anyInt());
                 args =
                         new String[] { "-catalogue-type", "continuum-component", "-parent-id", parentId.toString(),
                                 "-catalogue-filename", fileName, "-infile", fileName };
@@ -543,7 +543,7 @@ public class CatalogueCommandLineImporterTest extends AbstractArgumentsDrivenCom
             parser = mock(CatalogueParser.class);
             Catalogue catalogue = mock(Catalogue.class);
             doReturn(catalogue).when(parser).parseFile(Mockito.anyInt(), Mockito.anyString(), Mockito.anyString(),
-                    Mockito.any());
+                    Mockito.any(), anyInt());
             doReturn("observations-" + parentId + "-catalogues-" + fileName).when(catalogue).getFileId();
             beanPostProcessor.overrideBean(ContinuumComponentCatalogueParser.class, parser);
             importer = createCatalogueCommandLineImporterWithParser(parser);
@@ -612,7 +612,7 @@ public class CatalogueCommandLineImporterTest extends AbstractArgumentsDrivenCom
             {
                 validationSignal = new CatalogueParser.ValidationModeSignal();
                 doThrow(validationSignal).when(parser).parseFile(anyInt(), anyString(), anyString(),
-                        eq(CatalogueParser.Mode.VALIDATE_ONLY));
+                        eq(CatalogueParser.Mode.VALIDATE_ONLY), anyInt());
             }
 
             @Test
@@ -660,7 +660,7 @@ public class CatalogueCommandLineImporterTest extends AbstractArgumentsDrivenCom
                     validationSignal = new CatalogueParser.ValidationModeSignal();
                     validationSignal.addFailureMessage("Weee!");
                     doThrow(validationSignal).when(parser).parseFile(anyInt(), anyString(), anyString(),
-                            eq(CatalogueParser.Mode.VALIDATE_ONLY));
+                            eq(CatalogueParser.Mode.VALIDATE_ONLY), anyInt());
                 }
 
                 @Test
@@ -700,7 +700,7 @@ public class CatalogueCommandLineImporterTest extends AbstractArgumentsDrivenCom
                     validationSignal = new CatalogueParser.ValidationModeSignal();
                     validationSignal.addFailureMessage("Oops!");
                     doThrow(validationSignal).when(parser).parseFile(anyInt(), anyString(), anyString(),
-                            eq(CatalogueParser.Mode.VALIDATE_ONLY));
+                            eq(CatalogueParser.Mode.VALIDATE_ONLY), anyInt());
                 }
 
                 @Test
@@ -740,7 +740,7 @@ public class CatalogueCommandLineImporterTest extends AbstractArgumentsDrivenCom
                     validationSignal = new CatalogueParser.ValidationModeSignal();
                     validationSignal.addFailureMessage("Missing!");
                     doThrow(validationSignal).when(parser).parseFile(anyInt(), anyString(), anyString(),
-                            eq(CatalogueParser.Mode.VALIDATE_ONLY));
+                            eq(CatalogueParser.Mode.VALIDATE_ONLY), anyInt());
                 }
 
                 @Test

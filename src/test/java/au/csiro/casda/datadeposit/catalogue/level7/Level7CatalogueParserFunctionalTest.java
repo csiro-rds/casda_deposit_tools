@@ -21,8 +21,11 @@ import java.nio.charset.Charset;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.CharEncoding;
@@ -118,8 +121,9 @@ public class Level7CatalogueParserFunctionalTest
 
         Level7Collection level7Collection = new Level7Collection(123456);
         level7Collection.setProject(new Project("AS007"));
+        level7Collection.setDcCommonId(123450);
 
-        Catalogue catalogue = new Catalogue(CatalogueType.LEVEL7);
+        Catalogue catalogue = new Catalogue(CatalogueType.DERIVED_CATALOGUE);
         catalogue.setFilename("atlas_sources.xml");
         catalogue.setId(11L);
         level7Collection.addCatalogue(catalogue);
@@ -133,7 +137,8 @@ public class Level7CatalogueParserFunctionalTest
         ArgumentCaptor<String> queryCaptor = ArgumentCaptor.forClass(String.class);
         doNothing().when(repository).executeStatement(queryCaptor.capture());
 
-        parser.parseFile(123456, "atlas_sources.xml", "src/test/resources/level7/good/atlas_sources.xml", Mode.NORMAL);
+        parser.parseFile(123456, "atlas_sources.xml", "src/test/resources/level7/good/atlas_sources.xml", Mode.NORMAL,
+                level7Collection.getDcCommonId());
 
         goldenMasterReader =
                 new BufferedReader(new InputStreamReader(new FileInputStream(
@@ -163,8 +168,9 @@ public class Level7CatalogueParserFunctionalTest
 
         Level7Collection level7Collection = new Level7Collection(123456);
         level7Collection.setProject(new Project("AS031"));
+        level7Collection.setDcCommonId(255);
 
-        Catalogue catalogue = new Catalogue(CatalogueType.LEVEL7);
+        Catalogue catalogue = new Catalogue(CatalogueType.DERIVED_CATALOGUE);
         catalogue.setFilename("unusual_types_catalogue.xml");
         catalogue.setFormat("VOTABLE");
         catalogue.setParent(level7Collection);
@@ -240,21 +246,29 @@ public class Level7CatalogueParserFunctionalTest
                 new Level7VoTableVisitor(repository, new SimpleDateFormat("yyyy-MM-dd").parse("2015-04-07"), 255);
         Level7CatalogueParser parser = new Level7CatalogueParser(visitor, level7CollectionRepository);
 
-        when(repository.tableExists("my_level7_catalogue")).thenReturn(true);
+        when(repository.tableExists("my_level7_catalogue_v01")).thenReturn(true);
+        List<Map<String, Object>> mapList = new ArrayList<>();
+        Map<String, Object> entryMap = new HashMap<>();
+        entryMap.put("entries_table_name", "my_level7_catalogue_v01");
+        entryMap.put("dc_common_id", 42);
+        mapList.add(entryMap);
+        doReturn(mapList).when(repository).findTableVersions(anyString());
+
 
         when(level7CollectionRepository.save(any(Level7Collection.class))).then(returnSavedValue);
 
         try
         {
             parser.parseFile(Integer.parseInt(parentId), "catalogue_name.empty.xml", catalogueDatafile,
-                    Mode.VALIDATE_ONLY);
+                    Mode.VALIDATE_ONLY, Integer.parseInt(parentId));
             fail("Validation mode must throw an exception of type ValidationModeSignal");
         }
         catch (ValidationModeSignal e)
         {
             List<String> failureMessages = e.getValidationFailureMessages();
             assertEquals(1, failureMessages.size());
-            assertEquals("Error in PARAM 'Catalogue Name' : catalogue with name 'my_level7_catalogue' already exists",
+            assertEquals(
+                    "Error in PARAM 'Catalogue Name' : catalogue with name 'my_level7_catalogue_v01' already exists",
                     failureMessages.get(0));
         }
     }
@@ -270,7 +284,7 @@ public class Level7CatalogueParserFunctionalTest
                 new Level7VoTableVisitor(repository, new SimpleDateFormat("yyyy-MM-dd").parse("2015-04-07"), 255);
         Level7CatalogueParser parser = new Level7CatalogueParser(visitor, level7CollectionRepository);
 
-        Catalogue catalogue = new Catalogue(CatalogueType.LEVEL7);
+        Catalogue catalogue = new Catalogue(CatalogueType.DERIVED_CATALOGUE);
         catalogue.setProject(new Project("AS007"));
         catalogue.setFilename("atlas_sources.xml");
         catalogue.setId(11L);
@@ -281,7 +295,8 @@ public class Level7CatalogueParserFunctionalTest
 
         try
         {
-            parser.parseFile(Integer.parseInt(parentId), "atlas_sources.xml", catalogueDatafile, Mode.NORMAL);
+            parser.parseFile(Integer.parseInt(parentId), "atlas_sources.xml", catalogueDatafile, Mode.NORMAL,
+                    Integer.parseInt(parentId));
             fail("An exception should be thrown because the catalogue has already been loaded");
         }
         catch (CatalogueParser.DatabaseException e)
@@ -364,8 +379,9 @@ public class Level7CatalogueParserFunctionalTest
 
         Level7Collection level7Collection = new Level7Collection(123456);
         level7Collection.setProject(new Project("C009"));
+        level7Collection.setDcCommonId(255);
 
-        Catalogue catalogue = new Catalogue(CatalogueType.LEVEL7);
+        Catalogue catalogue = new Catalogue(CatalogueType.DERIVED_CATALOGUE);
         catalogue.setFilename("description.missing.xml");
         catalogue.setFormat("VOTABLE");
         catalogue.setId(12L);
@@ -420,8 +436,9 @@ public class Level7CatalogueParserFunctionalTest
 
         Level7Collection level7Collection = new Level7Collection(123456);
         level7Collection.setProject(new Project("C009"));
+        level7Collection.setDcCommonId(255);
 
-        Catalogue catalogue = new Catalogue(CatalogueType.LEVEL7);
+        Catalogue catalogue = new Catalogue(CatalogueType.DERIVED_CATALOGUE);
         catalogue.setFilename("quotes.in.comments.xml");
         catalogue.setFormat("VOTABLE");
         catalogue.setId(12L);
@@ -547,7 +564,7 @@ public class Level7CatalogueParserFunctionalTest
         try
         {
             parser.parseFile(Integer.parseInt(parentId), "catalogue_name.empty.xml", catalogueDatafile,
-                    Mode.VALIDATE_ONLY);
+                    Mode.VALIDATE_ONLY, Integer.parseInt(parentId));
             fail("Validation mode must throw an exception of type ValidationModeSignal");
         }
         catch (ValidationModeSignal e)

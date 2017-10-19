@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Import;
 import au.csiro.casda.AppConfig;
 import au.csiro.casda.datadeposit.ArgumentsDrivenCommandLineTool;
 import au.csiro.casda.datadeposit.DataDepositMessageBuilder;
+import au.csiro.casda.datadeposit.catalogue.CatalogueCommandLineArgumentsParser.CommandLineArguments;
 import au.csiro.casda.entity.observation.Catalogue;
 import au.csiro.casda.logging.DataLocation;
 import au.csiro.logging.CasdaDataDepositEvents;
@@ -74,22 +75,21 @@ public class CatalogueCommandLineImporter extends
 
         Instant startTime = Instant.now();
 
-        CatalogueType catalogueType = commandLineArgumentsParser.getArgs().getCatalogueType();
+        CommandLineArguments arguments = commandLineArgumentsParser.getArgs();
+        CatalogueType catalogueType = arguments.getCatalogueType();
 
         CatalogueParser parser = createParserForCatalogueType(catalogueType);
         Catalogue catalogue = null;
         try
         {
-            catalogue =
-                    parser.parseFile(commandLineArgumentsParser.getArgs().getParentId(), commandLineArgumentsParser
-                            .getArgs().getCatalogueFilename(), commandLineArgumentsParser.getArgs().getInfile(), this
-                            .getCommandLineArgumentsParser().getArgs().getMode());
+            catalogue = parser.parseFile(arguments.getParentId(), arguments.getCatalogueFilename(),
+                    arguments.getInfile(), arguments.getMode(), arguments.getDcCommonId());
         }
         catch (FileNotFoundException e)
         {
             logger.error(
                     CasdaDataDepositEvents.E056.messageBuilder().add(catalogueType.getDescription())
-                            .add(commandLineArgumentsParser.getArgs().getInfile()).add(String.join(" ", args))
+                            .add(arguments.getInfile()).add(String.join(" ", args))
                             .toString(), e);
             System.exit(1);
         }
@@ -97,7 +97,7 @@ public class CatalogueCommandLineImporter extends
         {
             logger.error(
                     CasdaDataDepositEvents.E057.messageBuilder().add(catalogueType.getDescription())
-                            .add(commandLineArgumentsParser.getArgs().getInfile()).add(String.join(" ", args))
+                            .add(arguments.getInfile()).add(String.join(" ", args))
                             .toString(), e);
             System.exit(1);
         }
@@ -105,7 +105,7 @@ public class CatalogueCommandLineImporter extends
         {
             logger.error(
                     CasdaDataDepositEvents.E058.messageBuilder().add(catalogueType.getDescription())
-                            .add(commandLineArgumentsParser.getArgs().getInfile()).add(String.join(" ", args))
+                            .add(arguments.getInfile()).add(String.join(" ", args))
                             .toString(), e);
             System.exit(1);
         }
@@ -128,7 +128,7 @@ public class CatalogueCommandLineImporter extends
         long filesizeInBytes = FileUtils.sizeOf(new File(this.getCommandLineArgumentsParser().getArgs().getInfile()));
         DataDepositMessageBuilder messageBuilder = CasdaDataDepositEvents.E059.messageBuilder() //
                 .add(catalogueType.getDescription()) //
-                .add(commandLineArgumentsParser.getArgs().getInfile()) //
+                .add(arguments.getInfile()) //
                 .addStartTime(startTime) //
                 .addEndTime(endTime) //
                 .addSource(DataLocation.RTC) //

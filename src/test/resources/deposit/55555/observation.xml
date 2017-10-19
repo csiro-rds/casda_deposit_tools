@@ -131,6 +131,7 @@
 	<evaluations>
 		<evaluation>
 			<format>pdf</format>
+            <project>AS031</project>
 			<filename>evaluations.pdf</filename>
 		</evaluation>
 	</evaluations>

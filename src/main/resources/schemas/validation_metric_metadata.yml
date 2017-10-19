@@ -1,0 +1,26 @@
+params:
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.ParamConstraint
+        name: project
+        datatype: char
+fields:
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: metric_name
+        datatype: char
+        maxarraysize: 100
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: metric_value
+        datatype: double
+        maxwidth: 12
+        maxprecision: 6
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: metric_status
+        datatype: int
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: metric_description
+        datatype: char
+        maxarraysize: 256

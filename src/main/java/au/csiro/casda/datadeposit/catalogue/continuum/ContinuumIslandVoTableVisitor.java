@@ -68,7 +68,22 @@ public class ContinuumIslandVoTableVisitor extends AbstractCatalogueVoTableVisit
         APPLIERS.put("min_axis", (continuumIsland, value) -> continuumIsland.setMinAxis(Float.parseFloat(value)));
         APPLIERS.put("pos_ang", (continuumIsland, value) -> continuumIsland.setPosAng(Float.parseFloat(value)));
         APPLIERS.put("flux_int", (continuumIsland, value) -> continuumIsland.setFluxInt(Float.parseFloat(value)));
+        APPLIERS.put("flux_int_err", (continuumIsland, value) -> continuumIsland.setFluxIntErr(Float.parseFloat(value)));
         APPLIERS.put("flux_peak", (continuumIsland, value) -> continuumIsland.setFluxPeak(Float.parseFloat(value)));
+        APPLIERS.put("mean_background",
+                (continuumIsland, value) -> continuumIsland.setMeanBackground(Float.parseFloat(value)));
+        APPLIERS.put("background_noise",
+                (continuumIsland, value) -> continuumIsland.setBackgroundNoise(Float.parseFloat(value)));
+        APPLIERS.put("max_residual",
+                (continuumIsland, value) -> continuumIsland.setMaxResidual(Float.parseFloat(value)));
+        APPLIERS.put("min_residual",
+                (continuumIsland, value) -> continuumIsland.setMinResidual(Float.parseFloat(value)));
+        APPLIERS.put("mean_residual",
+                (continuumIsland, value) -> continuumIsland.setMeanResidual(Float.parseFloat(value)));
+        APPLIERS.put("rms_residual",
+                (continuumIsland, value) -> continuumIsland.setRmsResidual(Float.parseFloat(value)));
+        APPLIERS.put("stddev_residual",
+                (continuumIsland, value) -> continuumIsland.setStddevResidual(Float.parseFloat(value)));
         APPLIERS.put("x_min", (continuumIsland, value) -> continuumIsland.setXMin(Integer.parseInt(value)));
         APPLIERS.put("x_max", (continuumIsland, value) -> continuumIsland.setXMax(Integer.parseInt(value)));
         APPLIERS.put("y_min", (continuumIsland, value) -> continuumIsland.setYMin(Integer.parseInt(value)));
@@ -80,6 +95,10 @@ public class ContinuumIslandVoTableVisitor extends AbstractCatalogueVoTableVisit
         APPLIERS.put("y_cen", (continuumIsland, value) -> continuumIsland.setYCen(Float.parseFloat(value)));
         APPLIERS.put("x_peak", (continuumIsland, value) -> continuumIsland.setXPeak(Integer.parseInt(value)));
         APPLIERS.put("y_peak", (continuumIsland, value) -> continuumIsland.setYPeak(Integer.parseInt(value)));
+        APPLIERS.put("solid_angle",
+                (continuumIsland, value) -> continuumIsland.setSolidAngle(Float.parseFloat(value)));
+        APPLIERS.put("beam_area",
+                (continuumIsland, value) -> continuumIsland.setBeamArea(Float.parseFloat(value)));
         APPLIERS.put("flag_i1", (continuumIsland, value) -> continuumIsland.setFlagI1(Short.parseShort(value)));
         APPLIERS.put("flag_i2", (continuumIsland, value) -> continuumIsland.setFlagI2(Short.parseShort(value)));
         APPLIERS.put("flag_i3", (continuumIsland, value) -> continuumIsland.setFlagI3(Short.parseShort(value)));

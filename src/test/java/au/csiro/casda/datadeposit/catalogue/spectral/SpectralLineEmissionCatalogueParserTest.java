@@ -14,9 +14,13 @@ package au.csiro.casda.datadeposit.catalogue.spectral;
 
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
+import static org.hamcrest.CoreMatchers.is;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -29,10 +33,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import au.csiro.TestUtils;
+import au.csiro.casda.datadeposit.DepositState;
 import au.csiro.casda.datadeposit.catalogue.CatalogueParser;
 import au.csiro.casda.datadeposit.catalogue.CatalogueParser.ValidationModeSignal;
 import au.csiro.casda.datadeposit.catalogue.spectralline.SpectralLineEmissionCatalogueParser;
@@ -86,7 +92,11 @@ public class SpectralLineEmissionCatalogueParserTest
         String catalogueFilename = "src/test/resources/spectralline/good/spectralLineEmission.good.xml";
         configureMockRepositories(catalogueFilename, "src/test/resources/image/good/validFile.fits");
 
-        parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL);
+        parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.NORMAL, null);
+
+        ArgumentCaptor<DepositState> queryCaptor = ArgumentCaptor.forClass(DepositState.class);
+        verify(catalogue).setDepositState(queryCaptor.capture());
+        assertThat(queryCaptor.getValue().getType(), is(DepositState.Type.PROCESSED));
     }
     
     /**
@@ -106,7 +116,7 @@ public class SpectralLineEmissionCatalogueParserTest
             String catalogueFilename = "src/test/resources/spectralline/bad/spectralLineEmission.bad.xml";
             configureMockRepositories(catalogueFilename, "src/test/resources/image/good/validFile.fits");
 
-            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.VALIDATE_ONLY);
+            parser.parseFile(12345, catalogueFilename, catalogueFilename, CatalogueParser.Mode.VALIDATE_ONLY, null);
         }
         catch(ValidationModeSignal vms)
         {

@@ -162,8 +162,8 @@ public class SpectralLineEmissionVoTableVisitor extends AbstractCatalogueVoTable
                 (spectralLineEmission, value) -> spectralLineEmission.setFluxVoxelMax(Float.parseFloat(value)));
         APPLIERS.put("flux_voxel_mean",
                 (spectralLineEmission, value) -> spectralLineEmission.setFluxVoxelMean(Float.parseFloat(value)));
-        APPLIERS.put("flux_voxel_stdev",
-                (spectralLineEmission, value) -> spectralLineEmission.setFluxVoxelStdev(Float.parseFloat(value)));
+        APPLIERS.put("flux_voxel_stddev",
+                (spectralLineEmission, value) -> spectralLineEmission.setFluxVoxelStddev(Float.parseFloat(value)));
         APPLIERS.put("flux_voxel_rms",
                 (spectralLineEmission, value) -> spectralLineEmission.setFluxVoxelRms(Float.parseFloat(value)));
         APPLIERS.put("rms_imagecube",

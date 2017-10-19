@@ -106,7 +106,7 @@ public enum CatalogueType
     /**
      * The 'Level 7' catalogue type.
      */
-    LEVEL7
+    DERIVED_CATALOGUE
     {
         /**
          * {@inheritDoc}

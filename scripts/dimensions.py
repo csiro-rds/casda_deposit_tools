@@ -2,9 +2,34 @@ import os
 import subprocess
 import re
 
+##
+# 
+# CSIRO ASKAP Science Data Archive
+#
+# Copyright (C) 2016 Commonwealth Scientific and Industrial Research Organisation (CSIRO) ABN 41 687 119 230.
+#
+# Licensed under the CSIRO Open Source License Agreement (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License in the LICENSE file.
+#
+##
+
+#code for white list
+# run this against database and export results out to csv file (without column headings)
+"""select IC.id, IC.filename, O.sbid from casda.image_cube IC, casda.observation O where IC.observation_id = O.id and IC.dimensions is null;"""
+
 #change for each environment
 test_directory = '/ASKAP/archive/dev/vol002/ASKAPArchive/'
 cmd = "/ASKAP/access/dev/shared_tools/bin/imagegeom ";
+
+#test_directory = '/ASKAP/archive/test/vol002/ASKAPArchive/'
+#cmd = "/ASKAP/access/test/shared_tools/bin/imagegeom ";
+
+#test_directory = '/ASKAP/archive/at/vol002/ASKAPArchive/'
+#cmd = "/ASKAP/access/at/shared_tools/bin/imagegeom ";
+
+#test_directory = '/ASKAP/prd-archive/prd/vol002/ASKAPArchive/'
+#cmd = "/ASKAP/prd-access/prd/shared_tools/bin/imagegeom ";
 
 if os.path.exists('result.sql'):
     os.remove('result.sql')

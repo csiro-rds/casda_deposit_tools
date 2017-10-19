@@ -77,7 +77,7 @@ public class SpectralLineEmissionCatalogueImportFunctionalTest extends Functiona
         }
 
         assertEquals(1, imageCubeRepository.count());
-        assertEquals(5, catalogueRepository.count());
+        assertEquals(7, catalogueRepository.count());
         Observation observation = observationRepository.findAll().iterator().next();
         assertEquals(1, observation.getCataloguesOfType(CatalogueType.SPECTRAL_LINE_EMISSION).size());
         Catalogue catalogue = observation.getCataloguesOfType(CatalogueType.SPECTRAL_LINE_EMISSION).get(0);
@@ -155,7 +155,7 @@ public class SpectralLineEmissionCatalogueImportFunctionalTest extends Functiona
         assertEquals(10574.080, spectralLineEmission.getFluxVoxelMax(), 1e-3);
         assertEquals(19.678, spectralLineEmission.getFluxVoxelMin(), 1e-3);
         assertEquals(21.943, spectralLineEmission.getFluxVoxelMean(), 1e-3);
-        assertEquals(55.236, spectralLineEmission.getFluxVoxelStdev(), 1e-3);
+        assertEquals(55.236, spectralLineEmission.getFluxVoxelStddev(), 1e-3);
         assertEquals(22.667, spectralLineEmission.getFluxVoxelRms(), 1e-3);
         assertEquals(993.945, spectralLineEmission.getRmsImagecube(), 01e-3);
 

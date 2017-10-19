@@ -49,6 +49,8 @@
 	<evaluations>
 		<evaluation>
 			<format>pdf</format>
+			<filename>componentCatalogue.xml</filename>
+			<project>AS007</project>
 			<filename>evaluations.pdf</filename>
 		</evaluation>
 	</evaluations>

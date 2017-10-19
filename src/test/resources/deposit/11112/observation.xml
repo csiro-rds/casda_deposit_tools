@@ -78,6 +78,7 @@
 	<evaluations>
 		<evaluation>
 			<format>pdf</format>
+            <project>AS007</project>
 			<filename>evaluations.pdf</filename>
 		</evaluation>
 	</evaluations>

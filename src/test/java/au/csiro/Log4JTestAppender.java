@@ -32,6 +32,7 @@ import org.apache.logging.log4j.core.Layout;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.config.Configuration;
+import org.apache.logging.log4j.core.config.LoggerConfig;
 import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.hamcrest.Matcher;
 import org.mockito.ArgumentMatcher;
@@ -54,7 +55,12 @@ public final class Log4JTestAppender implements Appender
         LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
         Configuration config = ctx.getConfiguration();
         Log4JTestAppender appender = new Log4JTestAppender();
-        config.getLoggerConfig("au.csiro").addAppender(appender, Level.INFO, null);
+        LoggerConfig loggerConfig = config.getLoggerConfig("au.csiro");
+        for(String key : loggerConfig.getAppenders().keySet())
+        {
+            loggerConfig.removeAppender(key);
+        }
+        loggerConfig.addAppender(appender, Level.INFO, null);
         return appender;
     }
 
@@ -258,5 +264,19 @@ public final class Log4JTestAppender implements Appender
     public void verifyNoMessages()
     {
         assertThat(this.events, empty());
+    }
+
+    @Override
+    public State getState()
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void initialize()
+    {
+        // TODO Auto-generated method stub
+        
     }
 }

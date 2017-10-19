@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataset xmlns="http://au.csiro/askap/observation">
+	<identity>
+		<telescope>ASKAP</telescope>
+		<sbid>610</sbid>
+		<sbids>
+			<sbid>609</sbid>
+		</sbids>
+		<obsprogram>test</obsprogram>
+	</identity>
+
+	<observation>
+		<obsstart>2013-11-19T02:30:00.000</obsstart>
+		<obsend>2013-11-19T03:30:00.000</obsend>
+	</observation>
+
+	<images>
+        <image>
+            <format>fits</format>
+            <filename>beta.image2.fits</filename>
+            <project>AS031</project>
+            <type>cont_restored_T0</type>
+            <moment_maps>
+            	<moment_map>
+            		<format>fits</format>
+            		<filename>mom0_*.fits</filename>
+            		<type>spectral_restored_mom0</type>
+            		<thumbnail>mom0_*.png</thumbnail>
+            		<number>2</number>
+            	</moment_map>
+            </moment_maps>
+        </image>
+	</images>
+</dataset>

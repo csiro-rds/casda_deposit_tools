@@ -5,22 +5,20 @@ params:
         !!au.csiro.casda.datadeposit.votable.parser.ParamConstraint
         name: imageFile
         datatype: char
-        maxarraysize: 63
+        maxarraysize: 255
 fields:
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: component_id
         datatype: char
-        unit: none
-        maxarraysize: 50
-        maxprecision: 2
+        unit: 
+        maxarraysize: 256
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: component_name
         datatype: char
-        unit: none
+        unit: 
         maxarraysize: 50
-        maxprecision: 2
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: ra_deg_cont
@@ -41,270 +39,270 @@ fields:
         datatype: double
         unit: mJy/beam
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 6
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: flux_Q_median
         datatype: double
         unit: mJy/beam
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 6
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: flux_U_median
         datatype: double
         unit: mJy/beam
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 35
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: flux_V_median
         datatype: double
         unit: mJy/beam
         maxwidth: 50
-        maxprecision: 4
+        maxprecision: 6
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: rms_I
         datatype: double
         unit: mJy/beam
         maxwidth: 50
-        maxprecision: 4
+        maxprecision: 5
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: rms_Q
         datatype: double
         unit: mJy/beam
         maxwidth: 50
-        maxprecision: 4
+        maxprecision: 5
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: rms_U
         datatype: double
         unit: mJy/beam
         maxwidth: 50
-        maxprecision: 4
+        maxprecision: 5
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: rms_V
         datatype: double
         unit: mJy/beam
         maxwidth: 50
-        maxprecision: 4
+        maxprecision: 5
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: co_1
+        unit: 
         datatype: double
-        unit: none
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 3
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: co_2
         datatype: double
-        unit: none
+        unit: 
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 3
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: co_3
         datatype: double
-        unit: none
+        unit: 
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 3
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: co_4
         datatype: double
-        unit: none
+        unit: 
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 3
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: co_5
         datatype: double
-        unit: none
+        unit: 
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 3
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: lambda_ref_sq
         datatype: double
         unit: m2
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 4
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: rmsf_fwhm
         datatype: double
         unit: rad/m2
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 4
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: pol_peak
         datatype: double
         unit: mJy/beam
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 3
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: pol_peak_debias
         datatype: double
         unit: mJy/beam
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 3
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: pol_peak_err
         datatype: double
         unit: mJy/beam
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 3
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: pol_peak_fit
         datatype: double
         unit: mJy/beam
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 3
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: pol_peak_fit_debias
         datatype: double
         unit: mJy/beam
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 3
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: pol_peak_fit_err
         datatype: double
         unit: mJy/beam
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 3
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: pol_peak_fit_snr
         datatype: double
-        unit: none
+        unit: 
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 3
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: pol_peak_fit_snr_err
         datatype: double
-        unit: none
+        unit: 
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 3
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: fd_peak
         datatype: double
         unit: rad/m2
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 4
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: fd_peak_err
         datatype: double
         unit: rad/m2
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 4
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: fd_peak_fit
         datatype: double
         unit: rad/m2
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 4
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: fd_peak_fit_err
         datatype: double
         unit: rad/m2
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 4
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: pol_ang_ref
         datatype: double
         unit: deg
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 3
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: pol_ang_ref_err
         datatype: double
         unit: deg
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 3
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: pol_ang_zero
         datatype: double
         unit: deg
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 3
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: pol_ang_zero_err
         datatype: double
         unit: deg
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 3
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: pol_frac
         datatype: double
-        unit: none
+        unit: 
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 4
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: pol_frac_err
         datatype: double
-        unit: none
+        unit: 
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 6
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: complex_1
         datatype: double
-        unit: none
+        unit: 
         maxwidth: 50
-        maxprecision: 2
+        maxprecision: 3
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: complex_2
         datatype: double
-        unit: none
+        unit: 
+        maxwidth: 50
+        maxprecision: 3
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: flag_is_detection
+        datatype: int
+        unit: 
         maxwidth: 50
         maxprecision: 2
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
-        name: flag_p1
-        datatype: boolean
-        unit: none
-        maxwidth: 50
-        maxprecision: 2
-    -
-        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
-        name: flag_p2
-        datatype: boolean
-        unit: none
+        name: flag_edge
+        datatype: int
+        unit: 
         maxwidth: 50
         maxprecision: 2
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: flag_p3
-        datatype: char
-        unit: none
+        datatype: int
+        unit: 
         maxarraysize: 50
         maxprecision: 2
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: flag_p4
-        datatype: char
-        unit: none
+        datatype: int
+        unit: 
         maxarraysize: 50
         maxprecision: 2

@@ -57,7 +57,7 @@ class CatalogueCommandLineArgumentsParser extends
 
         @Parameter(names = "-catalogue-type", description = "the kind of catalogue to import (continuum-island, "
                + "or continuum-component, polarisarion-component, spectral-line-absorption, spectral-line-emission, "
-               + "or level7", required = true)
+               + "or derived-catalogue", required = true)
         private String catalogueType;
 
         @Parameter(names = "-catalogue-filename", description = "the filename of the catalogue file "
@@ -70,6 +70,11 @@ class CatalogueCommandLineArgumentsParser extends
         @Parameter(names = "-validate-only", description = "Validation mode", required = false)
         private boolean validateOnly = false;
 
+        @Parameter(names = "-dc-common-id",
+                description = "The base collection id shared by all versions of a particular data collection.",
+                required = false)
+        private String dcCommonId;
+
         /**
          * @return the parent-id argument (if supplied)
          */
@@ -78,12 +83,13 @@ class CatalogueCommandLineArgumentsParser extends
             return Integer.parseInt(parentId);
         }
 
+        /**
+         * Convert from the command-line value (see the description for the catalogueType @Parameter above) to an
+         * enumeration value.
+         * @return the converted value
+         */
         public CatalogueType getCatalogueType()
         {
-            /*
-             * Convert from the command-line value (see the description for the catalogueType @Parameter above) to an
-             * enumeration value.
-             */
             return CatalogueType.valueOf(catalogueType.toUpperCase().replace("-", "_"));
         }
 
@@ -106,6 +112,23 @@ class CatalogueCommandLineArgumentsParser extends
         private String getRawParentId()
         {
             return parentId;
+        }
+
+        /**
+         * @return The numeric data collection common id (if provided)
+         */
+        public Integer getDcCommonId()
+        {
+            if (dcCommonId == null)
+            { 
+                return null;
+            }
+            return Integer.parseInt(dcCommonId);
+        }
+
+        public String getRawDcCommonId()
+        {
+            return dcCommonId;
         }
 
         /**
@@ -155,6 +178,14 @@ class CatalogueCommandLineArgumentsParser extends
         {
             throw new ParameterException("Parameter catalogue-type must be either "
                     + CommandLineArguments.getValidCatalogueTypeValuesDescription());
+        }
+        try
+        {
+            getArgs().getDcCommonId();
+        }
+        catch (NumberFormatException e)
+        {
+            throw new ParameterException("Parameter dc-common-id must be an integer");
         }
     }
 

@@ -1,5 +1,7 @@
 package au.csiro.casda.datadeposit.observation;
 
+import static org.hamcrest.Matchers.containsInAnyOrder;
+
 /*
  * #%L
  * CSIRO ASKAP Science Data Archive
@@ -14,11 +16,14 @@ package au.csiro.casda.datadeposit.observation;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import static org.hamcrest.CoreMatchers.is;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -40,12 +45,19 @@ import org.springframework.test.context.TestContextManager;
 import org.xml.sax.SAXParseException;
 
 import au.csiro.casda.TestAppConfig;
+import au.csiro.casda.datadeposit.DepositState.Type;
+import au.csiro.casda.datadeposit.DepositStateImpl;
 import au.csiro.casda.datadeposit.DepositableArtefact;
 import au.csiro.casda.datadeposit.observation.ObservationParser.MalformedFileException;
 import au.csiro.casda.datadeposit.observation.jdbc.repository.SimpleJdbcRepository;
 import au.csiro.casda.datadeposit.observation.jpa.repository.ObservationRepository;
 import au.csiro.casda.datadeposit.observation.jpa.repository.ProjectRepository;
 import au.csiro.casda.datadeposit.observation.parser.XmlObservationParserTest;
+import au.csiro.casda.entity.observation.Catalogue;
+import au.csiro.casda.entity.observation.EncapsulationFile;
+import au.csiro.casda.entity.observation.EvaluationFile;
+import au.csiro.casda.entity.observation.ImageCube;
+import au.csiro.casda.entity.observation.MeasurementSet;
 import au.csiro.casda.entity.observation.Observation;
 
 /**
@@ -60,6 +72,10 @@ public class ObservationParserTest
     @Autowired
     @Value("${fileIdMaxSize}")
     private int fileIdMaxSize;
+    
+    @Autowired
+    @Value("${thumbnail.max.size.kilobytes}")
+    private long thumbnailMaxSize;
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
@@ -117,6 +133,18 @@ public class ObservationParserTest
 
         return types;
     }
+    
+    public void testValidatethumbnailSize() throws Exception
+    {
+        ObservationParser parser =
+                new ObservationParserImpl(projectRepository, observationRepository, simpleJdbcRepository);
+        expectedException.expect(ObservationParser.MalformedFileException.class);
+        expectedException.expectMessage(
+                "Supplied sbid [1] does not match the value in the " + "/dataset/identity/sbid element [12345]");
+       // parser.parseFile(609, "src/test/resources/observation/good/metadata-v2-good01.xml");        
+        parser.parseFile(609, "src/test/resources/deposit/609/observation.xml", false);
+    }  
+    
 
     /**
      * Tests that validateDataset(Dataset) returns false if sbid in dataset and cli do not match.
@@ -131,7 +159,7 @@ public class ObservationParserTest
         expectedException.expect(ObservationParser.MalformedFileException.class);
         expectedException.expectMessage(
                 "Supplied sbid [1] does not match the value in the " + "/dataset/identity/sbid element [12345]");
-        parser.parseFile(1, "src/test/resources/observation/good/metadata-v2-good01.xml");
+        parser.parseFile(1, "src/test/resources/observation/good/metadata-v2-good01.xml", false);
     }
 
     /**
@@ -144,11 +172,11 @@ public class ObservationParserTest
     public void testInvalidCatalogueName() throws Exception
     {
         ObservationParser parser = new ObservationParserImpl(projectRepository, observationRepository,
-                simpleJdbcRepository, fileIdMaxSize);
+                simpleJdbcRepository, fileIdMaxSize, thumbnailMaxSize);
         expectedException.expect(ObservationParser.MalformedFileException.class);
         expectedException.expectMessage(
                 "Catalogue file name [/componentCatalogue.xml] must be a " + "relative path without a leading slash.");
-        parser.parseFile(12345, "src/test/resources/observation/bad/observationValidBadCatalogueName.xml");
+        parser.parseFile(12345, "src/test/resources/observation/bad/observationValidBadCatalogueName.xml", false);
     }
 
     /**
@@ -161,11 +189,12 @@ public class ObservationParserTest
     public void testInvalidCatalogueNameDoubleSlash() throws Exception
     {
         ObservationParser parser = new ObservationParserImpl(projectRepository, observationRepository,
-                simpleJdbcRepository, fileIdMaxSize);
+                simpleJdbcRepository, fileIdMaxSize, thumbnailMaxSize);
         expectedException.expect(ObservationParser.MalformedFileException.class);
         expectedException
                 .expectMessage("Catalogue file name [src//componentCatalogue.xml] must not contain a double slash.");
-        parser.parseFile(12345, "src/test/resources/observation/bad/observationValidBadCatalogueNameDoubleSlash.xml");
+        parser.parseFile(12345, "src/test/resources/observation/bad/observationValidBadCatalogueNameDoubleSlash.xml",
+                false);
     }
 
     /**
@@ -178,12 +207,12 @@ public class ObservationParserTest
     public void testCatalogueTypeRequired() throws Exception
     {
         ObservationParser parser = new ObservationParserImpl(projectRepository, observationRepository,
-                simpleJdbcRepository, fileIdMaxSize);
+                simpleJdbcRepository, fileIdMaxSize, thumbnailMaxSize);
         expectedException.expect(ObservationParser.MalformedFileException.class);
         expectedException
                 .expectCause(XmlObservationParserTest.unmarshallExceptionCausedByException(SAXParseException.class,
                         "The content of element 'catalogue' is not " + "complete. One of .* is expected."));
-        parser.parseFile(12345, "src/test/resources/observation/bad/metadata-v2-catalogue_type_missing.xml");
+        parser.parseFile(12345, "src/test/resources/observation/bad/metadata-v2-catalogue_type_missing.xml", false);
     }
 
     /**
@@ -196,11 +225,11 @@ public class ObservationParserTest
     public void testUnknownCatalogueType() throws Exception
     {
         ObservationParser parser = new ObservationParserImpl(projectRepository, observationRepository,
-                simpleJdbcRepository, fileIdMaxSize);
+                simpleJdbcRepository, fileIdMaxSize, thumbnailMaxSize);
         expectedException.expect(ObservationParser.MalformedFileException.class);
         expectedException.expectCause(XmlObservationParserTest.unmarshallExceptionCausedByException(
                 SAXParseException.class, "Value 'FOO' .*" + " must be a value from the enumeration."));
-        parser.parseFile(12345, "src/test/resources/observation/bad/metadata-v2-catalogue_type_unknown.xml");
+        parser.parseFile(12345, "src/test/resources/observation/bad/metadata-v2-catalogue_type_unknown.xml", false);
     }
 
     /**
@@ -213,11 +242,11 @@ public class ObservationParserTest
     public void testInvalidImageName() throws Exception
     {
         ObservationParser parser = new ObservationParserImpl(projectRepository, observationRepository,
-                simpleJdbcRepository, fileIdMaxSize);
+                simpleJdbcRepository, fileIdMaxSize, thumbnailMaxSize);
         expectedException.expect(ObservationParser.MalformedFileException.class);
         expectedException.expectMessage(
                 "Image file name [/image.i.clean.restored.fits] must be a relative path without a " + "leading slash.");
-        parser.parseFile(12345, "src/test/resources/observation/bad/observationValidBadImageCubeName.xml");
+        parser.parseFile(12345, "src/test/resources/observation/bad/observationValidBadImageCubeName.xml", false);
     }
     
     /**
@@ -230,11 +259,11 @@ public class ObservationParserTest
     public void testInvalidImageType() throws Exception
     {
         ObservationParser parser = new ObservationParserImpl(projectRepository, observationRepository,
-                simpleJdbcRepository, fileIdMaxSize);
+                simpleJdbcRepository, fileIdMaxSize, thumbnailMaxSize);
         expectedException.expect(ObservationParser.MalformedFileException.class);
         expectedException.expectMessage(
                 "Image file name [image.i.clean.restored.fits] contains invalid image type [Incorrect - Type].");
-        parser.parseFile(12345, "src/test/resources/observation/bad/observationValidBadImageCubeImageType.xml");
+        parser.parseFile(12345, "src/test/resources/observation/bad/observationValidBadImageCubeImageType.xml", false);
     }
 
     /**
@@ -247,12 +276,12 @@ public class ObservationParserTest
     public void testInvalidMeasurementSetName() throws Exception
     {
         ObservationParser parser = new ObservationParserImpl(projectRepository, observationRepository,
-                simpleJdbcRepository, fileIdMaxSize);
+                simpleJdbcRepository, fileIdMaxSize, thumbnailMaxSize);
         expectedException.expect(ObservationParser.MalformedFileException.class);
         expectedException
                 .expectMessage("Measurement set file name [/src/test/resources/measurement/good/no_file.ms.tar] must "
                         + "be a relative path without a leading slash.");
-        parser.parseFile(12345, "src/test/resources/observation/bad/observationValidBadMeasurementSetName.xml");
+        parser.parseFile(12345, "src/test/resources/observation/bad/observationValidBadMeasurementSetName.xml", false);
     }
 
     /**
@@ -265,11 +294,11 @@ public class ObservationParserTest
     public void testInvalidEvaluationFileName() throws Exception
     {
         ObservationParser parser = new ObservationParserImpl(projectRepository, observationRepository,
-                simpleJdbcRepository, fileIdMaxSize);
+                simpleJdbcRepository, fileIdMaxSize, thumbnailMaxSize);
         expectedException.expect(ObservationParser.MalformedFileException.class);
         expectedException.expectMessage("Evaluation file file name [/src/test/resources/evaluation/good/no_file.pdf] "
                 + "must be a relative path without a leading slash.");
-        parser.parseFile(12345, "src/test/resources/observation/bad/observationValidBadEvaluationFileName.xml");
+        parser.parseFile(12345, "src/test/resources/observation/bad/observationValidBadEvaluationFileName.xml", false);
     }
 
     /**
@@ -282,13 +311,15 @@ public class ObservationParserTest
     public void testParseFilePopulatesFileSizes() throws Exception
     {
         ObservationParser parser = new ObservationParserImpl(projectRepository, observationRepository,
-                simpleJdbcRepository, fileIdMaxSize);
-        Observation observation = parser.parseFile(12345, "src/test/resources/observation/good/metadata-v2-good01.xml");
-        assertEquals(7, observation.getDepositableArtefacts().size());
+                simpleJdbcRepository, fileIdMaxSize, thumbnailMaxSize);
+        Observation observation =
+                parser.parseFile(12345, "src/test/resources/observation/good/metadata-v2-good01.xml", false);
+        assertEquals(10, observation.getDepositableArtefacts().size());
 
         for (DepositableArtefact childDepositableArtefact : observation.getDepositableArtefacts())
         {
-            if ("observation.xml".equals(childDepositableArtefact.getFilename()))
+            if ("observation.xml".equals(childDepositableArtefact.getFilename()) || 
+            		childDepositableArtefact instanceof EncapsulationFile)
             {
                 assertNull(childDepositableArtefact.getFilesize());
             }
@@ -301,6 +332,47 @@ public class ObservationParserTest
             }
         }
     }
+    
+    /**
+     * Tests that parseFile will populate thumbnails
+     * 
+     * @throws Exception
+     *             IOException
+     */
+    @Test
+    public void testParseFileThumbnails() throws Exception
+    {
+        ObservationParser parser = new ObservationParserImpl(projectRepository, observationRepository,
+                simpleJdbcRepository, fileIdMaxSize, thumbnailMaxSize);
+        Observation observation =
+                parser.parseFile(12345, "src/test/resources/observation/good/metadata-v2-good01.xml", false);
+        assertEquals(10, observation.getDepositableArtefacts().size());
+        assertEquals("validFile_fits_large_thumbnail.jpg",
+                observation.getImageCubes().get(0).getLargeThumbnail().getFilename());
+        assertEquals("validFile_fits_small_thumbnail.png",
+                observation.getImageCubes().get(0).getSmallThumbnail().getFilename());
+        assertEquals("jpg", observation.getImageCubes().get(0).getLargeThumbnail().getFormat());
+        assertEquals("png", observation.getImageCubes().get(0).getSmallThumbnail().getFormat());
+
+    }
+    
+    
+    /**
+     * Tests that validation of thumbnail size
+     * 
+     * @throws Exception
+     *             IOException
+     */
+    @Test
+    public void testValidateFileThumbnailSize() throws Exception
+    {
+        ObservationParser parser = new ObservationParserImpl(projectRepository, observationRepository,
+                simpleJdbcRepository, fileIdMaxSize, thumbnailMaxSize);
+        expectedException.expect(ObservationParser.MalformedFileException.class);
+        expectedException.expectMessage(
+                "thumbnail file name [6.33MB-large-thumbnail.jpg] size [6488 KB] is larger than allowed size [3000 KB]");
+        parser.parseFile(610, "src/test/resources/deposit/610/observation.xml", false);
+    }
 
     /**
      * Tests that parseFile can handle multiple sbids
@@ -309,17 +381,103 @@ public class ObservationParserTest
      *             IOException
      */
     @Test
-    public void testParseFileObserationWithMultipleSbids() throws Exception
+    public void testParseFileObservationWithMultipleSbids() throws Exception
     {
         ObservationParser parser = new ObservationParserImpl(projectRepository, observationRepository,
-                simpleJdbcRepository, fileIdMaxSize);
-        Observation observation = parser.parseFile(609, "src/test/resources/deposit/609/observation.xml");
-        assertEquals(12, observation.getDepositableArtefacts().size());
+                simpleJdbcRepository, fileIdMaxSize, thumbnailMaxSize);
+        Observation observation = parser.parseFile(609, "src/test/resources/deposit/609/observation.xml", false);
+        assertEquals(13, observation.getDepositableArtefacts().size());
         assertEquals(5, observation.getSbids().size());
         assertTrue(observation.getSbid() == 609);
         assertEquals(observation.getSbids(), Arrays.asList(610, 611, 612, 613, 614));
     }
 
+    /**
+     * Tests that parseFile can handle updates to observations
+     * 
+     * @throws Exception
+     *             IOException
+     */
+    @Test
+    public void testParseFileUpdateObservation() throws Exception
+    {
+        when(observationRepository.findBySbid(66666)).thenReturn(null);
+        ObservationParser parser = new ObservationParserImpl(projectRepository, observationRepository,
+                simpleJdbcRepository, fileIdMaxSize, thumbnailMaxSize);
+        Observation observation = parser.parseFile(66666, "src/test/resources/deposit/66666/observation.xml", false);
+        assertEquals(7, observation.getDepositableArtefacts().size());
+        assertTrue(observation.getSbid() == 66666);
+        assertThat(observation.getImageCubes().get(0).getFilename(), is("beta.image1.fits"));
+        assertThat(observation.getImageCubes().size(), is(1));
+        assertThat(observation.getDepositStateType(), is(Type.UNDEPOSITED));
+
+        observation.setDepositState(new DepositStateImpl(Type.DEPOSITED, observation));
+        when(observationRepository.findBySbid(66666)).thenReturn(observation);
+        observation = parser.parseFile(66666, "src/test/resources/deposit/66666/observation-updated.xml", true);
+        List<String> actualNames = new ArrayList<>();
+        for (ImageCube imageCube : observation.getImageCubes())
+        {
+            actualNames.add(imageCube.getFilename());
+        }
+        assertThat(actualNames,
+                containsInAnyOrder("beta.image1.fits", "beta.image2.fits", "emu.image.fits", "vlbi.image.fits"));
+        
+        actualNames.clear();
+        for (Catalogue catalogue : observation.getCatalogues())
+        {
+            actualNames.add(catalogue.getFilename());
+        }
+        assertThat(actualNames, containsInAnyOrder("selavy-results.islands.xml", "selavy-results.components.xml",
+                "selavy-results_polarisation.xml"));
+
+        actualNames.clear();
+        for (EvaluationFile evaluationFile : observation.getEvaluationFiles())
+        {
+            actualNames.add(evaluationFile.getFilename());
+        }
+        assertThat(actualNames, containsInAnyOrder("evaluations.pdf", "evaluations2.pdf"));
+
+        actualNames.clear();
+        for (MeasurementSet measurementSet : observation.getMeasurementSets())
+        {
+            actualNames.add(measurementSet.getFilename());
+        }
+        assertThat(actualNames, containsInAnyOrder("beta.ms.tar", "emu.ms.tar", "vlbi.ms.tar"));
+        
+        assertThat(observation.getObservationMetadataFileDepositable().getFilename(), is("observation.xml"));
+        assertThat(observation.getDepositStateType(), is(Type.UNDEPOSITED));
+        assertEquals(15, observation.getDepositableArtefacts().size());
+        assertTrue(observation.getSbid() == 66666);
+    }
+
+    @Test
+    public void testParseFileUpdateRequiresDeposited() throws Exception
+    {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage("Asked to redeposit an observation that has not finished depositing");
+        
+        Observation observation = new Observation();
+        observation.setDepositState(new DepositStateImpl(Type.DEPOSITING, observation));
+        when(observationRepository.findBySbid(66666)).thenReturn(observation);
+
+        ObservationParser parser = new ObservationParserImpl(projectRepository, observationRepository,
+                simpleJdbcRepository, fileIdMaxSize, thumbnailMaxSize);
+
+        parser.parseFile(66666, "src/test/resources/deposit/66666/observation-updated.xml", true);
+    }
+
+    @Test
+    public void testParseFileUpdateRequiresExisting() throws Exception
+    {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage("Asked to redeposit an observation that does not exist");
+
+        ObservationParser parser = new ObservationParserImpl(projectRepository, observationRepository,
+                simpleJdbcRepository, fileIdMaxSize, thumbnailMaxSize);
+
+        parser.parseFile(66666, "src/test/resources/deposit/66666/observation-updated.xml", true);
+    }
+    
     @Test
     public void testCalculateFilesizeInKB() throws Exception
     {
@@ -344,7 +502,7 @@ public class ObservationParserTest
     public void testValidLongFileIdObservationArtifact() throws Exception
     {
         ObservationParser parser = new ObservationParserImpl(projectRepository, observationRepository,
-                simpleJdbcRepository, fileIdMaxSize);
+                simpleJdbcRepository, fileIdMaxSize, thumbnailMaxSize);
         expectedException.expect(ObservationParser.MalformedFileException.class);
         expectedException.expectMessage("image_cube file name ["
                 + "validFilexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxd"
@@ -354,17 +512,31 @@ public class ObservationParserTest
                 + "Filexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxd"
                 + "Filexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.fits"
                 + "] does not exist.");
-        parser.parseFile(12345, "src/test/resources/observation/bad/observationValidLongFileId.xml");
+        parser.parseFile(12345, "src/test/resources/observation/bad/observationValidLongFileId.xml", false);
     }
 
     @Test
     public void testFileNotExist() throws Exception
     {
         ObservationParser parser = new ObservationParserImpl(projectRepository, observationRepository,
-                simpleJdbcRepository, fileIdMaxSize);
+                simpleJdbcRepository, fileIdMaxSize, thumbnailMaxSize);
         expectedException.expect(ObservationParser.MalformedFileException.class);
         expectedException.expectMessage("image_cube file name [not_exist_file.fits] does not exist.");
-        parser.parseFile(12345, "src/test/resources/observation/bad/observationBlankFilename.xml");
+        parser.parseFile(12345, "src/test/resources/observation/bad/observationBlankFilename.xml", false);
     }
 
+    /**
+     * tests that the start date must be before the end date in observations
+     * @throws Exception an exception
+     */
+    @Test
+    public void testDatesInOrder() throws Exception
+    {
+        ObservationParser parser = new ObservationParserImpl(projectRepository, observationRepository,
+                simpleJdbcRepository, fileIdMaxSize, thumbnailMaxSize);
+        expectedException.expect(ObservationParser.MalformedFileException.class);
+        expectedException.expectMessage("Observation contains an observation End date/time "
+                    + "which is earlier than or equal to the observation start time.");
+        parser.parseFile(12345, "src/test/resources/observation/bad/observationEndBeforeStartDate.xml", false);
+    }
 }

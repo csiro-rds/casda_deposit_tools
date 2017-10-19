@@ -17,6 +17,7 @@ import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -83,4 +84,23 @@ public class SimpleJdbcRepository
         return this.jdbcTemplate.queryForList(
                 "select distinct type_name from casda.image_type where type_name != 'Unknown'", String.class);
     }
+
+    /**
+     * Retrieve all versions of a base table along with the data collection common id that they are associated with. 
+     * @param baseTableName
+     *          The base name of the table
+     * @return
+     *          An array of table names and data colleciton common ids
+     * @throws SQLException
+     *          Probably a connection failure
+     */
+    public List<Map<String, Object>> findTableVersions(String baseTableName) throws SQLException
+    {
+        List<Map<String, Object>> list = jdbcTemplate.queryForList("select c.entries_table_name, l7c.dc_common_id "
+                + "from casda.level7_collection l7c, casda.catalogue c "
+                + "where l7c.id = c.level7_collection_id and c.entries_table_name like 'casda." + baseTableName + "%' "
+                + "order by c.entries_table_name");
+        return list;
+    }
+    
 }

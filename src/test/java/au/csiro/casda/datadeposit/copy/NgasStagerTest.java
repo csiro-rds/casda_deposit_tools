@@ -18,6 +18,7 @@ import org.springframework.test.context.TestContextManager;
 import au.csiro.casda.TestAppConfig;
 import au.csiro.casda.Utils;
 import au.csiro.casda.datadeposit.service.NgasService.ServiceCallException;
+import au.csiro.casda.jobmanager.JavaProcessJobFactory;
 
 /*
  * #%L
@@ -85,7 +86,7 @@ public class NgasStagerTest
 
         stager =
                 new NgasStager(ngasServerName, ngasStagingDirectory,
-                        existenceCopyCommand);
+                        existenceCopyCommand, new JavaProcessJobFactory());
 
         exception.expect(NoSuchFileException.class);
         exception
@@ -102,7 +103,7 @@ public class NgasStagerTest
     {
         stager =
                 new NgasStager(ngasServerName, ngasStagingDirectory,
-                        failingCopyCommand);
+                        failingCopyCommand, new JavaProcessJobFactory());
 
         exception.expect(StagingException.class);
         exception.expectMessage(String.format(
@@ -122,7 +123,7 @@ public class NgasStagerTest
         filename = depositObservationParentDirectory + sbid + "/image.i.clean.restored.fits";
         stager =
                 new NgasStager(ngasServerName, ngasStagingDirectory,
-                        existenceCopyCommand);
+                        existenceCopyCommand, new JavaProcessJobFactory());
 
         exception.expect(ChecksumMissingException.class);
         exception.expectMessage(String.format(
@@ -141,7 +142,7 @@ public class NgasStagerTest
         filename = depositObservationParentDirectory + "/" + sbid + "/observation.xml";
         stager =
                 new NgasStager(ngasServerName, ngasStagingDirectory,
-                        existenceCopyCommand);
+                        existenceCopyCommand, new JavaProcessJobFactory());
 
         stager.stageArtefactToNgas(sbid, filename, volume, fileId);
     }
@@ -153,7 +154,7 @@ public class NgasStagerTest
         sbid = 22226;
         filename = depositObservationParentDirectory + "/" + sbid + "/evaluations.pdf";
         stager = new NgasStager(ngasServerName, ngasStagingDirectory,
-                        existenceCopyCommand);
+                        existenceCopyCommand, new JavaProcessJobFactory());
 
         exception.expect(StagingException.class);
         exception.expectMessage(String.format(

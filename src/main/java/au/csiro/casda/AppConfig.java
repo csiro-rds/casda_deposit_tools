@@ -1,5 +1,7 @@
 package au.csiro.casda;
 
+import org.apache.commons.lang3.StringUtils;
+
 /*
  * #%L
  * CSIRO ASKAP Science Data Archive
@@ -14,6 +16,7 @@ package au.csiro.casda;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ApplicationContext;
@@ -27,7 +30,10 @@ import org.springframework.web.client.RestTemplate;
 import au.csiro.casda.datadeposit.catalogue.level7.Level7CollectionRepository;
 import au.csiro.casda.datadeposit.observation.jdbc.repository.SimpleJdbcRepository;
 import au.csiro.casda.datadeposit.observation.jpa.repository.CatalogueRepository;
+import au.csiro.casda.jobmanager.CommandRunnerServiceProcessJobFactory;
+import au.csiro.casda.jobmanager.JavaProcessJobFactory;
 import au.csiro.casda.jobmanager.SynchronousProcessJobManager;
+import au.csiro.casda.jobmanager.ProcessJobBuilder.ProcessJobFactory;
 import au.csiro.casda.logging.CasdaLoggingSettings;
 
 /**
@@ -71,5 +77,31 @@ public class AppConfig
     public RestTemplate getRestTemplate()
     {
         return new RestTemplate();
+    }
+
+    /**
+     * Return the factory which will create ProcessJob instance for us to run commands.
+     * 
+     * @param cmdWebServiceUrl
+     *            The URL of the command runner web service.
+     * @param factoryName
+     *            The name of the factory to use, if not using the default.
+     * @return The ProcessJobFactory instance
+     */
+    @Bean
+    public ProcessJobFactory getProcessJobFactory(@Value("${command.webservice.url:}") String cmdWebServiceUrl,
+            @Value("${command.process.job.factory:}") String factoryName)
+    {
+        if ("CommandRunnerServiceProcessJobFactory".equalsIgnoreCase(factoryName))
+        {
+            if (StringUtils.isBlank(cmdWebServiceUrl))
+            {
+                throw new IllegalArgumentException(
+                        "command.webservice.url must be configured to use CommandRunnerServiceProcessJobFactory");
+            }
+            return new CommandRunnerServiceProcessJobFactory(cmdWebServiceUrl, APPLICATION_NAME);
+        }
+
+        return new JavaProcessJobFactory();
     }
 }

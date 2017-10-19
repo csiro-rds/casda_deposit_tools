@@ -32,6 +32,8 @@ public abstract class TestEvaluationFileBuilderFactory
     public static interface EvaluationFileBuilder extends TestObjectBuilder<EvaluationFile>
     {
         public EvaluationFileBuilder setParent(ParentDepositableArtefact observation);
+        
+        public EvaluationFileBuilder setProject(Project project);
 
         public EvaluationFileBuilder setFormat(String format);
 
@@ -49,6 +51,7 @@ public abstract class TestEvaluationFileBuilderFactory
         private EvaluationFileBuilderProxyHandler()
         {
             setDefault("parent", TestObservationBuilderFactory.createBuilder());
+            setDefault("project", TestProjectBuilderFactory.createBuilder());
             setDefault("format", RandomStringUtils.randomAlphabetic(10));
             setDefault("filename", RandomStringUtils.randomAlphabetic(30));
         }

@@ -174,6 +174,30 @@ fields:
         maxprecision: 2
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: maj_axis_deconv_err
+        datatype: float
+        unit: arcsec
+        maxwidth: 13
+        maxprecision: 2
+        optional: true
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: min_axis_deconv_err
+        datatype: float
+        unit: arcsec
+        maxwidth: 13
+        maxprecision: 2
+        optional: true
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: pos_ang_deconv_err
+        datatype: float
+        unit: deg
+        maxwidth: 12
+        maxprecision: 2
+        optional: true
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: chi_squared_fit
         datatype: float
         unit: --
@@ -202,6 +226,22 @@ fields:
         maxprecision: 2
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: spectral_index_err
+        datatype: float
+        unit: --
+        maxwidth: 15
+        maxprecision: 2
+        optional: true
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: spectral_curvature_err
+        datatype: float
+        unit: --
+        maxwidth: 19
+        maxprecision: 2
+        optional: true
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: rms_image
         datatype: float
         unit: mJy/beam
@@ -225,6 +265,14 @@ fields:
         datatype: int
         unit: 
         maxwidth: 8
+        optional: true
+    -
+        !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
+        name: spectral_index_from_tt
+        datatype: int
+        unit: 
+        maxwidth: 8
+        optional: true
     -
         !!au.csiro.casda.datadeposit.votable.parser.FieldConstraint
         name: flag_c4

@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<VOTABLE version="1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns="http://www.ivoa.net/xml/VOTable/v1.3"
+ xmlns:stc="http://www.ivoa.net/xml/STC/v1.30" >
+  <COOSYS ID="J2000" equinox="J2000" system="eq_FK5"/>
+  <RESOURCE name="Island catalogue from Selavy source finding">
+    <TABLE name="Island catalogue">
+      <DESCRIPTION></DESCRIPTION>
+      <PARAM name="table_version" ucd="meta.version" datatype="char" arraysize="40" value="casda.continuum_island_description_v0.7"/>
+      <PARAM name="imageFile" ucd="meta.file;meta.fits" datatype="char" arraysize="45" value="image.i.ngc7232.cont.linmos.taylor.0.restored"/>
+      <PARAM name="flagSubsection" ucd="meta.code" datatype="boolean" value="1"/>
+      <PARAM name="subsection" ucd="" datatype="char" arraysize="23" value="[1:3391,1:3486,1:1,1:1]"/>
+      <PARAM name="flagStatSec" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="StatSec" ucd="" datatype="char" arraysize="7" value="[*,*,*]"/>
+      <PARAM name="searchType" ucd="meta.note" datatype="char" arraysize="7" value="spatial"/>
+      <PARAM name="flagNegative" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="flagBaseline" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="flagRobustStats" ucd="meta.code" datatype="boolean" value="1"/>
+      <PARAM name="flagFDR" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="threshold" ucd="phot.flux;stat.min" datatype="float" value="200"/>
+      <PARAM name="flagGrowth" ucd="meta.code" datatype="boolean" value="1"/>
+      <PARAM name="growthThreshold" ucd="phot.flux;stat.min" datatype="float" value="4"/>
+      <PARAM name="minPix" ucd="" datatype="int" value="3"/>
+      <PARAM name="minChannels" ucd="" datatype="int" value="0"/>
+      <PARAM name="minVoxels" ucd="" datatype="int" value="3"/>
+      <PARAM name="flagAdjacent" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="threshSpatial" ucd="" datatype="float" value="7"/>
+      <PARAM name="threshVelocity" ucd="" datatype="float" value="7"/>
+      <PARAM name="flagRejectBeforeMerge" ucd="" datatype="boolean" value="0"/>
+      <PARAM name="flagTwoStageMerging" ucd="" datatype="boolean" value="1"/>
+      <PARAM name="pixelCentre" ucd="" datatype="char" arraysize="8" value="centroid"/>
+      <PARAM name="flagSmooth" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="flagATrous" ucd="meta.code" datatype="boolean" value="0"/>
+      <PARAM name="thresholdActual" ucd="" datatype="float" unit="Jy/beam" value="200"/>
+      <FIELD name="island_id" ID="col_island_id" ucd="meta.id;meta.main" datatype="char" unit="--" arraysize="49"/>
+      <FIELD name="island_name" ID="col_island_name" ucd="meta.id" datatype="char" unit="" arraysize="15"/>
+      <FIELD name="n_components" ID="col_n_components" ucd="meta.number" datatype="int" unit="" width="5"/>
+      <FIELD name="ra_hms_cont" ID="col_ra_hms_cont" ucd="pos.eq.ra" ref="J2000" datatype="char" unit="" arraysize="11"/>
+      <FIELD name="dec_dms_cont" ID="col_dec_dms_cont" ucd="pos.eq.dec" ref="J2000" datatype="char" unit="" arraysize="10"/>
+      <FIELD name="ra_deg_cont" ID="col_ra_deg_cont" ucd="pos.eq.ra;meta.main" ref="J2000" datatype="double" unit="deg" width="11" precision="6"/>
+      <FIELD name="dec_deg_cont" ID="col_dec_deg_cont" ucd="pos.eq.dec;meta.main" ref="J2000" datatype="double" unit="deg" width="11" precision="6"/>
+      <FIELD name="freq" ID="col_freq" ucd="em.freq" datatype="float" unit="MHz" width="8" precision="1"/>
+      <FIELD name="maj_axis" ID="col_maj_axis" ucd="phys.angSize.smajAxis;em.radio" datatype="float" unit="arcsec" width="5" precision="2"/>
+      <FIELD name="min_axis" ID="col_min_axis" ucd="phys.angSize.sminAxis;em.radio" datatype="float" unit="arcsec" width="4" precision="2"/>
+      <FIELD name="pos_ang" ID="col_pos_ang" ucd="phys.angSize;pos.posAng;em.radio" datatype="float" unit="deg" width="7" precision="2"/>
+      <FIELD name="flux_int" ID="col_flux_int" ucd="phot.flux.density.integrated;em.radio" datatype="float" unit="mJy" width="8" precision="3"/>
+      <FIELD name="flux_int_err" ID="col_flux_int_err" ucd="stat.error;phot.flux.density.integrated;em.radio" datatype="float" unit="mJy" width="5" precision="3"/>
+      <FIELD name="flux_peak" ID="col_flux_peak" ucd="phot.flux.density;stat.max;em.radio" datatype="float" unit="mJy/beam" width="9" precision="3"/>
+      <FIELD name="mean_background" ID="col_mean_background" ucd="askap:phot.flux.density.voxel;instr.skyLevel;stat.mean;em.radio" datatype="float" unit="mJy/beam" width="5" precision="3"/>
+      <FIELD name="background_noise" ID="col_background_noise" ucd="askap:phot.flux.density.voxel;instr.skyLevel;askap:stat.rms;em.radio" datatype="float" unit="mJy/beam" width="5" precision="3"/>
+      <FIELD name="max_residual" ID="col_max_residual" ucd="askap:phot.flux.density.voxel;stat.max;src.net;em.radio" datatype="float" unit="mJy/beam" width="5" precision="3"/>
+      <FIELD name="min_residual" ID="col_min_residual" ucd="askap:phot.flux.density.voxel;stat.min;src.net;em.radio" datatype="float" unit="mJy/beam" width="5" precision="3"/>
+      <FIELD name="mean_residual" ID="col_mean_residual" ucd="askap:phot.flux.density.voxel;stat.mean;src.net;em.radio" datatype="float" unit="mJy/beam" width="5" precision="3"/>
+      <FIELD name="rms_residual" ID="col_rms_residual" ucd="askap:phot.flux.density.voxel;askap:stat.rms;src.net;em.radio" datatype="float" unit="mJy/beam" width="5" precision="3"/>
+      <FIELD name="stddev_residual" ID="col_stddev_residual" ucd="askap:phot.flux.density.voxel;stat.stdev;src.net;em.radio" datatype="float" unit="mJy/beam" width="5" precision="3"/>
+      <FIELD name="x_min" ID="col_x_min" ucd="pos.cartesian.x;stat.min" datatype="int" unit="" width="5"/>
+      <FIELD name="x_max" ID="col_x_max" ucd="pos.cartesian.x;stat.max" datatype="int" unit="" width="5"/>
+      <FIELD name="y_min" ID="col_y_min" ucd="pos.cartesian.y;stat.min" datatype="int" unit="" width="5"/>
+      <FIELD name="y_max" ID="col_y_max" ucd="pos.cartesian.y;stat.max" datatype="int" unit="" width="5"/>
+      <FIELD name="n_pix" ID="col_n_pix" ucd="phys.angArea;instr.pixel;meta.number" datatype="int" unit="" width="9"/>
+      <FIELD name="solid_angle" ID="col_solid_angle" ucd="phys.angArea" datatype="float" unit="arcmin2" width="9"/>
+      <FIELD name="beam_area" ID="col_beam_area" ucd="phys.angArea;instr.beam" datatype="float" unit="arcmin2" width="9"/>
+      <FIELD name="x_ave" ID="col_x_ave" ucd="pos.cartesian.x;stat.mean" datatype="float" unit="" width="8" precision="2"/>
+      <FIELD name="y_ave" ID="col_y_ave" ucd="pos.cartesian.y;stat.mean" datatype="float" unit="" width="8" precision="2"/>
+      <FIELD name="x_cen" ID="col_x_cen" ucd="pos.cartesian.x;askap:stat.centroid" datatype="float" unit="" width="8" precision="2"/>
+      <FIELD name="y_cen" ID="col_y_cen" ucd="pos.cartesian.y;askap:stat.centroid" datatype="float" unit="" width="8" precision="2"/>
+      <FIELD name="x_peak" ID="col_x_peak" ucd="pos.cartesian.x;phot.flux;stat.max" datatype="int" unit="" width="5"/>
+      <FIELD name="y_peak" ID="col_y_peak" ucd="pos.cartesian.y;phot.flux;stat.max" datatype="int" unit="" width="5"/>
+      <FIELD name="flag_i1" ID="col_flag_i1" ucd="meta.code" datatype="int" unit="" width="5"/>
+      <FIELD name="flag_i2" ID="col_flag_i2" ucd="meta.code" datatype="int" unit="" width="5"/>
+      <FIELD name="flag_i3" ID="col_flag_i3" ucd="meta.code" datatype="int" unit="" width="5"/>
+      <FIELD name="flag_i4" ID="col_flag_i4" ucd="meta.code" datatype="int" unit="" width="5"/>
+      <FIELD name="comment" ID="col_comment" ucd="meta.note" datatype="char" unit="" arraysize="100"/>
+      <DATA>
+        <TABLEDATA>
+        <TR>
+          <TD>  image.i.ngc7232.cont.linmos.taylor.0.restored_1</TD><TD> J221655-452150</TD><TD>    3</TD><TD> 22:16:55.2</TD><TD> -45:21:50</TD><TD> 334.229793</TD><TD> -45.363969</TD><TD>  1400.5</TD><TD> 0.41</TD><TD>0.40</TD><TD>  16.87</TD><TD> 399.155</TD><TD>0.000</TD><TD> 1726.833</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD> 1445</TD><TD> 1466</TD><TD> 1708</TD><TD> 1734</TD><TD>       48</TD><TD>        0</TD><TD>        0</TD><TD> 1456.00</TD><TD> 1720.56</TD><TD> 1454.54</TD><TD> 1721.79</TD><TD> 1454</TD><TD> 1722</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>                                                                                                    </TD>
+        </TR>
+        <TR>
+          <TD>  image.i.ngc7232.cont.linmos.taylor.0.restored_2</TD><TD> J221021-454251</TD><TD>    5</TD><TD> 22:10:21.4</TD><TD> -45:42:51</TD><TD> 332.589201</TD><TD> -45.714269</TD><TD>  1400.5</TD><TD> 0.73</TD><TD>0.42</TD><TD>  43.78</TD><TD> 253.272</TD><TD>0.000</TD><TD>  766.953</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD> 1790</TD><TD> 1809</TD><TD> 1611</TD><TD> 1627</TD><TD>       59</TD><TD>        0</TD><TD>        0</TD><TD> 1800.68</TD><TD> 1620.15</TD><TD> 1800.22</TD><TD> 1619.95</TD><TD> 1800</TD><TD> 1620</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>                                                                                                    </TD>
+        </TR>
+        <TR>
+          <TD>  image.i.ngc7232.cont.linmos.taylor.0.restored_3</TD><TD> J221105-433312</TD><TD>    2</TD><TD> 22:11:05.4</TD><TD> -43:33:12</TD><TD> 332.772349</TD><TD> -43.553517</TD><TD>  1400.5</TD><TD> 0.60</TD><TD>0.09</TD><TD>  88.99</TD><TD> 170.642</TD><TD>0.000</TD><TD>  880.182</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD> 1751</TD><TD> 1770</TD><TD> 2265</TD><TD> 2280</TD><TD>       37</TD><TD>        0</TD><TD>        0</TD><TD> 1761.03</TD><TD> 2269.78</TD><TD> 1760.86</TD><TD> 2268.12</TD><TD> 1761</TD><TD> 2268</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>                                                                                                    </TD>
+        </TR>
+        <TR>
+          <TD>  image.i.ngc7232.cont.linmos.taylor.0.restored_4</TD><TD> J222254-452729</TD><TD>    1</TD><TD> 22:22:54.4</TD><TD> -45:27:29</TD><TD> 335.726537</TD><TD> -45.458264</TD><TD>  1400.5</TD><TD> 0.73</TD><TD>0.39</TD><TD>  81.00</TD><TD> 123.720</TD><TD>0.000</TD><TD>  426.248</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD> 1137</TD><TD> 1143</TD><TD> 1682</TD><TD> 1687</TD><TD>       31</TD><TD>        0</TD><TD>        0</TD><TD> 1140.10</TD><TD> 1684.58</TD><TD> 1140.40</TD><TD> 1684.48</TD><TD> 1141</TD><TD> 1684</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>                                                                                                    </TD>
+        </TR>
+        <TR>
+          <TD>  image.i.ngc7232.cont.linmos.taylor.0.restored_5</TD><TD> J221416-425710</TD><TD>    1</TD><TD> 22:14:16.8</TD><TD> -42:57:10</TD><TD> 333.569943</TD><TD> -42.952993</TD><TD>  1400.5</TD><TD> 0.46</TD><TD>0.27</TD><TD>  51.68</TD><TD> 112.661</TD><TD>0.000</TD><TD>  493.966</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD> 1582</TD><TD> 1589</TD><TD> 2445</TD><TD> 2449</TD><TD>       31</TD><TD>        0</TD><TD>        0</TD><TD> 1585.55</TD><TD> 2447.06</TD><TD> 1585.47</TD><TD> 2447.08</TD><TD> 1585</TD><TD> 2447</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>                                                                                                    </TD>
+        </TR>
+        <TR>
+          <TD>  image.i.ngc7232.cont.linmos.taylor.0.restored_6</TD><TD> J215840-471934</TD><TD>    2</TD><TD> 21:58:40.7</TD><TD> -47:19:34</TD><TD> 329.669445</TD><TD> -47.326162</TD><TD>  1400.5</TD><TD> 0.63</TD><TD>0.40</TD><TD>  86.95</TD><TD>  87.930</TD><TD>0.000</TD><TD>  329.294</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD> 2390</TD><TD> 2400</TD><TD> 1123</TD><TD> 1128</TD><TD>       41</TD><TD>        0</TD><TD>        0</TD><TD> 2394.37</TD><TD> 1125.68</TD><TD> 2393.31</TD><TD> 1125.52</TD><TD> 2393</TD><TD> 1126</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>                                                                                                    </TD>
+        </TR>
+        <TR>
+          <TD>  image.i.ngc7232.cont.linmos.taylor.0.restored_7</TD><TD> J222720-450513</TD><TD>    1</TD><TD> 22:27:20.2</TD><TD> -45:05:13</TD><TD> 336.834110</TD><TD> -45.087183</TD><TD>  1400.5</TD><TD> 0.63</TD><TD>0.47</TD><TD>  75.70</TD><TD>  74.291</TD><TD>0.000</TD><TD>  202.028</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>  899</TD><TD>  905</TD><TD> 1782</TD><TD> 1791</TD><TD>       48</TD><TD>        0</TD><TD>        0</TD><TD>  901.83</TD><TD> 1785.92</TD><TD>  902.04</TD><TD> 1785.24</TD><TD>  902</TD><TD> 1786</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>                                                                                                    </TD>
+        </TR>
+        <TR>
+          <TD>  image.i.ngc7232.cont.linmos.taylor.0.restored_8</TD><TD> J221149-451938</TD><TD>    1</TD><TD> 22:11:49.6</TD><TD> -45:19:38</TD><TD> 332.956568</TD><TD> -45.327359</TD><TD>  1400.5</TD><TD> 0.55</TD><TD>0.33</TD><TD>  85.73</TD><TD>  69.326</TD><TD>0.000</TD><TD>  360.926</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD> 1720</TD><TD> 1726</TD><TD> 1730</TD><TD> 1738</TD><TD>       26</TD><TD>        0</TD><TD>        0</TD><TD> 1722.42</TD><TD> 1735.65</TD><TD> 1722.82</TD><TD> 1735.90</TD><TD> 1723</TD><TD> 1736</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>                                                                                                    </TD>
+        </TR>
+        <TR>
+          <TD>  image.i.ngc7232.cont.linmos.taylor.0.restored_9</TD><TD> J220741-454118</TD><TD>    1</TD><TD> 22:07:41.2</TD><TD> -45:41:18</TD><TD> 331.921541</TD><TD> -45.688428</TD><TD>  1400.5</TD><TD> 0.50</TD><TD>0.44</TD><TD>  91.38</TD><TD>  67.863</TD><TD>0.000</TD><TD>  349.945</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD> 1938</TD><TD> 1943</TD><TD> 1625</TD><TD> 1629</TD><TD>       23</TD><TD>        0</TD><TD>        0</TD><TD> 1940.22</TD><TD> 1627.13</TD><TD> 1940.14</TD><TD> 1627.03</TD><TD> 1940</TD><TD> 1627</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>                                                                                                    </TD>
+        </TR>
+        <TR>
+          <TD> image.i.ngc7232.cont.linmos.taylor.0.restored_10</TD><TD> J220027-455835</TD><TD>    2</TD><TD> 22:00:27.2</TD><TD> -45:58:35</TD><TD> 330.113211</TD><TD> -45.976530</TD><TD>  1400.5</TD><TD> 0.59</TD><TD>0.55</TD><TD>  18.42</TD><TD>  65.225</TD><TD>0.000</TD><TD>  215.207</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD> 2307</TD><TD> 2319</TD><TD> 1527</TD><TD> 1539</TD><TD>       52</TD><TD>        0</TD><TD>        0</TD><TD> 2315.54</TD><TD> 1532.02</TD><TD> 2316.20</TD><TD> 1533.05</TD><TD> 2316</TD><TD> 1534</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>                                                                                                    </TD>
+        </TR>
+        <TR>
+          <TD> image.i.ngc7232.cont.linmos.taylor.0.restored_11</TD><TD> J221355-423825</TD><TD>    1</TD><TD> 22:13:55.2</TD><TD> -42:38:25</TD><TD> 333.480105</TD><TD> -42.640463</TD><TD>  1400.5</TD><TD> 0.58</TD><TD>0.46</TD><TD>  49.33</TD><TD>  65.074</TD><TD>0.000</TD><TD>  284.779</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD> 1595</TD><TD> 1614</TD><TD> 2539</TD><TD> 2543</TD><TD>       31</TD><TD>        0</TD><TD>        0</TD><TD> 1604.23</TD><TD> 2541.10</TD><TD> 1604.27</TD><TD> 2540.98</TD><TD> 1604</TD><TD> 2541</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>                                                                                                    </TD>
+        </TR>
+        <TR>
+          <TD> image.i.ngc7232.cont.linmos.taylor.0.restored_12</TD><TD> J221415-440454</TD><TD>    3</TD><TD> 22:14:15.8</TD><TD> -44:04:54</TD><TD> 333.565681</TD><TD> -44.081942</TD><TD>  1400.5</TD><TD> 1.23</TD><TD>0.20</TD><TD> 107.32</TD><TD>  61.180</TD><TD>0.000</TD><TD>  255.167</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD> 1577</TD><TD> 1602</TD><TD> 2103</TD><TD> 2113</TD><TD>       47</TD><TD>        0</TD><TD>        0</TD><TD> 1591.00</TD><TD> 2108.70</TD><TD> 1590.15</TD><TD> 2108.52</TD><TD> 1589</TD><TD> 2108</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>                                                                                                    </TD>
+        </TR>
+        <TR>
+          <TD> image.i.ngc7232.cont.linmos.taylor.0.restored_13</TD><TD> J222525-432428</TD><TD>    2</TD><TD> 22:25:25.9</TD><TD> -43:24:28</TD><TD> 336.357880</TD><TD> -43.408024</TD><TD>  1400.5</TD><TD> 1.63</TD><TD>0.47</TD><TD> 117.76</TD><TD>  58.771</TD><TD>0.000</TD><TD>  163.403</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>  973</TD><TD>  985</TD><TD> 2289</TD><TD> 2298</TD><TD>       54</TD><TD>        0</TD><TD>        0</TD><TD>  979.17</TD><TD> 2292.94</TD><TD>  979.92</TD><TD> 2293.32</TD><TD>  982</TD><TD> 2294</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>                                                                                                    </TD>
+        </TR>
+        <TR>
+          <TD> image.i.ngc7232.cont.linmos.taylor.0.restored_14</TD><TD> J222254-472319</TD><TD>    1</TD><TD> 22:22:54.0</TD><TD> -47:23:19</TD><TD> 335.725051</TD><TD> -47.388680</TD><TD>  1400.5</TD><TD> 0.51</TD><TD>0.46</TD><TD>  90.50</TD><TD>  47.433</TD><TD>0.000</TD><TD>  201.912</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD> 1160</TD><TD> 1171</TD><TD> 1103</TD><TD> 1108</TD><TD>       31</TD><TD>        0</TD><TD>        0</TD><TD> 1163.52</TD><TD> 1105.94</TD><TD> 1163.24</TD><TD> 1106.04</TD><TD> 1163</TD><TD> 1106</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>                                                                                                    </TD>
+        </TR>
+        <TR>
+          <TD> image.i.ngc7232.cont.linmos.taylor.0.restored_15</TD><TD> J222227-431209</TD><TD>    1</TD><TD> 22:22:27.5</TD><TD> -43:12:09</TD><TD> 335.614549</TD><TD> -43.202601</TD><TD>  1400.5</TD><TD> 0.68</TD><TD>0.35</TD><TD>  71.32</TD><TD>  45.639</TD><TD>0.000</TD><TD>  151.714</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD> 1136</TD><TD> 1142</TD><TD> 2359</TD><TD> 2364</TD><TD>       32</TD><TD>        0</TD><TD>        0</TD><TD> 1139.28</TD><TD> 2361.50</TD><TD> 1139.46</TD><TD> 2361.54</TD><TD> 1139</TD><TD> 2362</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>                                                                                                    </TD>
+        </TR>
+        <TR>
+          <TD> image.i.ngc7232.cont.linmos.taylor.0.restored_16</TD><TD> J220208-465808</TD><TD>    1</TD><TD> 22:02:08.4</TD><TD> -46:58:08</TD><TD> 330.534877</TD><TD> -46.969008</TD><TD>  1400.5</TD><TD> 0.57</TD><TD>0.36</TD><TD>  20.31</TD><TD>  41.755</TD><TD>0.000</TD><TD>  190.362</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD> 2218</TD><TD> 2223</TD><TD> 1236</TD><TD> 1243</TD><TD>       25</TD><TD>        0</TD><TD>        0</TD><TD> 2220.56</TD><TD> 1238.48</TD><TD> 2220.40</TD><TD> 1238.05</TD><TD> 2220</TD><TD> 1238</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>                                                                                                    </TD>
+        </TR>
+        <TR>
+          <TD> image.i.ngc7232.cont.linmos.taylor.0.restored_17</TD><TD> J222130-465700</TD><TD>    2</TD><TD> 22:21:30.0</TD><TD> -46:57:00</TD><TD> 335.374999</TD><TD> -46.949836</TD><TD>  1400.5</TD><TD> 0.58</TD><TD>0.36</TD><TD>  75.33</TD><TD>  20.618</TD><TD>0.000</TD><TD>   96.977</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD>0.000</TD><TD> 1226</TD><TD> 1232</TD><TD> 1234</TD><TD> 1247</TD><TD>       30</TD><TD>        0</TD><TD>        0</TD><TD> 1229.13</TD><TD> 1240.60</TD><TD> 1229.65</TD><TD> 1240.05</TD><TD> 1230</TD><TD> 1240</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>    0</TD><TD>                                                                                                    </TD>
+        </TR>
+        </TABLEDATA>
+      </DATA>
+    </TABLE>
+  </RESOURCE>
+</VOTABLE>

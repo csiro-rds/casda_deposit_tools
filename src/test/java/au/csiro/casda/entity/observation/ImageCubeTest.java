@@ -71,7 +71,7 @@ public class ImageCubeTest extends AbstractPersistenceTest
         ImageCube imageCube = TestImageCubeBuilderFactory.createBuilder().build();
         assertThat(imageCube, is(notNullValue()));
         assertThat(imageCube.getParent(), is(notNullValue()));
-        assertThat(imageCube.getParent().getImageCubes(), containsInAnyOrder(imageCube));
+        assertThat(((Observation)imageCube.getParent()).getImageCubes(), containsInAnyOrder(imageCube));
         assertThat(imageCube.getProject(), is(notNullValue()));
         assertThat(imageCube.getProject().getImageCubes(), containsInAnyOrder(imageCube));
         // All other default property values are tested in this and other entity test cases.
@@ -84,7 +84,7 @@ public class ImageCubeTest extends AbstractPersistenceTest
                 assertions((e) -> assertPersistedImageCubeCount(0L))));
         ImageCube imageCube = TestImageCubeBuilderFactory.createBuilder().setFilename(null).build();
         assertThat(imageCubeRepository.count(), is(0L));
-        observationRepository.save(imageCube.getParent());
+        observationRepository.save(((Observation)imageCube.getParent()));
     }
 
     @Test
@@ -95,7 +95,7 @@ public class ImageCubeTest extends AbstractPersistenceTest
                 assertions((e) -> assertPersistedImageCubeCount(0L))));
         ImageCube imageCube = TestImageCubeBuilderFactory.createBuilder().setFilename("").build();
         assertThat(imageCubeRepository.count(), is(0L));
-        observationRepository.save(imageCube.getParent());
+        observationRepository.save(((Observation)imageCube.getParent()));
     }
 
     @Test
@@ -105,7 +105,7 @@ public class ImageCubeTest extends AbstractPersistenceTest
                 assertions((e) -> assertPersistedImageCubeCount(0L))));
         ImageCube imageCube = TestImageCubeBuilderFactory.createBuilder().setFormat(null).build();
         assertThat(imageCubeRepository.count(), is(0L));
-        observationRepository.save(imageCube.getParent());
+        observationRepository.save(((Observation)imageCube.getParent()));
     }
 
     @Test
@@ -116,7 +116,7 @@ public class ImageCubeTest extends AbstractPersistenceTest
                 assertions((e) -> assertPersistedImageCubeCount(0L))));
         ImageCube imageCube = TestImageCubeBuilderFactory.createBuilder().setFormat("").build();
         assertThat(imageCubeRepository.count(), is(0L));
-        observationRepository.save(imageCube.getParent());
+        observationRepository.save(((Observation)imageCube.getParent()));
     }
 
     @Test
@@ -126,19 +126,7 @@ public class ImageCubeTest extends AbstractPersistenceTest
                 assertions((e) -> assertPersistedImageCubeCount(0L))));
         ImageCube imageCube = TestImageCubeBuilderFactory.createBuilder().setProject(null).build();
         assertThat(imageCubeRepository.count(), is(0L));
-        observationRepository.save(imageCube.getParent());
-    }
-
-    @Test
-    public void observationIsRequired()
-    {
-        exception.expect(allOf(constraintViolation(ImageCube.class, "observation", "may not be null"),
-                assertions((e) -> assertPersistedImageCubeCount(0L))));
-        ImageCube imageCube = TestImageCubeBuilderFactory.createBuilder().build();
-        Observation observation = imageCube.getParent();
-        imageCube.setParent(null);
-        assertThat(imageCubeRepository.count(), is(0L));
-        observationRepository.save(observation);
+        observationRepository.save(((Observation)imageCube.getParent()));
     }
 
     @Test
@@ -147,7 +135,7 @@ public class ImageCubeTest extends AbstractPersistenceTest
         assertThat(imageCubeRepository.count(), is(0L));
         ImageCube imageCube = TestImageCubeBuilderFactory.createBuilder().build();
 
-        observationRepository.save(imageCube.getParent());
+        observationRepository.save(((Observation)imageCube.getParent()));
 
         assertThat(imageCubeRepository.count(), is(1L));
         ImageCube savedImageCube = imageCubeRepository.findAll().iterator().next();
@@ -162,7 +150,7 @@ public class ImageCubeTest extends AbstractPersistenceTest
 
         ImageCube imageCube = TestImageCubeBuilderFactory.createBuilder().build();
 
-        observationRepository.save(imageCube.getParent());
+        observationRepository.save(((Observation)imageCube.getParent()));
 
         assertThat(imageCubeRepository.count(), is(1L));
         assertThat(projectRepository.count(), is(1L));
@@ -180,12 +168,12 @@ public class ImageCubeTest extends AbstractPersistenceTest
     {
         ImageCube imageCube = TestImageCubeBuilderFactory.createBuilder().build();
 
-        observationRepository.save(imageCube.getParent());
+        observationRepository.save(((Observation)imageCube.getParent()));
         assertThat(projectRepository.count(), is(1L));
         assertThat(observationRepository.count(), is(1L));
         assertThat(imageCubeRepository.count(), is(1L));
 
-        imageCube.getParent().removeImageCube(imageCube);
+        ((Observation)imageCube.getParent()).removeImageCube(imageCube);
         imageCubeRepository.delete(imageCube);
 
         assertThat(imageCubeRepository.count(), is(0L));

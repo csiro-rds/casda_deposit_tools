@@ -1,5 +1,7 @@
 package au.csiro.casda.datadeposit.observation.jpa.repository;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -34,4 +36,12 @@ public interface EvaluationFileRepository extends CrudRepository<EvaluationFile,
      * @return an EvaluationFile
      */
     public EvaluationFile findByObservationSbidAndFilename(Integer sbid, String filename);
+    
+    /**
+     * @param sbid
+     *            the sbid of an Observation
+     * @param filename the filename of the encapsulation file
+     * @return a list of evaluation files belonging to this encapsulation file
+     */
+    public List<EvaluationFile> findByObservationSbidAndEncapsulationFileFilename(Integer sbid, String filename);
 }

@@ -18,10 +18,14 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.internal.CheckExitCalled;
 
 import au.csiro.casda.datadeposit.fits.FitsCommandLineImporter;
+import au.csiro.casda.entity.observation.Cubelet;
 import au.csiro.casda.entity.observation.ImageCube;
+import au.csiro.casda.entity.observation.MomentMap;
 import au.csiro.casda.entity.observation.Observation;
 import au.csiro.casda.entity.observation.PGspoly;
+import au.csiro.casda.entity.observation.Spectrum;
 
+import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Polygon;
 
 /*
@@ -37,7 +41,7 @@ import com.vividsolutions.jts.geom.Polygon;
  */
 
 /**
- * Functional test for continuum catalogue data import.
+ * Functional test for image cube data import.
  * <p>
  * Copyright 2014, CSIRO Australia All rights reserved.
  */
@@ -96,7 +100,7 @@ public class ImageImportFunctionalTest extends FunctionalTestBase
         assertThat(observation.getImageCubes().size(), is(1));
         ImageCube imageCube = observation.getImageCubes().iterator().next();
 
-        assertThat(imageCube.getTargetName(), is(nullValue()));
+        assertThat(imageCube.getObjectName(), is(nullValue()));
         assertThat(imageCube.getRaDeg(), is(nullValue()));
         assertThat(imageCube.getDecDeg(), is(nullValue()));
         assertThat(imageCube.getStokesParameters(), is(nullValue()));
@@ -118,13 +122,13 @@ public class ImageImportFunctionalTest extends FunctionalTestBase
         assertThat(imageCube.getNoOfPixels(), is(nullValue()));
         assertThat(imageCube.getCellSize(), is(nullValue()));
         assertThat(imageCube.getFilesize(), is(9L));
-        assertThat(imageCube.getTargetName(), is(nullValue()));
+        assertThat(imageCube.getObjectName(), is(nullValue()));
 
         String imageFilePath = "validFile.fits";
         try
         {
-            fitsCommandLineImporter.run("-sbid", sbid, "-infile", depositDir + imageFilePath, "-imageCubeFilename",
-                    imageFilePath);
+            fitsCommandLineImporter.run("-parent-id", sbid, "-infile", depositDir + imageFilePath, "-fitsFilename",
+                    imageFilePath, "-fits-type", "image-cube", "-parent-type", "observation");
             failTestCase();
         }
         catch (CheckExitCalled e)
@@ -133,7 +137,9 @@ public class ImageImportFunctionalTest extends FunctionalTestBase
         }
         entityManager.refresh(imageCube);
 
-        assertThat(imageCube.getTargetName(), is(""));
+        assertThat(imageCube.getObjectName(), is(""));
+        assertThat(imageCube.getBType(), is("Intensity"));
+        assertThat(imageCube.getBUnit(), is("JY/BEAM"));
         assertThat(imageCube.getRaDeg(), is(194.61733726797));
         assertThat(imageCube.getDecDeg(), is(-49.419355920530));
         assertThat(imageCube.getStokesParameters(), is("/I/"));
@@ -180,6 +186,250 @@ public class ImageImportFunctionalTest extends FunctionalTestBase
         assertThat(imageCube.getFilesize(), is(9L));
     }
 
+
+    @Test
+    public void testSpectrumImport() throws Exception
+    {
+        String sbid = "12345";
+        String depositDir = "src/test/resources/functional_test/";
+        String imageFilePath = "beta.image2.001.sir.fits";
+        importObservation(sbid, depositDir + "metadata-v2-as031.xml");
+
+        Observation observation = observationRepository.findAll().iterator().next();
+        assertThat(observation.getImageCubes().size(), is(1));
+        ImageCube imageCube = observation.getImageCubes().iterator().next();
+        assertThat(imageCube.getSpectra().size(), is(1));
+        Spectrum spectrum = imageCube.getSpectra().get(0);
+        assertThat(spectrum.getFilename(), is(imageFilePath));
+        
+
+        try
+        {
+            fitsCommandLineImporter.run("-parent-id", sbid, "-infile", depositDir, "-fitsFilename",
+                    imageCube.getFilename(), "-fits-type", "spectrum", "-parent-type", "observation");
+            failTestCase();
+        }
+        catch (CheckExitCalled e)
+        {
+            assertEquals("Fits import failed - please check log for details", 0, e.getStatus().intValue());
+        }
+        entityManager.refresh(imageCube);
+
+        assertThat(imageCube.getSpectra().size(), is(1));
+        spectrum = imageCube.getSpectra().get(0);
+        assertThat(spectrum.getObjectName(), is(""));
+        assertThat(spectrum.getRaDeg(), is(344.15127636462));
+        assertThat(spectrum.getDecDeg(), is(-36.250662898927));
+        assertThat(spectrum.getStokesParameters(), is("/I/"));
+        
+        // As our sample spectrum is in VOPT we don't have frequency details. 
+        // This should be replaced with a more representative spectrum later on. 
+        assertNull(spectrum.getEmMin());
+        assertNull(spectrum.getEmMax());
+        assertNull(spectrum.getChannelWidth());
+        assertNull(spectrum.getCentreFrequency());
+        assertNull(spectrum.getNoOfChannels());
+        
+        assertNull(spectrum.getTMin());
+        assertNull(spectrum.getTMax());
+        assertThat(spectrum.getTExptime(), is(42000.0));
+
+        Coordinate[] sregionCoords = spectrum.getSRegion().getCoordinates();
+        assertThat(sregionCoords[0].x, closeTo(3.4415385005429e+02, 10e-10));
+        assertThat(sregionCoords[0].y, closeTo(-3.6252754112710e+01, 10e-10));
+        assertThat(sregionCoords[1].x, closeTo(3.4414868312951e+02, 10e-10));
+        assertThat(sregionCoords[1].y, closeTo(-3.6252738285371e+01, 10e-10));
+        assertThat(sregionCoords[2].x, closeTo(3.4414870281174e+02, 10e-10));
+        assertThat(sregionCoords[2].y, closeTo(-3.6248571629554e+01, 10e-10));
+        assertThat(sregionCoords[3].x, closeTo(3.4415386946100e+02, 10e-10));
+        assertThat(sregionCoords[3].y, closeTo(-3.6248587456052e+01, 10e-10));
+        assertThat(sregionCoords[0], equalTo(sregionCoords[4]));
+        assertThat(sregionCoords.length, is(5));
+        assertThat(spectrum.getSRegion().getClass(), is(Polygon.class));
+        assertEquals("encaps-spectra-1.tar", spectrum.getEncapsulationFile().getFilename());
+        
+        // H2 writes a PGspoly object as a string that represents a serialised object, hex encoded
+        // so when we read it out, we need to decode and deserialise the object for testing
+        // this doesn't happen locally because we can create the mapping from an spoly to a string, and we use a dialect
+        // that takes advantage of that
+        // this doesn't happen on the servers because pgsphere is installed.
+        String expectedSPoly = buildExpectedSPoly(sregionCoords);
+        PGspoly spoly = deserializePGspolyForH2(spectrum.getSRegionPoly().getValue());
+        assertThat(spoly.getValue(), equalTo(expectedSPoly));
+        
+        assertThat(spectrum.getFilesize(), is(12L));
+    }
+
+
+    @Test
+    public void testMomentMapImport() throws Exception
+    {
+        String sbid = "12345";
+        String depositDir = "src/test/resources/functional_test/";
+        String imageFilePath = "mom0_1.fits";
+        importObservation(sbid, depositDir + "metadata-v2-as031.xml");
+
+        Observation observation = observationRepository.findAll().iterator().next();
+        assertThat(observation.getImageCubes().size(), is(1));
+        ImageCube imageCube = observation.getImageCubes().iterator().next();
+        assertThat(imageCube.getMomentMaps().size(), is(1));
+        MomentMap momentMap = imageCube.getMomentMaps().get(0);
+        assertThat(momentMap.getFilename(), is(imageFilePath));
+        assertThat(momentMap.getType(), is("spectral_restored_mom0"));
+        
+
+        try
+        {
+            fitsCommandLineImporter.run("-parent-id", sbid, "-infile", depositDir, "-fitsFilename",
+                    imageCube.getFilename(), "-fits-type", "moment-map", "-parent-type", "observation");
+            failTestCase();
+        }
+        catch (CheckExitCalled e)
+        {
+            assertEquals("Fits import failed - please check log for details", 0, e.getStatus().intValue());
+        }
+        entityManager.refresh(imageCube);
+
+        assertThat(imageCube.getMomentMaps().size(), is(1));
+        momentMap = imageCube.getMomentMaps().get(0);
+        assertThat(momentMap.getFilename(), is(imageFilePath));
+        assertThat(momentMap.getObjectName(), is(""));
+        assertThat(momentMap.getRaDeg(), is(344.15354462644));
+        assertThat(momentMap.getDecDeg(), is(-36.249945278860));
+        assertThat(momentMap.getStokesParameters(), is("/I/"));
+        
+        // As our sample momentMap is in VOPT we don't have frequency details. 
+        // This should be replaced with a more representative momentMap later on. 
+        assertEquals(0.19133313747811379, momentMap.getEmMin(), 1e-10);
+        assertEquals(0.23664192421840471, momentMap.getEmMax(), 1e-10);
+        assertThat(momentMap.getChannelWidth(), is(3.0E8));
+        assertThat(momentMap.getCentreFrequency(), is(1.416861140477E9));
+        assertThat(momentMap.getNoOfChannels(), is(1));
+
+        assertNull(momentMap.getTMin());
+        assertNull(momentMap.getTMax());
+        assertThat(momentMap.getTExptime(), is(0.0));
+
+        Coordinate[] sregionCoords = momentMap.getSRegion().getCoordinates();
+        assertThat(sregionCoords[0].x, closeTo(3.4423091564739e+02, 10e-10));
+        assertThat(sregionCoords[0].y, closeTo(-3.6285572760070e+01, 10e-10));
+        assertThat(sregionCoords[1].x, closeTo(3.4407584316182e+02, 10e-10));
+        assertThat(sregionCoords[1].y, closeTo(-3.6285100677546e+01, 10e-10));
+        assertThat(sregionCoords[2].x, closeTo(3.4407624360392e+02, 10e-10));
+        assertThat(sregionCoords[2].y, closeTo(-3.6214267743621e+01, 10e-10));
+        assertThat(sregionCoords[3].x, closeTo(3.4423117558664e+02, 10e-10));
+        assertThat(sregionCoords[3].y, closeTo(-3.6214739400192e+01, 10e-10));
+        assertThat(sregionCoords[0], equalTo(sregionCoords[4]));
+        assertThat(sregionCoords.length, is(5));
+        assertThat(momentMap.getSRegion().getClass(), is(Polygon.class));
+        assertEquals("encaps-mom-3.tar", momentMap.getEncapsulationFile().getFilename());
+        
+        // H2 writes a PGspoly object as a string that represents a serialised object, hex encoded
+        // so when we read it out, we need to decode and deserialise the object for testing
+        // this doesn't happen locally because we can create the mapping from an spoly to a string, and we use a dialect
+        // that takes advantage of that
+        // this doesn't happen on the servers because pgsphere is installed.
+        String expectedSPoly = buildExpectedSPoly(sregionCoords);
+        PGspoly spoly = deserializePGspolyForH2(momentMap.getSRegionPoly().getValue());
+        assertThat(spoly.getValue(), equalTo(expectedSPoly));
+        
+        assertThat(momentMap.getFilesize(), is(12L));
+    }
+    
+    @Test
+    public void testCubletImport() throws Exception
+    {
+        String sbid = "12345";
+        String depositDir = "src/test/resources/functional_test/";
+        String imageFilePath = "cube_01.fits";
+        importObservation(sbid, depositDir + "metadata-v2-as031.xml");
+
+        Observation observation = observationRepository.findAll().iterator().next();
+        assertThat(observation.getImageCubes().size(), is(1));
+        ImageCube imageCube = observation.getImageCubes().iterator().next();
+        assertThat(imageCube.getCubelets().size(), is(1));
+        Cubelet cubelet = imageCube.getCubelets().get(0);
+        assertThat(cubelet.getFilename(), is(imageFilePath));
+        assertThat(cubelet.getType(), is("spectral_restored_mom0"));
+        
+
+        try
+        {
+            fitsCommandLineImporter.run("-parent-id", sbid, "-infile", depositDir, "-fitsFilename",
+                    imageCube.getFilename(), "-fits-type", "cubelet", "-parent-type", "observation");
+            failTestCase();
+        }
+        catch (CheckExitCalled e)
+        {
+            assertEquals("Fits import failed - please check log for details", 0, e.getStatus().intValue());
+        }
+        entityManager.refresh(imageCube);
+
+        assertThat(imageCube.getCubelets().size(), is(1));
+        cubelet = imageCube.getCubelets().get(0);
+        assertThat(cubelet.getFilename(), is(imageFilePath));
+        assertThat(cubelet.getObjectName(), is(""));
+        assertThat(cubelet.getRaDeg(), is(344.15354462644));
+        assertThat(cubelet.getDecDeg(), is(-36.249945278860));
+        assertThat(cubelet.getStokesParameters(), is("/I/"));
+        
+        // As our sample cubelet is in VOPT we don't have frequency details. 
+        // This should be replaced with a more representative cubelet later on. 
+        assertEquals(0.19133313747811379, cubelet.getEmMin(), 1e-10);
+        assertEquals(0.23664192421840471, cubelet.getEmMax(), 1e-10);
+        assertThat(cubelet.getChannelWidth(), is(3.0E8));
+        assertThat(cubelet.getCentreFrequency(), is(1.416861140477E9));
+        assertThat(cubelet.getNoOfChannels(), is(1));
+
+        assertNull(cubelet.getTMin());
+        assertNull(cubelet.getTMax());
+        assertThat(cubelet.getTExptime(), is(0.0));
+
+        Coordinate[] sregionCoords = cubelet.getSRegion().getCoordinates();
+        assertThat(sregionCoords[0].x, closeTo(3.4423091564739e+02, 10e-10));
+        assertThat(sregionCoords[0].y, closeTo(-3.6285572760070e+01, 10e-10));
+        assertThat(sregionCoords[1].x, closeTo(3.4407584316182e+02, 10e-10));
+        assertThat(sregionCoords[1].y, closeTo(-3.6285100677546e+01, 10e-10));
+        assertThat(sregionCoords[2].x, closeTo(3.4407624360392e+02, 10e-10));
+        assertThat(sregionCoords[2].y, closeTo(-3.6214267743621e+01, 10e-10));
+        assertThat(sregionCoords[3].x, closeTo(3.4423117558664e+02, 10e-10));
+        assertThat(sregionCoords[3].y, closeTo(-3.6214739400192e+01, 10e-10));
+        assertThat(sregionCoords[0], equalTo(sregionCoords[4]));
+        assertThat(sregionCoords.length, is(5));
+        assertThat(cubelet.getSRegion().getClass(), is(Polygon.class));
+        assertEquals("encaps-cube-5.tar", cubelet.getEncapsulationFile().getFilename());
+        
+        // H2 writes a PGspoly object as a string that represents a serialised object, hex encoded
+        // so when we read it out, we need to decode and deserialise the object for testing
+        // this doesn't happen locally because we can create the mapping from an spoly to a string, and we use a dialect
+        // that takes advantage of that
+        // this doesn't happen on the servers because pgsphere is installed.
+        String expectedSPoly = buildExpectedSPoly(sregionCoords);
+        PGspoly spoly = deserializePGspolyForH2(cubelet.getSRegionPoly().getValue());
+        assertThat(spoly.getValue(), equalTo(expectedSPoly));
+        
+        assertThat(cubelet.getFilesize(), is(12L));
+    }
+
+    private String buildExpectedSPoly(Coordinate[] sregionCoords)
+    {
+        StringBuilder expectedSPoly = new StringBuilder("{");
+        for (int i = 0; i < sregionCoords.length-1; i++)
+        {
+            expectedSPoly.append("(");
+            expectedSPoly.append(Math.toRadians(sregionCoords[i].x));
+            expectedSPoly.append(" , ");
+            expectedSPoly.append(Math.toRadians(sregionCoords[i].y));
+            expectedSPoly.append(")");
+            if (i < sregionCoords.length-2)
+            {
+                expectedSPoly.append(",");
+            }
+        }
+        expectedSPoly.append("}");
+        return expectedSPoly.toString();
+    }
+
     @Test
     public void testFitsImportSfovBug() throws Exception
     {
@@ -195,8 +445,8 @@ public class ImageImportFunctionalTest extends FunctionalTestBase
         String imageFilePath = "validFile-sfov-bug.fits";
         try
         {
-            fitsCommandLineImporter.run("-sbid", sbid, "-infile", depositDir + imageFilePath, "-imageCubeFilename",
-                    imageFilePath);
+            fitsCommandLineImporter.run("-parent-id", sbid, "-infile", depositDir + imageFilePath, "-fitsFilename",
+                    imageFilePath, "-fits-type", "image-cube", "-parent-type", "observation");
             failTestCase();
         }
         catch (CheckExitCalled e)
@@ -205,7 +455,7 @@ public class ImageImportFunctionalTest extends FunctionalTestBase
         }
         entityManager.refresh(imageCube);
 
-        assertThat(imageCube.getTargetName(), is("SB659_1"));
+        assertThat(imageCube.getObjectName(), is("SB659_1"));
         assertThat(imageCube.getRaDeg(), is(345.31046769332));
         assertThat(imageCube.getDecDeg(), is(-59.881700799090));
         assertThat(imageCube.getStokesParameters(), is("/I/"));
@@ -221,6 +471,8 @@ public class ImageImportFunctionalTest extends FunctionalTestBase
         assertNull(imageCube.getTMin());
         assertNull(imageCube.getTMax());
         assertThat(imageCube.getTExptime(), is(0.0));
+        assertNull(imageCube.getBUnit());
+        assertNull(imageCube.getBType());
 
         // H2 writes a PGspoly object as a string that represents a serialised object, hex encoded
         // so when we read it out, we need to decode and deserialise the object for testing

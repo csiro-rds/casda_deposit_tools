@@ -12,3 +12,4 @@ sql/
 config/application.properties
 src/test/resources/atlas/
 dep.txt
+*.pyc

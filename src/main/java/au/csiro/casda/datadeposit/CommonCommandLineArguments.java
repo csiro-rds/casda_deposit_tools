@@ -25,7 +25,7 @@ public class CommonCommandLineArguments
     /**
      * Level 7 type deposit
      */
-    public static final String LEVEL7_PARENT_TYPE = "level7";
+    public static final String LEVEL7_PARENT_TYPE = "derived-catalogue";
     
     /**
      * Observation deposit

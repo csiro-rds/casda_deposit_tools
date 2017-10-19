@@ -225,6 +225,8 @@ public interface CatalogueParser
      *            the file to parse
      * @param mode
      *            the CatalogueParser.MODE to use when parsing
+     * @param dcCommonId
+     *            The base collection id shared by all versions of this data collection.
      * @return the Catalogue
      * @throws FileNotFoundException
      *             if the specified file could not be found
@@ -235,7 +237,7 @@ public interface CatalogueParser
      * @throws CatalogueParser.ValidationModeSignal
      *             if the mode was VALIDATE_ONLY - NOTE: this exception does NOT signal an error
      */
-    public Catalogue parseFile(Integer sbid, String catalogueFilename, String catalogueDatafile, Mode mode)
-            throws FileNotFoundException, CatalogueParser.MalformedFileException, CatalogueParser.DatabaseException,
-            ValidationModeSignal;
+    public Catalogue parseFile(Integer sbid, String catalogueFilename, String catalogueDatafile, Mode mode,
+            Integer dcCommonId) throws FileNotFoundException, CatalogueParser.MalformedFileException,
+            CatalogueParser.DatabaseException, ValidationModeSignal;
 }
